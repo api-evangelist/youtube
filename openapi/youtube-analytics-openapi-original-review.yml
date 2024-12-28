@@ -1,0 +1,2066 @@
+executed: '2024-12-28T00:18:46.868Z'
+results:
+  - code: openapi-info-contact-email-error
+    message: Info MUST Have Contact Email
+    path:
+      - info
+      - contact
+    severity: 0
+    range:
+      start:
+        line: 4
+        character: 10
+      end:
+        line: 7
+        character: 22
+  - code: openapi-info-contact-info
+    message: Info Has Contact Object
+    path:
+      - info
+      - contact
+    severity: 2
+    range:
+      start:
+        line: 4
+        character: 10
+      end:
+        line: 7
+        character: 22
+  - code: openapi-info-contact-name-info
+    message: Info Has Contact Name
+    path:
+      - info
+      - contact
+      - name
+    severity: 2
+    range:
+      start:
+        line: 5
+        character: 10
+      end:
+        line: 5
+        character: 16
+  - code: openapi-info-contact-url-info
+    message: Info Has Contact URL
+    path:
+      - info
+      - contact
+      - url
+    severity: 2
+    range:
+      start:
+        line: 6
+        character: 9
+      end:
+        line: 6
+        character: 27
+  - code: openapi-info-description-info
+    message: Info Has Description
+    path:
+      - info
+      - description
+    severity: 2
+    range:
+      start:
+        line: 8
+        character: 15
+      end:
+        line: 11
+        character: 30
+  - code: openapi-info-license-identifier-error
+    message: Info MUST Have License Identifier
+    path:
+      - info
+      - license
+    severity: 0
+    range:
+      start:
+        line: 12
+        character: 10
+      end:
+        line: 14
+        character: 52
+  - code: openapi-info-license-info
+    message: Info Has License
+    path:
+      - info
+      - license
+    severity: 2
+    range:
+      start:
+        line: 12
+        character: 10
+      end:
+        line: 14
+        character: 52
+  - code: openapi-info-license-name-info
+    message: Info License Name
+    path:
+      - info
+      - license
+      - name
+    severity: 2
+    range:
+      start:
+        line: 13
+        character: 10
+      end:
+        line: 13
+        character: 42
+  - code: openapi-info-license-url-info
+    message: Info Has License URL
+    path:
+      - info
+      - license
+      - url
+    severity: 2
+    range:
+      start:
+        line: 14
+        character: 9
+      end:
+        line: 14
+        character: 52
+  - code: openapi-info-terms-of-service-info
+    message: Info Has Terms of Service
+    path:
+      - info
+      - termsOfService
+    severity: 2
+    range:
+      start:
+        line: 15
+        character: 18
+      end:
+        line: 15
+        character: 54
+  - code: openapi-info-title-info
+    message: Info Has Title
+    path:
+      - info
+      - title
+    severity: 2
+    range:
+      start:
+        line: 16
+        character: 9
+      end:
+        line: 16
+        character: 30
+  - code: openapi-info-title-upper-case-info
+    message: Info Title MUST Have First Characters Capitalized
+    path:
+      - info
+      - title
+    severity: 2
+    range:
+      start:
+        line: 16
+        character: 9
+      end:
+        line: 16
+        character: 30
+  - code: openapi-info-version-info
+    message: Info Has Version
+    path:
+      - info
+      - version
+    severity: 2
+    range:
+      start:
+        line: 17
+        character: 11
+      end:
+        line: 17
+        character: 13
+  - code: openapi-external-docs-info
+    message: OpenAPI Has External Documentation
+    path:
+      - externalDocs
+    severity: 2
+    range:
+      start:
+        line: 33
+        character: 13
+      end:
+        line: 34
+        character: 54
+  - code: openapi-tags-object-info
+    message: OpenAPIs Have a Tag Object
+    path:
+      - tags
+    severity: 2
+    range:
+      start:
+        line: 35
+        character: 5
+      end:
+        line: 35
+        character: 8
+  - code: openapi-tags-one-error
+    message: MUST Be At Least One Tag
+    path:
+      - tags
+    severity: 0
+    range:
+      start:
+        line: 35
+        character: 5
+      end:
+        line: 35
+        character: 8
+  - code: openapi-components-examples-error
+    message: Components MUST Have a Examples Property
+    path:
+      - components
+    severity: 0
+    range:
+      start:
+        line: 37
+        character: 11
+      end:
+        line: 118
+        character: 13
+  - code: openapi-components-headers-error
+    message: Components MUST Have a Headers Property
+    path:
+      - components
+    severity: 0
+    range:
+      start:
+        line: 37
+        character: 11
+      end:
+        line: 118
+        character: 13
+  - code: openapi-components-responses-error
+    message: Components MUST have a responses property.
+    path:
+      - components
+    severity: 0
+    range:
+      start:
+        line: 37
+        character: 11
+      end:
+        line: 118
+        character: 13
+  - code: openapi-security-schemes-error
+    message: Components MUST Have a Security Schemes
+    path:
+      - components
+    severity: 0
+    range:
+      start:
+        line: 37
+        character: 11
+      end:
+        line: 118
+        character: 13
+  - code: openapi-components-parameters-info
+    message: Components Have a Parameters Property
+    path:
+      - components
+      - parameters
+    severity: 2
+    range:
+      start:
+        line: 38
+        character: 13
+      end:
+        line: 117
+        character: 20
+  - code: openapi-components-parameters-description-info
+    message: Parameters Have a Description
+    path:
+      - components
+      - parameters
+      - _.xgafv
+      - description
+    severity: 2
+    range:
+      start:
+        line: 40
+        character: 19
+      end:
+        line: 40
+        character: 35
+  - code: openapi-components-parameters-in-info
+    message: Parameters In Property Is Set
+    path:
+      - components
+      - parameters
+      - _.xgafv
+      - in
+    severity: 2
+    range:
+      start:
+        line: 41
+        character: 10
+      end:
+        line: 41
+        character: 15
+  - code: openapi-components-parameters-casing-camel-error
+    message: Parameters Names MUST Be Camel Case
+    path:
+      - components
+      - parameters
+      - _.xgafv
+      - name
+    severity: 0
+    range:
+      start:
+        line: 42
+        character: 12
+      end:
+        line: 42
+        character: 19
+  - code: openapi-components-parameters-casing-camel-info
+    message: Parameters Names Are Camel Case
+    path:
+      - components
+      - parameters
+      - _.xgafv
+      - name
+    severity: 2
+    range:
+      start:
+        line: 42
+        character: 12
+      end:
+        line: 42
+        character: 19
+  - code: openapi-components-parameters-name-info
+    message: Parameters Have a Name
+    path:
+      - components
+      - parameters
+      - _.xgafv
+      - name
+    severity: 2
+    range:
+      start:
+        line: 42
+        character: 12
+      end:
+        line: 42
+        character: 19
+  - code: openapi-components-parameters-schema-info
+    message: Parameters Have Schema
+    path:
+      - components
+      - parameters
+      - _.xgafv
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 43
+        character: 13
+      end:
+        line: 47
+        character: 20
+  - code: openapi-components-parameters-schema-ref-info
+    message: Parameters Use Schema Reference
+    path:
+      - components
+      - parameters
+      - _.xgafv
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 43
+        character: 13
+      end:
+        line: 47
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-maxlength-warn
+    message: Parameter Schema Type String MaxLength
+    path:
+      - components
+      - parameters
+      - _.xgafv
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 43
+        character: 13
+      end:
+        line: 47
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-minlength-warn
+    message: Parameter Schema Type String MinLength
+    path:
+      - components
+      - parameters
+      - _.xgafv
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 43
+        character: 13
+      end:
+        line: 47
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-pattern-warn
+    message: Parameter Schema Type String Pattern
+    path:
+      - components
+      - parameters
+      - _.xgafv
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 43
+        character: 13
+      end:
+        line: 47
+        character: 20
+  - code: openapi-components-parameters-schema-type-info
+    message: Parameter Schema Type
+    path:
+      - components
+      - parameters
+      - _.xgafv
+      - schema
+      - type
+    severity: 2
+    range:
+      start:
+        line: 47
+        character: 14
+      end:
+        line: 47
+        character: 20
+  - code: openapi-components-parameters-description-info
+    message: Parameters Have a Description
+    path:
+      - components
+      - parameters
+      - access_token
+      - description
+    severity: 2
+    range:
+      start:
+        line: 49
+        character: 19
+      end:
+        line: 49
+        character: 38
+  - code: openapi-components-parameters-in-info
+    message: Parameters In Property Is Set
+    path:
+      - components
+      - parameters
+      - access_token
+      - in
+    severity: 2
+    range:
+      start:
+        line: 50
+        character: 10
+      end:
+        line: 50
+        character: 15
+  - code: openapi-components-parameters-casing-camel-error
+    message: Parameters Names MUST Be Camel Case
+    path:
+      - components
+      - parameters
+      - access_token
+      - name
+    severity: 0
+    range:
+      start:
+        line: 51
+        character: 12
+      end:
+        line: 51
+        character: 24
+  - code: openapi-components-parameters-casing-camel-info
+    message: Parameters Names Are Camel Case
+    path:
+      - components
+      - parameters
+      - access_token
+      - name
+    severity: 2
+    range:
+      start:
+        line: 51
+        character: 12
+      end:
+        line: 51
+        character: 24
+  - code: openapi-components-parameters-name-info
+    message: Parameters Have a Name
+    path:
+      - components
+      - parameters
+      - access_token
+      - name
+    severity: 2
+    range:
+      start:
+        line: 51
+        character: 12
+      end:
+        line: 51
+        character: 24
+  - code: openapi-components-parameters-schema-info
+    message: Parameters Have Schema
+    path:
+      - components
+      - parameters
+      - access_token
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 52
+        character: 13
+      end:
+        line: 53
+        character: 20
+  - code: openapi-components-parameters-schema-ref-info
+    message: Parameters Use Schema Reference
+    path:
+      - components
+      - parameters
+      - access_token
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 52
+        character: 13
+      end:
+        line: 53
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-maxlength-warn
+    message: Parameter Schema Type String MaxLength
+    path:
+      - components
+      - parameters
+      - access_token
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 52
+        character: 13
+      end:
+        line: 53
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-minlength-warn
+    message: Parameter Schema Type String MinLength
+    path:
+      - components
+      - parameters
+      - access_token
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 52
+        character: 13
+      end:
+        line: 53
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-pattern-warn
+    message: Parameter Schema Type String Pattern
+    path:
+      - components
+      - parameters
+      - access_token
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 52
+        character: 13
+      end:
+        line: 53
+        character: 20
+  - code: openapi-components-parameters-schema-type-info
+    message: Parameter Schema Type
+    path:
+      - components
+      - parameters
+      - access_token
+      - schema
+      - type
+    severity: 2
+    range:
+      start:
+        line: 53
+        character: 14
+      end:
+        line: 53
+        character: 20
+  - code: openapi-components-parameters-description-info
+    message: Parameters Have a Description
+    path:
+      - components
+      - parameters
+      - alt
+      - description
+    severity: 2
+    range:
+      start:
+        line: 55
+        character: 19
+      end:
+        line: 55
+        character: 44
+  - code: openapi-components-parameters-in-info
+    message: Parameters In Property Is Set
+    path:
+      - components
+      - parameters
+      - alt
+      - in
+    severity: 2
+    range:
+      start:
+        line: 56
+        character: 10
+      end:
+        line: 56
+        character: 15
+  - code: openapi-components-parameters-casing-camel-error
+    message: Parameters Names MUST Be Camel Case
+    path:
+      - components
+      - parameters
+      - alt
+      - name
+    severity: 0
+    range:
+      start:
+        line: 57
+        character: 12
+      end:
+        line: 57
+        character: 15
+  - code: openapi-components-parameters-casing-camel-info
+    message: Parameters Names Are Camel Case
+    path:
+      - components
+      - parameters
+      - alt
+      - name
+    severity: 2
+    range:
+      start:
+        line: 57
+        character: 12
+      end:
+        line: 57
+        character: 15
+  - code: openapi-components-parameters-name-info
+    message: Parameters Have a Name
+    path:
+      - components
+      - parameters
+      - alt
+      - name
+    severity: 2
+    range:
+      start:
+        line: 57
+        character: 12
+      end:
+        line: 57
+        character: 15
+  - code: openapi-components-parameters-schema-info
+    message: Parameters Have Schema
+    path:
+      - components
+      - parameters
+      - alt
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 58
+        character: 13
+      end:
+        line: 63
+        character: 20
+  - code: openapi-components-parameters-schema-ref-info
+    message: Parameters Use Schema Reference
+    path:
+      - components
+      - parameters
+      - alt
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 58
+        character: 13
+      end:
+        line: 63
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-maxlength-warn
+    message: Parameter Schema Type String MaxLength
+    path:
+      - components
+      - parameters
+      - alt
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 58
+        character: 13
+      end:
+        line: 63
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-minlength-warn
+    message: Parameter Schema Type String MinLength
+    path:
+      - components
+      - parameters
+      - alt
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 58
+        character: 13
+      end:
+        line: 63
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-pattern-warn
+    message: Parameter Schema Type String Pattern
+    path:
+      - components
+      - parameters
+      - alt
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 58
+        character: 13
+      end:
+        line: 63
+        character: 20
+  - code: openapi-components-parameters-schema-type-info
+    message: Parameter Schema Type
+    path:
+      - components
+      - parameters
+      - alt
+      - schema
+      - type
+    severity: 2
+    range:
+      start:
+        line: 63
+        character: 14
+      end:
+        line: 63
+        character: 20
+  - code: openapi-components-parameters-description-info
+    message: Parameters Have a Description
+    path:
+      - components
+      - parameters
+      - callback
+      - description
+    severity: 2
+    range:
+      start:
+        line: 65
+        character: 19
+      end:
+        line: 65
+        character: 24
+  - code: openapi-components-parameters-in-info
+    message: Parameters In Property Is Set
+    path:
+      - components
+      - parameters
+      - callback
+      - in
+    severity: 2
+    range:
+      start:
+        line: 66
+        character: 10
+      end:
+        line: 66
+        character: 15
+  - code: openapi-components-parameters-casing-camel-error
+    message: Parameters Names MUST Be Camel Case
+    path:
+      - components
+      - parameters
+      - callback
+      - name
+    severity: 0
+    range:
+      start:
+        line: 67
+        character: 12
+      end:
+        line: 67
+        character: 20
+  - code: openapi-components-parameters-casing-camel-info
+    message: Parameters Names Are Camel Case
+    path:
+      - components
+      - parameters
+      - callback
+      - name
+    severity: 2
+    range:
+      start:
+        line: 67
+        character: 12
+      end:
+        line: 67
+        character: 20
+  - code: openapi-components-parameters-name-info
+    message: Parameters Have a Name
+    path:
+      - components
+      - parameters
+      - callback
+      - name
+    severity: 2
+    range:
+      start:
+        line: 67
+        character: 12
+      end:
+        line: 67
+        character: 20
+  - code: openapi-components-parameters-schema-info
+    message: Parameters Have Schema
+    path:
+      - components
+      - parameters
+      - callback
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 68
+        character: 13
+      end:
+        line: 69
+        character: 20
+  - code: openapi-components-parameters-schema-ref-info
+    message: Parameters Use Schema Reference
+    path:
+      - components
+      - parameters
+      - callback
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 68
+        character: 13
+      end:
+        line: 69
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-maxlength-warn
+    message: Parameter Schema Type String MaxLength
+    path:
+      - components
+      - parameters
+      - callback
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 68
+        character: 13
+      end:
+        line: 69
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-minlength-warn
+    message: Parameter Schema Type String MinLength
+    path:
+      - components
+      - parameters
+      - callback
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 68
+        character: 13
+      end:
+        line: 69
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-pattern-warn
+    message: Parameter Schema Type String Pattern
+    path:
+      - components
+      - parameters
+      - callback
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 68
+        character: 13
+      end:
+        line: 69
+        character: 20
+  - code: openapi-components-parameters-schema-type-info
+    message: Parameter Schema Type
+    path:
+      - components
+      - parameters
+      - callback
+      - schema
+      - type
+    severity: 2
+    range:
+      start:
+        line: 69
+        character: 14
+      end:
+        line: 69
+        character: 20
+  - code: openapi-components-parameters-description-info
+    message: Parameters Have a Description
+    path:
+      - components
+      - parameters
+      - fields
+      - description
+    severity: 2
+    range:
+      start:
+        line: 71
+        character: 19
+      end:
+        line: 71
+        character: 85
+  - code: openapi-components-parameters-in-info
+    message: Parameters In Property Is Set
+    path:
+      - components
+      - parameters
+      - fields
+      - in
+    severity: 2
+    range:
+      start:
+        line: 72
+        character: 10
+      end:
+        line: 72
+        character: 15
+  - code: openapi-components-parameters-casing-camel-error
+    message: Parameters Names MUST Be Camel Case
+    path:
+      - components
+      - parameters
+      - fields
+      - name
+    severity: 0
+    range:
+      start:
+        line: 73
+        character: 12
+      end:
+        line: 73
+        character: 18
+  - code: openapi-components-parameters-casing-camel-info
+    message: Parameters Names Are Camel Case
+    path:
+      - components
+      - parameters
+      - fields
+      - name
+    severity: 2
+    range:
+      start:
+        line: 73
+        character: 12
+      end:
+        line: 73
+        character: 18
+  - code: openapi-components-parameters-name-info
+    message: Parameters Have a Name
+    path:
+      - components
+      - parameters
+      - fields
+      - name
+    severity: 2
+    range:
+      start:
+        line: 73
+        character: 12
+      end:
+        line: 73
+        character: 18
+  - code: openapi-components-parameters-schema-info
+    message: Parameters Have Schema
+    path:
+      - components
+      - parameters
+      - fields
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 74
+        character: 13
+      end:
+        line: 75
+        character: 20
+  - code: openapi-components-parameters-schema-ref-info
+    message: Parameters Use Schema Reference
+    path:
+      - components
+      - parameters
+      - fields
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 74
+        character: 13
+      end:
+        line: 75
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-maxlength-warn
+    message: Parameter Schema Type String MaxLength
+    path:
+      - components
+      - parameters
+      - fields
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 74
+        character: 13
+      end:
+        line: 75
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-minlength-warn
+    message: Parameter Schema Type String MinLength
+    path:
+      - components
+      - parameters
+      - fields
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 74
+        character: 13
+      end:
+        line: 75
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-pattern-warn
+    message: Parameter Schema Type String Pattern
+    path:
+      - components
+      - parameters
+      - fields
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 74
+        character: 13
+      end:
+        line: 75
+        character: 20
+  - code: openapi-components-parameters-schema-type-info
+    message: Parameter Schema Type
+    path:
+      - components
+      - parameters
+      - fields
+      - schema
+      - type
+    severity: 2
+    range:
+      start:
+        line: 75
+        character: 14
+      end:
+        line: 75
+        character: 20
+  - code: openapi-components-parameters-description-info
+    message: Parameters Have a Description
+    path:
+      - components
+      - parameters
+      - key
+      - description
+    severity: 2
+    range:
+      start:
+        line: 77
+        character: 19
+      end:
+        line: 80
+        character: 14
+  - code: openapi-components-parameters-in-info
+    message: Parameters In Property Is Set
+    path:
+      - components
+      - parameters
+      - key
+      - in
+    severity: 2
+    range:
+      start:
+        line: 81
+        character: 10
+      end:
+        line: 81
+        character: 15
+  - code: openapi-components-parameters-casing-camel-error
+    message: Parameters Names MUST Be Camel Case
+    path:
+      - components
+      - parameters
+      - key
+      - name
+    severity: 0
+    range:
+      start:
+        line: 82
+        character: 12
+      end:
+        line: 82
+        character: 15
+  - code: openapi-components-parameters-casing-camel-info
+    message: Parameters Names Are Camel Case
+    path:
+      - components
+      - parameters
+      - key
+      - name
+    severity: 2
+    range:
+      start:
+        line: 82
+        character: 12
+      end:
+        line: 82
+        character: 15
+  - code: openapi-components-parameters-name-info
+    message: Parameters Have a Name
+    path:
+      - components
+      - parameters
+      - key
+      - name
+    severity: 2
+    range:
+      start:
+        line: 82
+        character: 12
+      end:
+        line: 82
+        character: 15
+  - code: openapi-components-parameters-schema-info
+    message: Parameters Have Schema
+    path:
+      - components
+      - parameters
+      - key
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 83
+        character: 13
+      end:
+        line: 84
+        character: 20
+  - code: openapi-components-parameters-schema-ref-info
+    message: Parameters Use Schema Reference
+    path:
+      - components
+      - parameters
+      - key
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 83
+        character: 13
+      end:
+        line: 84
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-maxlength-warn
+    message: Parameter Schema Type String MaxLength
+    path:
+      - components
+      - parameters
+      - key
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 83
+        character: 13
+      end:
+        line: 84
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-minlength-warn
+    message: Parameter Schema Type String MinLength
+    path:
+      - components
+      - parameters
+      - key
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 83
+        character: 13
+      end:
+        line: 84
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-pattern-warn
+    message: Parameter Schema Type String Pattern
+    path:
+      - components
+      - parameters
+      - key
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 83
+        character: 13
+      end:
+        line: 84
+        character: 20
+  - code: openapi-components-parameters-schema-type-info
+    message: Parameter Schema Type
+    path:
+      - components
+      - parameters
+      - key
+      - schema
+      - type
+    severity: 2
+    range:
+      start:
+        line: 84
+        character: 14
+      end:
+        line: 84
+        character: 20
+  - code: openapi-components-parameters-description-info
+    message: Parameters Have a Description
+    path:
+      - components
+      - parameters
+      - oauth_token
+      - description
+    severity: 2
+    range:
+      start:
+        line: 86
+        character: 19
+      end:
+        line: 86
+        character: 56
+  - code: openapi-components-parameters-in-info
+    message: Parameters In Property Is Set
+    path:
+      - components
+      - parameters
+      - oauth_token
+      - in
+    severity: 2
+    range:
+      start:
+        line: 87
+        character: 10
+      end:
+        line: 87
+        character: 15
+  - code: openapi-components-parameters-casing-camel-error
+    message: Parameters Names MUST Be Camel Case
+    path:
+      - components
+      - parameters
+      - oauth_token
+      - name
+    severity: 0
+    range:
+      start:
+        line: 88
+        character: 12
+      end:
+        line: 88
+        character: 23
+  - code: openapi-components-parameters-casing-camel-info
+    message: Parameters Names Are Camel Case
+    path:
+      - components
+      - parameters
+      - oauth_token
+      - name
+    severity: 2
+    range:
+      start:
+        line: 88
+        character: 12
+      end:
+        line: 88
+        character: 23
+  - code: openapi-components-parameters-name-info
+    message: Parameters Have a Name
+    path:
+      - components
+      - parameters
+      - oauth_token
+      - name
+    severity: 2
+    range:
+      start:
+        line: 88
+        character: 12
+      end:
+        line: 88
+        character: 23
+  - code: openapi-components-parameters-schema-info
+    message: Parameters Have Schema
+    path:
+      - components
+      - parameters
+      - oauth_token
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 89
+        character: 13
+      end:
+        line: 90
+        character: 20
+  - code: openapi-components-parameters-schema-ref-info
+    message: Parameters Use Schema Reference
+    path:
+      - components
+      - parameters
+      - oauth_token
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 89
+        character: 13
+      end:
+        line: 90
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-maxlength-warn
+    message: Parameter Schema Type String MaxLength
+    path:
+      - components
+      - parameters
+      - oauth_token
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 89
+        character: 13
+      end:
+        line: 90
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-minlength-warn
+    message: Parameter Schema Type String MinLength
+    path:
+      - components
+      - parameters
+      - oauth_token
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 89
+        character: 13
+      end:
+        line: 90
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-pattern-warn
+    message: Parameter Schema Type String Pattern
+    path:
+      - components
+      - parameters
+      - oauth_token
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 89
+        character: 13
+      end:
+        line: 90
+        character: 20
+  - code: openapi-components-parameters-schema-type-info
+    message: Parameter Schema Type
+    path:
+      - components
+      - parameters
+      - oauth_token
+      - schema
+      - type
+    severity: 2
+    range:
+      start:
+        line: 90
+        character: 14
+      end:
+        line: 90
+        character: 20
+  - code: openapi-components-parameters-description-info
+    message: Parameters Have a Description
+    path:
+      - components
+      - parameters
+      - prettyPrint
+      - description
+    severity: 2
+    range:
+      start:
+        line: 92
+        character: 19
+      end:
+        line: 92
+        character: 70
+  - code: openapi-components-parameters-in-info
+    message: Parameters In Property Is Set
+    path:
+      - components
+      - parameters
+      - prettyPrint
+      - in
+    severity: 2
+    range:
+      start:
+        line: 93
+        character: 10
+      end:
+        line: 93
+        character: 15
+  - code: openapi-components-parameters-casing-camel-error
+    message: Parameters Names MUST Be Camel Case
+    path:
+      - components
+      - parameters
+      - prettyPrint
+      - name
+    severity: 0
+    range:
+      start:
+        line: 94
+        character: 12
+      end:
+        line: 94
+        character: 23
+  - code: openapi-components-parameters-casing-camel-info
+    message: Parameters Names Are Camel Case
+    path:
+      - components
+      - parameters
+      - prettyPrint
+      - name
+    severity: 2
+    range:
+      start:
+        line: 94
+        character: 12
+      end:
+        line: 94
+        character: 23
+  - code: openapi-components-parameters-name-info
+    message: Parameters Have a Name
+    path:
+      - components
+      - parameters
+      - prettyPrint
+      - name
+    severity: 2
+    range:
+      start:
+        line: 94
+        character: 12
+      end:
+        line: 94
+        character: 23
+  - code: openapi-components-parameters-schema-info
+    message: Parameters Have Schema
+    path:
+      - components
+      - parameters
+      - prettyPrint
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 95
+        character: 13
+      end:
+        line: 96
+        character: 21
+  - code: openapi-components-parameters-schema-ref-info
+    message: Parameters Use Schema Reference
+    path:
+      - components
+      - parameters
+      - prettyPrint
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 95
+        character: 13
+      end:
+        line: 96
+        character: 21
+  - code: openapi-components-parameters-schema-type-info
+    message: Parameter Schema Type
+    path:
+      - components
+      - parameters
+      - prettyPrint
+      - schema
+      - type
+    severity: 2
+    range:
+      start:
+        line: 96
+        character: 14
+      end:
+        line: 96
+        character: 21
+  - code: openapi-components-parameters-description-info
+    message: Parameters Have a Description
+    path:
+      - components
+      - parameters
+      - quotaUser
+      - description
+    severity: 2
+    range:
+      start:
+        line: 98
+        character: 19
+      end:
+        line: 101
+        character: 19
+  - code: openapi-components-parameters-in-info
+    message: Parameters In Property Is Set
+    path:
+      - components
+      - parameters
+      - quotaUser
+      - in
+    severity: 2
+    range:
+      start:
+        line: 102
+        character: 10
+      end:
+        line: 102
+        character: 15
+  - code: openapi-components-parameters-casing-camel-error
+    message: Parameters Names MUST Be Camel Case
+    path:
+      - components
+      - parameters
+      - quotaUser
+      - name
+    severity: 0
+    range:
+      start:
+        line: 103
+        character: 12
+      end:
+        line: 103
+        character: 21
+  - code: openapi-components-parameters-casing-camel-info
+    message: Parameters Names Are Camel Case
+    path:
+      - components
+      - parameters
+      - quotaUser
+      - name
+    severity: 2
+    range:
+      start:
+        line: 103
+        character: 12
+      end:
+        line: 103
+        character: 21
+  - code: openapi-components-parameters-name-info
+    message: Parameters Have a Name
+    path:
+      - components
+      - parameters
+      - quotaUser
+      - name
+    severity: 2
+    range:
+      start:
+        line: 103
+        character: 12
+      end:
+        line: 103
+        character: 21
+  - code: openapi-components-parameters-schema-info
+    message: Parameters Have Schema
+    path:
+      - components
+      - parameters
+      - quotaUser
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 104
+        character: 13
+      end:
+        line: 105
+        character: 20
+  - code: openapi-components-parameters-schema-ref-info
+    message: Parameters Use Schema Reference
+    path:
+      - components
+      - parameters
+      - quotaUser
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 104
+        character: 13
+      end:
+        line: 105
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-maxlength-warn
+    message: Parameter Schema Type String MaxLength
+    path:
+      - components
+      - parameters
+      - quotaUser
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 104
+        character: 13
+      end:
+        line: 105
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-minlength-warn
+    message: Parameter Schema Type String MinLength
+    path:
+      - components
+      - parameters
+      - quotaUser
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 104
+        character: 13
+      end:
+        line: 105
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-pattern-warn
+    message: Parameter Schema Type String Pattern
+    path:
+      - components
+      - parameters
+      - quotaUser
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 104
+        character: 13
+      end:
+        line: 105
+        character: 20
+  - code: openapi-components-parameters-schema-type-info
+    message: Parameter Schema Type
+    path:
+      - components
+      - parameters
+      - quotaUser
+      - schema
+      - type
+    severity: 2
+    range:
+      start:
+        line: 105
+        character: 14
+      end:
+        line: 105
+        character: 20
+  - code: openapi-components-parameters-description-info
+    message: Parameters Have a Description
+    path:
+      - components
+      - parameters
+      - uploadType
+      - description
+    severity: 2
+    range:
+      start:
+        line: 107
+        character: 19
+      end:
+        line: 107
+        character: 80
+  - code: openapi-components-parameters-in-info
+    message: Parameters In Property Is Set
+    path:
+      - components
+      - parameters
+      - uploadType
+      - in
+    severity: 2
+    range:
+      start:
+        line: 108
+        character: 10
+      end:
+        line: 108
+        character: 15
+  - code: openapi-components-parameters-casing-camel-error
+    message: Parameters Names MUST Be Camel Case
+    path:
+      - components
+      - parameters
+      - uploadType
+      - name
+    severity: 0
+    range:
+      start:
+        line: 109
+        character: 12
+      end:
+        line: 109
+        character: 22
+  - code: openapi-components-parameters-casing-camel-info
+    message: Parameters Names Are Camel Case
+    path:
+      - components
+      - parameters
+      - uploadType
+      - name
+    severity: 2
+    range:
+      start:
+        line: 109
+        character: 12
+      end:
+        line: 109
+        character: 22
+  - code: openapi-components-parameters-name-info
+    message: Parameters Have a Name
+    path:
+      - components
+      - parameters
+      - uploadType
+      - name
+    severity: 2
+    range:
+      start:
+        line: 109
+        character: 12
+      end:
+        line: 109
+        character: 22
+  - code: openapi-components-parameters-schema-info
+    message: Parameters Have Schema
+    path:
+      - components
+      - parameters
+      - uploadType
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 110
+        character: 13
+      end:
+        line: 111
+        character: 20
+  - code: openapi-components-parameters-schema-ref-info
+    message: Parameters Use Schema Reference
+    path:
+      - components
+      - parameters
+      - uploadType
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 110
+        character: 13
+      end:
+        line: 111
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-maxlength-warn
+    message: Parameter Schema Type String MaxLength
+    path:
+      - components
+      - parameters
+      - uploadType
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 110
+        character: 13
+      end:
+        line: 111
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-minlength-warn
+    message: Parameter Schema Type String MinLength
+    path:
+      - components
+      - parameters
+      - uploadType
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 110
+        character: 13
+      end:
+        line: 111
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-pattern-warn
+    message: Parameter Schema Type String Pattern
+    path:
+      - components
+      - parameters
+      - uploadType
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 110
+        character: 13
+      end:
+        line: 111
+        character: 20
+  - code: openapi-components-parameters-schema-type-info
+    message: Parameter Schema Type
+    path:
+      - components
+      - parameters
+      - uploadType
+      - schema
+      - type
+    severity: 2
+    range:
+      start:
+        line: 111
+        character: 14
+      end:
+        line: 111
+        character: 20
+  - code: openapi-components-parameters-description-info
+    message: Parameters Have a Description
+    path:
+      - components
+      - parameters
+      - upload_protocol
+      - description
+    severity: 2
+    range:
+      start:
+        line: 113
+        character: 19
+      end:
+        line: 113
+        character: 71
+  - code: openapi-components-parameters-in-info
+    message: Parameters In Property Is Set
+    path:
+      - components
+      - parameters
+      - upload_protocol
+      - in
+    severity: 2
+    range:
+      start:
+        line: 114
+        character: 10
+      end:
+        line: 114
+        character: 15
+  - code: openapi-components-parameters-casing-camel-error
+    message: Parameters Names MUST Be Camel Case
+    path:
+      - components
+      - parameters
+      - upload_protocol
+      - name
+    severity: 0
+    range:
+      start:
+        line: 115
+        character: 12
+      end:
+        line: 115
+        character: 27
+  - code: openapi-components-parameters-casing-camel-info
+    message: Parameters Names Are Camel Case
+    path:
+      - components
+      - parameters
+      - upload_protocol
+      - name
+    severity: 2
+    range:
+      start:
+        line: 115
+        character: 12
+      end:
+        line: 115
+        character: 27
+  - code: openapi-components-parameters-name-info
+    message: Parameters Have a Name
+    path:
+      - components
+      - parameters
+      - upload_protocol
+      - name
+    severity: 2
+    range:
+      start:
+        line: 115
+        character: 12
+      end:
+        line: 115
+        character: 27
+  - code: openapi-components-parameters-schema-info
+    message: Parameters Have Schema
+    path:
+      - components
+      - parameters
+      - upload_protocol
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 116
+        character: 13
+      end:
+        line: 117
+        character: 20
+  - code: openapi-components-parameters-schema-ref-info
+    message: Parameters Use Schema Reference
+    path:
+      - components
+      - parameters
+      - upload_protocol
+      - schema
+    severity: 2
+    range:
+      start:
+        line: 116
+        character: 13
+      end:
+        line: 117
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-maxlength-warn
+    message: Parameter Schema Type String MaxLength
+    path:
+      - components
+      - parameters
+      - upload_protocol
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 116
+        character: 13
+      end:
+        line: 117
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-minlength-warn
+    message: Parameter Schema Type String MinLength
+    path:
+      - components
+      - parameters
+      - upload_protocol
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 116
+        character: 13
+      end:
+        line: 117
+        character: 20
+  - code: openapi-components-parameters-schema-type-string-pattern-warn
+    message: Parameter Schema Type String Pattern
+    path:
+      - components
+      - parameters
+      - upload_protocol
+      - schema
+    severity: 1
+    range:
+      start:
+        line: 116
+        character: 13
+      end:
+        line: 117
+        character: 20
+  - code: openapi-components-parameters-schema-type-info
+    message: Parameter Schema Type
+    path:
+      - components
+      - parameters
+      - upload_protocol
+      - schema
+      - type
+    severity: 2
+    range:
+      start:
+        line: 117
+        character: 14
+      end:
+        line: 117
+        character: 20
+  - code: openapi-components-schemas-info
+    message: Components Have a Schema Property
+    path:
+      - components
+      - schemas
+    severity: 2
+    range:
+      start:
+        line: 118
+        character: 10
+      end:
+        line: 118
+        character: 13
