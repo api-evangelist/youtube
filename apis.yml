@@ -85,7 +85,7 @@ name: Youtube
 tags:
   - Videos
 created: 2024/04/14
-modified: '2024-12-11'
+modified: '2025-07-29'
 description: |-
 
   The Youtube API provides the ability to retrieve feeds related to videos,
@@ -97,3 +97,19 @@ maintainers:
     url: https://apievangelist.com
     email: info@apievangelist.com
 specificationVersion: '0.18'
+common:
+  - name: Portal
+    url: https://developers.google.com/youtube/v3
+    type: Portal
+  - name: Guides
+    url: https://developers.google.com/youtube/v3/getting-started
+    type: Guides
+  - name: Samples
+    url: https://developers.google.com/youtube/v3/code_samples
+    type: Samples
+  - name: Support
+    url: https://developers.google.com/youtube/v3/support
+    type: Support
+  - name: GitHubRepository
+    url: https://github.com/youtube/api-samples
+    type: GitHubRepository
