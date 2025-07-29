@@ -113,3 +113,15 @@ common:
   - name: GitHubRepository
     url: https://github.com/youtube/api-samples
     type: GitHubRepository
+  - name: Videos
+    url: https://www.youtube.com/user/YouTubeDev
+    type: Videos
+  - name: Terms of Service
+    url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+    type: TermsOfService
+  - name: Branding
+    url: https://developers.google.com/youtube/terms/branding-guidelines
+    type: Branding
+  - name: Change Log
+    url: https://developers.google.com/youtube/terms/revision-history
+    type: ChangeLog
