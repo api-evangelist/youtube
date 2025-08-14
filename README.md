@@ -1,5 +1,4 @@
 # Youtube (youtube)
-
 The Youtube API provides the ability to retrieve feeds related to videos,
 users, and playlists. It also provides the ability to manipulate these feeds,
 such as creating new playlists, adding videos as favorites, and sending
@@ -16,8 +15,8 @@ messsages. The API is also able to upload videos.
 
 ## Timestamps
 
-- **Created:** 2024/04/14 
-- **Modified:** 2025-07-29 
+- **Created:** 2025-07-29 
+- **Modified:** 2025-08-13 
 
 ## APIs
 
@@ -132,6 +131,8 @@ Managing Youtube videos.
 - [TermsOfService](https://developers.google.com/youtube/terms/api-services-terms-of-service)
 - [Branding](https://developers.google.com/youtube/terms/branding-guidelines)
 - [ChangeLog](https://developers.google.com/youtube/terms/revision-history)
+- [Plans](undefined)
+- [RateLimits](https://developers.google.com/youtube/v3/determine_quota_cost)
 
 ## Maintainers
 
