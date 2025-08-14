@@ -18,6 +18,8 @@ apis:
     properties:
       - url: https://developers.google.com/youtube/v3/docs/channels/list
         type: Documentation
+      - type: OpenAPI
+        url: properties/youtube-channels-api-openapi.yml
     description: Managing Youtube channels.
   - aid: youtube:youtube-comments-api
     name: Youtube Comments API
