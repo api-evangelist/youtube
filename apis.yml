@@ -78,6 +78,8 @@ apis:
     properties:
       - url: https://developers.google.com/youtube/v3/docs/subscriptions/list
         type: Documentation
+      - type: OpenAPI
+        url: properties/youtube-subscriptions-api-openapi.yml
     description: Managing Youtube subscriptions.
   - aid: youtube:youtube-videos-api
     name: Youtube Videos API
