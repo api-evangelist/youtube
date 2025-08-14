@@ -9,8 +9,6 @@ apis:
     properties:
       - url: https://developers.google.com/youtube/v3/docs/activities/list
         type: Documentation
-      - url: properties/youtube-activities-api-openapi.yml
-        type: OpenAPI
     description: Managing Youtube activities.
   - aid: youtube:youtube-channels-api
     name: Youtube Channels API
@@ -20,8 +18,6 @@ apis:
     properties:
       - url: https://developers.google.com/youtube/v3/docs/channels/list
         type: Documentation
-      - url: properties/youtube-channels-api-openapi.yml
-        type: OpenAPI
     description: Managing Youtube channels.
   - aid: youtube:youtube-comments-api
     name: Youtube Comments API
@@ -49,8 +45,6 @@ apis:
     properties:
       - url: https://developers.google.com/youtube/v3/docs/playlists/list
         type: Documentation
-      - url: properties/youtube-playlists-api-openapi.yml
-        type: OpenAPI
     description: Managing Youtube playlists.
   - aid: youtube:youtube-playlist-items-api
     name: Youtube Playlist Items API
@@ -69,8 +63,6 @@ apis:
     properties:
       - url: https://developers.google.com/youtube/v3/docs/search/list
         type: Documentation
-      - url: properties/youtube-search-api-openapi.yml
-        type: OpenAPI
     description: Managing Youtube search.
   - aid: youtube:youtube-subscriptions-api
     name: Youtube Subscriptions API
@@ -88,8 +80,6 @@ apis:
     properties:
       - url: https://developers.google.com/youtube/v3/docs/videos/list
         type: Documentation
-      - url: properties/youtube-videos-api-openapi.yml
-        type: OpenAPI
     description: Managing Youtube videos.
 name: Youtube
 tags:
@@ -122,12 +112,9 @@ common:
   - url: https://developers.google.com/youtube/terms/revision-history
     name: Change Log
     type: ChangeLog
-  - name: Plans
-    type: Plans
-    data:
+  - data:
       - id: free
         name: Free
-        description: Youtube has only free tier.
         entries:
           - geo: US
             unit: 1
@@ -137,11 +124,44 @@ common:
             metric: user
             timeFrame: month
             description: Free tier.
-  - name: Rate Limits
-    url: https://developers.google.com/youtube/v3/determine_quota_cost
-    type: Rate Limits
+        description: Youtube has only free tier.
+    name: Plans
+    type: Plans
+  - url: https://developers.google.com/youtube/v3/determine_quota_cost
+    data:
+      - name: Rate Limits
+        type: Type of Rate Limits
+        limit: 200
+        cost: 1
+        metric: request
+        rate: credit
+        domains:
+          - googleapis.com
+        timeframe: hours
+        operations:
+          - getActivities
+          - getChannels
+          - getChannelSections
+          - getComments
+          - getCommentThreads
+          - getGuideChategories
+          - getI18nLanguages
+          - getI18nRegions
+          - getMemebers
+          - getMembershipLevels
+          - getPlayListItems
+          - getPlayLists
+          - getSubscriptions
+          - getvideoAbuseReportReasons
+          - getVideoCategories
+          - getVideos
+        description: This is a description of these rate limits.
+        userMultiplied: true
+    name: Single Cost Rate Limits
+    type: RateLimits
+    description: The single credit cost rate limits operations.
 created: '2025-07-29'
-modified: '2025-07-29'
+modified: '2025-08-13'
 description: |-
   The Youtube API provides the ability to retrieve feeds related to videos,
   users, and playlists. It also provides the ability to manipulate these feeds,
