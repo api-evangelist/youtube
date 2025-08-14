@@ -86,6 +86,8 @@ apis:
     properties:
       - url: https://developers.google.com/youtube/v3/docs/videos/list
         type: Documentation
+      - type: OpenAPI
+        url: properties/youtube-videos-api-openapi.yml
     description: Managing Youtube videos.
 name: Youtube
 tags:
