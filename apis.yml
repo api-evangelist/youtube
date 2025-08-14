@@ -27,18 +27,7 @@ apis:
     properties:
       - url: https://developers.google.com/youtube/v3/docs/comments/list
         type: Documentation
-      - url: properties/youtube-comments-api-openapi.yml
-        type: OpenAPI
     description: Managing Youtube comments.
-  - aid: youtube:youtube-comment-threads-api
-    name: Youtube Comment Threads API
-    tags:
-      - Videos
-      - Comment Threads
-    properties:
-      - url: https://developers.google.com/youtube/v3/docs/commentThreads/list
-        type: Documentation
-    description: Managing Youtube comment threads.
   - aid: youtube:youtube-playlists-api
     name: Youtube Playlists API
     tags:
@@ -47,8 +36,6 @@ apis:
     properties:
       - url: https://developers.google.com/youtube/v3/docs/playlists/list
         type: Documentation
-      - url: properties/youtube-playlists-api-openapi.yml
-        type: OpenAPI
     description: Managing Youtube playlists.
   - aid: youtube:youtube-search-api
     name: Youtube Search API
@@ -75,8 +62,6 @@ apis:
     properties:
       - url: https://developers.google.com/youtube/v3/docs/videos/list
         type: Documentation
-      - url: properties/youtube-videos-api-openapi.yml
-        type: OpenAPI
     description: Managing Youtube videos.
 name: Youtube
 tags:
