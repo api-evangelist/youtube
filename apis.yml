@@ -47,6 +47,8 @@ apis:
     properties:
       - url: https://developers.google.com/youtube/v3/docs/playlists/list
         type: Documentation
+      - type: OpenAPI
+        url: properties/youtube-playlists-api-openapi.yml
     description: Managing Youtube playlists.
   - aid: youtube:youtube-search-api
     name: Youtube Search API
