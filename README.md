@@ -16,7 +16,7 @@ messsages. The API is also able to upload videos.
 ## Timestamps
 
 - **Created:** 2025-07-29 
-- **Modified:** 2025-08-13 
+- **Modified:** 2025-08-14 
 
 ## APIs
 
@@ -53,17 +53,6 @@ Managing Youtube comments.
 #### Properties
 
 - [Documentation](https://developers.google.com/youtube/v3/docs/comments/list)
-### Youtube Comment Threads API
-Managing Youtube comment threads.
-
-
-#### Tags:
-
- - Videos, Comment Threads
-
-#### Properties
-
-- [Documentation](https://developers.google.com/youtube/v3/docs/commentThreads/list)
 ### Youtube Playlists API
 Managing Youtube playlists.
 
@@ -75,17 +64,6 @@ Managing Youtube playlists.
 #### Properties
 
 - [Documentation](https://developers.google.com/youtube/v3/docs/playlists/list)
-### Youtube Playlist Items API
-Managing Youtube playlist items.
-
-
-#### Tags:
-
- - Videos, Playlist Items
-
-#### Properties
-
-- [Documentation](https://developers.google.com/youtube/v3/docs/playlistItems/list)
 ### Youtube Search API
 Managing Youtube search.
 
