@@ -63,6 +63,8 @@ apis:
     properties:
       - url: https://developers.google.com/youtube/v3/docs/search/list
         type: Documentation
+      - type: OpenAPI
+        url: properties/youtube-search-api-openapi.yml
     description: Managing Youtube search.
   - aid: youtube:youtube-subscriptions-api
     name: Youtube Subscriptions API
