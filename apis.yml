@@ -29,6 +29,8 @@ apis:
     properties:
       - url: https://developers.google.com/youtube/v3/docs/comments/list
         type: Documentation
+      - type: OpenAPI
+        url: properties/youtube-comments-api-openapi.yml
     description: Managing Youtube comments.
   - aid: youtube:youtube-comment-threads-api
     name: Youtube Comment Threads API
