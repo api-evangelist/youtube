@@ -1,109 +1,1153 @@
-openapi: 3.0.0
-servers:
-  - url: https://youtubeanalytics.googleapis.com/
+openapi: 3.1.0
 info:
+  title: YouTube Analytics API
+  description: |
+    The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
+    Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
+    and gain insights into viewer demographics and behavior patterns.
+    
+    ## Key Features
+    - Retrieve channel and video performance metrics
+    - Access audience demographics and geographic data
+    - Monitor engagement metrics like likes, comments, and shares
+    - Track revenue and ad performance data (for monetized content)
+    - Generate custom date-range reports
+    
+    ## Authentication
+    All API requests require OAuth 2.0 authentication with appropriate scopes.
+  version: 2.0.0
   contact:
-    name: Google
-    url: https://google.com
-    x-twitter: youtube
-  description: Retrieves your YouTube Analytics data.
+    name: Google Developers
+    url: https://developers.google.com/youtube/analytics
+    email: youtube-api-support@google.com
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
+    identifier: CC-BY-3.0
   termsOfService: https://developers.google.com/terms/
-  title: YouTube Analytics API
-  version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
-  x-apisguru-categories:
-    - analytics
-    - media
   x-logo:
-    url: https://api.apis.guru/v2/cache/logo/https_www.google.com_images_branding_googlelogo_2x_googlelogo_color_272x92dp.png
-  x-origin:
-    - format: openapi
-      url: https://youtubeanalytics.googleapis.com/$discovery/rest?version=v1
-      version: "3.0"
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: youtubeAnalytics
+    url: https://www.youtube.com/img/desktop/yt_1200.png
+servers:
+  - url: https://youtubeanalytics.googleapis.com/v2
+    description: YouTube Analytics API Production Server
 externalDocs:
+  description: YouTube Analytics API Documentation
   url: https://developers.google.com/youtube/analytics
-tags: []
-paths: {}
+tags:
+  - name: Analytics Reports
+    description: Operations for retrieving YouTube Analytics reports and metrics
+  - name: Analytics Groups
+    description: Operations for managing analytics group definitions
+  - name: Group Items
+    description: Operations for managing items within analytics groups
+paths:
+  /reports:
+    get:
+      tags:
+        - Analytics Reports
+      operationId: getAnalyticsReports
+      summary: Retrieve YouTube Analytics Reports
+      description: |
+        Retrieves YouTube Analytics data for a channel or content owner.
+        The API response contains a report with the requested dimensions and metrics
+        for the specified date range. You can filter results by various dimensions
+        such as video, country, or traffic source.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulAnalyticsReportExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/Ids'
+        - $ref: '#/components/parameters/StartDate'
+        - $ref: '#/components/parameters/EndDate'
+        - $ref: '#/components/parameters/Metrics'
+        - $ref: '#/components/parameters/Dimensions'
+        - $ref: '#/components/parameters/Filters'
+        - $ref: '#/components/parameters/Sort'
+        - $ref: '#/components/parameters/MaxResults'
+        - $ref: '#/components/parameters/StartIndex'
+        - $ref: '#/components/parameters/Currency'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/PrettyPrint'
+      responses:
+        '200':
+          description: Successful response containing analytics report data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsReportResponse'
+              examples:
+                SuccessfulAnalyticsReportExample:
+                  $ref: '#/components/examples/SuccessfulAnalyticsReportExample'
+        '400':
+          description: Bad request - invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestErrorExample:
+                  $ref: '#/components/examples/BadRequestErrorExample'
+        '401':
+          description: Unauthorized - invalid or missing authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                UnauthorizedErrorExample:
+                  $ref: '#/components/examples/UnauthorizedErrorExample'
+        '403':
+          description: Forbidden - insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                ForbiddenErrorExample:
+                  $ref: '#/components/examples/ForbiddenErrorExample'
+  /groups:
+    get:
+      tags:
+        - Analytics Groups
+      operationId: listAnalyticsGroups
+      summary: List Analytics Groups
+      description: |
+        Returns a collection of analytics groups that match the API request parameters.
+        Groups allow you to aggregate data for multiple channels or videos to analyze
+        combined performance metrics.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulGroupListExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/GroupId'
+        - $ref: '#/components/parameters/OnBehalfOfContentOwner'
+        - $ref: '#/components/parameters/PageToken'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/PrettyPrint'
+      responses:
+        '200':
+          description: Successful response containing list of analytics groups
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupListResponse'
+              examples:
+                SuccessfulGroupListExample:
+                  $ref: '#/components/examples/SuccessfulGroupListExample'
+        '401':
+          description: Unauthorized - invalid or missing authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                UnauthorizedErrorExample:
+                  $ref: '#/components/examples/UnauthorizedErrorExample'
+    post:
+      tags:
+        - Analytics Groups
+      operationId: createAnalyticsGroup
+      summary: Create Analytics Group
+      description: |
+        Creates a new analytics group. Groups enable you to aggregate analytics data
+        for multiple channels or videos, making it easier to analyze combined
+        performance across related content.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulGroupCreateExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/OnBehalfOfContentOwner'
+        - $ref: '#/components/parameters/AccessToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupCreateRequest'
+            examples:
+              GroupCreateRequestExample:
+                $ref: '#/components/examples/GroupCreateRequestExample'
+      responses:
+        '200':
+          description: Successfully created analytics group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+              examples:
+                SuccessfulGroupCreateExample:
+                  $ref: '#/components/examples/SuccessfulGroupCreateExample'
+        '400':
+          description: Bad request - invalid group data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestErrorExample:
+                  $ref: '#/components/examples/BadRequestErrorExample'
+        '401':
+          description: Unauthorized - invalid or missing authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                UnauthorizedErrorExample:
+                  $ref: '#/components/examples/UnauthorizedErrorExample'
+  /groups/{groupId}:
+    get:
+      tags:
+        - Analytics Groups
+      operationId: getAnalyticsGroup
+      summary: Get Analytics Group
+      description: |
+        Retrieves a specific analytics group by its unique identifier.
+        Returns detailed information about the group including its title,
+        content details, and associated metadata.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulGroupCreateExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/GroupIdPath'
+        - $ref: '#/components/parameters/OnBehalfOfContentOwner'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/PrettyPrint'
+      responses:
+        '200':
+          description: Successful response containing the analytics group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+              examples:
+                SuccessfulGroupCreateExample:
+                  $ref: '#/components/examples/SuccessfulGroupCreateExample'
+        '404':
+          description: Group not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+    put:
+      tags:
+        - Analytics Groups
+      operationId: updateAnalyticsGroup
+      summary: Update Analytics Group
+      description: |
+        Updates an existing analytics group. You can modify the group's title
+        and other editable properties. The group ID cannot be changed.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulGroupCreateExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/GroupIdPath'
+        - $ref: '#/components/parameters/OnBehalfOfContentOwner'
+        - $ref: '#/components/parameters/AccessToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupUpdateRequest'
+            examples:
+              GroupUpdateRequestExample:
+                $ref: '#/components/examples/GroupUpdateRequestExample'
+      responses:
+        '200':
+          description: Successfully updated analytics group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+              examples:
+                SuccessfulGroupCreateExample:
+                  $ref: '#/components/examples/SuccessfulGroupCreateExample'
+        '400':
+          description: Bad request - invalid update data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestErrorExample:
+                  $ref: '#/components/examples/BadRequestErrorExample'
+        '404':
+          description: Group not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+    delete:
+      tags:
+        - Analytics Groups
+      operationId: deleteAnalyticsGroup
+      summary: Delete Analytics Group
+      description: |
+        Deletes an analytics group. This action is permanent and cannot be undone.
+        All group items associated with the group will also be removed.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulDeleteExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/GroupIdPath'
+        - $ref: '#/components/parameters/OnBehalfOfContentOwner'
+        - $ref: '#/components/parameters/AccessToken'
+      responses:
+        '204':
+          description: Successfully deleted the analytics group
+        '404':
+          description: Group not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+  /groupItems:
+    get:
+      tags:
+        - Group Items
+      operationId: listGroupItems
+      summary: List Group Items
+      description: |
+        Returns a collection of group items that match the API request parameters.
+        Group items represent the individual channels or videos that belong to
+        an analytics group.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulGroupItemListExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/GroupIdQuery'
+        - $ref: '#/components/parameters/OnBehalfOfContentOwner'
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/PrettyPrint'
+      responses:
+        '200':
+          description: Successful response containing list of group items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupItemListResponse'
+              examples:
+                SuccessfulGroupItemListExample:
+                  $ref: '#/components/examples/SuccessfulGroupItemListExample'
+        '401':
+          description: Unauthorized - invalid or missing authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                UnauthorizedErrorExample:
+                  $ref: '#/components/examples/UnauthorizedErrorExample'
+    post:
+      tags:
+        - Group Items
+      operationId: createGroupItem
+      summary: Add Item to Group
+      description: |
+        Adds a channel or video to an analytics group. The item will be included
+        in the group's aggregated analytics data going forward.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulGroupItemCreateExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/OnBehalfOfContentOwner'
+        - $ref: '#/components/parameters/AccessToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupItemCreateRequest'
+            examples:
+              GroupItemCreateRequestExample:
+                $ref: '#/components/examples/GroupItemCreateRequestExample'
+      responses:
+        '200':
+          description: Successfully added item to group
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupItem'
+              examples:
+                SuccessfulGroupItemCreateExample:
+                  $ref: '#/components/examples/SuccessfulGroupItemCreateExample'
+        '400':
+          description: Bad request - invalid item data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestErrorExample:
+                  $ref: '#/components/examples/BadRequestErrorExample'
+  /groupItems/{itemId}:
+    delete:
+      tags:
+        - Group Items
+      operationId: deleteGroupItem
+      summary: Remove Item from Group
+      description: |
+        Removes a channel or video from an analytics group. The item's historical
+        data will no longer be included in the group's aggregated metrics.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulDeleteExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/ItemIdPath'
+        - $ref: '#/components/parameters/OnBehalfOfContentOwner'
+        - $ref: '#/components/parameters/AccessToken'
+      responses:
+        '204':
+          description: Successfully removed item from group
+        '404':
+          description: Item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
 components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for YouTube Analytics API
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View YouTube Analytics monetary reports
   parameters:
-    _.xgafv:
-      description: V1 error format.
+    Ids:
+      name: ids
       in: query
-      name: $.xgafv
+      required: true
+      description: |
+        Identifies the YouTube channel or content owner for which you are retrieving
+        YouTube Analytics data. Use channel==CHANNEL_ID or contentOwner==CONTENT_OWNER_ID.
       schema:
-        enum:
-          - "1"
-          - "2"
         type: string
-    access_token:
-      description: OAuth access token.
+        example: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+    StartDate:
+      name: startDate
       in: query
+      required: true
+      description: The start date for the data retrieval in YYYY-MM-DD format
+      schema:
+        type: string
+        format: date
+        example: '2024-01-01'
+    EndDate:
+      name: endDate
+      in: query
+      required: true
+      description: The end date for the data retrieval in YYYY-MM-DD format
+      schema:
+        type: string
+        format: date
+        example: '2024-01-31'
+    Metrics:
+      name: metrics
+      in: query
+      required: true
+      description: |
+        A comma-separated list of YouTube Analytics metrics to retrieve.
+        Common metrics include views, estimatedMinutesWatched, averageViewDuration, likes, dislikes, comments, shares.
+      schema:
+        type: string
+        example: views,estimatedMinutesWatched,averageViewDuration,likes
+    Dimensions:
+      name: dimensions
+      in: query
+      required: false
+      description: |
+        A comma-separated list of YouTube Analytics dimensions.
+        Common dimensions include video, channel, country, day, month.
+      schema:
+        type: string
+        example: video,day
+    Filters:
+      name: filters
+      in: query
+      required: false
+      description: |
+        A list of filters to apply to the data. Filters use the format dimension==value
+        and can be combined with semicolons.
+      schema:
+        type: string
+        example: country==US;video==dQw4w9WgXcQ
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: |
+        A comma-separated list of dimensions or metrics to sort by.
+        Prefix with - for descending order.
+      schema:
+        type: string
+        example: -views
+    MaxResults:
+      name: maxResults
+      in: query
+      required: false
+      description: Maximum number of rows to include in the response (1-500)
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+        default: 100
+        example: 50
+    StartIndex:
+      name: startIndex
+      in: query
+      required: false
+      description: Index of the first row to retrieve (1-based)
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+        example: 1
+    Currency:
+      name: currency
+      in: query
+      required: false
+      description: Currency code for revenue metrics (ISO 4217)
+      schema:
+        type: string
+        pattern: ^[A-Z]{3}$
+        example: USD
+    GroupId:
+      name: id
+      in: query
+      required: false
+      description: The unique identifier of an analytics group to retrieve
+      schema:
+        type: string
+        example: ABCdef123456
+    GroupIdPath:
+      name: groupId
+      in: path
+      required: true
+      description: The unique identifier of the analytics group
+      schema:
+        type: string
+        example: ABCdef123456
+    GroupIdQuery:
+      name: groupId
+      in: query
+      required: true
+      description: The group ID to retrieve items for
+      schema:
+        type: string
+        example: ABCdef123456
+    ItemIdPath:
+      name: itemId
+      in: path
+      required: true
+      description: The unique identifier of the group item
+      schema:
+        type: string
+        example: XYZ789abc123
+    OnBehalfOfContentOwner:
+      name: onBehalfOfContentOwner
+      in: query
+      required: false
+      description: |
+        The content owner ID for YouTube content owner operations.
+        Required for content owner authenticated requests.
+      schema:
+        type: string
+        example: ContentOwnerXYZ
+    PageToken:
+      name: pageToken
+      in: query
+      required: false
+      description: Token for retrieving the next page of results
+      schema:
+        type: string
+    AccessToken:
       name: access_token
+      in: query
+      required: false
+      description: OAuth 2.0 access token for authentication
       schema:
         type: string
-    alt:
-      description: Data format for response.
-      in: query
-      name: alt
-      schema:
-        enum:
-          - json
-          - media
-          - proto
-        type: string
-    callback:
-      description: JSONP
-      in: query
-      name: callback
-      schema:
-        type: string
-    fields:
-      description: Selector specifying which fields to include in a partial response.
-      in: query
-      name: fields
-      schema:
-        type: string
-    key:
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      in: query
-      name: key
-      schema:
-        type: string
-    oauth_token:
-      description: OAuth 2.0 token for the current user.
-      in: query
-      name: oauth_token
-      schema:
-        type: string
-    prettyPrint:
-      description: Returns response with indentations and line breaks.
-      in: query
+    PrettyPrint:
       name: prettyPrint
+      in: query
+      required: false
+      description: Returns response with indentations and line breaks for readability
       schema:
         type: boolean
-    quotaUser:
-      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
-      in: query
-      name: quotaUser
-      schema:
-        type: string
-    uploadType:
-      description: Legacy upload protocol for media (e.g. "media", "multipart").
-      in: query
-      name: uploadType
-      schema:
-        type: string
-    upload_protocol:
-      description: Upload protocol for media (e.g. "raw", "multipart").
-      in: query
-      name: upload_protocol
-      schema:
-        type: string
-  schemas: {}
+        default: true
+  schemas:
+    AnalyticsReportResponse:
+      type: object
+      description: Response object containing YouTube Analytics report data
+      required:
+        - kind
+        - columnHeaders
+        - rows
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtubeAnalytics#resultTable
+        columnHeaders:
+          type: array
+          description: Column header definitions for the report data
+          items:
+            $ref: '#/components/schemas/ColumnHeader'
+        rows:
+          type: array
+          description: Data rows containing the requested metrics and dimensions
+          items:
+            type: array
+            items:
+              oneOf:
+                - type: string
+                - type: number
+                - type: integer
+    ColumnHeader:
+      type: object
+      description: Defines a column in the analytics report
+      required:
+        - name
+        - columnType
+        - dataType
+      properties:
+        name:
+          type: string
+          description: The name of the dimension or metric
+          example: views
+        columnType:
+          type: string
+          description: Whether the column is a dimension or metric
+          enum:
+            - DIMENSION
+            - METRIC
+          example: METRIC
+        dataType:
+          type: string
+          description: The data type of the column values
+          enum:
+            - STRING
+            - INTEGER
+            - FLOAT
+          example: INTEGER
+    GroupListResponse:
+      type: object
+      description: Response containing a list of analytics groups
+      required:
+        - kind
+        - items
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#groupListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        items:
+          type: array
+          description: List of analytics groups
+          items:
+            $ref: '#/components/schemas/Group'
+        nextPageToken:
+          type: string
+          description: Token to retrieve the next page of results
+    Group:
+      type: object
+      description: An analytics group for aggregating channel or video data
+      required:
+        - kind
+        - id
+        - snippet
+        - contentDetails
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#group
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the group
+          example: ABCdef123456
+        snippet:
+          $ref: '#/components/schemas/GroupSnippet'
+        contentDetails:
+          $ref: '#/components/schemas/GroupContentDetails'
+    GroupSnippet:
+      type: object
+      description: Basic information about an analytics group
+      required:
+        - title
+        - publishedAt
+      properties:
+        title:
+          type: string
+          description: The title of the group
+          example: Top Performing Videos Q1 2024
+        publishedAt:
+          type: string
+          format: date-time
+          description: When the group was created
+          example: '2024-01-15T10:30:00Z'
+    GroupContentDetails:
+      type: object
+      description: Content details for an analytics group
+      required:
+        - itemCount
+        - itemType
+      properties:
+        itemCount:
+          type: integer
+          description: Number of items in the group
+          example: 25
+        itemType:
+          type: string
+          description: Type of items in the group
+          enum:
+            - youtube#channel
+            - youtube#video
+          example: youtube#video
+    GroupCreateRequest:
+      type: object
+      description: Request body for creating a new analytics group
+      required:
+        - snippet
+        - contentDetails
+      properties:
+        snippet:
+          type: object
+          required:
+            - title
+          properties:
+            title:
+              type: string
+              description: The title for the new group
+              example: My New Analytics Group
+        contentDetails:
+          type: object
+          required:
+            - itemType
+          properties:
+            itemType:
+              type: string
+              description: Type of items the group will contain
+              enum:
+                - youtube#channel
+                - youtube#video
+              example: youtube#video
+    GroupUpdateRequest:
+      type: object
+      description: Request body for updating an analytics group
+      required:
+        - id
+        - snippet
+      properties:
+        id:
+          type: string
+          description: The ID of the group to update
+          example: ABCdef123456
+        snippet:
+          type: object
+          required:
+            - title
+          properties:
+            title:
+              type: string
+              description: The updated title for the group
+              example: Updated Analytics Group Name
+    GroupItemListResponse:
+      type: object
+      description: Response containing a list of group items
+      required:
+        - kind
+        - items
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#groupItemListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        items:
+          type: array
+          description: List of group items
+          items:
+            $ref: '#/components/schemas/GroupItem'
+    GroupItem:
+      type: object
+      description: An item (channel or video) within an analytics group
+      required:
+        - kind
+        - id
+        - groupId
+        - resource
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#groupItem
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the group item
+          example: XYZ789abc123
+        groupId:
+          type: string
+          description: ID of the group this item belongs to
+          example: ABCdef123456
+        resource:
+          $ref: '#/components/schemas/GroupItemResource'
+    GroupItemResource:
+      type: object
+      description: Resource information for a group item
+      required:
+        - kind
+        - id
+      properties:
+        kind:
+          type: string
+          description: Type of resource
+          enum:
+            - youtube#channel
+            - youtube#video
+          example: youtube#video
+        id:
+          type: string
+          description: YouTube ID of the channel or video
+          example: dQw4w9WgXcQ
+    GroupItemCreateRequest:
+      type: object
+      description: Request body for adding an item to a group
+      required:
+        - groupId
+        - resource
+      properties:
+        groupId:
+          type: string
+          description: ID of the group to add the item to
+          example: ABCdef123456
+        resource:
+          type: object
+          required:
+            - kind
+            - id
+          properties:
+            kind:
+              type: string
+              description: Type of resource to add
+              enum:
+                - youtube#channel
+                - youtube#video
+              example: youtube#video
+            id:
+              type: string
+              description: YouTube ID of the channel or video
+              example: dQw4w9WgXcQ
+    ErrorResponse:
+      type: object
+      description: Error response object
+      required:
+        - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetails'
+    ErrorDetails:
+      type: object
+      description: Details about an API error
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid parameter value
+        errors:
+          type: array
+          description: List of specific errors
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    ErrorItem:
+      type: object
+      description: Individual error detail
+      properties:
+        domain:
+          type: string
+          description: Error domain
+          example: youtube.analytics
+        reason:
+          type: string
+          description: Error reason code
+          example: invalidParameter
+        message:
+          type: string
+          description: Detailed error message
+          example: The parameter 'startDate' has an invalid value
+        locationType:
+          type: string
+          description: Type of location where error occurred
+          example: parameter
+        location:
+          type: string
+          description: Specific location of the error
+          example: startDate
+  examples:
+    SuccessfulAnalyticsReportExample:
+      summary: Successful analytics report response
+      description: Example response containing video views and engagement metrics
+      value:
+        kind: youtubeAnalytics#resultTable
+        columnHeaders:
+          - name: video
+            columnType: DIMENSION
+            dataType: STRING
+          - name: views
+            columnType: METRIC
+            dataType: INTEGER
+          - name: estimatedMinutesWatched
+            columnType: METRIC
+            dataType: FLOAT
+          - name: averageViewDuration
+            columnType: METRIC
+            dataType: FLOAT
+          - name: likes
+            columnType: METRIC
+            dataType: INTEGER
+        rows:
+          - - dQw4w9WgXcQ
+            - 1500000
+            - 3750000.5
+            - 150.2
+            - 45000
+          - - abc123XYZ789
+            - 500000
+            - 1000000.0
+            - 120.0
+            - 15000
+    SuccessfulGroupListExample:
+      summary: Successful group list response
+      description: Example response containing analytics groups
+      value:
+        kind: youtube#groupListResponse
+        etag: abc123def456
+        items:
+          - kind: youtube#group
+            etag: xyz789abc123
+            id: ABCdef123456
+            snippet:
+              title: Top Performing Videos Q1 2024
+              publishedAt: '2024-01-15T10:30:00Z'
+            contentDetails:
+              itemCount: 25
+              itemType: youtube#video
+          - kind: youtube#group
+            etag: mno456pqr789
+            id: GHIjkl789012
+            snippet:
+              title: Channel Performance Tracking
+              publishedAt: '2024-02-01T14:00:00Z'
+            contentDetails:
+              itemCount: 5
+              itemType: youtube#channel
+    SuccessfulGroupCreateExample:
+      summary: Successfully created group
+      description: Example response for a newly created analytics group
+      value:
+        kind: youtube#group
+        etag: newgroup123
+        id: NEWgroup456789
+        snippet:
+          title: My New Analytics Group
+          publishedAt: '2024-03-01T09:00:00Z'
+        contentDetails:
+          itemCount: 0
+          itemType: youtube#video
+    SuccessfulGroupItemListExample:
+      summary: Successful group items list response
+      description: Example response containing items in an analytics group
+      value:
+        kind: youtube#groupItemListResponse
+        etag: items123abc
+        items:
+          - kind: youtube#groupItem
+            etag: item1abc
+            id: ITEMabc123
+            groupId: ABCdef123456
+            resource:
+              kind: youtube#video
+              id: dQw4w9WgXcQ
+          - kind: youtube#groupItem
+            etag: item2def
+            id: ITEMdef456
+            groupId: ABCdef123456
+            resource:
+              kind: youtube#video
+              id: abc123XYZ789
+    SuccessfulGroupItemCreateExample:
+      summary: Successfully added item to group
+      description: Example response for a newly added group item
+      value:
+        kind: youtube#groupItem
+        etag: newitem789
+        id: NEWitem123456
+        groupId: ABCdef123456
+        resource:
+          kind: youtube#video
+          id: dQw4w9WgXcQ
+    GroupCreateRequestExample:
+      summary: Group creation request
+      description: Example request body for creating a new analytics group
+      value:
+        snippet:
+          title: My New Analytics Group
+        contentDetails:
+          itemType: youtube#video
+    GroupUpdateRequestExample:
+      summary: Group update request
+      description: Example request body for updating an analytics group
+      value:
+        id: ABCdef123456
+        snippet:
+          title: Updated Analytics Group Name
+    GroupItemCreateRequestExample:
+      summary: Add item to group request
+      description: Example request body for adding an item to a group
+      value:
+        groupId: ABCdef123456
+        resource:
+          kind: youtube#video
+          id: dQw4w9WgXcQ
+    BadRequestErrorExample:
+      summary: Bad request error
+      description: Example error response for invalid parameters
+      value:
+        error:
+          code: 400
+          message: Invalid parameter value
+          errors:
+            - domain: youtube.analytics
+              reason: invalidParameter
+              message: The parameter 'startDate' has an invalid value
+              locationType: parameter
+              location: startDate
+    UnauthorizedErrorExample:
+      summary: Unauthorized error
+      description: Example error response for authentication failure
+      value:
+        error:
+          code: 401
+          message: Invalid credentials
+          errors:
+            - domain: youtube.analytics
+              reason: authError
+              message: The access token is invalid or expired
+              locationType: header
+              location: Authorization
+    ForbiddenErrorExample:
+      summary: Forbidden error
+      description: Example error response for insufficient permissions
+      value:
+        error:
+          code: 403
+          message: Access forbidden
+          errors:
+            - domain: youtube.analytics
+              reason: forbidden
+              message: The authenticated user does not have permission to access this resource
+              locationType: header
+              location: Authorization
+    NotFoundErrorExample:
+      summary: Not found error
+      description: Example error response when resource is not found
+      value:
+        error:
+          code: 404
+          message: Resource not found
+          errors:
+            - domain: youtube.analytics
+              reason: notFound
+              message: The specified group was not found
+              locationType: parameter
+              location: groupId
+    SuccessfulDeleteExample:
+      summary: Successful deletion
+      description: No content returned on successful deletion
+      value: null
+security:
+  - OAuth2:
+      - https://www.googleapis.com/auth/yt-analytics.readonly

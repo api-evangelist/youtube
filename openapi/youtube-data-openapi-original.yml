@@ -1,119 +1,2845 @@
-openapi: 3.0.0
-servers:
-  - url: https://youtubeanalytics.googleapis.com/
+openapi: 3.1.0
 info:
+  title: YouTube Data API
+  description: |
+    The YouTube Data API enables you to incorporate YouTube functionality into your applications.
+    Use this API to manage YouTube resources such as videos, playlists, channels, and subscriptions.
+    
+    ## Key Features
+    - Search for videos, channels, and playlists
+    - Retrieve detailed metadata for YouTube resources
+    - Manage playlists and playlist items
+    - Access channel information and statistics
+    - Retrieve video captions and comments
+    - Manage subscriptions and activities
+    
+    ## Authentication
+    Most API requests require OAuth 2.0 authentication. Some read-only operations can use an API key.
+    
+    ## Rate Limits
+    The API uses a quota system. Each request costs quota units based on the operation type.
+    Monitor your quota usage in the Google Cloud Console.
+  version: 3.0.0
   contact:
-    name: Google
-    url: https://google.com
-    x-twitter: youtube
-  description: |-
-    The YouTube Reporting and YouTube Analytics APIs let you retrieve YouTube
-    Analytics data to automate complex reporting tasks, build custom
-    dashboards, and much more.
+    name: Google Developers
+    url: https://developers.google.com/youtube/v3
+    email: youtube-api-support@google.com
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
+    identifier: CC-BY-3.0
   termsOfService: https://developers.google.com/terms/
-  title: Youtube Analytics API
-  version: v1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
-  x-apisguru-categories:
-    - analytics
-    - media
   x-logo:
-    url: >-
-      https://api.apis.guru/v2/cache/logo/https_www.google.com_images_branding_googlelogo_2x_googlelogo_color_272x92dp.png
-  x-origin:
-    - format: openapi
-      url: https://youtubeanalytics.googleapis.com/$discovery/rest?version=v1
-      version: '3.0'
-  x-preferred: true
-  x-providerName: googleapis.com
-  x-serviceName: youtubeAnalytics
+    url: https://www.youtube.com/img/desktop/yt_1200.png
+servers:
+  - url: https://www.googleapis.com/youtube/v3
+    description: YouTube Data API Production Server
 externalDocs:
-  url: https://developers.google.com/youtube/analytics
-tags: []
-paths: {}
+  description: YouTube Data API Documentation
+  url: https://developers.google.com/youtube/v3
+tags:
+  - name: Search
+    description: Operations for searching YouTube content
+  - name: Videos
+    description: Operations for retrieving and managing video resources
+  - name: Channels
+    description: Operations for retrieving channel information
+  - name: Playlists
+    description: Operations for managing playlist resources
+  - name: Playlist Items
+    description: Operations for managing items within playlists
+  - name: Subscriptions
+    description: Operations for managing channel subscriptions
+  - name: Comments
+    description: Operations for retrieving and managing comments
+  - name: Captions
+    description: Operations for managing video captions
+paths:
+  /search:
+    get:
+      tags:
+        - Search
+      operationId: searchContent
+      summary: Search YouTube Content
+      description: |
+        Returns a collection of search results that match the query parameters.
+        You can search for videos, channels, and playlists. By default, a search
+        result set identifies matching video, channel, and playlist resources,
+        but you can configure queries to only retrieve a specific type of resource.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulSearchExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/Part'
+        - $ref: '#/components/parameters/SearchQuery'
+        - $ref: '#/components/parameters/SearchType'
+        - $ref: '#/components/parameters/ChannelId'
+        - $ref: '#/components/parameters/MaxResultsSearch'
+        - $ref: '#/components/parameters/Order'
+        - $ref: '#/components/parameters/PublishedAfter'
+        - $ref: '#/components/parameters/PublishedBefore'
+        - $ref: '#/components/parameters/RegionCode'
+        - $ref: '#/components/parameters/PageToken'
+        - $ref: '#/components/parameters/ApiKey'
+      responses:
+        '200':
+          description: Successful search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchListResponse'
+              examples:
+                SuccessfulSearchExample:
+                  $ref: '#/components/examples/SuccessfulSearchExample'
+        '400':
+          description: Bad request - invalid search parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestErrorExample:
+                  $ref: '#/components/examples/BadRequestErrorExample'
+        '403':
+          description: Forbidden - quota exceeded or access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                QuotaExceededErrorExample:
+                  $ref: '#/components/examples/QuotaExceededErrorExample'
+  /videos:
+    get:
+      tags:
+        - Videos
+      operationId: listVideos
+      summary: List Video Resources
+      description: |
+        Returns a list of videos that match the API request parameters.
+        You can retrieve video details by specifying video IDs, or retrieve
+        videos based on chart rankings or user-specific criteria.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulVideoListExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/Part'
+        - $ref: '#/components/parameters/VideoId'
+        - $ref: '#/components/parameters/Chart'
+        - $ref: '#/components/parameters/VideoCategoryId'
+        - $ref: '#/components/parameters/RegionCode'
+        - $ref: '#/components/parameters/MaxResultsDefault'
+        - $ref: '#/components/parameters/PageToken'
+        - $ref: '#/components/parameters/ApiKey'
+      responses:
+        '200':
+          description: Successful video list response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoListResponse'
+              examples:
+                SuccessfulVideoListExample:
+                  $ref: '#/components/examples/SuccessfulVideoListExample'
+        '404':
+          description: Video not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+    post:
+      tags:
+        - Videos
+      operationId: insertVideo
+      summary: Upload Video
+      description: |
+        Uploads a video to YouTube and optionally sets the video's metadata.
+        This operation requires OAuth 2.0 authentication with the
+        youtube.upload scope.
+      x-microcks-operation:
+        delay: 500
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulVideoInsertExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/Part'
+        - $ref: '#/components/parameters/NotifySubscribers'
+        - $ref: '#/components/parameters/AccessToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoInsertRequest'
+            examples:
+              VideoInsertRequestExample:
+                $ref: '#/components/examples/VideoInsertRequestExample'
+      responses:
+        '200':
+          description: Successfully uploaded video
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+              examples:
+                SuccessfulVideoInsertExample:
+                  $ref: '#/components/examples/SuccessfulVideoInsertExample'
+        '400':
+          description: Bad request - invalid video data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestErrorExample:
+                  $ref: '#/components/examples/BadRequestErrorExample'
+        '401':
+          description: Unauthorized - authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                UnauthorizedErrorExample:
+                  $ref: '#/components/examples/UnauthorizedErrorExample'
+  /videos/{videoId}:
+    put:
+      tags:
+        - Videos
+      operationId: updateVideo
+      summary: Update Video Metadata
+      description: |
+        Updates a video's metadata. This operation requires OAuth 2.0 authentication.
+        You can only update videos that belong to the authenticated user's channel.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulVideoInsertExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/VideoIdPath'
+        - $ref: '#/components/parameters/Part'
+        - $ref: '#/components/parameters/AccessToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoUpdateRequest'
+            examples:
+              VideoUpdateRequestExample:
+                $ref: '#/components/examples/VideoUpdateRequestExample'
+      responses:
+        '200':
+          description: Successfully updated video
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+              examples:
+                SuccessfulVideoInsertExample:
+                  $ref: '#/components/examples/SuccessfulVideoInsertExample'
+        '404':
+          description: Video not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+    delete:
+      tags:
+        - Videos
+      operationId: deleteVideo
+      summary: Delete Video
+      description: |
+        Deletes a video. This operation requires OAuth 2.0 authentication.
+        You can only delete videos that belong to the authenticated user's channel.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulDeleteExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/VideoIdPath'
+        - $ref: '#/components/parameters/AccessToken'
+      responses:
+        '204':
+          description: Successfully deleted video
+        '404':
+          description: Video not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+  /channels:
+    get:
+      tags:
+        - Channels
+      operationId: listChannels
+      summary: List Channel Resources
+      description: |
+        Returns a collection of channels that match the request criteria.
+        You can retrieve channel information by channel ID, username, or for
+        the authenticated user's channel.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulChannelListExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/Part'
+        - $ref: '#/components/parameters/ChannelIdQuery'
+        - $ref: '#/components/parameters/ForUsername'
+        - $ref: '#/components/parameters/Mine'
+        - $ref: '#/components/parameters/MaxResultsDefault'
+        - $ref: '#/components/parameters/PageToken'
+        - $ref: '#/components/parameters/ApiKey'
+      responses:
+        '200':
+          description: Successful channel list response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelListResponse'
+              examples:
+                SuccessfulChannelListExample:
+                  $ref: '#/components/examples/SuccessfulChannelListExample'
+        '404':
+          description: Channel not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+  /playlists:
+    get:
+      tags:
+        - Playlists
+      operationId: listPlaylists
+      summary: List Playlists
+      description: |
+        Returns a collection of playlists that match the API request parameters.
+        You can retrieve playlists by ID, channel ID, or for the authenticated user.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulPlaylistListExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/Part'
+        - $ref: '#/components/parameters/PlaylistId'
+        - $ref: '#/components/parameters/ChannelIdQuery'
+        - $ref: '#/components/parameters/Mine'
+        - $ref: '#/components/parameters/MaxResultsDefault'
+        - $ref: '#/components/parameters/PageToken'
+        - $ref: '#/components/parameters/ApiKey'
+      responses:
+        '200':
+          description: Successful playlist list response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistListResponse'
+              examples:
+                SuccessfulPlaylistListExample:
+                  $ref: '#/components/examples/SuccessfulPlaylistListExample'
+        '404':
+          description: Playlist not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+    post:
+      tags:
+        - Playlists
+      operationId: insertPlaylist
+      summary: Create Playlist
+      description: |
+        Creates a new playlist for the authenticated user. This operation
+        requires OAuth 2.0 authentication with the youtube scope.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulPlaylistInsertExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/Part'
+        - $ref: '#/components/parameters/AccessToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaylistInsertRequest'
+            examples:
+              PlaylistInsertRequestExample:
+                $ref: '#/components/examples/PlaylistInsertRequestExample'
+      responses:
+        '200':
+          description: Successfully created playlist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+              examples:
+                SuccessfulPlaylistInsertExample:
+                  $ref: '#/components/examples/SuccessfulPlaylistInsertExample'
+        '400':
+          description: Bad request - invalid playlist data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestErrorExample:
+                  $ref: '#/components/examples/BadRequestErrorExample'
+  /playlists/{playlistId}:
+    put:
+      tags:
+        - Playlists
+      operationId: updatePlaylist
+      summary: Update Playlist
+      description: |
+        Updates a playlist's metadata. This operation requires OAuth 2.0 authentication.
+        You can only update playlists that belong to the authenticated user's channel.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulPlaylistInsertExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/PlaylistIdPath'
+        - $ref: '#/components/parameters/Part'
+        - $ref: '#/components/parameters/AccessToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaylistUpdateRequest'
+            examples:
+              PlaylistUpdateRequestExample:
+                $ref: '#/components/examples/PlaylistUpdateRequestExample'
+      responses:
+        '200':
+          description: Successfully updated playlist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Playlist'
+              examples:
+                SuccessfulPlaylistInsertExample:
+                  $ref: '#/components/examples/SuccessfulPlaylistInsertExample'
+        '404':
+          description: Playlist not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+    delete:
+      tags:
+        - Playlists
+      operationId: deletePlaylist
+      summary: Delete Playlist
+      description: |
+        Deletes a playlist. This operation requires OAuth 2.0 authentication.
+        You can only delete playlists that belong to the authenticated user's channel.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulDeleteExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/PlaylistIdPath'
+        - $ref: '#/components/parameters/AccessToken'
+      responses:
+        '204':
+          description: Successfully deleted playlist
+        '404':
+          description: Playlist not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+  /playlistItems:
+    get:
+      tags:
+        - Playlist Items
+      operationId: listPlaylistItems
+      summary: List Playlist Items
+      description: |
+        Returns a collection of playlist items that match the API request parameters.
+        You can retrieve all of the playlist items in a specified playlist or
+        retrieve specific playlist items by their unique IDs.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulPlaylistItemListExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/Part'
+        - $ref: '#/components/parameters/PlaylistIdQuery'
+        - $ref: '#/components/parameters/PlaylistItemId'
+        - $ref: '#/components/parameters/MaxResultsDefault'
+        - $ref: '#/components/parameters/PageToken'
+        - $ref: '#/components/parameters/ApiKey'
+      responses:
+        '200':
+          description: Successful playlist items list response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistItemListResponse'
+              examples:
+                SuccessfulPlaylistItemListExample:
+                  $ref: '#/components/examples/SuccessfulPlaylistItemListExample'
+        '404':
+          description: Playlist not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+    post:
+      tags:
+        - Playlist Items
+      operationId: insertPlaylistItem
+      summary: Add Item to Playlist
+      description: |
+        Adds a video to a playlist. This operation requires OAuth 2.0 authentication.
+        You can only add items to playlists that belong to the authenticated user's channel.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulPlaylistItemInsertExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/Part'
+        - $ref: '#/components/parameters/AccessToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaylistItemInsertRequest'
+            examples:
+              PlaylistItemInsertRequestExample:
+                $ref: '#/components/examples/PlaylistItemInsertRequestExample'
+      responses:
+        '200':
+          description: Successfully added item to playlist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlaylistItem'
+              examples:
+                SuccessfulPlaylistItemInsertExample:
+                  $ref: '#/components/examples/SuccessfulPlaylistItemInsertExample'
+        '400':
+          description: Bad request - invalid playlist item data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestErrorExample:
+                  $ref: '#/components/examples/BadRequestErrorExample'
+  /playlistItems/{playlistItemId}:
+    delete:
+      tags:
+        - Playlist Items
+      operationId: deletePlaylistItem
+      summary: Remove Item from Playlist
+      description: |
+        Removes an item from a playlist. This operation requires OAuth 2.0 authentication.
+        You can only remove items from playlists that belong to the authenticated user's channel.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulDeleteExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/PlaylistItemIdPath'
+        - $ref: '#/components/parameters/AccessToken'
+      responses:
+        '204':
+          description: Successfully removed item from playlist
+        '404':
+          description: Playlist item not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+  /subscriptions:
+    get:
+      tags:
+        - Subscriptions
+      operationId: listSubscriptions
+      summary: List Subscriptions
+      description: |
+        Returns a list of subscription resources that match the API request criteria.
+        You can retrieve subscriptions for the authenticated user or for a specific channel.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulSubscriptionListExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/Part'
+        - $ref: '#/components/parameters/ChannelIdQuery'
+        - $ref: '#/components/parameters/Mine'
+        - $ref: '#/components/parameters/ForChannelId'
+        - $ref: '#/components/parameters/SubscriptionOrder'
+        - $ref: '#/components/parameters/MaxResultsDefault'
+        - $ref: '#/components/parameters/PageToken'
+        - $ref: '#/components/parameters/AccessToken'
+      responses:
+        '200':
+          description: Successful subscription list response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionListResponse'
+              examples:
+                SuccessfulSubscriptionListExample:
+                  $ref: '#/components/examples/SuccessfulSubscriptionListExample'
+        '401':
+          description: Unauthorized - authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                UnauthorizedErrorExample:
+                  $ref: '#/components/examples/UnauthorizedErrorExample'
+    post:
+      tags:
+        - Subscriptions
+      operationId: insertSubscription
+      summary: Subscribe to Channel
+      description: |
+        Adds a subscription for the authenticated user's channel.
+        This operation requires OAuth 2.0 authentication with the youtube scope.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulSubscriptionInsertExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/Part'
+        - $ref: '#/components/parameters/AccessToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionInsertRequest'
+            examples:
+              SubscriptionInsertRequestExample:
+                $ref: '#/components/examples/SubscriptionInsertRequestExample'
+      responses:
+        '200':
+          description: Successfully created subscription
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+              examples:
+                SuccessfulSubscriptionInsertExample:
+                  $ref: '#/components/examples/SuccessfulSubscriptionInsertExample'
+        '400':
+          description: Bad request - invalid subscription data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestErrorExample:
+                  $ref: '#/components/examples/BadRequestErrorExample'
+  /subscriptions/{subscriptionId}:
+    delete:
+      tags:
+        - Subscriptions
+      operationId: deleteSubscription
+      summary: Unsubscribe from Channel
+      description: |
+        Deletes a subscription. This operation requires OAuth 2.0 authentication.
+        You can only delete subscriptions that belong to the authenticated user.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulDeleteExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/SubscriptionIdPath'
+        - $ref: '#/components/parameters/AccessToken'
+      responses:
+        '204':
+          description: Successfully deleted subscription
+        '404':
+          description: Subscription not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+  /commentThreads:
+    get:
+      tags:
+        - Comments
+      operationId: listCommentThreads
+      summary: List Comment Threads
+      description: |
+        Returns a list of comment threads that match the API request parameters.
+        Comment threads contain the top-level comment and all replies to that comment.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulCommentThreadListExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/Part'
+        - $ref: '#/components/parameters/VideoIdQuery'
+        - $ref: '#/components/parameters/ChannelIdQuery'
+        - $ref: '#/components/parameters/CommentThreadId'
+        - $ref: '#/components/parameters/CommentOrder'
+        - $ref: '#/components/parameters/MaxResultsDefault'
+        - $ref: '#/components/parameters/PageToken'
+        - $ref: '#/components/parameters/ApiKey'
+      responses:
+        '200':
+          description: Successful comment threads list response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentThreadListResponse'
+              examples:
+                SuccessfulCommentThreadListExample:
+                  $ref: '#/components/examples/SuccessfulCommentThreadListExample'
+        '404':
+          description: Video or channel not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+  /captions:
+    get:
+      tags:
+        - Captions
+      operationId: listCaptions
+      summary: List Video Captions
+      description: |
+        Returns a list of caption tracks for a specified video.
+        Caption tracks contain the text of video captions in various languages.
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: |
+          {
+            "dispatcher": "FALLBACK",
+            "fallback": "SuccessfulCaptionListExample"
+          }
+      parameters:
+        - $ref: '#/components/parameters/Part'
+        - $ref: '#/components/parameters/VideoIdQueryRequired'
+        - $ref: '#/components/parameters/CaptionId'
+        - $ref: '#/components/parameters/ApiKey'
+      responses:
+        '200':
+          description: Successful caption list response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaptionListResponse'
+              examples:
+                SuccessfulCaptionListExample:
+                  $ref: '#/components/examples/SuccessfulCaptionListExample'
+        '404':
+          description: Video not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
 components:
-  parameters:
-    _.xgafv:
-      description: V1 error format.
-      in: query
-      name: $.xgafv
-      schema:
-        enum:
-          - '1'
-          - '2'
-        type: string
-    access_token:
-      description: OAuth access token.
-      in: query
-      name: access_token
-      schema:
-        type: string
-    alt:
-      description: Data format for response.
-      in: query
-      name: alt
-      schema:
-        enum:
-          - json
-          - media
-          - proto
-        type: string
-    callback:
-      description: JSONP
-      in: query
-      name: callback
-      schema:
-        type: string
-    fields:
-      description: Selector specifying which fields to include in a partial response.
-      in: query
-      name: fields
-      schema:
-        type: string
-    key:
-      description: >-
-        API key. Your API key identifies your project and provides you with API
-        access, quota, and reports. Required unless you provide an OAuth 2.0
-        token.
-      in: query
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for YouTube Data API
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/youtube.upload: Upload videos to YouTube
+            https://www.googleapis.com/auth/youtube.force-ssl: Manage your YouTube videos
+    ApiKey:
+      type: apiKey
+      description: API key for read-only operations
       name: key
+      in: query
+  parameters:
+    Part:
+      name: part
+      in: query
+      required: true
+      description: |
+        The part parameter specifies a comma-separated list of one or more
+        resource properties that the API response will include.
       schema:
         type: string
-    oauth_token:
-      description: OAuth 2.0 token for the current user.
+        example: snippet,contentDetails,statistics
+    SearchQuery:
+      name: q
       in: query
-      name: oauth_token
+      required: false
+      description: The search query term to search for
       schema:
         type: string
-    prettyPrint:
-      description: Returns response with indentations and line breaks.
+        example: openapi tutorial
+    SearchType:
+      name: type
       in: query
-      name: prettyPrint
+      required: false
+      description: Restricts a search to a particular type of resource
+      schema:
+        type: string
+        enum:
+          - video
+          - channel
+          - playlist
+        example: video
+    ChannelId:
+      name: channelId
+      in: query
+      required: false
+      description: Filter results to only include resources from this channel
+      schema:
+        type: string
+        example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+    ChannelIdQuery:
+      name: channelId
+      in: query
+      required: false
+      description: Filter results by channel ID
+      schema:
+        type: string
+        example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+    VideoId:
+      name: id
+      in: query
+      required: false
+      description: A comma-separated list of video IDs to retrieve
+      schema:
+        type: string
+        example: dQw4w9WgXcQ,abc123XYZ789
+    VideoIdPath:
+      name: videoId
+      in: path
+      required: true
+      description: The unique identifier of the video
+      schema:
+        type: string
+        example: dQw4w9WgXcQ
+    VideoIdQuery:
+      name: videoId
+      in: query
+      required: false
+      description: Filter results by video ID
+      schema:
+        type: string
+        example: dQw4w9WgXcQ
+    VideoIdQueryRequired:
+      name: videoId
+      in: query
+      required: true
+      description: The video ID to retrieve captions for
+      schema:
+        type: string
+        example: dQw4w9WgXcQ
+    PlaylistId:
+      name: id
+      in: query
+      required: false
+      description: A comma-separated list of playlist IDs to retrieve
+      schema:
+        type: string
+        example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+    PlaylistIdPath:
+      name: playlistId
+      in: path
+      required: true
+      description: The unique identifier of the playlist
+      schema:
+        type: string
+        example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+    PlaylistIdQuery:
+      name: playlistId
+      in: query
+      required: true
+      description: The playlist ID to retrieve items for
+      schema:
+        type: string
+        example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+    PlaylistItemId:
+      name: id
+      in: query
+      required: false
+      description: A comma-separated list of playlist item IDs
+      schema:
+        type: string
+        example: UExmF3p7bTU0NXRLaW00c2dOT2tuR3ZOamJ5OWVmZGYuOTI0NzIzRTJENDg3RENNQQ
+    PlaylistItemIdPath:
+      name: playlistItemId
+      in: path
+      required: true
+      description: The unique identifier of the playlist item
+      schema:
+        type: string
+        example: UExmF3p7bTU0NXRLaW00c2dOT2tuR3ZOamJ5OWVmZGYuOTI0NzIzRTJENDg3RUNNQQ
+    SubscriptionIdPath:
+      name: subscriptionId
+      in: path
+      required: true
+      description: The unique identifier of the subscription
+      schema:
+        type: string
+        example: SUBScription123abc
+    CommentThreadId:
+      name: id
+      in: query
+      required: false
+      description: A comma-separated list of comment thread IDs
+      schema:
+        type: string
+        example: UgzYABCdef123xyz456
+    CaptionId:
+      name: id
+      in: query
+      required: false
+      description: A comma-separated list of caption track IDs
+      schema:
+        type: string
+        example: CAPTIONabc123
+    Chart:
+      name: chart
+      in: query
+      required: false
+      description: Identifies the chart to retrieve
+      schema:
+        type: string
+        enum:
+          - mostPopular
+        example: mostPopular
+    VideoCategoryId:
+      name: videoCategoryId
+      in: query
+      required: false
+      description: Filter chart results by video category
+      schema:
+        type: string
+        example: '10'
+    RegionCode:
+      name: regionCode
+      in: query
+      required: false
+      description: ISO 3166-1 alpha-2 country code for regional filtering
+      schema:
+        type: string
+        pattern: ^[A-Z]{2}$
+        example: US
+    MaxResultsSearch:
+      name: maxResults
+      in: query
+      required: false
+      description: Maximum number of items to return (0-50)
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 50
+        default: 25
+        example: 10
+    MaxResultsDefault:
+      name: maxResults
+      in: query
+      required: false
+      description: Maximum number of items to return (1-50)
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 5
+        example: 25
+    Order:
+      name: order
+      in: query
+      required: false
+      description: The method to use for sorting search results
+      schema:
+        type: string
+        enum:
+          - date
+          - rating
+          - relevance
+          - title
+          - videoCount
+          - viewCount
+        default: relevance
+        example: viewCount
+    SubscriptionOrder:
+      name: order
+      in: query
+      required: false
+      description: The method to use for sorting subscription results
+      schema:
+        type: string
+        enum:
+          - alphabetical
+          - relevance
+          - unread
+        default: relevance
+        example: alphabetical
+    CommentOrder:
+      name: order
+      in: query
+      required: false
+      description: The method to use for sorting comments
+      schema:
+        type: string
+        enum:
+          - time
+          - relevance
+        default: time
+        example: relevance
+    PublishedAfter:
+      name: publishedAfter
+      in: query
+      required: false
+      description: Filter results to only include resources created after this date
+      schema:
+        type: string
+        format: date-time
+        example: '2024-01-01T00:00:00Z'
+    PublishedBefore:
+      name: publishedBefore
+      in: query
+      required: false
+      description: Filter results to only include resources created before this date
+      schema:
+        type: string
+        format: date-time
+        example: '2024-12-31T23:59:59Z'
+    PageToken:
+      name: pageToken
+      in: query
+      required: false
+      description: Token for retrieving the next page of results
+      schema:
+        type: string
+    ForUsername:
+      name: forUsername
+      in: query
+      required: false
+      description: Retrieve channel by username
+      schema:
+        type: string
+        example: GoogleDevelopers
+    ForChannelId:
+      name: forChannelId
+      in: query
+      required: false
+      description: Filter subscriptions to the specified channel
+      schema:
+        type: string
+        example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+    Mine:
+      name: mine
+      in: query
+      required: false
+      description: Return resources owned by the authenticated user
       schema:
         type: boolean
-    quotaUser:
-      description: >-
-        Available to use for quota purposes for server-side applications. Can be
-        any arbitrary string assigned to a user, but should not exceed 40
-        characters.
+        example: true
+    NotifySubscribers:
+      name: notifySubscribers
       in: query
-      name: quotaUser
+      required: false
+      description: Whether subscribers should be notified about the video upload
+      schema:
+        type: boolean
+        default: true
+        example: true
+    AccessToken:
+      name: access_token
+      in: query
+      required: false
+      description: OAuth 2.0 access token for authentication
       schema:
         type: string
-    uploadType:
-      description: Legacy upload protocol for media (e.g. "media", "multipart").
+    ApiKey:
+      name: key
       in: query
-      name: uploadType
+      required: false
+      description: API key for authentication (for read-only operations)
       schema:
         type: string
-    upload_protocol:
-      description: Upload protocol for media (e.g. "raw", "multipart").
-      in: query
-      name: upload_protocol
-      schema:
-        type: string
-  schemas: {}
+  schemas:
+    SearchListResponse:
+      type: object
+      description: Response containing search results
+      required:
+        - kind
+        - etag
+        - items
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#searchListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        nextPageToken:
+          type: string
+          description: Token for the next page of results
+        prevPageToken:
+          type: string
+          description: Token for the previous page of results
+        regionCode:
+          type: string
+          description: Region code used for the search
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: List of search results
+          items:
+            $ref: '#/components/schemas/SearchResult'
+    SearchResult:
+      type: object
+      description: A single search result
+      required:
+        - kind
+        - etag
+        - id
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#searchResult
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          $ref: '#/components/schemas/ResourceId'
+        snippet:
+          $ref: '#/components/schemas/SearchResultSnippet'
+    ResourceId:
+      type: object
+      description: Identifies the resource in the search result
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          description: Type of resource
+          enum:
+            - youtube#video
+            - youtube#channel
+            - youtube#playlist
+          example: youtube#video
+        videoId:
+          type: string
+          description: Video ID if the result is a video
+          example: dQw4w9WgXcQ
+        channelId:
+          type: string
+          description: Channel ID if the result is a channel
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        playlistId:
+          type: string
+          description: Playlist ID if the result is a playlist
+          example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+    SearchResultSnippet:
+      type: object
+      description: Basic information about the search result
+      properties:
+        publishedAt:
+          type: string
+          format: date-time
+          description: When the resource was published
+          example: '2024-03-15T10:30:00Z'
+        channelId:
+          type: string
+          description: ID of the channel that owns the resource
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        title:
+          type: string
+          description: Title of the resource
+          example: 'OpenAPI Tutorial: Building REST APIs'
+        description:
+          type: string
+          description: Description of the resource
+          example: Learn how to build REST APIs using OpenAPI specification...
+        thumbnails:
+          $ref: '#/components/schemas/ThumbnailDetails'
+        channelTitle:
+          type: string
+          description: Title of the channel
+          example: Google Developers
+    VideoListResponse:
+      type: object
+      description: Response containing video resources
+      required:
+        - kind
+        - etag
+        - items
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#videoListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        nextPageToken:
+          type: string
+          description: Token for the next page of results
+        prevPageToken:
+          type: string
+          description: Token for the previous page of results
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: List of videos
+          items:
+            $ref: '#/components/schemas/Video'
+    Video:
+      type: object
+      description: A YouTube video resource
+      required:
+        - kind
+        - etag
+        - id
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#video
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the video
+          example: dQw4w9WgXcQ
+        snippet:
+          $ref: '#/components/schemas/VideoSnippet'
+        contentDetails:
+          $ref: '#/components/schemas/VideoContentDetails'
+        statistics:
+          $ref: '#/components/schemas/VideoStatistics'
+        status:
+          $ref: '#/components/schemas/VideoStatus'
+    VideoSnippet:
+      type: object
+      description: Basic information about the video
+      properties:
+        publishedAt:
+          type: string
+          format: date-time
+          description: When the video was published
+          example: '2024-03-15T10:30:00Z'
+        channelId:
+          type: string
+          description: ID of the channel that owns the video
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        title:
+          type: string
+          description: Title of the video
+          example: 'OpenAPI Tutorial: Building REST APIs'
+        description:
+          type: string
+          description: Description of the video
+          example: Learn how to build REST APIs using OpenAPI specification...
+        thumbnails:
+          $ref: '#/components/schemas/ThumbnailDetails'
+        channelTitle:
+          type: string
+          description: Title of the channel
+          example: Google Developers
+        tags:
+          type: array
+          description: List of keyword tags for the video
+          items:
+            type: string
+          example:
+            - openapi
+            - rest api
+            - tutorial
+        categoryId:
+          type: string
+          description: YouTube video category ID
+          example: '28'
+        defaultLanguage:
+          type: string
+          description: Default language of the video
+          example: en
+    VideoContentDetails:
+      type: object
+      description: Content details for the video
+      properties:
+        duration:
+          type: string
+          description: Duration of the video in ISO 8601 format
+          example: PT15M33S
+        dimension:
+          type: string
+          description: Whether the video is 2D or 3D
+          enum:
+            - 2d
+            - 3d
+          example: 2d
+        definition:
+          type: string
+          description: Whether the video is SD or HD
+          enum:
+            - hd
+            - sd
+          example: hd
+        caption:
+          type: string
+          description: Whether captions are available
+          enum:
+            - 'true'
+            - 'false'
+          example: 'true'
+        licensedContent:
+          type: boolean
+          description: Whether the video is licensed content
+          example: true
+    VideoStatistics:
+      type: object
+      description: Statistics for the video
+      properties:
+        viewCount:
+          type: string
+          description: Number of views
+          example: '1500000'
+        likeCount:
+          type: string
+          description: Number of likes
+          example: '45000'
+        dislikeCount:
+          type: string
+          description: Number of dislikes (deprecated)
+          example: '500'
+        favoriteCount:
+          type: string
+          description: Number of favorites
+          example: '0'
+        commentCount:
+          type: string
+          description: Number of comments
+          example: '2500'
+    VideoStatus:
+      type: object
+      description: Status information for the video
+      properties:
+        uploadStatus:
+          type: string
+          description: Upload status of the video
+          enum:
+            - deleted
+            - failed
+            - processed
+            - rejected
+            - uploaded
+          example: processed
+        privacyStatus:
+          type: string
+          description: Privacy status of the video
+          enum:
+            - private
+            - public
+            - unlisted
+          example: public
+        license:
+          type: string
+          description: License of the video
+          enum:
+            - creativeCommon
+            - youtube
+          example: youtube
+        embeddable:
+          type: boolean
+          description: Whether the video can be embedded
+          example: true
+        publicStatsViewable:
+          type: boolean
+          description: Whether statistics are publicly viewable
+          example: true
+    VideoInsertRequest:
+      type: object
+      description: Request body for uploading a video
+      required:
+        - snippet
+        - status
+      properties:
+        snippet:
+          type: object
+          required:
+            - title
+            - categoryId
+          properties:
+            title:
+              type: string
+              description: Title for the video
+              example: My New Video
+            description:
+              type: string
+              description: Description for the video
+              example: This is my new video about...
+            tags:
+              type: array
+              items:
+                type: string
+              example:
+                - tutorial
+                - demo
+            categoryId:
+              type: string
+              description: YouTube video category ID
+              example: '28'
+            defaultLanguage:
+              type: string
+              description: Default language of the video
+              example: en
+        status:
+          type: object
+          properties:
+            privacyStatus:
+              type: string
+              enum:
+                - private
+                - public
+                - unlisted
+              example: public
+            embeddable:
+              type: boolean
+              example: true
+            license:
+              type: string
+              enum:
+                - creativeCommon
+                - youtube
+              example: youtube
+    VideoUpdateRequest:
+      type: object
+      description: Request body for updating a video
+      required:
+        - id
+        - snippet
+      properties:
+        id:
+          type: string
+          description: ID of the video to update
+          example: dQw4w9WgXcQ
+        snippet:
+          type: object
+          required:
+            - title
+            - categoryId
+          properties:
+            title:
+              type: string
+              description: Updated title
+              example: Updated Video Title
+            description:
+              type: string
+              description: Updated description
+              example: Updated description...
+            tags:
+              type: array
+              items:
+                type: string
+            categoryId:
+              type: string
+              example: '28'
+    ChannelListResponse:
+      type: object
+      description: Response containing channel resources
+      required:
+        - kind
+        - etag
+        - items
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#channelListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        nextPageToken:
+          type: string
+          description: Token for the next page of results
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: List of channels
+          items:
+            $ref: '#/components/schemas/Channel'
+    Channel:
+      type: object
+      description: A YouTube channel resource
+      required:
+        - kind
+        - etag
+        - id
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#channel
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the channel
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        snippet:
+          $ref: '#/components/schemas/ChannelSnippet'
+        contentDetails:
+          $ref: '#/components/schemas/ChannelContentDetails'
+        statistics:
+          $ref: '#/components/schemas/ChannelStatistics'
+    ChannelSnippet:
+      type: object
+      description: Basic information about the channel
+      properties:
+        title:
+          type: string
+          description: Title of the channel
+          example: Google Developers
+        description:
+          type: string
+          description: Description of the channel
+          example: The Google Developers channel...
+        customUrl:
+          type: string
+          description: Custom URL for the channel
+          example: '@GoogleDevelopers'
+        publishedAt:
+          type: string
+          format: date-time
+          description: When the channel was created
+          example: '2007-08-23T00:34:43Z'
+        thumbnails:
+          $ref: '#/components/schemas/ThumbnailDetails'
+        country:
+          type: string
+          description: Country associated with the channel
+          example: US
+    ChannelContentDetails:
+      type: object
+      description: Content details for the channel
+      properties:
+        relatedPlaylists:
+          type: object
+          properties:
+            likes:
+              type: string
+              description: Playlist ID for liked videos
+            favorites:
+              type: string
+              description: Playlist ID for favorited videos
+            uploads:
+              type: string
+              description: Playlist ID for uploaded videos
+              example: UU_x5XG1OV2P6uZZ5FSM9Ttw
+    ChannelStatistics:
+      type: object
+      description: Statistics for the channel
+      properties:
+        viewCount:
+          type: string
+          description: Total channel views
+          example: '500000000'
+        subscriberCount:
+          type: string
+          description: Number of subscribers
+          example: '3000000'
+        hiddenSubscriberCount:
+          type: boolean
+          description: Whether subscriber count is hidden
+          example: false
+        videoCount:
+          type: string
+          description: Number of public videos
+          example: '5000'
+    PlaylistListResponse:
+      type: object
+      description: Response containing playlist resources
+      required:
+        - kind
+        - etag
+        - items
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#playlistListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        nextPageToken:
+          type: string
+          description: Token for the next page of results
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: List of playlists
+          items:
+            $ref: '#/components/schemas/Playlist'
+    Playlist:
+      type: object
+      description: A YouTube playlist resource
+      required:
+        - kind
+        - etag
+        - id
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#playlist
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the playlist
+          example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+        snippet:
+          $ref: '#/components/schemas/PlaylistSnippet'
+        contentDetails:
+          $ref: '#/components/schemas/PlaylistContentDetails'
+        status:
+          $ref: '#/components/schemas/PlaylistStatus'
+    PlaylistSnippet:
+      type: object
+      description: Basic information about the playlist
+      properties:
+        publishedAt:
+          type: string
+          format: date-time
+          description: When the playlist was created
+          example: '2024-01-15T10:30:00Z'
+        channelId:
+          type: string
+          description: ID of the channel that owns the playlist
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        title:
+          type: string
+          description: Title of the playlist
+          example: API Development Tutorials
+        description:
+          type: string
+          description: Description of the playlist
+          example: A collection of tutorials for API development...
+        thumbnails:
+          $ref: '#/components/schemas/ThumbnailDetails'
+        channelTitle:
+          type: string
+          description: Title of the channel
+          example: Google Developers
+    PlaylistContentDetails:
+      type: object
+      description: Content details for the playlist
+      properties:
+        itemCount:
+          type: integer
+          description: Number of videos in the playlist
+          example: 25
+    PlaylistStatus:
+      type: object
+      description: Status information for the playlist
+      properties:
+        privacyStatus:
+          type: string
+          description: Privacy status of the playlist
+          enum:
+            - private
+            - public
+            - unlisted
+          example: public
+    PlaylistInsertRequest:
+      type: object
+      description: Request body for creating a playlist
+      required:
+        - snippet
+      properties:
+        snippet:
+          type: object
+          required:
+            - title
+          properties:
+            title:
+              type: string
+              description: Title for the playlist
+              example: My New Playlist
+            description:
+              type: string
+              description: Description for the playlist
+              example: A collection of my favorite videos
+            defaultLanguage:
+              type: string
+              description: Default language
+              example: en
+        status:
+          type: object
+          properties:
+            privacyStatus:
+              type: string
+              enum:
+                - private
+                - public
+                - unlisted
+              example: public
+    PlaylistUpdateRequest:
+      type: object
+      description: Request body for updating a playlist
+      required:
+        - id
+        - snippet
+      properties:
+        id:
+          type: string
+          description: ID of the playlist to update
+          example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+        snippet:
+          type: object
+          required:
+            - title
+          properties:
+            title:
+              type: string
+              description: Updated title
+              example: Updated Playlist Name
+            description:
+              type: string
+              description: Updated description
+    PlaylistItemListResponse:
+      type: object
+      description: Response containing playlist item resources
+      required:
+        - kind
+        - etag
+        - items
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#playlistItemListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        nextPageToken:
+          type: string
+          description: Token for the next page of results
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: List of playlist items
+          items:
+            $ref: '#/components/schemas/PlaylistItem'
+    PlaylistItem:
+      type: object
+      description: A playlist item resource
+      required:
+        - kind
+        - etag
+        - id
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#playlistItem
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the playlist item
+          example: UExmF3p7bTU0NXRLaW00c2dOT2tuR3ZOamJ5OWVmZGYuOTI0NzIzRTJENDg3RUNNQQ
+        snippet:
+          $ref: '#/components/schemas/PlaylistItemSnippet'
+        contentDetails:
+          $ref: '#/components/schemas/PlaylistItemContentDetails'
+    PlaylistItemSnippet:
+      type: object
+      description: Basic information about the playlist item
+      properties:
+        publishedAt:
+          type: string
+          format: date-time
+          description: When the item was added to the playlist
+          example: '2024-03-15T10:30:00Z'
+        channelId:
+          type: string
+          description: ID of the channel that owns the playlist
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        title:
+          type: string
+          description: Title of the video
+          example: 'OpenAPI Tutorial: Building REST APIs'
+        description:
+          type: string
+          description: Description of the video
+        thumbnails:
+          $ref: '#/components/schemas/ThumbnailDetails'
+        channelTitle:
+          type: string
+          description: Title of the channel
+        playlistId:
+          type: string
+          description: ID of the playlist
+          example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+        position:
+          type: integer
+          description: Position in the playlist (0-indexed)
+          example: 0
+        resourceId:
+          $ref: '#/components/schemas/ResourceId'
+    PlaylistItemContentDetails:
+      type: object
+      description: Content details for the playlist item
+      properties:
+        videoId:
+          type: string
+          description: ID of the video
+          example: dQw4w9WgXcQ
+        videoPublishedAt:
+          type: string
+          format: date-time
+          description: When the video was published
+    PlaylistItemInsertRequest:
+      type: object
+      description: Request body for adding an item to a playlist
+      required:
+        - snippet
+      properties:
+        snippet:
+          type: object
+          required:
+            - playlistId
+            - resourceId
+          properties:
+            playlistId:
+              type: string
+              description: ID of the playlist
+              example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+            position:
+              type: integer
+              description: Position in the playlist
+              example: 0
+            resourceId:
+              type: object
+              required:
+                - kind
+                - videoId
+              properties:
+                kind:
+                  type: string
+                  example: youtube#video
+                videoId:
+                  type: string
+                  example: dQw4w9WgXcQ
+    SubscriptionListResponse:
+      type: object
+      description: Response containing subscription resources
+      required:
+        - kind
+        - etag
+        - items
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#subscriptionListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        nextPageToken:
+          type: string
+          description: Token for the next page of results
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: List of subscriptions
+          items:
+            $ref: '#/components/schemas/Subscription'
+    Subscription:
+      type: object
+      description: A subscription resource
+      required:
+        - kind
+        - etag
+        - id
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#subscription
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the subscription
+          example: SUBScription123abc
+        snippet:
+          $ref: '#/components/schemas/SubscriptionSnippet'
+        contentDetails:
+          $ref: '#/components/schemas/SubscriptionContentDetails'
+    SubscriptionSnippet:
+      type: object
+      description: Basic information about the subscription
+      properties:
+        publishedAt:
+          type: string
+          format: date-time
+          description: When the subscription was created
+          example: '2024-01-15T10:30:00Z'
+        title:
+          type: string
+          description: Title of the subscribed channel
+          example: Google Developers
+        description:
+          type: string
+          description: Description of the subscribed channel
+        resourceId:
+          $ref: '#/components/schemas/ResourceId'
+        channelId:
+          type: string
+          description: ID of the subscriber's channel
+        thumbnails:
+          $ref: '#/components/schemas/ThumbnailDetails'
+    SubscriptionContentDetails:
+      type: object
+      description: Content details for the subscription
+      properties:
+        totalItemCount:
+          type: integer
+          description: Total number of videos on the channel
+          example: 500
+        newItemCount:
+          type: integer
+          description: Number of new videos since last visit
+          example: 5
+    SubscriptionInsertRequest:
+      type: object
+      description: Request body for creating a subscription
+      required:
+        - snippet
+      properties:
+        snippet:
+          type: object
+          required:
+            - resourceId
+          properties:
+            resourceId:
+              type: object
+              required:
+                - kind
+                - channelId
+              properties:
+                kind:
+                  type: string
+                  example: youtube#channel
+                channelId:
+                  type: string
+                  description: ID of the channel to subscribe to
+                  example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+    CommentThreadListResponse:
+      type: object
+      description: Response containing comment thread resources
+      required:
+        - kind
+        - etag
+        - items
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#commentThreadListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        nextPageToken:
+          type: string
+          description: Token for the next page of results
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: List of comment threads
+          items:
+            $ref: '#/components/schemas/CommentThread'
+    CommentThread:
+      type: object
+      description: A comment thread resource
+      required:
+        - kind
+        - etag
+        - id
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#commentThread
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the comment thread
+          example: UgzYABCdef123xyz456
+        snippet:
+          $ref: '#/components/schemas/CommentThreadSnippet'
+        replies:
+          $ref: '#/components/schemas/CommentThreadReplies'
+    CommentThreadSnippet:
+      type: object
+      description: Basic information about the comment thread
+      properties:
+        channelId:
+          type: string
+          description: ID of the channel associated with the comment
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        videoId:
+          type: string
+          description: ID of the video the comment is for
+          example: dQw4w9WgXcQ
+        topLevelComment:
+          $ref: '#/components/schemas/Comment'
+        canReply:
+          type: boolean
+          description: Whether the user can reply
+          example: true
+        totalReplyCount:
+          type: integer
+          description: Total number of replies
+          example: 10
+        isPublic:
+          type: boolean
+          description: Whether the comment thread is public
+          example: true
+    CommentThreadReplies:
+      type: object
+      description: Replies to the comment thread
+      properties:
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+    Comment:
+      type: object
+      description: A comment resource
+      properties:
+        kind:
+          type: string
+          example: youtube#comment
+        etag:
+          type: string
+        id:
+          type: string
+          example: UgzYABCdef123xyz456
+        snippet:
+          $ref: '#/components/schemas/CommentSnippet'
+    CommentSnippet:
+      type: object
+      description: Basic information about the comment
+      properties:
+        authorDisplayName:
+          type: string
+          description: Display name of the comment author
+          example: John Doe
+        authorProfileImageUrl:
+          type: string
+          description: URL of the author's profile image
+        authorChannelUrl:
+          type: string
+          description: URL of the author's channel
+        authorChannelId:
+          type: object
+          properties:
+            value:
+              type: string
+        textDisplay:
+          type: string
+          description: Display text of the comment
+          example: Great tutorial! Very helpful.
+        textOriginal:
+          type: string
+          description: Original text of the comment
+        publishedAt:
+          type: string
+          format: date-time
+          example: '2024-03-15T12:30:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+        likeCount:
+          type: integer
+          example: 25
+    CaptionListResponse:
+      type: object
+      description: Response containing caption track resources
+      required:
+        - kind
+        - etag
+        - items
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#captionListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        items:
+          type: array
+          description: List of caption tracks
+          items:
+            $ref: '#/components/schemas/Caption'
+    Caption:
+      type: object
+      description: A caption track resource
+      required:
+        - kind
+        - etag
+        - id
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#caption
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the caption track
+          example: CAPTIONabc123
+        snippet:
+          $ref: '#/components/schemas/CaptionSnippet'
+    CaptionSnippet:
+      type: object
+      description: Basic information about the caption track
+      properties:
+        videoId:
+          type: string
+          description: ID of the video
+          example: dQw4w9WgXcQ
+        lastUpdated:
+          type: string
+          format: date-time
+          description: When the caption was last updated
+        trackKind:
+          type: string
+          description: Type of caption track
+          enum:
+            - ASR
+            - forced
+            - standard
+          example: standard
+        language:
+          type: string
+          description: Language of the caption track
+          example: en
+        name:
+          type: string
+          description: Name of the caption track
+          example: English
+        audioTrackType:
+          type: string
+          description: Type of audio track
+          enum:
+            - commentary
+            - descriptive
+            - primary
+            - unknown
+          example: primary
+        isCC:
+          type: boolean
+          description: Whether this is closed caption
+          example: true
+        isLarge:
+          type: boolean
+          description: Whether the track has large text
+          example: false
+        isEasyReader:
+          type: boolean
+          description: Whether the track is easy reader
+          example: false
+        isDraft:
+          type: boolean
+          description: Whether the track is a draft
+          example: false
+        isAutoSynced:
+          type: boolean
+          description: Whether the track is auto-synced
+          example: false
+        status:
+          type: string
+          description: Status of the caption track
+          enum:
+            - failed
+            - serving
+            - syncing
+          example: serving
+    ThumbnailDetails:
+      type: object
+      description: Thumbnail images at various resolutions
+      properties:
+        default:
+          $ref: '#/components/schemas/Thumbnail'
+        medium:
+          $ref: '#/components/schemas/Thumbnail'
+        high:
+          $ref: '#/components/schemas/Thumbnail'
+        standard:
+          $ref: '#/components/schemas/Thumbnail'
+        maxres:
+          $ref: '#/components/schemas/Thumbnail'
+    Thumbnail:
+      type: object
+      description: A thumbnail image
+      properties:
+        url:
+          type: string
+          description: URL of the thumbnail image
+          example: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
+        width:
+          type: integer
+          description: Width of the thumbnail
+          example: 120
+        height:
+          type: integer
+          description: Height of the thumbnail
+          example: 90
+    PageInfo:
+      type: object
+      description: Pagination information
+      properties:
+        totalResults:
+          type: integer
+          description: Total number of results
+          example: 1000000
+        resultsPerPage:
+          type: integer
+          description: Number of results per page
+          example: 25
+    ErrorResponse:
+      type: object
+      description: Error response object
+      required:
+        - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetails'
+    ErrorDetails:
+      type: object
+      description: Details about an API error
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid parameter value
+        errors:
+          type: array
+          description: List of specific errors
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    ErrorItem:
+      type: object
+      description: Individual error detail
+      properties:
+        domain:
+          type: string
+          description: Error domain
+          example: youtube.parameter
+        reason:
+          type: string
+          description: Error reason code
+          example: invalidParameter
+        message:
+          type: string
+          description: Detailed error message
+          example: The parameter 'part' is required
+        locationType:
+          type: string
+          description: Type of location where error occurred
+          example: parameter
+        location:
+          type: string
+          description: Specific location of the error
+          example: part
+  examples:
+    SuccessfulSearchExample:
+      summary: Successful search results
+      description: Example response for a video search query
+      value:
+        kind: youtube#searchListResponse
+        etag: abc123def456
+        nextPageToken: CAUQAA
+        regionCode: US
+        pageInfo:
+          totalResults: 1000000
+          resultsPerPage: 5
+        items:
+          - kind: youtube#searchResult
+            etag: xyz789abc123
+            id:
+              kind: youtube#video
+              videoId: dQw4w9WgXcQ
+            snippet:
+              publishedAt: '2024-03-15T10:30:00Z'
+              channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+              title: 'OpenAPI Tutorial: Building REST APIs'
+              description: Learn how to build REST APIs using OpenAPI...
+              thumbnails:
+                default:
+                  url: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
+                  width: 120
+                  height: 90
+              channelTitle: Google Developers
+    SuccessfulVideoListExample:
+      summary: Successful video list response
+      description: Example response for retrieving video details
+      value:
+        kind: youtube#videoListResponse
+        etag: abc123xyz789
+        pageInfo:
+          totalResults: 1
+          resultsPerPage: 1
+        items:
+          - kind: youtube#video
+            etag: video123etag
+            id: dQw4w9WgXcQ
+            snippet:
+              publishedAt: '2024-03-15T10:30:00Z'
+              channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+              title: 'OpenAPI Tutorial: Building REST APIs'
+              description: Learn how to build REST APIs...
+              thumbnails:
+                default:
+                  url: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
+                  width: 120
+                  height: 90
+              channelTitle: Google Developers
+              tags:
+                - openapi
+                - rest api
+              categoryId: '28'
+            contentDetails:
+              duration: PT15M33S
+              dimension: 2d
+              definition: hd
+              caption: 'true'
+              licensedContent: true
+            statistics:
+              viewCount: '1500000'
+              likeCount: '45000'
+              commentCount: '2500'
+            status:
+              uploadStatus: processed
+              privacyStatus: public
+              license: youtube
+              embeddable: true
+    SuccessfulVideoInsertExample:
+      summary: Successfully uploaded video
+      description: Example response for a newly uploaded video
+      value:
+        kind: youtube#video
+        etag: newvideo123
+        id: NEWvideo456
+        snippet:
+          publishedAt: '2024-03-20T14:00:00Z'
+          channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+          title: My New Video
+          description: This is my new video about...
+          thumbnails:
+            default:
+              url: https://i.ytimg.com/vi/NEWvideo456/default.jpg
+              width: 120
+              height: 90
+          channelTitle: My Channel
+          tags:
+            - tutorial
+            - demo
+          categoryId: '28'
+        status:
+          uploadStatus: processed
+          privacyStatus: public
+          embeddable: true
+    VideoInsertRequestExample:
+      summary: Video upload request
+      description: Example request body for uploading a video
+      value:
+        snippet:
+          title: My New Video
+          description: This is my new video about...
+          tags:
+            - tutorial
+            - demo
+          categoryId: '28'
+          defaultLanguage: en
+        status:
+          privacyStatus: public
+          embeddable: true
+          license: youtube
+    VideoUpdateRequestExample:
+      summary: Video update request
+      description: Example request body for updating video metadata
+      value:
+        id: dQw4w9WgXcQ
+        snippet:
+          title: Updated Video Title
+          description: Updated description...
+          tags:
+            - updated
+            - tags
+          categoryId: '28'
+    SuccessfulChannelListExample:
+      summary: Successful channel list response
+      description: Example response for retrieving channel details
+      value:
+        kind: youtube#channelListResponse
+        etag: channel123etag
+        pageInfo:
+          totalResults: 1
+          resultsPerPage: 1
+        items:
+          - kind: youtube#channel
+            etag: ch123etag
+            id: UC_x5XG1OV2P6uZZ5FSM9Ttw
+            snippet:
+              title: Google Developers
+              description: The Google Developers channel...
+              customUrl: '@GoogleDevelopers'
+              publishedAt: '2007-08-23T00:34:43Z'
+              thumbnails:
+                default:
+                  url: https://yt3.ggpht.com/channel_default.jpg
+                  width: 88
+                  height: 88
+              country: US
+            contentDetails:
+              relatedPlaylists:
+                uploads: UU_x5XG1OV2P6uZZ5FSM9Ttw
+            statistics:
+              viewCount: '500000000'
+              subscriberCount: '3000000'
+              hiddenSubscriberCount: false
+              videoCount: '5000'
+    SuccessfulPlaylistListExample:
+      summary: Successful playlist list response
+      description: Example response for retrieving playlists
+      value:
+        kind: youtube#playlistListResponse
+        etag: playlist123etag
+        pageInfo:
+          totalResults: 2
+          resultsPerPage: 5
+        items:
+          - kind: youtube#playlist
+            etag: pl1etag
+            id: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+            snippet:
+              publishedAt: '2024-01-15T10:30:00Z'
+              channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+              title: API Development Tutorials
+              description: A collection of tutorials...
+              thumbnails:
+                default:
+                  url: https://i.ytimg.com/vi/playlist1/default.jpg
+                  width: 120
+                  height: 90
+              channelTitle: Google Developers
+            contentDetails:
+              itemCount: 25
+            status:
+              privacyStatus: public
+    SuccessfulPlaylistInsertExample:
+      summary: Successfully created playlist
+      description: Example response for a newly created playlist
+      value:
+        kind: youtube#playlist
+        etag: newplaylist123
+        id: NEWplaylist456
+        snippet:
+          publishedAt: '2024-03-20T14:00:00Z'
+          channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+          title: My New Playlist
+          description: A collection of my favorite videos
+          thumbnails:
+            default:
+              url: https://i.ytimg.com/vi/default.jpg
+              width: 120
+              height: 90
+          channelTitle: My Channel
+        contentDetails:
+          itemCount: 0
+        status:
+          privacyStatus: public
+    PlaylistInsertRequestExample:
+      summary: Playlist creation request
+      description: Example request body for creating a playlist
+      value:
+        snippet:
+          title: My New Playlist
+          description: A collection of my favorite videos
+          defaultLanguage: en
+        status:
+          privacyStatus: public
+    PlaylistUpdateRequestExample:
+      summary: Playlist update request
+      description: Example request body for updating a playlist
+      value:
+        id: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+        snippet:
+          title: Updated Playlist Name
+          description: Updated description
+    SuccessfulPlaylistItemListExample:
+      summary: Successful playlist items response
+      description: Example response for retrieving playlist items
+      value:
+        kind: youtube#playlistItemListResponse
+        etag: items123etag
+        pageInfo:
+          totalResults: 25
+          resultsPerPage: 5
+        items:
+          - kind: youtube#playlistItem
+            etag: item1etag
+            id: UExmF3p7bTU0NXRLaW00c2dOT2tuR3ZOamJ5OWVmZGYuOTI0NzIzRTJENDg3RUNNQQ
+            snippet:
+              publishedAt: '2024-03-15T10:30:00Z'
+              channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+              title: 'OpenAPI Tutorial: Building REST APIs'
+              thumbnails:
+                default:
+                  url: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
+                  width: 120
+                  height: 90
+              channelTitle: Google Developers
+              playlistId: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+              position: 0
+              resourceId:
+                kind: youtube#video
+                videoId: dQw4w9WgXcQ
+            contentDetails:
+              videoId: dQw4w9WgXcQ
+              videoPublishedAt: '2024-03-15T10:30:00Z'
+    SuccessfulPlaylistItemInsertExample:
+      summary: Successfully added item to playlist
+      description: Example response for adding a video to a playlist
+      value:
+        kind: youtube#playlistItem
+        etag: newitem123
+        id: NEWitem456
+        snippet:
+          publishedAt: '2024-03-20T14:00:00Z'
+          channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+          title: Added Video Title
+          playlistId: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+          position: 0
+          resourceId:
+            kind: youtube#video
+            videoId: dQw4w9WgXcQ
+        contentDetails:
+          videoId: dQw4w9WgXcQ
+    PlaylistItemInsertRequestExample:
+      summary: Add item to playlist request
+      description: Example request body for adding a video to a playlist
+      value:
+        snippet:
+          playlistId: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+          position: 0
+          resourceId:
+            kind: youtube#video
+            videoId: dQw4w9WgXcQ
+    SuccessfulSubscriptionListExample:
+      summary: Successful subscription list response
+      description: Example response for retrieving subscriptions
+      value:
+        kind: youtube#subscriptionListResponse
+        etag: subs123etag
+        pageInfo:
+          totalResults: 50
+          resultsPerPage: 5
+        items:
+          - kind: youtube#subscription
+            etag: sub1etag
+            id: SUBScription123abc
+            snippet:
+              publishedAt: '2024-01-15T10:30:00Z'
+              title: Google Developers
+              description: The Google Developers channel...
+              resourceId:
+                kind: youtube#channel
+                channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+              thumbnails:
+                default:
+                  url: https://yt3.ggpht.com/channel.jpg
+                  width: 88
+                  height: 88
+            contentDetails:
+              totalItemCount: 500
+              newItemCount: 5
+    SuccessfulSubscriptionInsertExample:
+      summary: Successfully created subscription
+      description: Example response for a new subscription
+      value:
+        kind: youtube#subscription
+        etag: newsub123
+        id: NEWsub456
+        snippet:
+          publishedAt: '2024-03-20T14:00:00Z'
+          title: Subscribed Channel
+          resourceId:
+            kind: youtube#channel
+            channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+          thumbnails:
+            default:
+              url: https://yt3.ggpht.com/channel.jpg
+              width: 88
+              height: 88
+        contentDetails:
+          totalItemCount: 500
+          newItemCount: 0
+    SubscriptionInsertRequestExample:
+      summary: Subscription creation request
+      description: Example request body for subscribing to a channel
+      value:
+        snippet:
+          resourceId:
+            kind: youtube#channel
+            channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+    SuccessfulCommentThreadListExample:
+      summary: Successful comment threads response
+      description: Example response for retrieving comments
+      value:
+        kind: youtube#commentThreadListResponse
+        etag: comments123etag
+        pageInfo:
+          totalResults: 2500
+          resultsPerPage: 20
+        items:
+          - kind: youtube#commentThread
+            etag: thread1etag
+            id: UgzYABCdef123xyz456
+            snippet:
+              channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+              videoId: dQw4w9WgXcQ
+              topLevelComment:
+                kind: youtube#comment
+                etag: comment1etag
+                id: UgzYABCdef123xyz456
+                snippet:
+                  authorDisplayName: John Doe
+                  authorProfileImageUrl: https://yt3.ggpht.com/user.jpg
+                  textDisplay: Great tutorial! Very helpful.
+                  textOriginal: Great tutorial! Very helpful.
+                  publishedAt: '2024-03-15T12:30:00Z'
+                  likeCount: 25
+              canReply: true
+              totalReplyCount: 10
+              isPublic: true
+    SuccessfulCaptionListExample:
+      summary: Successful caption list response
+      description: Example response for retrieving video captions
+      value:
+        kind: youtube#captionListResponse
+        etag: captions123etag
+        items:
+          - kind: youtube#caption
+            etag: caption1etag
+            id: CAPTIONabc123
+            snippet:
+              videoId: dQw4w9WgXcQ
+              lastUpdated: '2024-03-15T10:30:00Z'
+              trackKind: standard
+              language: en
+              name: English
+              audioTrackType: primary
+              isCC: true
+              isLarge: false
+              isEasyReader: false
+              isDraft: false
+              isAutoSynced: false
+              status: serving
+    BadRequestErrorExample:
+      summary: Bad request error
+      description: Example error response for invalid parameters
+      value:
+        error:
+          code: 400
+          message: Invalid parameter value
+          errors:
+            - domain: youtube.parameter
+              reason: invalidParameter
+              message: The parameter 'part' is required
+              locationType: parameter
+              location: part
+    UnauthorizedErrorExample:
+      summary: Unauthorized error
+      description: Example error response for authentication failure
+      value:
+        error:
+          code: 401
+          message: Invalid credentials
+          errors:
+            - domain: youtube.authentication
+              reason: authError
+              message: The access token is invalid or expired
+              locationType: header
+              location: Authorization
+    QuotaExceededErrorExample:
+      summary: Quota exceeded error
+      description: Example error response when API quota is exceeded
+      value:
+        error:
+          code: 403
+          message: Quota exceeded
+          errors:
+            - domain: youtube.quota
+              reason: quotaExceeded
+              message: The request cannot be completed because you have exceeded your quota
+              locationType: global
+              location: ''
+    NotFoundErrorExample:
+      summary: Not found error
+      description: Example error response when resource is not found
+      value:
+        error:
+          code: 404
+          message: Resource not found
+          errors:
+            - domain: youtube.video
+              reason: videoNotFound
+              message: The video identified by the parameter id could not be found
+              locationType: parameter
+              location: id
+    SuccessfulDeleteExample:
+      summary: Successful deletion
+      description: No content returned on successful deletion
+      value: null
+security:
+  - OAuth2:
+      - https://www.googleapis.com/auth/youtube.readonly
+  - ApiKey: []
