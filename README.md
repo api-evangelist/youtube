@@ -1,17 +1,11 @@
 # Youtube (youtube)
-The Youtube API provides the ability to retrieve feeds related to videos,
-users, and playlists. It also provides the ability to manipulate these feeds,
-such as creating new playlists, adding videos as favorites, and sending
-messsages. The API is also able to upload videos.
+YouTube API provides access to YouTube data such as videos, playlists, channels, and user interactions
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-search/videos/main/_apis/youtube/apis.md)
 
-## Scope
-
-
 ## Tags:
 
- - Videos
+ - Videos, google, media, social, streaming, video
 
 ## Timestamps
 
@@ -31,6 +25,7 @@ Managing Youtube activities.
 #### Properties
 
 - [Documentation](https://developers.google.com/youtube/v3/docs/activities/list)
+
 ### Youtube Channels API
 Managing Youtube channels.
 
@@ -42,6 +37,7 @@ Managing Youtube channels.
 #### Properties
 
 - [Documentation](https://developers.google.com/youtube/v3/docs/channels/list)
+
 ### Youtube Comments API
 Managing Youtube comments.
 
@@ -53,6 +49,7 @@ Managing Youtube comments.
 #### Properties
 
 - [Documentation](https://developers.google.com/youtube/v3/docs/comments/list)
+
 ### Youtube Playlists API
 Managing Youtube playlists.
 
@@ -64,6 +61,7 @@ Managing Youtube playlists.
 #### Properties
 
 - [Documentation](https://developers.google.com/youtube/v3/docs/playlists/list)
+
 ### Youtube Search API
 Managing Youtube search.
 
@@ -75,6 +73,7 @@ Managing Youtube search.
 #### Properties
 
 - [Documentation](https://developers.google.com/youtube/v3/docs/search/list)
+
 ### Youtube Subscriptions API
 Managing Youtube subscriptions.
 
@@ -86,6 +85,7 @@ Managing Youtube subscriptions.
 #### Properties
 
 - [Documentation](https://developers.google.com/youtube/v3/docs/subscriptions/list)
+
 ### Youtube Videos API
 Managing Youtube videos.
 
@@ -109,12 +109,16 @@ Managing Youtube videos.
 - [TermsOfService](https://developers.google.com/youtube/terms/api-services-terms-of-service)
 - [Branding](https://developers.google.com/youtube/terms/branding-guidelines)
 - [ChangeLog](https://developers.google.com/youtube/terms/revision-history)
-- [Plans](undefined)
 - [RateLimits](https://developers.google.com/youtube/v3/determine_quota_cost)
+- [Status](https://status.cloud.google.com)
+- [Blog](https://blog.youtube/news-and-events/)
+- [Privacy Policy](https://policies.google.com/privacy)
 
 ## Maintainers
 
 **FN:** API Evangelist
 
 **Email:** info@apievangelist.com
+**FN:** Google
 
+**Email:** youtube-api-support@google.com
