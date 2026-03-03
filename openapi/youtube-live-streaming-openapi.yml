@@ -1,0 +1,1291 @@
+openapi: 3.1.0
+info:
+  title: YouTube Live Streaming API
+  description: >-
+    The YouTube Live Streaming API lets you create, update, and manage live video broadcasts
+    and live video streams on YouTube. The API provides resources for liveBroadcasts,
+    liveStreams, liveChatMessages, liveChatModerators, liveChatBans, and superChatEvents.
+    Broadcasts are scheduled events that viewers can watch live, while streams are the
+    actual video feed bound to a broadcast.
+  version: v3
+  contact:
+    name: YouTube API Support
+    url: https://developers.google.com/youtube/v3/live/support
+  termsOfService: https://developers.google.com/youtube/terms/api-services-terms-of-service
+servers:
+  - url: https://www.googleapis.com/youtube/v3
+    description: YouTube Live Streaming API base server (shared with YouTube Data API v3)
+security:
+  - oauth2:
+      - https://www.googleapis.com/auth/youtube
+tags:
+  - name: LiveBroadcasts
+    description: Operations for managing YouTube live broadcast events
+  - name: LiveStreams
+    description: Operations for managing YouTube live video streams
+  - name: LiveChatMessages
+    description: Operations for managing messages in YouTube live chat
+  - name: LiveChatModerators
+    description: Operations for managing moderators in YouTube live chat
+paths:
+  /liveBroadcasts:
+    get:
+      operationId: youtube.liveBroadcasts.list
+      summary: List live broadcasts
+      description: >-
+        Returns a list of YouTube broadcasts that match the API request parameters. You
+        can retrieve broadcasts for the authenticated user or retrieve specific broadcasts
+        by their IDs.
+      tags:
+        - LiveBroadcasts
+      parameters:
+        - $ref: '#/components/parameters/part'
+        - name: id
+          in: query
+          description: Comma-separated list of YouTube broadcast IDs for the resources being retrieved.
+          schema:
+            type: string
+        - name: mine
+          in: query
+          description: >-
+            Set this parameter to true to instruct the API to return only broadcasts owned
+            by the authenticated user.
+          schema:
+            type: boolean
+        - name: broadcastStatus
+          in: query
+          description: >-
+            Filters the API response to only include broadcasts with the specified status.
+          schema:
+            type: string
+            enum:
+              - active
+              - all
+              - completed
+              - upcoming
+        - name: broadcastType
+          in: query
+          description: >-
+            Filters results by the type of broadcast. Acceptable values are event and
+            persistent.
+          schema:
+            type: string
+            enum:
+              - all
+              - event
+              - persistent
+        - $ref: '#/components/parameters/maxResults'
+        - $ref: '#/components/parameters/pageToken'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing a list of live broadcast resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveBroadcastListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: youtube.liveBroadcasts.insert
+      summary: Create a live broadcast
+      description: >-
+        Creates a broadcast. The authenticated user must be authorized to create broadcasts.
+        After creating the broadcast, you will need to bind it to a stream and set it live.
+      tags:
+        - LiveBroadcasts
+      parameters:
+        - $ref: '#/components/parameters/part'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/key'
+      requestBody:
+        description: The live broadcast resource to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LiveBroadcast'
+      responses:
+        '200':
+          description: Successful response containing the newly created live broadcast resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveBroadcast'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    put:
+      operationId: youtube.liveBroadcasts.update
+      summary: Update a live broadcast
+      description: >-
+        Updates a broadcast's settings. The authenticated user must own the broadcast being
+        updated. Note that certain properties cannot be modified after a broadcast goes live.
+      tags:
+        - LiveBroadcasts
+      parameters:
+        - $ref: '#/components/parameters/part'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/key'
+      requestBody:
+        description: The live broadcast resource with updated properties.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LiveBroadcast'
+      responses:
+        '200':
+          description: Successful response containing the updated live broadcast resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveBroadcast'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    delete:
+      operationId: youtube.liveBroadcasts.delete
+      summary: Delete a live broadcast
+      description: >-
+        Deletes a broadcast. The authenticated user must own the broadcast being deleted.
+        Broadcasts cannot be deleted while they are in the live or testing status.
+      tags:
+        - LiveBroadcasts
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: The ID of the broadcast to delete.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/key'
+      responses:
+        '204':
+          description: The broadcast was successfully deleted.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /liveBroadcasts/bind:
+    post:
+      operationId: youtube.liveBroadcasts.bind
+      summary: Bind broadcast to stream
+      description: >-
+        Binds a YouTube broadcast to a stream or removes an existing binding between a
+        broadcast and a stream. A broadcast can only be bound to one video stream, though
+        a video stream may be bound to more than one broadcast.
+      tags:
+        - LiveBroadcasts
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: The id parameter specifies the unique ID of the broadcast that is being bound to a video stream.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/part'
+        - name: streamId
+          in: query
+          description: >-
+            The streamId parameter specifies the unique ID of the video stream that is
+            being bound to a broadcast. If this parameter is omitted, the API will remove
+            any existing binding between the broadcast and a video stream.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing the updated live broadcast resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveBroadcast'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /liveBroadcasts/transition:
+    post:
+      operationId: youtube.liveBroadcasts.transition
+      summary: Transition broadcast state
+      description: >-
+        Changes the status of a YouTube live broadcast and initiates any processes associated
+        with the new status. Valid transitions are: ready -> testing, testing -> live,
+        live -> complete, ready -> live (skips testing state).
+      tags:
+        - LiveBroadcasts
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: The id parameter specifies the unique ID of the broadcast that is transitioning to another status.
+          schema:
+            type: string
+        - name: broadcastStatus
+          in: query
+          required: true
+          description: >-
+            The broadcastStatus parameter identifies the state to which the broadcast is
+            changing.
+          schema:
+            type: string
+            enum:
+              - complete
+              - live
+              - testing
+        - $ref: '#/components/parameters/part'
+        - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing the updated live broadcast resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveBroadcast'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+  /liveStreams:
+    get:
+      operationId: youtube.liveStreams.list
+      summary: List live streams
+      description: >-
+        Returns a list of video streams that match the API request parameters. You can
+        retrieve streams for the authenticated user or retrieve specific streams by their
+        IDs.
+      tags:
+        - LiveStreams
+      parameters:
+        - $ref: '#/components/parameters/part'
+        - name: id
+          in: query
+          description: Comma-separated list of live stream IDs for the resources being retrieved.
+          schema:
+            type: string
+        - name: mine
+          in: query
+          description: >-
+            Set this parameter to true to instruct the API to return only streams owned
+            by the authenticated user.
+          schema:
+            type: boolean
+        - $ref: '#/components/parameters/maxResults'
+        - $ref: '#/components/parameters/pageToken'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing a list of live stream resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveStreamListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: youtube.liveStreams.insert
+      summary: Create a live stream
+      description: >-
+        Creates a video stream. The stream enables you to send your video to YouTube, which
+        can then broadcast the video to your audience. After creating the stream you must
+        bind it to a broadcast.
+      tags:
+        - LiveStreams
+      parameters:
+        - $ref: '#/components/parameters/part'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/key'
+      requestBody:
+        description: The live stream resource to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LiveStream'
+      responses:
+        '200':
+          description: Successful response containing the newly created live stream resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveStream'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    put:
+      operationId: youtube.liveStreams.update
+      summary: Update a live stream
+      description: >-
+        Updates a video stream. If the properties that you want to change cannot be updated,
+        you need to create a new stream with the proper settings.
+      tags:
+        - LiveStreams
+      parameters:
+        - $ref: '#/components/parameters/part'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/key'
+      requestBody:
+        description: The live stream resource with updated properties.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LiveStream'
+      responses:
+        '200':
+          description: Successful response containing the updated live stream resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveStream'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    delete:
+      operationId: youtube.liveStreams.delete
+      summary: Delete a live stream
+      description: >-
+        Deletes a video stream. The authenticated user must own the stream being deleted.
+        Streams bound to active or scheduled broadcasts cannot be deleted.
+      tags:
+        - LiveStreams
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: The ID of the live stream to delete.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/key'
+      responses:
+        '204':
+          description: The live stream was successfully deleted.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /liveChatMessages:
+    get:
+      operationId: youtube.liveChatMessages.list
+      summary: List live chat messages
+      description: >-
+        Lists live chat messages for a specific live broadcast. This method does not support
+        filtering by user. The list is ordered chronologically, starting with the earliest
+        message.
+      tags:
+        - LiveChatMessages
+      parameters:
+        - $ref: '#/components/parameters/part'
+        - name: liveChatId
+          in: query
+          required: true
+          description: >-
+            The liveChatId parameter specifies the ID of the live chat whose messages will
+            be returned. The live chat ID associated with a broadcast is returned in the
+            liveBroadcast resource's snippet.liveChatId property.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/maxResults'
+        - $ref: '#/components/parameters/pageToken'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing a list of live chat message resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveChatMessageListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: youtube.liveChatMessages.insert
+      summary: Send a live chat message
+      description: >-
+        Adds a message to a live chat. The authenticated user must be authorized to participate
+        in the chat. Some chat types may have restrictions on who can send messages.
+      tags:
+        - LiveChatMessages
+      parameters:
+        - $ref: '#/components/parameters/part'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/key'
+      requestBody:
+        description: The live chat message resource to send.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LiveChatMessage'
+      responses:
+        '200':
+          description: Successful response containing the newly sent live chat message resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveChatMessage'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    delete:
+      operationId: youtube.liveChatMessages.delete
+      summary: Delete a live chat message
+      description: >-
+        Deletes a chat message. The authenticated user must be the author of the message
+        or a moderator of the live chat to delete the message.
+      tags:
+        - LiveChatMessages
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: The ID of the live chat message to delete.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/key'
+      responses:
+        '204':
+          description: The live chat message was successfully deleted.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /liveChatModerators:
+    get:
+      operationId: youtube.liveChatModerators.list
+      summary: List live chat moderators
+      description: >-
+        Lists moderators for a live chat. This list is ordered by date added, with the
+        most recently added moderator first.
+      tags:
+        - LiveChatModerators
+      parameters:
+        - $ref: '#/components/parameters/part'
+        - name: liveChatId
+          in: query
+          required: true
+          description: >-
+            The liveChatId parameter specifies the YouTube live chat for which the API
+            should return moderators.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/maxResults'
+        - $ref: '#/components/parameters/pageToken'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing a list of live chat moderator resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveChatModeratorListResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    post:
+      operationId: youtube.liveChatModerators.insert
+      summary: Add a live chat moderator
+      description: >-
+        Adds a new moderator for a live chat. The authenticated user must own the live
+        broadcast associated with the chat to add moderators.
+      tags:
+        - LiveChatModerators
+      parameters:
+        - $ref: '#/components/parameters/part'
+        - $ref: '#/components/parameters/fields'
+        - $ref: '#/components/parameters/key'
+      requestBody:
+        description: The live chat moderator resource to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LiveChatModerator'
+      responses:
+        '200':
+          description: Successful response containing the newly added live chat moderator resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveChatModerator'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+    delete:
+      operationId: youtube.liveChatModerators.delete
+      summary: Remove a live chat moderator
+      description: >-
+        Removes a chat moderator. The authenticated user must own the live broadcast
+        associated with the chat to remove moderators.
+      tags:
+        - LiveChatModerators
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: The ID of the live chat moderator to remove.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/key'
+      responses:
+        '204':
+          description: The moderator was successfully removed.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/youtube.force-ssl: See, edit, and permanently delete your YouTube videos, ratings, comments and captions
+    apiKey:
+      type: apiKey
+      in: query
+      name: key
+  parameters:
+    part:
+      name: part
+      in: query
+      required: true
+      description: >-
+        Specifies a comma-separated list of one or more resource properties that the API
+        response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+    maxResults:
+      name: maxResults
+      in: query
+      description: >-
+        The maximum number of items that should be returned in the result set. Acceptable
+        values are 0 to 50, inclusive.
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 50
+        default: 5
+    pageToken:
+      name: pageToken
+      in: query
+      description: >-
+        Identifies a specific page in the result set that should be returned. The
+        nextPageToken property in the API response identifies other pages that are available.
+      schema:
+        type: string
+    fields:
+      name: fields
+      in: query
+      description: >-
+        Selector specifying which fields to include in a partial response. Use this parameter
+        to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
+    key:
+      name: key
+      in: query
+      description: >-
+        API key. Your API key identifies your project and provides you with API access, quota,
+        and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: >-
+        The request was authenticated but the caller does not have permission to perform
+        the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    PageInfo:
+      type: object
+      description: Paging details for a list of live streaming resources.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results in the result set.
+        resultsPerPage:
+          type: integer
+          description: The number of results included in the API response.
+    LiveBroadcastSnippet:
+      type: object
+      description: Basic details about a live broadcast including its title, description, and scheduled start and end times.
+      properties:
+        publishedAt:
+          type: string
+          format: date-time
+          description: The date and time that the broadcast was added to YouTube's live broadcast schedule.
+        channelId:
+          type: string
+          description: The ID of the channel to which this broadcast is affiliated.
+        title:
+          type: string
+          description: The broadcast's title. The title is a required field when inserting a broadcast.
+        description:
+          type: string
+          description: The broadcast's description.
+        thumbnails:
+          type: object
+          description: A map of thumbnail images associated with the broadcast.
+          additionalProperties:
+            type: object
+            properties:
+              url:
+                type: string
+                description: The URL of the thumbnail image.
+              width:
+                type: integer
+                description: The thumbnail width in pixels.
+              height:
+                type: integer
+                description: The thumbnail height in pixels.
+        scheduledStartTime:
+          type: string
+          format: date-time
+          description: The date and time that the broadcast is scheduled to begin.
+        scheduledEndTime:
+          type: string
+          format: date-time
+          description: The date and time that the broadcast is scheduled to end.
+        actualStartTime:
+          type: string
+          format: date-time
+          description: The date and time that the broadcast actually started.
+        actualEndTime:
+          type: string
+          format: date-time
+          description: The date and time that the broadcast actually ended.
+        liveChatId:
+          type: string
+          description: The live chat ID associated with the broadcast.
+        isDefaultBroadcast:
+          type: boolean
+          description: Indicates whether this broadcast is the default broadcast.
+    LiveBroadcastStatus:
+      type: object
+      description: Status information about a live broadcast including its privacy status and lifecycle status.
+      properties:
+        lifeCycleStatus:
+          type: string
+          description: The broadcast's status as it relates to the lifecycle of the broadcast.
+          enum:
+            - abandoned
+            - complete
+            - completeStarting
+            - created
+            - live
+            - liveStarting
+            - ready
+            - reclaimed
+            - revoked
+            - testStarting
+            - testing
+        privacyStatus:
+          type: string
+          description: The broadcast's privacy status.
+          enum:
+            - private
+            - public
+            - unlisted
+        recordingStatus:
+          type: string
+          description: The broadcast's recording status.
+          enum:
+            - notRecording
+            - recorded
+            - recording
+        madeForKids:
+          type: boolean
+          description: Indicates whether the broadcast is designated as child-directed.
+        selfDeclaredMadeForKids:
+          type: boolean
+          description: >-
+            Indicates whether the channel owner has designated the broadcast as being
+            made for kids.
+    LiveBroadcastContentDetails:
+      type: object
+      description: Detailed settings for a live broadcast including stream configuration, DVR settings, and content configuration.
+      properties:
+        boundStreamId:
+          type: string
+          description: The ID of the stream that is bound to the broadcast.
+        boundStreamLastUpdateTimeMs:
+          type: string
+          description: The date and time that the live stream referenced by boundStreamId was last updated.
+        monitorStream:
+          type: object
+          description: The monitorStream object contains information about the monitor stream, which the broadcaster can use to review the event content before the broadcast stream is shown publicly.
+          properties:
+            enableMonitorStream:
+              type: boolean
+              description: This value determines whether the monitor stream is enabled for the broadcast.
+            broadcastStreamDelayMs:
+              type: integer
+              description: If you have set the enableMonitorStream property to true, this value sets the delay between the video input and the broadcast monitor stream.
+            embedHtml:
+              type: string
+              description: The HTML code that embeds a player that plays the monitor stream.
+        enableEmbed:
+          type: boolean
+          description: Indicates whether the broadcast video can be played in an embedded player.
+        enableDvr:
+          type: boolean
+          description: >-
+            Indicates whether the broadcast enables DVR controls. DVR controls enable the
+            viewer to control the video playback experience by pausing, rewinding, or fast
+            forwarding portions of the broadcast.
+        enableContentEncryption:
+          type: boolean
+          description: Indicates whether YouTube should enable content encryption for the broadcast.
+        startWithSlate:
+          type: boolean
+          description: >-
+            Indicates whether the broadcast should automatically begin with an in-stream
+            slate when you update the broadcast's status to live.
+        closedCaptionsType:
+          type: string
+          description: Indicates whether the broadcast has captions enabled.
+          enum:
+            - closedCaptionsDisabled
+            - closedCaptionsEmbedded
+            - closedCaptionsHttpPost
+        enableLowLatency:
+          type: boolean
+          description: Indicates whether this broadcast has low latency enabled.
+        latencyPreference:
+          type: string
+          description: >-
+            Indicates latency preference for the broadcast. The options are ultraLow,
+            low, and normal.
+          enum:
+            - low
+            - normal
+            - ultraLow
+        enableAutoStart:
+          type: boolean
+          description: This setting indicates whether the broadcast should automatically begin streaming.
+        enableAutoStop:
+          type: boolean
+          description: Indicates whether the broadcast should automatically stop streaming.
+    LiveBroadcast:
+      type: object
+      description: A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.
+      required:
+        - kind
+        - etag
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#liveBroadcast.
+          default: youtube#liveBroadcast
+        etag:
+          type: string
+          description: The Etag of this resource.
+        id:
+          type: string
+          description: The ID that YouTube assigns to uniquely identify the broadcast.
+        snippet:
+          $ref: '#/components/schemas/LiveBroadcastSnippet'
+        status:
+          $ref: '#/components/schemas/LiveBroadcastStatus'
+        contentDetails:
+          $ref: '#/components/schemas/LiveBroadcastContentDetails'
+        statistics:
+          type: object
+          description: The statistics object contains info about the live broadcast.
+          properties:
+            totalChatCount:
+              type: integer
+              format: int64
+              description: The number of live chat messages currently on the broadcast.
+    LiveBroadcastListResponse:
+      type: object
+      description: A list of live broadcast resources matching the request criteria.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#liveBroadcastListResponse.
+          default: youtube#liveBroadcastListResponse
+        etag:
+          type: string
+          description: The Etag of this resource.
+        nextPageToken:
+          type: string
+          description: The token for the next page of results.
+        prevPageToken:
+          type: string
+          description: The token for the previous page of results.
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of live broadcasts that match the request criteria.
+          items:
+            $ref: '#/components/schemas/LiveBroadcast'
+    LiveStreamSnippet:
+      type: object
+      description: Basic details about a live stream including its title, description, and channel association.
+      properties:
+        channelId:
+          type: string
+          description: The ID of the channel to which this stream is affiliated.
+        title:
+          type: string
+          description: The stream's title. The value must be between 1 and 128 characters long.
+        description:
+          type: string
+          description: The stream's description. The value cannot be longer than 10000 characters.
+        publishedAt:
+          type: string
+          format: date-time
+          description: The date and time that the stream was created.
+        isDefaultStream:
+          type: boolean
+          description: Indicates whether this stream is the default stream.
+    LiveStreamStatus:
+      type: object
+      description: Status information about a live stream including its stream status and health status.
+      properties:
+        streamStatus:
+          type: string
+          description: The stream's current status.
+          enum:
+            - active
+            - created
+            - error
+            - inactive
+            - ready
+        healthStatus:
+          type: object
+          description: The health status of the stream.
+          properties:
+            status:
+              type: string
+              description: The status code of this stream.
+              enum:
+                - bad
+                - good
+                - noData
+                - ok
+                - revoked
+            lastUpdateTimeSeconds:
+              type: integer
+              format: int64
+              description: The last time this status was updated, as a Unix timestamp.
+            configurationIssues:
+              type: array
+              description: The configurations issues on this stream.
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The kind of error happening.
+                  severity:
+                    type: string
+                    description: How severe this issue is to the stream.
+                    enum:
+                      - error
+                      - info
+                      - warning
+                  reason:
+                    type: string
+                    description: The short-form reason for this issue.
+                  description:
+                    type: string
+                    description: The long-form description of the issue and how to resolve it.
+    LiveStreamContentDetails:
+      type: object
+      description: Detailed settings for a live stream including the stream key and ingestion settings.
+      properties:
+        boundBroadcastId:
+          type: string
+          description: The ID of the live broadcast to which this stream is bound.
+        isReusable:
+          type: boolean
+          description: Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts.
+    LiveStream:
+      type: object
+      description: >-
+        A liveStream resource contains information about the video stream that you are
+        transmitting to YouTube. The stream provides the content that will be broadcast
+        to YouTube users.
+      required:
+        - kind
+        - etag
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#liveStream.
+          default: youtube#liveStream
+        etag:
+          type: string
+          description: The Etag of this resource.
+        id:
+          type: string
+          description: The ID that YouTube assigns to uniquely identify the stream.
+        snippet:
+          $ref: '#/components/schemas/LiveStreamSnippet'
+        cdn:
+          type: object
+          description: The cdn object defines the live stream's content delivery network (CDN) settings.
+          properties:
+            ingestionType:
+              type: string
+              description: The method or protocol used to transmit the video stream.
+              enum:
+                - dash
+                - rtmp
+                - webrtc
+            ingestionInfo:
+              type: object
+              description: The ingestionInfo object contains information that YouTube provides that you need to transmit your RTMP or HTTP stream to YouTube.
+              properties:
+                streamName:
+                  type: string
+                  description: The stream name that YouTube assigns to the video stream.
+                ingestionAddress:
+                  type: string
+                  description: The primary ingestion URL that you should use to stream video to YouTube.
+                backupIngestionAddress:
+                  type: string
+                  description: The backup ingestion URL that you should use to stream video to YouTube.
+                rtmpsIngestionAddress:
+                  type: string
+                  description: The primary secured ingestion URL that you should use to stream video to YouTube.
+                backupRtmpsIngestionAddress:
+                  type: string
+                  description: The backup secured ingestion URL that you should use to stream video to YouTube.
+            resolution:
+              type: string
+              description: The resolution of the inbound video data.
+            frameRate:
+              type: string
+              description: The frame rate of the inbound video data.
+        status:
+          $ref: '#/components/schemas/LiveStreamStatus'
+        contentDetails:
+          $ref: '#/components/schemas/LiveStreamContentDetails'
+    LiveStreamListResponse:
+      type: object
+      description: A list of live stream resources matching the request criteria.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#liveStreamListResponse.
+          default: youtube#liveStreamListResponse
+        etag:
+          type: string
+          description: The Etag of this resource.
+        nextPageToken:
+          type: string
+          description: The token for the next page of results.
+        prevPageToken:
+          type: string
+          description: The token for the previous page of results.
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of live streams that match the request criteria.
+          items:
+            $ref: '#/components/schemas/LiveStream'
+    LiveChatMessage:
+      type: object
+      description: A liveChatMessage resource represents a chat message in a YouTube live broadcast.
+      required:
+        - kind
+        - etag
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#liveChatMessage.
+          default: youtube#liveChatMessage
+        etag:
+          type: string
+          description: The Etag of this resource.
+        id:
+          type: string
+          description: The ID that YouTube assigns to uniquely identify the message.
+        snippet:
+          type: object
+          description: The snippet object contains basic details about the message.
+          properties:
+            liveChatId:
+              type: string
+              description: The ID of the live chat to which this message belongs.
+            type:
+              type: string
+              description: The type of message.
+              enum:
+                - chatEndedEvent
+                - fanFundingEvent
+                - giftMembershipReceivedEvent
+                - memberMilestoneChatEvent
+                - membershipGiftingEvent
+                - messageDeletedEvent
+                - newSponsorEvent
+                - pollClosedEvent
+                - pollEditedEvent
+                - pollOpenedEvent
+                - pollVotedEvent
+                - sponsorOnlyModeEndedEvent
+                - sponsorOnlyModeStartedEvent
+                - superChatEvent
+                - superStickerEvent
+                - textMessageEvent
+                - tombstone
+                - userBannedEvent
+            displayMessage:
+              type: string
+              description: Contains a string that can be displayed to the user. The string is not necessarily the message text itself.
+            authorChannelId:
+              type: string
+              description: The ID of the user that authored this message.
+            publishedAt:
+              type: string
+              format: date-time
+              description: The date and time when the message was orignally published.
+            hasDisplayContent:
+              type: boolean
+              description: Whether the message has display content that should be displayed to users.
+            textMessageDetails:
+              type: object
+              description: Details about the text message. This object is only present if the type is textMessageEvent.
+              properties:
+                messageText:
+                  type: string
+                  description: The user's message.
+        authorDetails:
+          type: object
+          description: The authorDetails object contains basic details about the user that posted this message.
+          properties:
+            channelId:
+              type: string
+              description: The YouTube channel ID of the message author.
+            channelUrl:
+              type: string
+              description: The channel URL of the message author.
+            displayName:
+              type: string
+              description: The channel's display name.
+            profileImageUrl:
+              type: string
+              description: The channel's avatar URL.
+            isVerified:
+              type: boolean
+              description: Indicates whether YouTube has verified the authenticity of the channel owner's identity.
+            isChatOwner:
+              type: boolean
+              description: Indicates whether the user is the owner of the live chat.
+            isChatSponsor:
+              type: boolean
+              description: Indicates whether the user is a sponsor of the live chat.
+            isChatModerator:
+              type: boolean
+              description: Indicates whether the user is a moderator of the live chat.
+    LiveChatMessageListResponse:
+      type: object
+      description: A list of live chat message resources for a given broadcast.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#liveChatMessageListResponse.
+          default: youtube#liveChatMessageListResponse
+        etag:
+          type: string
+          description: The Etag of this resource.
+        nextPageToken:
+          type: string
+          description: The token for the next page of results.
+        pollingIntervalMillis:
+          type: integer
+          description: >-
+            The amount of time the client should wait before polling again, in milliseconds.
+        offlineAt:
+          type: string
+          format: date-time
+          description: The date and time when the underlying stream went offline.
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of chat messages that match the request criteria.
+          items:
+            $ref: '#/components/schemas/LiveChatMessage'
+    LiveChatModerator:
+      type: object
+      description: A liveChatModerator resource identifies a user who has moderator privileges in a YouTube live chat.
+      required:
+        - kind
+        - etag
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#liveChatModerator.
+          default: youtube#liveChatModerator
+        etag:
+          type: string
+          description: The Etag of this resource.
+        id:
+          type: string
+          description: The ID that YouTube assigns to uniquely identify the moderator.
+        snippet:
+          type: object
+          description: The snippet object contains basic details about the moderator.
+          properties:
+            liveChatId:
+              type: string
+              description: The liveChatId is the live chat id for this moderator resource.
+            moderatorDetails:
+              type: object
+              description: Details about the moderator.
+              properties:
+                channelId:
+                  type: string
+                  description: The YouTube channel ID of the moderator.
+                channelUrl:
+                  type: string
+                  description: The channel URL of the moderator.
+                displayName:
+                  type: string
+                  description: The channel's display name.
+                profileImageUrl:
+                  type: string
+                  description: The channel's avatar URL.
+    LiveChatModeratorListResponse:
+      type: object
+      description: A list of live chat moderator resources for a given live chat.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#liveChatModeratorListResponse.
+          default: youtube#liveChatModeratorListResponse
+        etag:
+          type: string
+          description: The Etag of this resource.
+        nextPageToken:
+          type: string
+          description: The token for the next page of results.
+        prevPageToken:
+          type: string
+          description: The token for the previous page of results.
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of moderators that match the request criteria.
+          items:
+            $ref: '#/components/schemas/LiveChatModerator'
+    ErrorResponse:
+      type: object
+      description: A standard error response returned by the YouTube Live Streaming API.
+      properties:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            errors:
+              type: array
+              description: A list of individual errors.
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A human-readable description of the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  reason:
+                    type: string
+                    description: The reason for the error.

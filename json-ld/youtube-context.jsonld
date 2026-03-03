@@ -1,0 +1,348 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "yt": "https://developers.google.com/youtube/v3/ns/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+
+    "Video": {
+      "@id": "schema:VideoObject",
+      "@context": {
+        "id": "@id",
+        "kind": "yt:kind",
+        "etag": "yt:etag",
+        "snippet": "yt:snippet",
+        "title": "dcterms:title",
+        "description": "dcterms:description",
+        "publishedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "channelId": "yt:channelId",
+        "channelTitle": "yt:channelTitle",
+        "thumbnails": "yt:thumbnails",
+        "tags": "yt:tags",
+        "categoryId": "yt:categoryId",
+        "statistics": "yt:statistics",
+        "viewCount": {
+          "@id": "schema:interactionCount",
+          "@type": "xsd:integer"
+        },
+        "likeCount": {
+          "@id": "yt:likeCount",
+          "@type": "xsd:integer"
+        },
+        "commentCount": {
+          "@id": "schema:commentCount",
+          "@type": "xsd:integer"
+        },
+        "favoriteCount": {
+          "@id": "yt:favoriteCount",
+          "@type": "xsd:integer"
+        },
+        "contentDetails": "yt:contentDetails",
+        "duration": {
+          "@id": "schema:duration",
+          "@type": "xsd:duration"
+        },
+        "dimension": "yt:dimension",
+        "definition": "yt:definition",
+        "caption": "yt:caption",
+        "licensedContent": "yt:licensedContent",
+        "status": "yt:status",
+        "uploadStatus": "yt:uploadStatus",
+        "privacyStatus": "yt:privacyStatus",
+        "embeddable": "yt:embeddable",
+        "publicStatsViewable": "yt:publicStatsViewable",
+        "player": "yt:player",
+        "embedHtml": "yt:embedHtml"
+      }
+    },
+
+    "Channel": {
+      "@id": "schema:Organization",
+      "@context": {
+        "id": "@id",
+        "kind": "yt:kind",
+        "etag": "yt:etag",
+        "snippet": "yt:snippet",
+        "title": {
+          "@id": "schema:name"
+        },
+        "description": {
+          "@id": "schema:description"
+        },
+        "customUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "publishedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "country": {
+          "@id": "schema:addressCountry"
+        },
+        "thumbnails": "yt:thumbnails",
+        "statistics": "yt:statistics",
+        "subscriberCount": {
+          "@id": "yt:subscriberCount",
+          "@type": "xsd:integer"
+        },
+        "viewCount": {
+          "@id": "yt:viewCount",
+          "@type": "xsd:integer"
+        },
+        "videoCount": {
+          "@id": "yt:videoCount",
+          "@type": "xsd:integer"
+        },
+        "hiddenSubscriberCount": "yt:hiddenSubscriberCount",
+        "contentDetails": "yt:contentDetails",
+        "relatedPlaylists": "yt:relatedPlaylists",
+        "brandingSettings": "yt:brandingSettings"
+      }
+    },
+
+    "Playlist": {
+      "@id": "yt:Playlist",
+      "@context": {
+        "id": "@id",
+        "kind": "yt:kind",
+        "etag": "yt:etag",
+        "snippet": "yt:snippet",
+        "title": "dcterms:title",
+        "description": "dcterms:description",
+        "publishedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "channelId": "yt:channelId",
+        "channelTitle": "yt:channelTitle",
+        "thumbnails": "yt:thumbnails",
+        "tags": "yt:tags",
+        "status": "yt:status",
+        "privacyStatus": "yt:privacyStatus",
+        "contentDetails": "yt:contentDetails",
+        "itemCount": {
+          "@id": "yt:itemCount",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "PlaylistItem": {
+      "@id": "yt:PlaylistItem",
+      "@context": {
+        "id": "@id",
+        "kind": "yt:kind",
+        "etag": "yt:etag",
+        "snippet": "yt:snippet",
+        "title": "dcterms:title",
+        "description": "dcterms:description",
+        "publishedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "channelId": "yt:channelId",
+        "channelTitle": "yt:channelTitle",
+        "playlistId": "yt:playlistId",
+        "position": {
+          "@id": "yt:position",
+          "@type": "xsd:integer"
+        },
+        "resourceId": "yt:resourceId",
+        "videoId": "yt:videoId",
+        "thumbnails": "yt:thumbnails",
+        "contentDetails": "yt:contentDetails",
+        "status": "yt:status"
+      }
+    },
+
+    "Comment": {
+      "@id": "schema:Comment",
+      "@context": {
+        "id": "@id",
+        "kind": "yt:kind",
+        "etag": "yt:etag",
+        "snippet": "yt:snippet",
+        "textOriginal": {
+          "@id": "schema:text"
+        },
+        "textDisplay": "yt:textDisplay",
+        "authorDisplayName": {
+          "@id": "schema:author"
+        },
+        "authorProfileImageUrl": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "authorChannelUrl": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "likeCount": {
+          "@id": "yt:likeCount",
+          "@type": "xsd:integer"
+        },
+        "publishedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "videoId": "yt:videoId",
+        "parentId": "yt:parentId",
+        "canRate": "yt:canRate",
+        "moderationStatus": "yt:moderationStatus"
+      }
+    },
+
+    "CommentThread": {
+      "@id": "yt:CommentThread",
+      "@context": {
+        "id": "@id",
+        "kind": "yt:kind",
+        "etag": "yt:etag",
+        "snippet": "yt:snippet",
+        "channelId": "yt:channelId",
+        "videoId": "yt:videoId",
+        "topLevelComment": {
+          "@id": "yt:topLevelComment",
+          "@type": "schema:Comment"
+        },
+        "canReply": "yt:canReply",
+        "totalReplyCount": {
+          "@id": "yt:totalReplyCount",
+          "@type": "xsd:integer"
+        },
+        "isPublic": "yt:isPublic",
+        "replies": "yt:replies"
+      }
+    },
+
+    "Subscription": {
+      "@id": "yt:Subscription",
+      "@context": {
+        "id": "@id",
+        "kind": "yt:kind",
+        "etag": "yt:etag",
+        "snippet": "yt:snippet",
+        "title": "dcterms:title",
+        "description": "dcterms:description",
+        "publishedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "channelId": "yt:channelId",
+        "resourceId": "yt:resourceId",
+        "thumbnails": "yt:thumbnails",
+        "contentDetails": "yt:contentDetails",
+        "subscriberSnippet": "yt:subscriberSnippet"
+      }
+    },
+
+    "LiveBroadcast": {
+      "@id": "schema:BroadcastEvent",
+      "@context": {
+        "id": "@id",
+        "kind": "yt:kind",
+        "etag": "yt:etag",
+        "snippet": "yt:snippet",
+        "title": {
+          "@id": "schema:name"
+        },
+        "description": {
+          "@id": "schema:description"
+        },
+        "publishedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "scheduledStartTime": {
+          "@id": "schema:startDate",
+          "@type": "xsd:dateTime"
+        },
+        "scheduledEndTime": {
+          "@id": "schema:endDate",
+          "@type": "xsd:dateTime"
+        },
+        "actualStartTime": {
+          "@id": "yt:actualStartTime",
+          "@type": "xsd:dateTime"
+        },
+        "actualEndTime": {
+          "@id": "yt:actualEndTime",
+          "@type": "xsd:dateTime"
+        },
+        "channelId": "yt:channelId",
+        "liveChatId": "yt:liveChatId",
+        "isDefaultBroadcast": "yt:isDefaultBroadcast",
+        "thumbnails": "yt:thumbnails",
+        "status": "yt:status",
+        "lifeCycleStatus": "yt:lifeCycleStatus",
+        "privacyStatus": "yt:privacyStatus",
+        "recordingStatus": "yt:recordingStatus",
+        "contentDetails": "yt:contentDetails"
+      }
+    },
+
+    "LiveStream": {
+      "@id": "yt:LiveStream",
+      "@context": {
+        "id": "@id",
+        "kind": "yt:kind",
+        "etag": "yt:etag",
+        "snippet": "yt:snippet",
+        "title": "dcterms:title",
+        "description": "dcterms:description",
+        "publishedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "channelId": "yt:channelId",
+        "isDefaultStream": "yt:isDefaultStream",
+        "cdn": "yt:cdn",
+        "ingestionType": "yt:ingestionType",
+        "ingestionInfo": "yt:ingestionInfo",
+        "streamName": "yt:streamName",
+        "ingestionAddress": {
+          "@id": "yt:ingestionAddress",
+          "@type": "@id"
+        },
+        "status": "yt:status",
+        "streamStatus": "yt:streamStatus",
+        "healthStatus": "yt:healthStatus",
+        "contentDetails": "yt:contentDetails"
+      }
+    },
+
+    "AnalyticsReport": {
+      "@id": "yt:AnalyticsReport",
+      "@context": {
+        "kind": "yt:kind",
+        "columnHeaders": "yt:columnHeaders",
+        "rows": "yt:rows",
+        "name": {
+          "@id": "schema:name"
+        },
+        "columnType": "yt:columnType",
+        "dataType": "yt:dataType",
+        "startDate": {
+          "@id": "yt:startDate",
+          "@type": "xsd:date"
+        },
+        "endDate": {
+          "@id": "yt:endDate",
+          "@type": "xsd:date"
+        },
+        "metrics": "yt:metrics",
+        "dimensions": "yt:dimensions"
+      }
+    }
+  }
+}

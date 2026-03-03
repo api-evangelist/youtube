@@ -1,0 +1,416 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developers.google.com/youtube/v3/schemas/channel",
+  "title": "YouTube Channel",
+  "description": "A channel resource represents a YouTube channel. It contains information about a YouTube channel, including its metadata, statistics, content details, and branding settings.",
+  "type": "object",
+  "required": ["id", "kind"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID that YouTube uses to uniquely identify the channel."
+    },
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. The value will be youtube#channel.",
+      "const": "youtube#channel"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource, used for cache validation and conditional requests."
+    },
+    "snippet": {
+      "type": "object",
+      "description": "The snippet object contains basic details about the channel, such as its title, description, and thumbnail images.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The channel's title.",
+          "maxLength": 30
+        },
+        "description": {
+          "type": "string",
+          "description": "The channel description. The property's value has a maximum length of 1000 characters.",
+          "maxLength": 1000
+        },
+        "customUrl": {
+          "type": "string",
+          "description": "The channel's custom URL. The YouTube Help Center explains eligibility requirements for getting a custom URL, as well as how to set up the URL."
+        },
+        "publishedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time that the channel was created."
+        },
+        "thumbnails": {
+          "type": "object",
+          "description": "A map of thumbnail images associated with the channel. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other information about the thumbnail.",
+          "properties": {
+            "default": {
+              "$ref": "#/$defs/Thumbnail",
+              "description": "The default thumbnail image for this resource. The default thumbnail for a channel is 88px wide and 88px tall."
+            },
+            "medium": {
+              "$ref": "#/$defs/Thumbnail",
+              "description": "A higher resolution version of the thumbnail image. For a channel, this image is 240px wide and 240px tall."
+            },
+            "high": {
+              "$ref": "#/$defs/Thumbnail",
+              "description": "A high resolution version of the thumbnail image. For a channel, this image is 800px wide and 800px tall."
+            }
+          }
+        },
+        "country": {
+          "type": "string",
+          "description": "The country with which the channel is associated. To set this property's value, update the value of the brandingSettings.channel.country property."
+        },
+        "localized": {
+          "type": "object",
+          "description": "The snippet.localized object contains a localized title and description for the channel or the channel's title in the default language for the channel's metadata.",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "The localized channel title."
+            },
+            "description": {
+              "type": "string",
+              "description": "The localized channel description."
+            }
+          }
+        },
+        "defaultLanguage": {
+          "type": "string",
+          "description": "The language of the text in the channel resource's snippet.title and snippet.description properties."
+        }
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "description": "The statistics object encapsulates statistics for the channel.",
+      "properties": {
+        "viewCount": {
+          "type": "string",
+          "description": "The number of times the channel has been viewed.",
+          "pattern": "^[0-9]+$"
+        },
+        "subscriberCount": {
+          "type": "string",
+          "description": "The number of subscribers that the channel has. This value is rounded down to three significant figures.",
+          "pattern": "^[0-9]+$"
+        },
+        "hiddenSubscriberCount": {
+          "type": "boolean",
+          "description": "Indicates whether the channel's subscriber count is publicly visible."
+        },
+        "videoCount": {
+          "type": "string",
+          "description": "The number of public videos uploaded to the channel.",
+          "pattern": "^[0-9]+$"
+        }
+      }
+    },
+    "contentDetails": {
+      "type": "object",
+      "description": "The contentDetails object encapsulates information about the channel's content.",
+      "properties": {
+        "relatedPlaylists": {
+          "type": "object",
+          "description": "A map that identifies playlists associated with the channel, such as the channel's uploaded videos or liked videos.",
+          "properties": {
+            "uploads": {
+              "type": "string",
+              "description": "The ID of the playlist that contains the channel's uploaded videos. Use the playlistItems.list method to retrieve the playlist items."
+            },
+            "likes": {
+              "type": "string",
+              "description": "The ID of the playlist that contains the videos that the channel has liked. Use the playlistItems.list method to retrieve the playlist items."
+            },
+            "favorites": {
+              "type": "string",
+              "description": "The ID of the playlist that contains the channel's favorite videos. Use the playlistItems.list method to retrieve the playlist items."
+            },
+            "watchHistory": {
+              "type": "string",
+              "description": "The ID of the playlist that contains the channel's watch history. Use the playlistItems.list method to retrieve the playlist items."
+            },
+            "watchLater": {
+              "type": "string",
+              "description": "The ID of the playlist that contains videos that the user has added to their watch later list. Use the playlistItems.list method to retrieve the playlist items."
+            }
+          }
+        }
+      }
+    },
+    "brandingSettings": {
+      "type": "object",
+      "description": "The brandingSettings object encapsulates information about the branding of the channel.",
+      "properties": {
+        "channel": {
+          "type": "object",
+          "description": "The channel object encapsulates branding properties of the channel page.",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "The channel's title.",
+              "maxLength": 30
+            },
+            "description": {
+              "type": "string",
+              "description": "The channel description, which appears in the channel information box on your channel page.",
+              "maxLength": 1000
+            },
+            "keywords": {
+              "type": "string",
+              "description": "Keywords associated with your channel. The value is a space-separated list of strings."
+            },
+            "defaultTab": {
+              "type": "string",
+              "description": "The content tab that users should display by default when they visit the channel page."
+            },
+            "trackingAnalyticsAccountId": {
+              "type": "string",
+              "description": "The ID for a Google Analytics account that you want to use to track and measure traffic to your channel."
+            },
+            "moderateComments": {
+              "type": "boolean",
+              "description": "Indicates whether user-submitted comments left on the channel page need to be approved by the channel owner to be publicly visible."
+            },
+            "showRelatedChannels": {
+              "type": "boolean",
+              "description": "Indicates whether YouTube should show an algorithmically generated list of related channels on your channel page."
+            },
+            "showBrowseView": {
+              "type": "boolean",
+              "description": "Indicates whether the channel page should display content in a browse or feed view."
+            },
+            "featuredChannelsTitle": {
+              "type": "string",
+              "description": "The title that displays above the featured channels module.",
+              "maxLength": 30
+            },
+            "featuredChannelsUrls": {
+              "type": "array",
+              "description": "A list of up to 100 channels that you would like to link to from the featured channels section of your channel page.",
+              "maxItems": 100,
+              "items": {
+                "type": "string",
+                "description": "A URL identifying a featured channel."
+              }
+            },
+            "unsubscribedTrailer": {
+              "type": "string",
+              "description": "The video that should play in the featured video module in the channel page's browse view for unsubscribed viewers."
+            },
+            "defaultLanguage": {
+              "type": "string",
+              "description": "The language of the text in the channel's brandingSettings.channel.title and brandingSettings.channel.description properties."
+            },
+            "country": {
+              "type": "string",
+              "description": "The country with which the channel is associated."
+            }
+          }
+        },
+        "image": {
+          "type": "object",
+          "description": "The image object encapsulates information about images that display on the channel's channel page or video watch pages.",
+          "properties": {
+            "bannerExternalUrl": {
+              "type": "string",
+              "description": "The URL for the banner image shown on the channel page on the YouTube website.",
+              "format": "uri"
+            },
+            "bannerImageUrl": {
+              "type": "string",
+              "description": "The URL for the banner image that displays on the channel page on the YouTube website. The image is 1060px by 175px.",
+              "format": "uri"
+            },
+            "bannerMobileImageUrl": {
+              "type": "string",
+              "description": "The URL for the banner image that displays on the channel page on mobile applications. The image is 640px by 175px.",
+              "format": "uri"
+            },
+            "bannerTabletLowImageUrl": {
+              "type": "string",
+              "description": "The URL for a low resolution banner image that displays on the channel page on tablet applications. The image is 1138px by 188px.",
+              "format": "uri"
+            },
+            "bannerTabletImageUrl": {
+              "type": "string",
+              "description": "The URL for a banner image that displays on the channel page on tablet applications. The image is 1707px by 283px.",
+              "format": "uri"
+            },
+            "bannerTabletHdImageUrl": {
+              "type": "string",
+              "description": "The URL for a high resolution banner image that displays on the channel page on tablet applications. The image is 2276px by 377px.",
+              "format": "uri"
+            },
+            "bannerTabletExtraHdImageUrl": {
+              "type": "string",
+              "description": "The URL for an extra-high resolution banner image that displays on the channel page on tablet applications. The image is 2560px by 424px.",
+              "format": "uri"
+            },
+            "bannerMobileLowImageUrl": {
+              "type": "string",
+              "description": "The URL for a low resolution banner image that displays on the channel page on mobile applications. The image is 320px by 88px.",
+              "format": "uri"
+            },
+            "bannerMobileMediumHdImageUrl": {
+              "type": "string",
+              "description": "The URL for a medium-resolution banner image that displays on the channel page on mobile applications. The image is 960px by 263px.",
+              "format": "uri"
+            },
+            "bannerMobileHdImageUrl": {
+              "type": "string",
+              "description": "The URL for a high resolution banner image that displays on the channel page on mobile applications. The image is 1280px by 360px.",
+              "format": "uri"
+            },
+            "bannerMobileExtraHdImageUrl": {
+              "type": "string",
+              "description": "The URL for an extra-high resolution banner image that displays on the channel page on mobile applications. The image is 1440px by 395px.",
+              "format": "uri"
+            },
+            "bannerTvImageUrl": {
+              "type": "string",
+              "description": "The URL for the banner image that displays on the channel page on TV applications. The image is 2120px by 1192px.",
+              "format": "uri"
+            },
+            "bannerTvLowImageUrl": {
+              "type": "string",
+              "description": "The URL for a low resolution banner image that displays on the channel page on TV applications. The image is 854px by 480px.",
+              "format": "uri"
+            },
+            "bannerTvMediumImageUrl": {
+              "type": "string",
+              "description": "The URL for a medium resolution banner image that displays on the channel page on TV applications. The image is 1280px by 720px.",
+              "format": "uri"
+            },
+            "bannerTvHighImageUrl": {
+              "type": "string",
+              "description": "The URL for a high resolution banner image that displays on the channel page on TV applications. The image is 1920px by 1080px.",
+              "format": "uri"
+            },
+            "trackingImageUrl": {
+              "type": "string",
+              "description": "The URL for a 1px by 1px tracking pixel that can be used to measure viewership for the channel or video player being displayed.",
+              "format": "uri"
+            },
+            "watchIconImageUrl": {
+              "type": "string",
+              "description": "The URL for the image that displays above the video player. This is a 25px by 16px image, with a maximum file size of 1 MB, that identifies the channel.",
+              "format": "uri"
+            }
+          }
+        },
+        "hints": {
+          "type": "array",
+          "description": "The hints object encapsulates additional branding properties.",
+          "items": {
+            "type": "object",
+            "description": "A key-value pair containing a branding hint property.",
+            "properties": {
+              "property": {
+                "type": "string",
+                "description": "The property's name."
+              },
+              "value": {
+                "type": "string",
+                "description": "The property's value."
+              }
+            }
+          }
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "The status object encapsulates information about the privacy status of the channel.",
+      "properties": {
+        "privacyStatus": {
+          "type": "string",
+          "description": "Privacy status of the channel.",
+          "enum": ["private", "public", "unlisted"]
+        },
+        "isLinked": {
+          "type": "boolean",
+          "description": "Indicates whether the channel data identifies a user that is already linked to either a YouTube username or a Google+ account."
+        },
+        "longUploadsStatus": {
+          "type": "string",
+          "description": "Indicates whether the channel is eligible to upload videos that are more than 15 minutes long.",
+          "enum": ["allowed", "disallowed", "eligible", "longUploadsUnspecified"]
+        },
+        "madeForKids": {
+          "type": "boolean",
+          "description": "Indicates whether the channel is designated as child-directed, and contains the current designation."
+        },
+        "selfDeclaredMadeForKids": {
+          "type": "boolean",
+          "description": "Indicates whether the channel owner has designated the channel as being made for kids."
+        }
+      }
+    },
+    "localizations": {
+      "type": "object",
+      "description": "The localizations object encapsulates translations of the channel's metadata.",
+      "additionalProperties": {
+        "type": "object",
+        "description": "A localized version of the channel's metadata for a specific language.",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The localized channel title."
+          },
+          "description": {
+            "type": "string",
+            "description": "The localized channel description."
+          }
+        }
+      }
+    },
+    "topicDetails": {
+      "type": "object",
+      "description": "The topicDetails object encapsulates information about topics associated with the channel.",
+      "properties": {
+        "topicIds": {
+          "type": "array",
+          "description": "A list of Freebase topic IDs associated with the channel.",
+          "items": {
+            "type": "string",
+            "description": "A Freebase topic ID."
+          }
+        },
+        "topicCategories": {
+          "type": "array",
+          "description": "A list of Wikipedia URLs that describe the channel's content.",
+          "items": {
+            "type": "string",
+            "description": "A Wikipedia URL.",
+            "format": "uri"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Thumbnail": {
+      "type": "object",
+      "description": "A thumbnail image associated with a resource.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The image's URL.",
+          "format": "uri"
+        },
+        "width": {
+          "type": "integer",
+          "description": "The image's width in pixels."
+        },
+        "height": {
+          "type": "integer",
+          "description": "The image's height in pixels."
+        }
+      }
+    }
+  }
+}

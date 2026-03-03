@@ -6,75 +6,441 @@ apis:
   tags:
   - Videos
   - Activities
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/activities
+  baseURL: https://www.googleapis.com/youtube/v3
   properties:
   - url: https://developers.google.com/youtube/v3/docs/activities/list
     type: Documentation
-  description: Managing Youtube activities.
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Manages YouTube user activities, including videos liked, channels subscribed to, and other user interactions on YouTube.
 - aid: youtube:youtube-channels-api
   name: Youtube Channels API
   tags:
   - Videos
   - Channels
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/channels
+  baseURL: https://www.googleapis.com/youtube/v3
   properties:
   - url: https://developers.google.com/youtube/v3/docs/channels/list
     type: Documentation
-  description: Managing Youtube channels.
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  - url: json-schema/youtube-channel-schema.json
+    type: JSONSchema
+  description: Provides access to YouTube channel data including channel metadata, statistics, and settings for both the authenticated user and other public channels.
 - aid: youtube:youtube-comments-api
   name: Youtube Comments API
   tags:
   - Videos
   - Comments
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/comments
+  baseURL: https://www.googleapis.com/youtube/v3
   properties:
   - url: https://developers.google.com/youtube/v3/docs/comments/list
     type: Documentation
-  description: Managing Youtube comments.
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Manages individual comments on YouTube videos and other resources, supporting retrieval, creation, update, deletion, and moderation operations.
+- aid: youtube:youtube-comment-threads-api
+  name: Youtube Comment Threads API
+  tags:
+  - Videos
+  - Comments
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/commentThreads
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/docs/commentThreads/list
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Provides access to comment threads on YouTube videos and channels, where a comment thread includes a top-level comment and any replies to that comment.
 - aid: youtube:youtube-playlists-api
   name: Youtube Playlists API
   tags:
   - Videos
   - Playlists
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/playlists
+  baseURL: https://www.googleapis.com/youtube/v3
   properties:
   - url: https://developers.google.com/youtube/v3/docs/playlists/list
     type: Documentation
-  description: Managing Youtube playlists.
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Manages YouTube playlists including creating, updating, deleting, and listing playlists associated with a channel or the authenticated user.
+- aid: youtube:youtube-playlist-items-api
+  name: Youtube Playlist Items API
+  tags:
+  - Videos
+  - Playlists
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/playlistItems
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/docs/playlistItems/list
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Manages individual items within a YouTube playlist, enabling retrieval, addition, update, and removal of videos from playlists.
 - aid: youtube:youtube-search-api
   name: Youtube Search API
   tags:
   - Videos
   - Search
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/search
+  baseURL: https://www.googleapis.com/youtube/v3
   properties:
   - url: https://developers.google.com/youtube/v3/docs/search/list
     type: Documentation
-  description: Managing Youtube search.
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Searches across YouTube content including videos, channels, and playlists matching specified query parameters, returning a collection of results.
 - aid: youtube:youtube-subscriptions-api
   name: Youtube Subscriptions API
   tags:
   - Videos
   - Subscriptions
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/subscriptions
+  baseURL: https://www.googleapis.com/youtube/v3
   properties:
   - url: https://developers.google.com/youtube/v3/docs/subscriptions/list
     type: Documentation
-  description: Managing Youtube subscriptions.
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Manages YouTube channel subscriptions, allowing retrieval, creation, and deletion of subscriptions for the authenticated user.
 - aid: youtube:youtube-videos-api
   name: Youtube Videos API
   tags:
   - Videos
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/videos
+  baseURL: https://www.googleapis.com/youtube/v3
   properties:
   - url: https://developers.google.com/youtube/v3/docs/videos/list
     type: Documentation
-  description: Managing Youtube videos.
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  - url: openapi/youtube-data-api-openapi.yml
+    type: OpenAPI
+  - url: json-schema/youtube-video-schema.json
+    type: JSONSchema
+  description: Provides access to YouTube video data including metadata, statistics, and content details, and supports uploading, updating, rating, and deleting videos.
+- aid: youtube:youtube-captions-api
+  name: Youtube Captions API
+  tags:
+  - Videos
+  - Captions
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/captions
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/docs/captions
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Manages caption tracks associated with YouTube videos. A caption track is associated with exactly one YouTube video and supports upload, update, download, and deletion operations.
+- aid: youtube:youtube-channel-sections-api
+  name: Youtube Channel Sections API
+  tags:
+  - Videos
+  - Channels
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/channelSections
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/docs/channelSections
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Manages sections that a channel has chosen to feature on its channel page, including inserting, updating, and deleting channel sections.
+- aid: youtube:youtube-channel-banners-api
+  name: Youtube Channel Banners API
+  tags:
+  - Videos
+  - Channels
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/channelBanners
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/docs/channelBanners
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Enables uploading a new banner image to a YouTube channel, returning the URL that identifies the uploaded image for use with the channels.update method.
+- aid: youtube:youtube-members-api
+  name: Youtube Members API
+  tags:
+  - Videos
+  - Members
+  - Monetization
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/members
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/docs/members
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Provides access to channel membership data, allowing channel owners to retrieve a list of paying members who support the channel in exchange for exclusive benefits.
+- aid: youtube:youtube-memberships-levels-api
+  name: Youtube Memberships Levels API
+  tags:
+  - Videos
+  - Members
+  - Monetization
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/membershipsLevels
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/docs/membershipsLevels
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Provides information about membership pricing tiers that a channel has set up, allowing retrieval of the levels that members can subscribe to.
+- aid: youtube:youtube-thumbnails-api
+  name: Youtube Thumbnails API
+  tags:
+  - Videos
+  - Thumbnails
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/thumbnails
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/docs/thumbnails
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Manages custom video thumbnail images, enabling upload of a custom thumbnail image for a video that the authenticated user owns.
+- aid: youtube:youtube-watermarks-api
+  name: Youtube Watermarks API
+  tags:
+  - Videos
+  - Watermarks
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/watermarks
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/docs/watermarks
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Manages images that display in the corner of a player during playback of a channel's videos, supporting upload and deletion of channel watermarks.
+- aid: youtube:youtube-video-categories-api
+  name: Youtube Video Categories API
+  tags:
+  - Videos
+  - Categories
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/videoCategories
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/docs/videoCategories
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  description: Provides a list of categories that can be associated with YouTube videos, allowing retrieval of video categories available in a given region.
+- aid: youtube:youtube-video-abuse-report-reasons-api
+  name: Youtube Video Abuse Report Reasons API
+  tags:
+  - Videos
+  - Moderation
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/videoAbuseReportReasons
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/docs/videoAbuseReportReasons
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Retrieves a list of reasons that can be used to report abusive videos, supporting programmatic submission of video abuse reports.
+- aid: youtube:youtube-i18n-languages-api
+  name: Youtube i18n Languages API
+  tags:
+  - Videos
+  - Localization
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/i18nLanguages
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/docs/i18nLanguages
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  description: Returns a list of application languages that the YouTube website supports, providing the language codes and human-readable names for localization purposes.
+- aid: youtube:youtube-i18n-regions-api
+  name: Youtube i18n Regions API
+  tags:
+  - Videos
+  - Localization
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/i18nRegions
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/docs/i18nRegions
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  description: Returns a list of content regions that the YouTube website supports, providing region codes and human-readable names used for region-specific content filtering.
+- aid: youtube:youtube-analytics-api
+  name: YouTube Analytics API
+  tags:
+  - Videos
+  - Analytics
+  - Reporting
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/analytics
+  baseURL: https://youtubeanalytics.googleapis.com/v2
+  properties:
+  - url: https://developers.google.com/youtube/analytics
+    type: Documentation
+  - url: https://developers.google.com/youtube/reporting/guides/authorization
+    type: Getting Started
+  - url: https://developers.google.com/youtube/analytics/reference
+    type: Reference
+  - url: https://developers.google.com/youtube/reporting/guides/authorization
+    type: Authentication
+  - url: https://developers.google.com/youtube/reporting/v1/code_samples
+    type: Code Samples
+  - url: openapi/youtube-analytics-openapi.yml
+    type: OpenAPI
+  description: Generates custom reports containing YouTube Analytics data for channels and content owners. Reports can be filtered by dimensions such as date, country, and video, and measured by metrics including views, likes, and watch time.
+- aid: youtube:youtube-reporting-api
+  name: YouTube Reporting API
+  tags:
+  - Videos
+  - Analytics
+  - Reporting
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/reporting
+  baseURL: https://youtubereporting.googleapis.com
+  properties:
+  - url: https://developers.google.com/youtube/reporting
+    type: Documentation
+  - url: https://developers.google.com/youtube/reporting/guides/authorization
+    type: Getting Started
+  - url: https://developers.google.com/youtube/reporting/v1/reference/rest
+    type: Reference
+  - url: https://developers.google.com/youtube/reporting/guides/authorization
+    type: Authentication
+  - url: https://developers.google.com/youtube/reporting/v1/reports
+    type: Reports
+  - url: https://developers.google.com/youtube/reporting/v1/code_samples
+    type: Code Samples
+  description: Retrieves bulk YouTube Analytics data through predefined reports for a channel or content owner. Reports are generated daily as CSV datasets covering 24-hour periods and are accessible for 30 to 60 days depending on the report type.
+- aid: youtube:youtube-live-streaming-api
+  name: YouTube Live Streaming API
+  tags:
+  - Videos
+  - Live Streaming
+  - Broadcasting
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/live/getting-started
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/live/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/live/docs
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/live/docs
+    type: Reference
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  - url: https://developers.google.com/youtube/v3/live/code_samples
+    type: Code Samples
+  - url: https://developers.google.com/youtube/v3/live/support
+    type: Support
+  - url: openapi/youtube-live-streaming-openapi.yml
+    type: OpenAPI
+  description: Enables creating, updating, and managing live events on YouTube including scheduling broadcasts, linking video streams, managing live chat, and controlling ad insertion during live events. The API provides resources for liveBroadcasts, liveStreams, liveChatMessages, liveChatModerators, liveChatBans, and superChatEvents.
+- aid: youtube:youtube-iframe-player-api
+  name: YouTube IFrame Player API
+  tags:
+  - Videos
+  - Player
+  - Embed
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/iframe_api_reference
+  properties:
+  - url: https://developers.google.com/youtube/iframe_api_reference
+    type: Documentation
+  - url: https://developers.google.com/youtube/iframe_api_reference#Getting_started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/player_parameters
+    type: Reference
+  description: Enables embedding a YouTube video player on websites and controlling playback through JavaScript. The API supports queuing and playing videos, adjusting volume, retrieving video information, and subscribing to player state change events.
+- aid: youtube:youtube-subscribe-button
+  name: YouTube Subscribe Button
+  tags:
+  - Videos
+  - Widgets
+  - Embed
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/subscribe
+  properties:
+  - url: https://developers.google.com/youtube/subscribe
+    type: Documentation
+  - url: https://developers.google.com/youtube/subscribe/reference
+    type: Reference
+  description: Provides an embeddable subscribe button that website owners can configure and add to their pages, enabling one-click channel subscriptions for visitors without leaving the page.
 name: Youtube
 tags:
 - Videos
-- google
-- media
-- social
-- streaming
-- video
+- Google
+- Media
+- Social
+- Streaming
+- Video
 common:
 - url: https://developers.google.com/youtube/v3
   name: Portal
   type: Portal
+- url: https://developers.google.com/youtube/v3/getting-started
+  name: Getting Started
+  type: Getting Started
+- url: https://developers.google.com/youtube/v3
+  name: Documentation
+  type: Documentation
 - url: https://developers.google.com/youtube/v3/getting-started
   name: Guides
   type: Guides
@@ -84,21 +450,42 @@ common:
 - url: https://developers.google.com/youtube/v3/support
   name: Support
   type: Support
+- url: https://developers.google.com/youtube/v3/libraries
+  name: Client Libraries
+  type: Client Libraries
+- url: https://developers.google.com/youtube/v3/guides/authentication
+  name: Authentication
+  type: Authentication
+- url: https://developers.google.com/youtube/v3/revision_history
+  name: Change Log
+  type: Change Log
+- url: https://developers.google.com/youtube/v3/determine_quota_cost
+  name: Quotas
+  type: Quotas
 - url: https://github.com/youtube/api-samples
-  name: GitHubRepository
+  name: GitHub Repository
   type: GitHubRepository
+- url: https://github.com/youtube
+  name: GitHub Organization
+  type: GitHub Organization
 - url: https://www.youtube.com/user/YouTubeDev
   name: Videos
   type: Videos
 - url: https://developers.google.com/youtube/terms/api-services-terms-of-service
   name: Terms of Service
-  type: TermsOfService
+  type: Terms of Service
 - url: https://developers.google.com/youtube/terms/branding-guidelines
   name: Branding
   type: Branding
 - url: https://developers.google.com/youtube/terms/revision-history
   name: Change Log
   type: ChangeLog
+- url: https://issuetracker.google.com/issues?q=componentid:186600
+  name: Issue Tracker
+  type: Issue Tracker
+- url: https://stackoverflow.com/questions/tagged/youtube-api
+  name: Stack Overflow
+  type: Stack Overflow
 - data:
   - id: free
     name: Free
@@ -152,16 +539,20 @@ common:
 - url: https://blog.youtube/news-and-events/
   type: Blog
 - url: https://policies.google.com/privacy
+  name: Privacy Policy
   type: Privacy Policy
+- url: json-ld/youtube-context.jsonld
+  type: JSON-LD
+- url: json-schema/youtube-video-schema.json
+  type: JSONSchema
+- url: json-schema/youtube-channel-schema.json
+  type: JSONSchema
 created: '2025-07-29'
-modified: '2025-08-14'
-description: YouTube API provides access to YouTube data such as videos, playlists, channels, and user interactions
+modified: '2026-03-02'
+description: YouTube APIs provide programmatic access to YouTube data including videos, playlists, channels, user interactions, live streaming, analytics, captions, and embedded player controls.
 maintainers:
-- FN: API Evangelist
+- FN: Kin Lane
   url: https://apievangelist.com
-  email: info@apievangelist.com
-- name: Google
-  email: youtube-api-support@google.com
-  url: https://developers.google.com/youtube
+  email: kin@apievangelist.com
 specificationVersion: '0.20'
 image: https://www.youtube.com/img/desktop/yt_1200.png
