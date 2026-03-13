@@ -277,6 +277,8 @@ apis:
     type: Documentation
   - url: https://developers.google.com/youtube/v3/getting-started
     type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
   description: Provides a list of categories that can be associated with YouTube videos, allowing retrieval of video categories available in a given region.
 - aid: youtube:youtube-video-abuse-report-reasons-api
   name: Youtube Video Abuse Report Reasons API
@@ -307,6 +309,8 @@ apis:
     type: Documentation
   - url: https://developers.google.com/youtube/v3/getting-started
     type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
   description: Returns a list of application languages that the YouTube website supports, providing the language codes and human-readable names for localization purposes.
 - aid: youtube:youtube-i18n-regions-api
   name: Youtube i18n Regions API
@@ -321,6 +325,8 @@ apis:
     type: Documentation
   - url: https://developers.google.com/youtube/v3/getting-started
     type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
   description: Returns a list of content regions that the YouTube website supports, providing region codes and human-readable names used for region-specific content filtering.
 - aid: youtube:youtube-analytics-api
   name: YouTube Analytics API
@@ -423,6 +429,56 @@ apis:
   - url: https://developers.google.com/youtube/subscribe/reference
     type: Reference
   description: Provides an embeddable subscribe button that website owners can configure and add to their pages, enabling one-click channel subscriptions for visitors without leaving the page.
+- aid: youtube:youtube-playlist-images-api
+  name: Youtube Playlist Images API
+  tags:
+  - Videos
+  - Playlists
+  - Images
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/v3/docs/playlistImages
+  baseURL: https://www.googleapis.com/youtube/v3
+  properties:
+  - url: https://developers.google.com/youtube/v3/docs/playlistImages
+    type: Documentation
+  - url: https://developers.google.com/youtube/v3/docs/playlistImages/list
+    type: Reference
+  - url: https://developers.google.com/youtube/v3/getting-started
+    type: Getting Started
+  - url: https://developers.google.com/youtube/v3/guides/authentication
+    type: Authentication
+  description: Manages thumbnail images associated with YouTube playlists, supporting retrieval, insertion, update, and deletion of custom playlist thumbnail images.
+- aid: youtube:youtube-content-id-api
+  name: YouTube Content ID API
+  tags:
+  - Videos
+  - Content ID
+  - Rights Management
+  - Monetization
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://developers.google.com/youtube/partner
+  baseURL: https://www.googleapis.com/youtube/partner/v1
+  properties:
+  - url: https://developers.google.com/youtube/partner
+    type: Documentation
+  - url: https://developers.google.com/youtube/partner/reference/rest
+    type: Reference
+  - url: https://developers.google.com/youtube/partner/terms
+    type: Terms of Service
+  description: Enables YouTube content partners to interact with the rights management system, allowing creation and management of assets, content references, ownership data, claims, and policies for intellectual property on YouTube.
+- aid: youtube:youtube-oembed-api
+  name: YouTube oEmbed API
+  tags:
+  - Videos
+  - Embed
+  - oEmbed
+  image: https://www.youtube.com/img/desktop/yt_1200.png
+  humanURL: https://oembed.com/
+  baseURL: https://www.youtube.com/oembed
+  properties:
+  - url: https://oembed.com/
+    type: Documentation
+  description: Provides an oEmbed-compliant endpoint that returns embed code and metadata for YouTube videos in JSON or XML format, enabling easy embedding of YouTube content on external websites.
 name: Youtube
 tags:
 - Videos
@@ -486,6 +542,30 @@ common:
 - url: https://stackoverflow.com/questions/tagged/youtube-api
   name: Stack Overflow
   type: Stack Overflow
+- url: https://developers.google.com/youtube/registering_an_application
+  name: Sign Up
+  type: Sign Up
+- url: https://developers.google.com/youtube/v3/docs
+  name: API Reference
+  type: API Reference
+- url: https://developers.google.com/youtube/v3/docs/errors
+  name: Errors
+  type: Errors
+- url: https://developers.google.com/youtube/terms/developer-policies
+  name: Developer Policies
+  type: Developer Policies
+- url: https://developers.google.com/youtube/v3/guides/quota_and_compliance_audits
+  name: Compliance
+  type: Compliance
+- url: https://developers.google.com/youtube/v3/guides/implementation
+  name: Implementation Guide
+  type: Guides
+- url: https://x.com/YouTubeDev
+  name: X (Twitter)
+  type: X (Twitter)
+- url: https://developers.google.com/youtube/documentation/
+  name: Developer Documentation
+  type: Documentation
 - data:
   - id: free
     name: Free
@@ -548,7 +628,7 @@ common:
 - url: json-schema/youtube-channel-schema.json
   type: JSONSchema
 created: '2025-07-29'
-modified: '2026-03-02'
+modified: '2026-03-03'
 description: YouTube APIs provide programmatic access to YouTube data including videos, playlists, channels, user interactions, live streaming, analytics, captions, and embedded player controls.
 maintainers:
 - FN: Kin Lane
