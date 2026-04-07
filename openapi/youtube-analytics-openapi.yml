@@ -30,7 +30,7 @@ paths:
   /reports:
     get:
       operationId: youtubeAnalytics.reports.query
-      summary: Query analytics reports
+      summary: Youtube Query analytics reports
       description: >-
         Retrieves YouTube Analytics data for a channel or content owner. The report provides
         aggregated statistics for the specified dimensions and metrics over the date range.
@@ -146,7 +146,7 @@ paths:
   /groups:
     get:
       operationId: youtubeAnalytics.groups.list
-      summary: List groups
+      summary: Youtube List groups
       description: >-
         Returns a collection of groups that match the API request parameters. You can
         retrieve all groups that the authenticated user owns, or retrieve one or more
@@ -199,7 +199,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       operationId: youtubeAnalytics.groups.insert
-      summary: Create a group
+      summary: Youtube Create a group
       description: >-
         Creates an Analytics group. The authenticated user must be authorized to create
         groups. A group must have at least one item before you can run a report for the
@@ -236,7 +236,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     put:
       operationId: youtubeAnalytics.groups.update
-      summary: Update a group
+      summary: Youtube Update a group
       description: >-
         Modifies a group. The authenticated user must own the group being updated. Currently,
         the only property that can be updated is the group's title.
@@ -272,7 +272,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     delete:
       operationId: youtubeAnalytics.groups.delete
-      summary: Delete a group
+      summary: Youtube Delete a group
       description: >-
         Deletes a group. The authenticated user must own the group being deleted. Deleting
         a group does not delete any of the resources contained in the group.
@@ -306,7 +306,7 @@ paths:
   /groupItems:
     get:
       operationId: youtubeAnalytics.groupItems.list
-      summary: List group items
+      summary: Youtube List group items
       description: >-
         Returns a collection of group items that match the API request parameters. Retrieves
         the list of items in a specified Analytics group owned by the authenticated user.
@@ -343,7 +343,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       operationId: youtubeAnalytics.groupItems.insert
-      summary: Create a group item
+      summary: Youtube Create a group item
       description: >-
         Creates a group item, adding a resource such as a video, channel, or playlist to
         an Analytics group. The authenticated user must own the group.
@@ -379,7 +379,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     delete:
       operationId: youtubeAnalytics.groupItems.delete
-      summary: Delete a group item
+      summary: Youtube Delete a group item
       description: >-
         Removes an item from a group. The authenticated user must own the group. Deleting
         a group item does not delete the underlying resource (video, channel, or playlist).

@@ -31,7 +31,7 @@ paths:
   /liveBroadcasts:
     get:
       operationId: youtube.liveBroadcasts.list
-      summary: List live broadcasts
+      summary: Youtube List live broadcasts
       description: >-
         Returns a list of YouTube broadcasts that match the API request parameters. You
         can retrieve broadcasts for the authenticated user or retrieve specific broadcasts
@@ -93,7 +93,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       operationId: youtube.liveBroadcasts.insert
-      summary: Create a live broadcast
+      summary: Youtube Create a live broadcast
       description: >-
         Creates a broadcast. The authenticated user must be authorized to create broadcasts.
         After creating the broadcast, you will need to bind it to a stream and set it live.
@@ -125,7 +125,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     put:
       operationId: youtube.liveBroadcasts.update
-      summary: Update a live broadcast
+      summary: Youtube Update a live broadcast
       description: >-
         Updates a broadcast's settings. The authenticated user must own the broadcast being
         updated. Note that certain properties cannot be modified after a broadcast goes live.
@@ -157,7 +157,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     delete:
       operationId: youtube.liveBroadcasts.delete
-      summary: Delete a live broadcast
+      summary: Youtube Delete a live broadcast
       description: >-
         Deletes a broadcast. The authenticated user must own the broadcast being deleted.
         Broadcasts cannot be deleted while they are in the live or testing status.
@@ -185,7 +185,7 @@ paths:
   /liveBroadcasts/bind:
     post:
       operationId: youtube.liveBroadcasts.bind
-      summary: Bind broadcast to stream
+      summary: Youtube Bind broadcast to stream
       description: >-
         Binds a YouTube broadcast to a stream or removes an existing binding between a
         broadcast and a stream. A broadcast can only be bound to one video stream, though
@@ -225,7 +225,7 @@ paths:
   /liveBroadcasts/transition:
     post:
       operationId: youtube.liveBroadcasts.transition
-      summary: Transition broadcast state
+      summary: Youtube Transition broadcast state
       description: >-
         Changes the status of a YouTube live broadcast and initiates any processes associated
         with the new status. Valid transitions are: ready -> testing, testing -> live,
@@ -269,7 +269,7 @@ paths:
   /liveStreams:
     get:
       operationId: youtube.liveStreams.list
-      summary: List live streams
+      summary: Youtube List live streams
       description: >-
         Returns a list of video streams that match the API request parameters. You can
         retrieve streams for the authenticated user or retrieve specific streams by their
@@ -309,7 +309,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       operationId: youtube.liveStreams.insert
-      summary: Create a live stream
+      summary: Youtube Create a live stream
       description: >-
         Creates a video stream. The stream enables you to send your video to YouTube, which
         can then broadcast the video to your audience. After creating the stream you must
@@ -342,7 +342,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     put:
       operationId: youtube.liveStreams.update
-      summary: Update a live stream
+      summary: Youtube Update a live stream
       description: >-
         Updates a video stream. If the properties that you want to change cannot be updated,
         you need to create a new stream with the proper settings.
@@ -374,7 +374,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     delete:
       operationId: youtube.liveStreams.delete
-      summary: Delete a live stream
+      summary: Youtube Delete a live stream
       description: >-
         Deletes a video stream. The authenticated user must own the stream being deleted.
         Streams bound to active or scheduled broadcasts cannot be deleted.
@@ -402,7 +402,7 @@ paths:
   /liveChatMessages:
     get:
       operationId: youtube.liveChatMessages.list
-      summary: List live chat messages
+      summary: Youtube List live chat messages
       description: >-
         Lists live chat messages for a specific live broadcast. This method does not support
         filtering by user. The list is ordered chronologically, starting with the earliest
@@ -439,7 +439,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       operationId: youtube.liveChatMessages.insert
-      summary: Send a live chat message
+      summary: Youtube Send a live chat message
       description: >-
         Adds a message to a live chat. The authenticated user must be authorized to participate
         in the chat. Some chat types may have restrictions on who can send messages.
@@ -471,7 +471,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     delete:
       operationId: youtube.liveChatMessages.delete
-      summary: Delete a live chat message
+      summary: Youtube Delete a live chat message
       description: >-
         Deletes a chat message. The authenticated user must be the author of the message
         or a moderator of the live chat to delete the message.
@@ -499,7 +499,7 @@ paths:
   /liveChatModerators:
     get:
       operationId: youtube.liveChatModerators.list
-      summary: List live chat moderators
+      summary: Youtube List live chat moderators
       description: >-
         Lists moderators for a live chat. This list is ordered by date added, with the
         most recently added moderator first.
@@ -534,7 +534,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       operationId: youtube.liveChatModerators.insert
-      summary: Add a live chat moderator
+      summary: Youtube Add a live chat moderator
       description: >-
         Adds a new moderator for a live chat. The authenticated user must own the live
         broadcast associated with the chat to add moderators.
@@ -566,7 +566,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     delete:
       operationId: youtube.liveChatModerators.delete
-      summary: Remove a live chat moderator
+      summary: Youtube Remove a live chat moderator
       description: >-
         Removes a chat moderator. The authenticated user must own the live broadcast
         associated with the chat to remove moderators.

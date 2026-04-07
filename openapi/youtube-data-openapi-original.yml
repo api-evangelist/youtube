@@ -4,7 +4,7 @@ info:
   description: |
     The YouTube Data API enables you to incorporate YouTube functionality into your applications.
     Use this API to manage YouTube resources such as videos, playlists, channels, and subscriptions.
-    
+
     ## Key Features
     - Search for videos, channels, and playlists
     - Retrieve detailed metadata for YouTube resources
@@ -12,10 +12,10 @@ info:
     - Access channel information and statistics
     - Retrieve video captions and comments
     - Manage subscriptions and activities
-    
+
     ## Authentication
     Most API requests require OAuth 2.0 authentication. Some read-only operations can use an API key.
-    
+
     ## Rate Limits
     The API uses a quota system. Each request costs quota units based on the operation type.
     Monitor your quota usage in the Google Cloud Console.
@@ -119,7 +119,7 @@ paths:
       tags:
         - Videos
       operationId: listVideos
-      summary: List Video Resources
+      summary: Youtube List Video Resources
       description: |
         Returns a list of videos that match the API request parameters.
         You can retrieve video details by specifying video IDs, or retrieve
@@ -164,7 +164,7 @@ paths:
       tags:
         - Videos
       operationId: insertVideo
-      summary: Upload Video
+      summary: Youtube Upload Video
       description: |
         Uploads a video to YouTube and optionally sets the video's metadata.
         This operation requires OAuth 2.0 authentication with the
@@ -223,7 +223,7 @@ paths:
       tags:
         - Videos
       operationId: updateVideo
-      summary: Update Video Metadata
+      summary: Youtube Update Video Metadata
       description: |
         Updates a video's metadata. This operation requires OAuth 2.0 authentication.
         You can only update videos that belong to the authenticated user's channel.
@@ -271,7 +271,7 @@ paths:
       tags:
         - Videos
       operationId: deleteVideo
-      summary: Delete Video
+      summary: Youtube Delete Video
       description: |
         Deletes a video. This operation requires OAuth 2.0 authentication.
         You can only delete videos that belong to the authenticated user's channel.
@@ -303,7 +303,7 @@ paths:
       tags:
         - Channels
       operationId: listChannels
-      summary: List Channel Resources
+      summary: Youtube List Channel Resources
       description: |
         Returns a collection of channels that match the request criteria.
         You can retrieve channel information by channel ID, username, or for
@@ -348,7 +348,7 @@ paths:
       tags:
         - Playlists
       operationId: listPlaylists
-      summary: List Playlists
+      summary: Youtube List Playlists
       description: |
         Returns a collection of playlists that match the API request parameters.
         You can retrieve playlists by ID, channel ID, or for the authenticated user.
@@ -391,7 +391,7 @@ paths:
       tags:
         - Playlists
       operationId: insertPlaylist
-      summary: Create Playlist
+      summary: Youtube Create Playlist
       description: |
         Creates a new playlist for the authenticated user. This operation
         requires OAuth 2.0 authentication with the youtube scope.
@@ -439,7 +439,7 @@ paths:
       tags:
         - Playlists
       operationId: updatePlaylist
-      summary: Update Playlist
+      summary: Youtube Update Playlist
       description: |
         Updates a playlist's metadata. This operation requires OAuth 2.0 authentication.
         You can only update playlists that belong to the authenticated user's channel.
@@ -487,7 +487,7 @@ paths:
       tags:
         - Playlists
       operationId: deletePlaylist
-      summary: Delete Playlist
+      summary: Youtube Delete Playlist
       description: |
         Deletes a playlist. This operation requires OAuth 2.0 authentication.
         You can only delete playlists that belong to the authenticated user's channel.
@@ -519,7 +519,7 @@ paths:
       tags:
         - Playlist Items
       operationId: listPlaylistItems
-      summary: List Playlist Items
+      summary: Youtube List Playlist Items
       description: |
         Returns a collection of playlist items that match the API request parameters.
         You can retrieve all of the playlist items in a specified playlist or
@@ -562,7 +562,7 @@ paths:
       tags:
         - Playlist Items
       operationId: insertPlaylistItem
-      summary: Add Item to Playlist
+      summary: Youtube Add Item to Playlist
       description: |
         Adds a video to a playlist. This operation requires OAuth 2.0 authentication.
         You can only add items to playlists that belong to the authenticated user's channel.
@@ -610,7 +610,7 @@ paths:
       tags:
         - Playlist Items
       operationId: deletePlaylistItem
-      summary: Remove Item from Playlist
+      summary: Youtube Remove Item from Playlist
       description: |
         Removes an item from a playlist. This operation requires OAuth 2.0 authentication.
         You can only remove items from playlists that belong to the authenticated user's channel.
@@ -642,7 +642,7 @@ paths:
       tags:
         - Subscriptions
       operationId: listSubscriptions
-      summary: List Subscriptions
+      summary: Youtube List Subscriptions
       description: |
         Returns a list of subscription resources that match the API request criteria.
         You can retrieve subscriptions for the authenticated user or for a specific channel.
@@ -686,7 +686,7 @@ paths:
       tags:
         - Subscriptions
       operationId: insertSubscription
-      summary: Subscribe to Channel
+      summary: Youtube Subscribe to Channel
       description: |
         Adds a subscription for the authenticated user's channel.
         This operation requires OAuth 2.0 authentication with the youtube scope.
@@ -734,7 +734,7 @@ paths:
       tags:
         - Subscriptions
       operationId: deleteSubscription
-      summary: Unsubscribe from Channel
+      summary: Youtube Unsubscribe from Channel
       description: |
         Deletes a subscription. This operation requires OAuth 2.0 authentication.
         You can only delete subscriptions that belong to the authenticated user.
@@ -766,7 +766,7 @@ paths:
       tags:
         - Comments
       operationId: listCommentThreads
-      summary: List Comment Threads
+      summary: Youtube List Comment Threads
       description: |
         Returns a list of comment threads that match the API request parameters.
         Comment threads contain the top-level comment and all replies to that comment.
@@ -811,7 +811,7 @@ paths:
       tags:
         - Captions
       operationId: listCaptions
-      summary: List Video Captions
+      summary: Youtube List Video Captions
       description: |
         Returns a list of caption tracks for a specified video.
         Caption tracks contain the text of video captions in various languages.
@@ -2838,7 +2838,7 @@ components:
     SuccessfulDeleteExample:
       summary: Successful deletion
       description: No content returned on successful deletion
-      value: null
+      value:
 security:
   - OAuth2:
       - https://www.googleapis.com/auth/youtube.readonly

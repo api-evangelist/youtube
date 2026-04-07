@@ -5,14 +5,14 @@ info:
     The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
     Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
     and gain insights into viewer demographics and behavior patterns.
-    
+
     ## Key Features
     - Retrieve channel and video performance metrics
     - Access audience demographics and geographic data
     - Monitor engagement metrics like likes, comments, and shares
     - Track revenue and ad performance data (for monetized content)
     - Generate custom date-range reports
-    
+
     ## Authentication
     All API requests require OAuth 2.0 authentication with appropriate scopes.
   version: 2.0.0
@@ -115,7 +115,7 @@ paths:
       tags:
         - Analytics Groups
       operationId: listAnalyticsGroups
-      summary: List Analytics Groups
+      summary: Youtube List Analytics Groups
       description: |
         Returns a collection of analytics groups that match the API request parameters.
         Groups allow you to aggregate data for multiple channels or videos to analyze
@@ -157,7 +157,7 @@ paths:
       tags:
         - Analytics Groups
       operationId: createAnalyticsGroup
-      summary: Create Analytics Group
+      summary: Youtube Create Analytics Group
       description: |
         Creates a new analytics group. Groups enable you to aggregate analytics data
         for multiple channels or videos, making it easier to analyze combined
@@ -215,7 +215,7 @@ paths:
       tags:
         - Analytics Groups
       operationId: getAnalyticsGroup
-      summary: Get Analytics Group
+      summary: Youtube Get Analytics Group
       description: |
         Retrieves a specific analytics group by its unique identifier.
         Returns detailed information about the group including its title,
@@ -256,7 +256,7 @@ paths:
       tags:
         - Analytics Groups
       operationId: updateAnalyticsGroup
-      summary: Update Analytics Group
+      summary: Youtube Update Analytics Group
       description: |
         Updates an existing analytics group. You can modify the group's title
         and other editable properties. The group ID cannot be changed.
@@ -313,7 +313,7 @@ paths:
       tags:
         - Analytics Groups
       operationId: deleteAnalyticsGroup
-      summary: Delete Analytics Group
+      summary: Youtube Delete Analytics Group
       description: |
         Deletes an analytics group. This action is permanent and cannot be undone.
         All group items associated with the group will also be removed.
@@ -346,7 +346,7 @@ paths:
       tags:
         - Group Items
       operationId: listGroupItems
-      summary: List Group Items
+      summary: Youtube List Group Items
       description: |
         Returns a collection of group items that match the API request parameters.
         Group items represent the individual channels or videos that belong to
@@ -387,7 +387,7 @@ paths:
       tags:
         - Group Items
       operationId: createGroupItem
-      summary: Add Item to Group
+      summary: Youtube Add Item to Group
       description: |
         Adds a channel or video to an analytics group. The item will be included
         in the group's aggregated analytics data going forward.
@@ -435,7 +435,7 @@ paths:
       tags:
         - Group Items
       operationId: deleteGroupItem
-      summary: Remove Item from Group
+      summary: Youtube Remove Item from Group
       description: |
         Removes a channel or video from an analytics group. The item's historical
         data will no longer be included in the group's aggregated metrics.
@@ -989,16 +989,16 @@ components:
             columnType: METRIC
             dataType: INTEGER
         rows:
-          - - dQw4w9WgXcQ
-            - 1500000
-            - 3750000.5
-            - 150.2
-            - 45000
-          - - abc123XYZ789
-            - 500000
-            - 1000000.0
-            - 120.0
-            - 15000
+          -   - dQw4w9WgXcQ
+              - 1500000
+              - 3750000.5
+              - 150.2
+              - 45000
+          -   - abc123XYZ789
+              - 500000
+              - 1000000.0
+              - 120.0
+              - 15000
     SuccessfulGroupListExample:
       summary: Successful group list response
       description: Example response containing analytics groups
@@ -1147,7 +1147,7 @@ components:
     SuccessfulDeleteExample:
       summary: Successful deletion
       description: No content returned on successful deletion
-      value: null
+      value:
 security:
   - OAuth2:
       - https://www.googleapis.com/auth/yt-analytics.readonly

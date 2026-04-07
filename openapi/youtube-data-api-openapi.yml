@@ -44,7 +44,7 @@ paths:
   /videos:
     get:
       operationId: youtube.videos.list
-      summary: List videos
+      summary: Youtube List videos
       description: >-
         Returns a list of videos that match the API request parameters. Requires the part
         parameter to specify the video resource properties to include in the response.
@@ -96,7 +96,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       operationId: youtube.videos.insert
-      summary: Upload or insert a video
+      summary: Youtube Upload or insert a video
       description: >-
         Uploads a video to YouTube and optionally sets the video's metadata. This method
         supports media upload and requires the part parameter to specify the video resource
@@ -129,7 +129,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     put:
       operationId: youtube.videos.update
-      summary: Update video metadata
+      summary: Youtube Update video metadata
       description: >-
         Updates a video's metadata. This method supports patch semantics and requires the
         part parameter to specify the video resource properties to update.
@@ -161,7 +161,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     delete:
       operationId: youtube.videos.delete
-      summary: Delete a video
+      summary: Youtube Delete a video
       description: >-
         Deletes a YouTube video. The authenticated user must own the video or be authorized
         to delete it.
@@ -189,7 +189,7 @@ paths:
   /videos/rate:
     post:
       operationId: youtube.videos.rate
-      summary: Rate a video
+      summary: Youtube Rate a video
       description: >-
         Adds a like or dislike rating to a video or removes a rating from a video. The
         authenticated user must be authorized to rate videos.
@@ -226,7 +226,7 @@ paths:
   /channels:
     get:
       operationId: youtube.channels.list
-      summary: List channels
+      summary: Youtube List channels
       description: >-
         Returns a collection of zero or more channel resources that match the request
         criteria. Use the part parameter to specify the channel resource properties to include.
@@ -273,7 +273,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     put:
       operationId: youtube.channels.update
-      summary: Update channel metadata
+      summary: Youtube Update channel metadata
       description: >-
         Updates a channel's metadata. The authenticated user must own the channel being
         updated. Use the part parameter to specify the channel properties to update.
@@ -306,7 +306,7 @@ paths:
   /playlists:
     get:
       operationId: youtube.playlists.list
-      summary: List playlists
+      summary: Youtube List playlists
       description: >-
         Returns a collection of playlists that match the API request parameters. You can
         retrieve playlists by ID, by channel, or for the authenticated user.
@@ -351,7 +351,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       operationId: youtube.playlists.insert
-      summary: Create a playlist
+      summary: Youtube Create a playlist
       description: >-
         Creates a playlist on behalf of the authenticated user. The user must be authorized
         to create playlists.
@@ -383,7 +383,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     put:
       operationId: youtube.playlists.update
-      summary: Update a playlist
+      summary: Youtube Update a playlist
       description: >-
         Modifies a playlist. The authenticated user must own the playlist being updated.
         Use the part parameter to specify the properties being updated.
@@ -415,7 +415,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     delete:
       operationId: youtube.playlists.delete
-      summary: Delete a playlist
+      summary: Youtube Delete a playlist
       description: >-
         Deletes a playlist. The authenticated user must own the playlist or be authorized
         to delete it.
@@ -443,7 +443,7 @@ paths:
   /playlistItems:
     get:
       operationId: youtube.playlistItems.list
-      summary: List playlist items
+      summary: Youtube List playlist items
       description: >-
         Returns a collection of playlist items that match the API request parameters. You
         can retrieve all items in a specified playlist or retrieve one or more playlist items
@@ -488,7 +488,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       operationId: youtube.playlistItems.insert
-      summary: Add an item to a playlist
+      summary: Youtube Add an item to a playlist
       description: >-
         Adds a resource to a playlist. The authenticated user must own the playlist or be
         authorized to add items to it.
@@ -520,7 +520,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     delete:
       operationId: youtube.playlistItems.delete
-      summary: Remove a playlist item
+      summary: Youtube Remove a playlist item
       description: >-
         Deletes a playlist item. The authenticated user must own the playlist or be authorized
         to remove items from it.
@@ -626,7 +626,7 @@ paths:
   /subscriptions:
     get:
       operationId: youtube.subscriptions.list
-      summary: List subscriptions
+      summary: Youtube List subscriptions
       description: >-
         Returns subscription resources that match the API request criteria. Retrieve
         subscriptions for the authenticated user, a specific channel, or by subscription IDs.
@@ -670,7 +670,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       operationId: youtube.subscriptions.insert
-      summary: Subscribe to a channel
+      summary: Youtube Subscribe to a channel
       description: >-
         Adds a subscription for the authenticated user. The authenticated user must be
         authorized to create subscriptions.
@@ -702,7 +702,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     delete:
       operationId: youtube.subscriptions.delete
-      summary: Unsubscribe from a channel
+      summary: Youtube Unsubscribe from a channel
       description: >-
         Deletes a subscription. The authenticated user must own the subscription being deleted.
       tags:
@@ -729,7 +729,7 @@ paths:
   /comments:
     get:
       operationId: youtube.comments.list
-      summary: List comments
+      summary: Youtube List comments
       description: >-
         Returns a list of comments that match the API request parameters. Use the part
         parameter to specify the comment resource properties to include in the response.
@@ -777,7 +777,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       operationId: youtube.comments.insert
-      summary: Create a comment
+      summary: Youtube Create a comment
       description: >-
         Creates a reply to an existing comment. To add a top-level comment to a video or
         channel discussion, use the commentThreads.insert method.
@@ -809,7 +809,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     put:
       operationId: youtube.comments.update
-      summary: Update a comment
+      summary: Youtube Update a comment
       description: >-
         Modifies a comment. The authenticated user must own the comment being updated.
       tags:
@@ -840,7 +840,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     delete:
       operationId: youtube.comments.delete
-      summary: Delete a comment
+      summary: Youtube Delete a comment
       description: >-
         Deletes a comment. The authenticated user must own the comment or be authorized
         to delete it.
@@ -868,7 +868,7 @@ paths:
   /comments/setModerationStatus:
     post:
       operationId: youtube.comments.setModerationStatus
-      summary: Set comment moderation status
+      summary: Youtube Set comment moderation status
       description: >-
         Sets the moderation status of one or more comments. The authenticated user must be
         authorized to moderate comments for the associated video or channel.
@@ -913,7 +913,7 @@ paths:
   /commentThreads:
     get:
       operationId: youtube.commentThreads.list
-      summary: List comment threads
+      summary: Youtube List comment threads
       description: >-
         Returns a list of comment threads that match the API request parameters. The response
         includes top-level comments and optionally their replies.
@@ -968,7 +968,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       operationId: youtube.commentThreads.insert
-      summary: Create a comment thread
+      summary: Youtube Create a comment thread
       description: >-
         Creates a new top-level comment. To add a reply to an existing comment, use the
         comments.insert method.
@@ -1000,7 +1000,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     put:
       operationId: youtube.commentThreads.update
-      summary: Update a comment thread
+      summary: Youtube Update a comment thread
       description: >-
         Modifies the top-level comment in a comment thread. The authenticated user must
         own the comment being updated.
@@ -1033,7 +1033,7 @@ paths:
   /captions:
     get:
       operationId: youtube.captions.list
-      summary: List caption tracks
+      summary: Youtube List caption tracks
       description: >-
         Returns a list of caption tracks that are associated with a specified video. The
         API response does not contain the actual captions and the captions.download method
@@ -1070,7 +1070,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     post:
       operationId: youtube.captions.insert
-      summary: Upload a caption track
+      summary: Youtube Upload a caption track
       description: >-
         Uploads a caption track. The authenticated user must own the video associated with
         the caption track. This method supports media upload.
@@ -1102,7 +1102,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     put:
       operationId: youtube.captions.update
-      summary: Update a caption track
+      summary: Youtube Update a caption track
       description: >-
         Updates a caption track. When updating a caption track, you can change the track's
         draft status, upload a new caption file, or both.
@@ -1134,7 +1134,7 @@ paths:
           $ref: '#/components/responses/Forbidden'
     delete:
       operationId: youtube.captions.delete
-      summary: Delete a caption track
+      summary: Youtube Delete a caption track
       description: >-
         Deletes a specified caption track. The authenticated user must own the video that
         the caption track is associated with.
@@ -1162,7 +1162,7 @@ paths:
   /videoCategories:
     get:
       operationId: youtube.videoCategories.list
-      summary: List video categories
+      summary: Youtube List video categories
       description: >-
         Returns a list of categories that can be associated with YouTube videos. Provide
         the hl parameter to specify the language for category names and regionCode to filter
@@ -1205,7 +1205,7 @@ paths:
   /i18nLanguages:
     get:
       operationId: youtube.i18nLanguages.list
-      summary: List i18n languages
+      summary: Youtube List i18n languages
       description: >-
         Returns a list of application languages that the YouTube website supports. The list
         includes both the language code and the human-readable name of each supported language.
@@ -1235,7 +1235,7 @@ paths:
   /i18nRegions:
     get:
       operationId: youtube.i18nRegions.list
-      summary: List i18n regions
+      summary: Youtube List i18n regions
       description: >-
         Returns a list of content regions that the YouTube website supports. The list
         includes region codes and human-readable names used for region-specific content
