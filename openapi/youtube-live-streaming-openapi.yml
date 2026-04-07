@@ -21,12 +21,12 @@ security:
 tags:
   - name: LiveBroadcasts
     description: Operations for managing YouTube live broadcast events
-  - name: LiveStreams
-    description: Operations for managing YouTube live video streams
   - name: LiveChatMessages
     description: Operations for managing messages in YouTube live chat
   - name: LiveChatModerators
     description: Operations for managing moderators in YouTube live chat
+  - name: LiveStreams
+    description: Operations for managing YouTube live video streams
 paths:
   /liveBroadcasts:
     get:

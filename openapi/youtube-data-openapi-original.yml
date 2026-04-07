@@ -38,22 +38,22 @@ externalDocs:
   description: YouTube Data API Documentation
   url: https://developers.google.com/youtube/v3
 tags:
-  - name: Search
-    description: Operations for searching YouTube content
-  - name: Videos
-    description: Operations for retrieving and managing video resources
-  - name: Channels
-    description: Operations for retrieving channel information
-  - name: Playlists
-    description: Operations for managing playlist resources
-  - name: Playlist Items
-    description: Operations for managing items within playlists
-  - name: Subscriptions
-    description: Operations for managing channel subscriptions
-  - name: Comments
-    description: Operations for retrieving and managing comments
   - name: Captions
     description: Operations for managing video captions
+  - name: Channels
+    description: Operations for retrieving channel information
+  - name: Comments
+    description: Operations for retrieving and managing comments
+  - name: Playlist Items
+    description: Operations for managing items within playlists
+  - name: Playlists
+    description: Operations for managing playlist resources
+  - name: Search
+    description: Operations for searching YouTube content
+  - name: Subscriptions
+    description: Operations for managing channel subscriptions
+  - name: Videos
+    description: Operations for retrieving and managing video resources
 paths:
   /search:
     get:

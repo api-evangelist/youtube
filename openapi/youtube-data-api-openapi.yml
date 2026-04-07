@@ -18,28 +18,28 @@ security:
       - https://www.googleapis.com/auth/youtube
   - apiKey: []
 tags:
-  - name: Videos
-    description: Operations related to YouTube video resources
+  - name: Captions
+    description: Operations related to YouTube video caption tracks
   - name: Channels
     description: Operations related to YouTube channel resources
-  - name: Playlists
-    description: Operations related to YouTube playlist resources
-  - name: PlaylistItems
-    description: Operations related to items within YouTube playlists
-  - name: Search
-    description: Operations for searching YouTube content
-  - name: Subscriptions
-    description: Operations related to YouTube channel subscriptions
   - name: Comments
     description: Operations related to individual YouTube comments
   - name: CommentThreads
     description: Operations related to YouTube comment threads
-  - name: Captions
-    description: Operations related to YouTube video caption tracks
+  - name: I18n
+    description: Operations related to internationalization resources
+  - name: PlaylistItems
+    description: Operations related to items within YouTube playlists
+  - name: Playlists
+    description: Operations related to YouTube playlist resources
+  - name: Search
+    description: Operations for searching YouTube content
+  - name: Subscriptions
+    description: Operations related to YouTube channel subscriptions
   - name: VideoCategories
     description: Operations related to YouTube video categories
-  - name: i18n
-    description: Operations related to internationalization resources
+  - name: Videos
+    description: Operations related to YouTube video resources
 paths:
   /videos:
     get:
@@ -1210,7 +1210,7 @@ paths:
         Returns a list of application languages that the YouTube website supports. The list
         includes both the language code and the human-readable name of each supported language.
       tags:
-        - i18n
+        - I18n
       parameters:
         - $ref: '#/components/parameters/part'
         - name: hl
@@ -1241,7 +1241,7 @@ paths:
         includes region codes and human-readable names used for region-specific content
         filtering.
       tags:
-        - i18n
+        - I18n
       parameters:
         - $ref: '#/components/parameters/part'
         - name: hl

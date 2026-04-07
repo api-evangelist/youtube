@@ -20,12 +20,12 @@ security:
       - https://www.googleapis.com/auth/youtube
       - https://www.googleapis.com/auth/yt-analytics.readonly
 tags:
-  - name: Reports
-    description: Operations for querying YouTube Analytics report data
-  - name: Groups
-    description: Operations for managing YouTube Analytics groups
   - name: GroupItems
     description: Operations for managing items within YouTube Analytics groups
+  - name: Groups
+    description: Operations for managing YouTube Analytics groups
+  - name: Reports
+    description: Operations for querying YouTube Analytics report data
 paths:
   /reports:
     get:

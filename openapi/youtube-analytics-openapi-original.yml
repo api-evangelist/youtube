@@ -34,10 +34,10 @@ externalDocs:
   description: YouTube Analytics API Documentation
   url: https://developers.google.com/youtube/analytics
 tags:
-  - name: Analytics Reports
-    description: Operations for retrieving YouTube Analytics reports and metrics
   - name: Analytics Groups
     description: Operations for managing analytics group definitions
+  - name: Analytics Reports
+    description: Operations for retrieving YouTube Analytics reports and metrics
   - name: Group Items
     description: Operations for managing items within analytics groups
 paths:
