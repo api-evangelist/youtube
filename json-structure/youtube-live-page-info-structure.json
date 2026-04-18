@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "description": "Paging details for a list of live streaming resources.",
+  "name": "PageInfo",
+  "properties": {
+    "totalResults": {
+      "type": "integer",
+      "description": "The total number of results in the result set."
+    },
+    "resultsPerPage": {
+      "type": "integer",
+      "description": "The number of results included in the API response."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "name": "Report",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The server-generated ID of the report."
+    },
+    "jobId": {
+      "type": "string",
+      "description": "The ID of the job that created this report."
+    },
+    "startTime": {
+      "type": "datetime",
+      "description": "The start of the time period that the report covers."
+    },
+    "endTime": {
+      "type": "datetime",
+      "description": "The end of the time period that the report covers."
+    },
+    "createTime": {
+      "type": "datetime",
+      "description": "The date and time when the report was created."
+    },
+    "downloadUrl": {
+      "type": "string",
+      "description": "The URL from which the report can be downloaded."
+    },
+    "jobExpireTime": {
+      "type": "datetime",
+      "description": "The date and time when the job creating this report will expire."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

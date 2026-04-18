@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "description": "A subscription resource contains information about a YouTube user's subscription to a channel.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#subscription.",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "id": {
+      "type": "string",
+      "description": "The ID that YouTube uses to uniquely identify the subscription.",
+      "example": "abc123def456"
+    },
+    "snippet": {
+      "type": "object",
+      "description": "The snippet object contains basic details about the subscription.",
+      "example": "example_value",
+      "properties": {
+        "publishedAt": {
+          "type": "string",
+          "description": "The date and time that the subscription was created.",
+          "format": "date-time"
+        },
+        "title": {
+          "type": "string",
+          "description": "The subscription title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The subscription description."
+        },
+        "resourceId": {
+          "type": "object",
+          "description": "The resourceId object contains information about the resource to which the subscriber subscribed.",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "description": "The type of the API resource."
+            },
+            "channelId": {
+              "type": "string",
+              "description": "The value that YouTube uses to uniquely identify the channel that the user subscribed to."
+            }
+          }
+        },
+        "channelId": {
+          "type": "string",
+          "description": "The ID of the channel that the subscription belongs to."
+        },
+        "thumbnails": {
+          "type": "object",
+          "description": "A map of thumbnail images associated with the subscription."
+        }
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "etag"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Subscription",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-data-api-openapi.yml"
+}

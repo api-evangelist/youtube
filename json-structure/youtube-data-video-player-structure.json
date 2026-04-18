@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "description": "Information used to play the video.",
+  "name": "VideoPlayer",
+  "properties": {
+    "embedHtml": {
+      "type": "string",
+      "description": "An iframe tag that embeds a player that will play the video."
+    },
+    "embedHeight": {
+      "type": "number",
+      "description": "The height of the embedded player returned in the player.embedHtml property."
+    },
+    "embedWidth": {
+      "type": "number",
+      "description": "The width of the embedded player returned in the player.embedHtml property."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

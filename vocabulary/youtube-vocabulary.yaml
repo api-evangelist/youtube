@@ -1,0 +1,547 @@
+name: YouTube API Vocabulary
+description: Vocabulary and taxonomy mapping operational (OpenAPI) and 
+  capability (Naftiko) dimensions of YouTube APIs.
+provider: YouTube
+created: '2026-04-18'
+modified: '2026-04-18'
+apis:
+- name: YouTube Data API
+  version: v3
+  base_url: https://www.googleapis.com/youtube/v3
+- name: YouTube Analytics API
+  version: v2
+  base_url: https://youtubeanalytics.googleapis.com/v2
+- name: YouTube Live Streaming API
+  version: v3
+  base_url: https://www.googleapis.com/youtube/v3
+- name: YouTube Reporting API
+  version: v1
+  base_url: https://youtubereporting.googleapis.com/v1
+resources: {}
+actions: {}
+schemas:
+- Caption
+- CaptionListResponse
+- Channel
+- ChannelListResponse
+- ChannelSnippet
+- ChannelStatistics
+- ColumnHeader
+- Comment
+- CommentListResponse
+- CommentThread
+- CommentThreadListResponse
+- ErrorResponse
+- Group
+- GroupContentDetails
+- GroupItem
+- GroupItemListResponse
+- GroupListResponse
+- I18nLanguageListResponse
+- I18nRegionListResponse
+- Job
+- ListJobsResponse
+- ListReportTypesResponse
+- ListReportsResponse
+- LiveBroadcast
+- LiveBroadcastContentDetails
+- LiveBroadcastListResponse
+- LiveBroadcastSnippet
+- LiveBroadcastStatus
+- LiveChatMessage
+- LiveChatMessageListResponse
+- LiveChatModerator
+- LiveChatModeratorListResponse
+- LiveStream
+- LiveStreamContentDetails
+- LiveStreamListResponse
+- LiveStreamSnippet
+- LiveStreamStatus
+- PageInfo
+- Playlist
+- PlaylistItem
+- PlaylistItemListResponse
+- PlaylistListResponse
+- QueryResponse
+- Report
+- ReportType
+- SearchListResponse
+- SearchResult
+- Subscription
+- SubscriptionListResponse
+- Video
+- VideoCategory
+- VideoCategoryListResponse
+- VideoContentDetails
+- VideoListResponse
+- VideoPlayer
+- VideoSnippet
+- VideoStatistics
+- VideoStatus
+parameters:
+- alt
+- banAuthor
+- broadcastStatus
+- broadcastType
+- channelId
+- chart
+- createdAfter
+- currency
+- dimensions
+- endDate
+- filters
+- forUsername
+- groupId
+- hl
+- id
+- ids
+- includeSystemManaged
+- jobId
+- liveChatId
+- maxResults
+- metrics
+- mine
+- moderationStatus
+- myRating
+- onBehalfOfContentOwner
+- order
+- pageSize
+- pageToken
+- parentId
+- playlistId
+- publishedAfter
+- publishedBefore
+- q
+- rating
+- regionCode
+- reportId
+- sort
+- startDate
+- startIndex
+- startTimeAtOrAfter
+- startTimeBefore
+- streamId
+- textFormat
+- type
+- videoId
+enums:
+  chart:
+  - mostPopular
+  myRating:
+  - dislike
+  - like
+  rating:
+  - dislike
+  - like
+  - none
+  order:
+  - date
+  - rating
+  - relevance
+  - title
+  - videoCount
+  - viewCount
+  textFormat:
+  - html
+  - plainText
+  moderationStatus:
+  - heldForReview
+  - likelySpam
+  - published
+  - rejected
+  liveBroadcastContent:
+  - live
+  - none
+  - upcoming
+  definition:
+  - hd
+  - sd
+  caption:
+  - 'false'
+  - 'true'
+  uploadStatus:
+  - deleted
+  - failed
+  - processed
+  - rejected
+  - uploaded
+  privacyStatus:
+  - private
+  - public
+  - unlisted
+  license:
+  - creativeCommon
+  - youtube
+  alt:
+  - json
+  columnType:
+  - DIMENSION
+  - METRIC
+  dataType:
+  - CURRENCY
+  - FLOAT
+  - INTEGER
+  - STRING
+  itemType:
+  - youtube#channel
+  - youtube#playlist
+  - youtube#video
+  - youtubePartner#asset
+  broadcastStatus:
+  - active
+  - all
+  - complete
+  - completed
+  - live
+  - testing
+  - upcoming
+  broadcastType:
+  - all
+  - event
+  - persistent
+  lifeCycleStatus:
+  - abandoned
+  - complete
+  - completeStarting
+  - created
+  - live
+  - liveStarting
+  - ready
+  - reclaimed
+  - revoked
+  - testStarting
+  - testing
+  recordingStatus:
+  - notRecording
+  - recorded
+  - recording
+  closedCaptionsType:
+  - closedCaptionsDisabled
+  - closedCaptionsEmbedded
+  - closedCaptionsHttpPost
+  latencyPreference:
+  - low
+  - normal
+  - ultraLow
+  streamStatus:
+  - active
+  - created
+  - error
+  - inactive
+  - ready
+authentication:
+- name: oauth2
+  type: oauth2
+- name: apiKey
+  type: apiKey
+- name: oauth2
+  type: oauth2
+- name: oauth2
+  type: oauth2
+- name: apiKey
+  type: apiKey
+- name: oauth2
+  type: oauth2
+tags:
+- Captions
+- Channels
+- CommentThreads
+- Comments
+- GroupItems
+- Groups
+- I18n
+- Jobs
+- LiveBroadcasts
+- LiveChatMessages
+- LiveChatModerators
+- LiveStreams
+- PlaylistItems
+- Playlists
+- ReportTypes
+- Reports
+- Search
+- Subscriptions
+- VideoCategories
+- Videos
+workflows:
+- name: YouTube Analytics And Reporting
+  description: Workflow combining YouTube Analytics and Reporting APIs for 
+    comprehensive channel performance monitoring, custom report generation, and 
+    bulk data export. Designed for data analysts, marketing teams, and content 
+    strategists.
+  tags:
+  - YouTube
+  - Analytics
+  - Reporting
+  - Metrics
+  tools: 14
+  file: analytics-and-reporting.yaml
+- name: YouTube Community Engagement
+  description: Workflow for managing community interactions including comments, 
+    comment threads, subscriptions, and channel management. Designed for 
+    community managers, social media teams, and content moderators.
+  tags:
+  - YouTube
+  - Community
+  - Comments
+  - Subscriptions
+  - Moderation
+  tools: 12
+  file: community-engagement.yaml
+- name: YouTube Content Management
+  description: Unified workflow for managing YouTube video content lifecycle 
+    including uploading, updating, organizing into playlists, managing captions,
+    and moderating comments. Designed for content creators, media teams, and 
+    platform administrators.
+  tags:
+  - YouTube
+  - Content Management
+  - Video
+  - Playlists
+  - Captions
+  tools: 15
+  file: content-management.yaml
+- name: YouTube Live Streaming
+  description: Workflow for managing YouTube live events including scheduling 
+    broadcasts, linking streams, managing live chat, and moderating live 
+    interactions. Designed for live event producers, streaming teams, and 
+    broadcast operators.
+  tags:
+  - YouTube
+  - Live Streaming
+  - Broadcasting
+  - Live Chat
+  tools: 14
+  file: live-streaming.yaml
+personas:
+- Community Manager
+- Content Creator
+- Content Moderator
+- Content Strategist
+- Data Analyst
+- Live Event Producer
+- Marketing Team
+- Platform Administrator
+domains:
+  Content:
+  - name: videos
+    operations: 5
+    actions:
+    - Update
+    - Rate
+    - Delete
+    - List
+    - Create
+  - name: channels
+    operations: 2
+    actions:
+    - List
+    - Update
+  - name: playlists
+    operations: 4
+    actions:
+    - List
+  - name: playlistItems
+    operations: 3
+    actions:
+    - List
+  - name: captions
+    operations: 4
+    actions:
+    - Delete
+    - List
+    - Create
+    - Update
+  - name: videoCategories
+    operations: 1
+    actions:
+    - List
+  Discovery:
+  - name: search
+    operations: 1
+    actions:
+    - List
+  Community:
+  - name: subscriptions
+    operations: 3
+    actions:
+    - Delete
+    - List
+    - Create
+  - name: comments
+    operations: 5
+    actions:
+    - Update
+    - Modify
+    - Delete
+    - List
+    - Create
+  - name: commentThreads
+    operations: 3
+    actions:
+    - List
+    - Create
+    - Update
+  Localization:
+  - name: i18nLanguages
+    operations: 1
+    actions:
+    - List
+  - name: i18nRegions
+    operations: 1
+    actions:
+    - List
+  Analytics:
+  - name: reports
+    operations: 1
+    actions:
+    - Read
+  - name: groups
+    operations: 4
+    actions:
+    - Delete
+    - List
+    - Create
+    - Update
+  - name: groupItems
+    operations: 3
+    actions:
+    - Delete
+    - List
+    - Create
+  Live Streaming:
+  - name: liveBroadcasts
+    operations: 6
+    actions:
+    - Link
+    - Update
+    - Delete
+    - List
+    - Create
+    - Transition
+  - name: liveStreams
+    operations: 4
+    actions:
+    - Delete
+    - List
+    - Create
+    - Update
+  - name: liveChatMessages
+    operations: 3
+    actions:
+    - Delete
+    - List
+    - Create
+  - name: liveChatModerators
+    operations: 3
+    actions:
+    - Delete
+    - List
+    - Create
+  Reporting:
+  - name: jobs
+    operations: 6
+    actions:
+    - Delete
+    - List
+    - Create
+    - Read
+  - name: reportTypes
+    operations: 1
+    actions:
+    - List
+action_groups:
+  Read:
+    verbs:
+    - List
+    - Read
+    description: Retrieve and list resources
+  Write:
+    verbs:
+    - Create
+    - Update
+    description: Create and modify resources
+  Delete:
+    verbs:
+    - Delete
+    description: Remove resources
+  Control:
+    verbs:
+    - Modify
+    - Link
+    - Transition
+    - Rate
+    description: State changes and control operations
+cross_references:
+- resource: videos
+  domain: Content
+  workflows:
+  - YouTube Content Management
+- resource: channels
+  domain: Content
+  workflows:
+  - YouTube Content Management
+- resource: playlists
+  domain: Content
+  workflows:
+  - YouTube Content Management
+- resource: playlistItems
+  domain: Content
+  workflows:
+  - YouTube Content Management
+- resource: captions
+  domain: Content
+  workflows:
+  - YouTube Content Management
+- resource: videoCategories
+  domain: Content
+  workflows:
+  - YouTube Content Management
+- resource: subscriptions
+  domain: Community
+  workflows:
+  - YouTube Community Engagement
+- resource: comments
+  domain: Community
+  workflows:
+  - YouTube Community Engagement
+- resource: commentThreads
+  domain: Community
+  workflows:
+  - YouTube Community Engagement
+- resource: reports
+  domain: Analytics
+  workflows:
+  - YouTube Analytics And Reporting
+- resource: groups
+  domain: Analytics
+  workflows:
+  - YouTube Analytics And Reporting
+- resource: groupItems
+  domain: Analytics
+  workflows:
+  - YouTube Analytics And Reporting
+- resource: liveBroadcasts
+  domain: Live Streaming
+  workflows:
+  - YouTube Live Streaming
+- resource: liveStreams
+  domain: Live Streaming
+  workflows:
+  - YouTube Live Streaming
+- resource: liveChatMessages
+  domain: Live Streaming
+  workflows:
+  - YouTube Live Streaming
+- resource: liveChatModerators
+  domain: Live Streaming
+  workflows:
+  - YouTube Live Streaming
+- resource: jobs
+  domain: Reporting
+  workflows:
+  - YouTube Analytics And Reporting
+- resource: reportTypes
+  domain: Reporting
+  workflows:
+  - YouTube Analytics And Reporting

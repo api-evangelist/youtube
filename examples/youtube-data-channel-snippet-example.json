@@ -1,0 +1,9 @@
+{
+  "title": "Example Title",
+  "description": "A sample description for this resource.",
+  "customUrl": "https://www.example.com",
+  "publishedAt": "2026-01-15T10:30:00Z",
+  "thumbnails": "example_value",
+  "country": 42,
+  "localized": "example_value"
+}

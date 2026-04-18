@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "description": "Information used to play the video.",
+  "properties": {
+    "embedHtml": {
+      "type": "string",
+      "description": "An iframe tag that embeds a player that will play the video.",
+      "example": "example_value"
+    },
+    "embedHeight": {
+      "type": "number",
+      "description": "The height of the embedded player returned in the player.embedHtml property.",
+      "example": 42.5
+    },
+    "embedWidth": {
+      "type": "number",
+      "description": "The width of the embedded player returned in the player.embedHtml property.",
+      "example": 42.5
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VideoPlayer",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-data-api-openapi.yml"
+}

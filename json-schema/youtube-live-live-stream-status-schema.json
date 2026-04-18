@@ -1,0 +1,75 @@
+{
+  "type": "object",
+  "description": "Status information about a live stream including its stream status and health status.",
+  "properties": {
+    "streamStatus": {
+      "type": "string",
+      "description": "The stream's current status.",
+      "example": "active",
+      "enum": [
+        "active",
+        "created",
+        "error",
+        "inactive",
+        "ready"
+      ]
+    },
+    "healthStatus": {
+      "type": "object",
+      "description": "The health status of the stream.",
+      "example": "example_value",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The status code of this stream.",
+          "enum": [
+            "bad",
+            "good",
+            "noData",
+            "ok",
+            "revoked"
+          ]
+        },
+        "lastUpdateTimeSeconds": {
+          "type": "integer",
+          "description": "The last time this status was updated, as a Unix timestamp.",
+          "format": "int64"
+        },
+        "configurationIssues": {
+          "type": "array",
+          "description": "The configurations issues on this stream.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The kind of error happening."
+              },
+              "severity": {
+                "type": "string",
+                "description": "How severe this issue is to the stream.",
+                "enum": [
+                  "error",
+                  "info",
+                  "warning"
+                ]
+              },
+              "reason": {
+                "type": "string",
+                "description": "The short-form reason for this issue."
+              },
+              "description": {
+                "type": "string",
+                "description": "The long-form description of the issue and how to resolve it."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LiveStreamStatus",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-live-streaming-openapi.yml"
+}

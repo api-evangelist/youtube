@@ -1,0 +1,54 @@
+{
+  "type": "object",
+  "description": "A group resource represents a YouTube Analytics group, which is a custom collection of up to 500 channels, videos, playlists, or assets. You can use groups to simplify retrieving data for multiple resources.",
+  "name": "Group",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#group."
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource."
+    },
+    "id": {
+      "type": "string",
+      "description": "The ID that YouTube uses to uniquely identify the group."
+    },
+    "snippet": {
+      "type": "object",
+      "description": "The snippet object contains basic details about the group.",
+      "properties": {
+        "publishedAt": {
+          "type": "datetime",
+          "description": "The date and time that the group was created."
+        },
+        "title": {
+          "type": "string",
+          "description": "The group title. The value must be a non-empty string."
+        }
+      }
+    },
+    "contentDetails": {
+      "type": "object",
+      "description": "Describes the content of a YouTube Analytics group in terms of the number of items it contains and the type of items it contains.",
+      "properties": {
+        "itemCount": {
+          "type": "integer",
+          "description": "The number of items in the group."
+        },
+        "itemType": {
+          "type": "string",
+          "description": "The type of resources contained in the group. Valid values are youtube#channel, youtube#playlist, youtube#video, and youtubePartner#asset.",
+          "enum": [
+            "youtube#channel",
+            "youtube#playlist",
+            "youtube#video",
+            "youtubePartner#asset"
+          ]
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

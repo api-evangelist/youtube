@@ -1,0 +1,248 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "YouTube Community Engagement"
+  description: "Workflow for managing community interactions including comments, comment threads, subscriptions, and channel management. Designed for community managers, social media teams, and content moderators."
+  tags:
+    - YouTube
+    - Community
+    - Comments
+    - Subscriptions
+    - Moderation
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      YOUTUBE_API_KEY: YOUTUBE_API_KEY
+      YOUTUBE_OAUTH_TOKEN: YOUTUBE_OAUTH_TOKEN
+
+capability:
+  consumes:
+    - import: youtube-data
+      location: ./shared/data-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: community-engagement-api
+      description: "Unified REST API for YouTube community engagement workflows."
+      resources:
+        - path: /v1/comments
+          name: comments
+          description: "Manage individual comments"
+          operations:
+            - method: GET
+              name: list-comments
+              description: "List comments"
+              call: "youtube-data.list-comments"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-comment
+              description: "Post a new comment"
+              call: "youtube-data.insert-comment"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-comment
+              description: "Update a comment"
+              call: "youtube-data.update-comment"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-comment
+              description: "Delete a comment"
+              call: "youtube-data.delete-comment"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/comment-threads
+          name: comment-threads
+          description: "Manage comment threads"
+          operations:
+            - method: GET
+              name: list-comment-threads
+              description: "List comment threads"
+              call: "youtube-data.list-comment-threads"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-comment-thread
+              description: "Create a new comment thread"
+              call: "youtube-data.insert-comment-thread"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-comment-thread
+              description: "Update a comment thread"
+              call: "youtube-data.update-comment-thread"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/subscriptions
+          name: subscriptions
+          description: "Manage channel subscriptions"
+          operations:
+            - method: GET
+              name: list-subscriptions
+              description: "List subscriptions"
+              call: "youtube-data.list-subscriptions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: subscribe
+              description: "Subscribe to a channel"
+              call: "youtube-data.insert-subscription"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: unsubscribe
+              description: "Unsubscribe from a channel"
+              call: "youtube-data.delete-subscription"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/channels
+          name: channels
+          description: "Manage channel information"
+          operations:
+            - method: GET
+              name: list-channels
+              description: "List channels"
+              call: "youtube-data.list-channels"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-channel
+              description: "Update channel settings"
+              call: "youtube-data.update-channel"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9091
+      namespace: community-engagement-mcp
+      transport: http
+      description: "MCP server for AI-assisted YouTube community engagement."
+      tools:
+        - name: list-comments
+          description: "List comments on a video or channel"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "youtube-data.list-comments"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-comment
+          description: "Post a new comment"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "youtube-data.insert-comment"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-comment
+          description: "Update an existing comment"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "youtube-data.update-comment"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-comment
+          description: "Delete a comment"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-data.delete-comment"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: set-moderation-status
+          description: "Set moderation status on comments"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "youtube-data.set-comment-moderation-status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-comment-threads
+          description: "List comment threads"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "youtube-data.list-comment-threads"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-comment-thread
+          description: "Create a new comment thread"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "youtube-data.insert-comment-thread"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-subscriptions
+          description: "List channel subscriptions"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "youtube-data.list-subscriptions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: subscribe-to-channel
+          description: "Subscribe to a YouTube channel"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "youtube-data.insert-subscription"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: unsubscribe-from-channel
+          description: "Unsubscribe from a YouTube channel"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-data.delete-subscription"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-channels
+          description: "List YouTube channels"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "youtube-data.list-channels"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-channel
+          description: "Update channel settings"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "youtube-data.update-channel"
+          outputParameters:
+            - type: object
+              mapping: "$."

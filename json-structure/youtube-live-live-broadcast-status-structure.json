@@ -1,0 +1,51 @@
+{
+  "type": "object",
+  "description": "Status information about a live broadcast including its privacy status and lifecycle status.",
+  "name": "LiveBroadcastStatus",
+  "properties": {
+    "lifeCycleStatus": {
+      "type": "string",
+      "description": "The broadcast's status as it relates to the lifecycle of the broadcast.",
+      "enum": [
+        "abandoned",
+        "complete",
+        "completeStarting",
+        "created",
+        "live",
+        "liveStarting",
+        "ready",
+        "reclaimed",
+        "revoked",
+        "testStarting",
+        "testing"
+      ]
+    },
+    "privacyStatus": {
+      "type": "string",
+      "description": "The broadcast's privacy status.",
+      "enum": [
+        "private",
+        "public",
+        "unlisted"
+      ]
+    },
+    "recordingStatus": {
+      "type": "string",
+      "description": "The broadcast's recording status.",
+      "enum": [
+        "notRecording",
+        "recorded",
+        "recording"
+      ]
+    },
+    "madeForKids": {
+      "type": "boolean",
+      "description": "Indicates whether the broadcast is designated as child-directed."
+    },
+    "selfDeclaredMadeForKids": {
+      "type": "boolean",
+      "description": "Indicates whether the channel owner has designated the broadcast as being made for kids."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

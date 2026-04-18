@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "name": "Job",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The server-generated ID of the job."
+    },
+    "reportTypeId": {
+      "type": "string",
+      "description": "The type of reports that the job creates."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the job. Max length is 100 characters."
+    },
+    "createTime": {
+      "type": "datetime",
+      "description": "The date and time when the job was created."
+    },
+    "expireTime": {
+      "type": "datetime",
+      "description": "The date and time when the job will expire."
+    },
+    "systemManaged": {
+      "type": "boolean",
+      "description": "Whether the job is system-managed."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

@@ -1,0 +1,384 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "yt": "https://developers.google.com/youtube/v3/ns/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "PageInfo": {
+      "@id": "yt:PageInfo",
+      "@context": {
+        "totalResults": {
+          "@id": "yt:totalResults",
+          "@type": "xsd:integer"
+        },
+        "resultsPerPage": {
+          "@id": "yt:resultsPerPage",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+    "LiveBroadcastSnippet": {
+      "@id": "yt:LiveBroadcastSnippet",
+      "@context": {
+        "publishedAt": "dcterms:created",
+        "channelId": {
+          "@id": "yt:channelId",
+          "@type": "xsd:string"
+        },
+        "title": "dcterms:title",
+        "description": "dcterms:description",
+        "thumbnails": "yt:thumbnails",
+        "scheduledStartTime": {
+          "@id": "yt:scheduledStartTime",
+          "@type": "xsd:string"
+        },
+        "scheduledEndTime": {
+          "@id": "yt:scheduledEndTime",
+          "@type": "xsd:string"
+        },
+        "actualStartTime": {
+          "@id": "yt:actualStartTime",
+          "@type": "xsd:string"
+        },
+        "actualEndTime": {
+          "@id": "yt:actualEndTime",
+          "@type": "xsd:string"
+        },
+        "liveChatId": {
+          "@id": "yt:liveChatId",
+          "@type": "xsd:string"
+        },
+        "isDefaultBroadcast": {
+          "@id": "yt:isDefaultBroadcast",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+    "LiveBroadcastStatus": {
+      "@id": "yt:LiveBroadcastStatus",
+      "@context": {
+        "lifeCycleStatus": {
+          "@id": "yt:lifeCycleStatus",
+          "@type": "xsd:string"
+        },
+        "privacyStatus": {
+          "@id": "yt:privacyStatus",
+          "@type": "xsd:string"
+        },
+        "recordingStatus": {
+          "@id": "yt:recordingStatus",
+          "@type": "xsd:string"
+        },
+        "madeForKids": {
+          "@id": "yt:madeForKids",
+          "@type": "xsd:boolean"
+        },
+        "selfDeclaredMadeForKids": {
+          "@id": "yt:selfDeclaredMadeForKids",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+    "LiveBroadcastContentDetails": {
+      "@id": "yt:LiveBroadcastContentDetails",
+      "@context": {
+        "boundStreamId": {
+          "@id": "yt:boundStreamId",
+          "@type": "xsd:string"
+        },
+        "boundStreamLastUpdateTimeMs": {
+          "@id": "yt:boundStreamLastUpdateTimeMs",
+          "@type": "xsd:string"
+        },
+        "monitorStream": "yt:monitorStream",
+        "enableEmbed": {
+          "@id": "yt:enableEmbed",
+          "@type": "xsd:boolean"
+        },
+        "enableDvr": {
+          "@id": "yt:enableDvr",
+          "@type": "xsd:boolean"
+        },
+        "enableContentEncryption": {
+          "@id": "yt:enableContentEncryption",
+          "@type": "xsd:boolean"
+        },
+        "startWithSlate": {
+          "@id": "yt:startWithSlate",
+          "@type": "xsd:boolean"
+        },
+        "closedCaptionsType": {
+          "@id": "yt:closedCaptionsType",
+          "@type": "xsd:string"
+        },
+        "enableLowLatency": {
+          "@id": "yt:enableLowLatency",
+          "@type": "xsd:boolean"
+        },
+        "latencyPreference": {
+          "@id": "yt:latencyPreference",
+          "@type": "xsd:string"
+        },
+        "enableAutoStart": {
+          "@id": "yt:enableAutoStart",
+          "@type": "xsd:boolean"
+        },
+        "enableAutoStop": {
+          "@id": "yt:enableAutoStop",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+    "LiveBroadcast": {
+      "@id": "yt:LiveBroadcast",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "snippet": {
+          "@id": "yt:snippet",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "yt:status",
+          "@type": "xsd:string"
+        },
+        "contentDetails": {
+          "@id": "yt:contentDetails",
+          "@type": "xsd:string"
+        },
+        "statistics": "yt:statistics"
+      }
+    },
+    "LiveBroadcastListResponse": {
+      "@id": "yt:LiveBroadcastListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        },
+        "prevPageToken": {
+          "@id": "yt:prevPageToken",
+          "@type": "xsd:string"
+        },
+        "pageInfo": {
+          "@id": "yt:pageInfo",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "LiveStreamSnippet": {
+      "@id": "yt:LiveStreamSnippet",
+      "@context": {
+        "channelId": {
+          "@id": "yt:channelId",
+          "@type": "xsd:string"
+        },
+        "title": "dcterms:title",
+        "description": "dcterms:description",
+        "publishedAt": "dcterms:created",
+        "isDefaultStream": {
+          "@id": "yt:isDefaultStream",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+    "LiveStreamStatus": {
+      "@id": "yt:LiveStreamStatus",
+      "@context": {
+        "streamStatus": {
+          "@id": "yt:streamStatus",
+          "@type": "xsd:string"
+        },
+        "healthStatus": "yt:healthStatus"
+      }
+    },
+    "LiveStreamContentDetails": {
+      "@id": "yt:LiveStreamContentDetails",
+      "@context": {
+        "boundBroadcastId": {
+          "@id": "yt:boundBroadcastId",
+          "@type": "xsd:string"
+        },
+        "isReusable": {
+          "@id": "yt:isReusable",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+    "LiveStream": {
+      "@id": "yt:LiveStream",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "snippet": {
+          "@id": "yt:snippet",
+          "@type": "xsd:string"
+        },
+        "cdn": "yt:cdn",
+        "status": {
+          "@id": "yt:status",
+          "@type": "xsd:string"
+        },
+        "contentDetails": {
+          "@id": "yt:contentDetails",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "LiveStreamListResponse": {
+      "@id": "yt:LiveStreamListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        },
+        "prevPageToken": {
+          "@id": "yt:prevPageToken",
+          "@type": "xsd:string"
+        },
+        "pageInfo": {
+          "@id": "yt:pageInfo",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "LiveChatMessage": {
+      "@id": "yt:LiveChatMessage",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "snippet": "yt:snippet",
+        "authorDetails": "yt:authorDetails"
+      }
+    },
+    "LiveChatMessageListResponse": {
+      "@id": "yt:LiveChatMessageListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        },
+        "pollingIntervalMillis": {
+          "@id": "yt:pollingIntervalMillis",
+          "@type": "xsd:integer"
+        },
+        "offlineAt": {
+          "@id": "yt:offlineAt",
+          "@type": "xsd:string"
+        },
+        "pageInfo": {
+          "@id": "yt:pageInfo",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "LiveChatModerator": {
+      "@id": "yt:LiveChatModerator",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "snippet": "yt:snippet"
+      }
+    },
+    "LiveChatModeratorListResponse": {
+      "@id": "yt:LiveChatModeratorListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        },
+        "prevPageToken": {
+          "@id": "yt:prevPageToken",
+          "@type": "xsd:string"
+        },
+        "pageInfo": {
+          "@id": "yt:pageInfo",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "ErrorResponse": {
+      "@id": "yt:ErrorResponse",
+      "@context": {
+        "error": "yt:error"
+      }
+    }
+  }
+}

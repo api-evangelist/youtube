@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "description": "Detailed settings for a live stream including the stream key and ingestion settings.",
+  "name": "LiveStreamContentDetails",
+  "properties": {
+    "boundBroadcastId": {
+      "type": "string",
+      "description": "The ID of the live broadcast to which this stream is bound."
+    },
+    "isReusable": {
+      "type": "boolean",
+      "description": "Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

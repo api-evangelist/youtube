@@ -1,0 +1,62 @@
+{
+  "type": "object",
+  "description": "A list of group item resources in a specified group.",
+  "name": "GroupItemListResponse",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#groupItemListResponse."
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource."
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of group items that are part of the specified group.",
+      "items": {
+        "type": "object",
+        "description": "A groupItem resource identifies a resource, such as a video, channel, or playlist, that is part of a group. A group can contain a maximum of 500 items and only items of the same type (videos, channels, playlists, or assets).",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Identifies the API resource's type. Value is youtube#groupItem."
+          },
+          "etag": {
+            "type": "string",
+            "description": "The Etag of this resource."
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID that YouTube uses to uniquely identify the groupItem resource."
+          },
+          "groupId": {
+            "type": "string",
+            "description": "The ID that YouTube uses to uniquely identify the group that contains the item."
+          },
+          "resource": {
+            "type": "object",
+            "description": "The resource object contains information that identifies the item being added to the group.",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "description": "Identifies the type of resource being added to the group.",
+                "enum": [
+                  "youtube#channel",
+                  "youtube#playlist",
+                  "youtube#video",
+                  "youtubePartner#asset"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "The channel, video, playlist, or asset ID that YouTube uses to uniquely identify the item being added to the group."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

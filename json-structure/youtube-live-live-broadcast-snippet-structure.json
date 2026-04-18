@@ -1,0 +1,52 @@
+{
+  "type": "object",
+  "description": "Basic details about a live broadcast including its title, description, and scheduled start and end times.",
+  "name": "LiveBroadcastSnippet",
+  "properties": {
+    "publishedAt": {
+      "type": "datetime",
+      "description": "The date and time that the broadcast was added to YouTube's live broadcast schedule."
+    },
+    "channelId": {
+      "type": "string",
+      "description": "The ID of the channel to which this broadcast is affiliated."
+    },
+    "title": {
+      "type": "string",
+      "description": "The broadcast's title. The title is a required field when inserting a broadcast."
+    },
+    "description": {
+      "type": "string",
+      "description": "The broadcast's description."
+    },
+    "thumbnails": {
+      "type": "object",
+      "description": "A map of thumbnail images associated with the broadcast."
+    },
+    "scheduledStartTime": {
+      "type": "datetime",
+      "description": "The date and time that the broadcast is scheduled to begin."
+    },
+    "scheduledEndTime": {
+      "type": "datetime",
+      "description": "The date and time that the broadcast is scheduled to end."
+    },
+    "actualStartTime": {
+      "type": "datetime",
+      "description": "The date and time that the broadcast actually started."
+    },
+    "actualEndTime": {
+      "type": "datetime",
+      "description": "The date and time that the broadcast actually ended."
+    },
+    "liveChatId": {
+      "type": "string",
+      "description": "The live chat ID associated with the broadcast."
+    },
+    "isDefaultBroadcast": {
+      "type": "boolean",
+      "description": "Indicates whether this broadcast is the default broadcast."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

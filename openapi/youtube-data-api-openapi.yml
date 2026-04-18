@@ -11,76 +11,79 @@ info:
     url: https://developers.google.com/youtube/v3/support
   termsOfService: https://developers.google.com/youtube/terms/api-services-terms-of-service
 servers:
-  - url: https://www.googleapis.com/youtube/v3
-    description: YouTube Data API v3 base server
+- url: https://www.googleapis.com/youtube/v3
+  description: YouTube Data API v3 base server
 security:
-  - oauth2:
-      - https://www.googleapis.com/auth/youtube
-  - apiKey: []
+- oauth2:
+  - https://www.googleapis.com/auth/youtube
+- apiKey: []
 tags:
-  - name: Captions
-    description: Operations related to YouTube video caption tracks
-  - name: Channels
-    description: Operations related to YouTube channel resources
-  - name: Comments
-    description: Operations related to individual YouTube comments
-  - name: CommentThreads
-    description: Operations related to YouTube comment threads
-  - name: I18n
-    description: Operations related to internationalization resources
-  - name: PlaylistItems
-    description: Operations related to items within YouTube playlists
-  - name: Playlists
-    description: Operations related to YouTube playlist resources
-  - name: Search
-    description: Operations for searching YouTube content
-  - name: Subscriptions
-    description: Operations related to YouTube channel subscriptions
-  - name: VideoCategories
-    description: Operations related to YouTube video categories
-  - name: Videos
-    description: Operations related to YouTube video resources
+- name: Captions
+  description: Operations related to YouTube video caption tracks
+- name: Channels
+  description: Operations related to YouTube channel resources
+- name: Comments
+  description: Operations related to individual YouTube comments
+- name: CommentThreads
+  description: Operations related to YouTube comment threads
+- name: I18n
+  description: Operations related to internationalization resources
+- name: PlaylistItems
+  description: Operations related to items within YouTube playlists
+- name: Playlists
+  description: Operations related to YouTube playlist resources
+- name: Search
+  description: Operations for searching YouTube content
+- name: Subscriptions
+  description: Operations related to YouTube channel subscriptions
+- name: VideoCategories
+  description: Operations related to YouTube video categories
+- name: Videos
+  description: Operations related to YouTube video resources
 paths:
   /videos:
     get:
       operationId: youtube.videos.list
-      summary: Youtube List videos
+      summary: Youtube List Videos
       description: >-
         Returns a list of videos that match the API request parameters. Requires the part
         parameter to specify the video resource properties to include in the response.
       tags:
-        - Videos
+      - Videos
       parameters:
-        - $ref: '#/components/parameters/part'
-        - name: id
-          in: query
-          description: >-
-            Comma-separated list of YouTube video IDs for the resources being retrieved.
-          schema:
-            type: string
-        - name: chart
-          in: query
-          description: >-
-            Identifies the chart that the API returns chart data for. Acceptable values are
-            mostPopular and videoCategoryId.
-          schema:
-            type: string
-            enum:
-              - mostPopular
-        - name: myRating
-          in: query
-          description: >-
-            Set this parameter to like or dislike to instruct the API to return only videos
-            liked or disliked by the authenticated user.
-          schema:
-            type: string
-            enum:
-              - like
-              - dislike
-        - $ref: '#/components/parameters/maxResults'
-        - $ref: '#/components/parameters/pageToken'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - name: id
+        in: query
+        description: >-
+          Comma-separated list of YouTube video IDs for the resources being retrieved.
+        schema:
+          type: string
+        example: abc123def456
+      - name: chart
+        in: query
+        description: >-
+          Identifies the chart that the API returns chart data for. Acceptable values are
+          mostPopular and videoCategoryId.
+        schema:
+          type: string
+          enum:
+          - mostPopular
+        example: mostPopular
+      - name: myRating
+        in: query
+        description: >-
+          Set this parameter to like or dislike to instruct the API to return only videos
+          liked or disliked by the authenticated user.
+        schema:
+          type: string
+          enum:
+          - like
+          - dislike
+        example: like
+      - $ref: '#/components/parameters/maxResults'
+      - $ref: '#/components/parameters/pageToken'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       responses:
         '200':
           description: Successful response containing a list of video resources.
@@ -88,25 +91,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VideoListResponse'
+              examples:
+                YoutubeVideosList200Example:
+                  summary: Default youtube.videos.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    prevPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    pageInfo:
+                      totalResults: 42
+                      resultsPerPage: 10
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      localizations: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: youtube.videos.insert
-      summary: Youtube Upload or insert a video
+      summary: Youtube Upload or Insert a Video
       description: >-
         Uploads a video to YouTube and optionally sets the video's metadata. This method
         supports media upload and requires the part parameter to specify the video resource
         properties to set.
       tags:
-        - Videos
+      - Videos
       parameters:
-        - $ref: '#/components/parameters/part'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       requestBody:
         description: The video resource to insert.
         required: true
@@ -114,6 +137,54 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Video'
+            examples:
+              YoutubeVideosInsertRequestExample:
+                summary: Default youtube.videos.insert request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    channelId: '500123'
+                    title: Example Title
+                    description: A sample description for this resource.
+                    thumbnails: example_value
+                    channelTitle: example_value
+                    tags:
+                    - example_value
+                    categoryId: '500123'
+                    liveBroadcastContent: live
+                    defaultLanguage: en
+                    localized:
+                      title: Example Title
+                      description: A sample description for this resource.
+                  contentDetails:
+                    duration: example_value
+                    dimension: example_value
+                    definition: hd
+                    caption: 'false'
+                    licensedContent: true
+                    contentRating: example_value
+                  status:
+                    uploadStatus: deleted
+                    privacyStatus: private
+                    license: creativeCommon
+                    embeddable: true
+                    publicStatsViewable: true
+                    madeForKids: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+                  statistics:
+                    viewCount: 42
+                    likeCount: 42
+                    dislikeCount: 42
+                    favoriteCount: 42
+                    commentCount: 42
+                  player:
+                    embedHtml: example_value
+                    embedHeight: 42.5
+                    embedWidth: 42.5
+                  localizations: example_value
       responses:
         '200':
           description: Successful response containing the inserted video resource.
@@ -121,24 +192,75 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Video'
+              examples:
+                YoutubeVideosInsert200Example:
+                  summary: Default youtube.videos.insert 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      channelId: '500123'
+                      title: Example Title
+                      description: A sample description for this resource.
+                      thumbnails: example_value
+                      channelTitle: example_value
+                      tags:
+                      - example_value
+                      categoryId: '500123'
+                      liveBroadcastContent: live
+                      defaultLanguage: en
+                      localized:
+                        title: Example Title
+                        description: A sample description for this resource.
+                    contentDetails:
+                      duration: example_value
+                      dimension: example_value
+                      definition: hd
+                      caption: 'false'
+                      licensedContent: true
+                      contentRating: example_value
+                    status:
+                      uploadStatus: deleted
+                      privacyStatus: private
+                      license: creativeCommon
+                      embeddable: true
+                      publicStatsViewable: true
+                      madeForKids: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+                    statistics:
+                      viewCount: 42
+                      likeCount: 42
+                      dislikeCount: 42
+                      favoriteCount: 42
+                      commentCount: 42
+                    player:
+                      embedHtml: example_value
+                      embedHeight: 42.5
+                      embedWidth: 42.5
+                    localizations: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: youtube.videos.update
-      summary: Youtube Update video metadata
+      summary: Youtube Update Video Metadata
       description: >-
         Updates a video's metadata. This method supports patch semantics and requires the
         part parameter to specify the video resource properties to update.
       tags:
-        - Videos
+      - Videos
       parameters:
-        - $ref: '#/components/parameters/part'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       requestBody:
         description: The video resource with updated properties.
         required: true
@@ -146,6 +268,54 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Video'
+            examples:
+              YoutubeVideosUpdateRequestExample:
+                summary: Default youtube.videos.update request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    channelId: '500123'
+                    title: Example Title
+                    description: A sample description for this resource.
+                    thumbnails: example_value
+                    channelTitle: example_value
+                    tags:
+                    - example_value
+                    categoryId: '500123'
+                    liveBroadcastContent: live
+                    defaultLanguage: en
+                    localized:
+                      title: Example Title
+                      description: A sample description for this resource.
+                  contentDetails:
+                    duration: example_value
+                    dimension: example_value
+                    definition: hd
+                    caption: 'false'
+                    licensedContent: true
+                    contentRating: example_value
+                  status:
+                    uploadStatus: deleted
+                    privacyStatus: private
+                    license: creativeCommon
+                    embeddable: true
+                    publicStatsViewable: true
+                    madeForKids: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+                  statistics:
+                    viewCount: 42
+                    likeCount: 42
+                    dislikeCount: 42
+                    favoriteCount: 42
+                    commentCount: 42
+                  player:
+                    embedHtml: example_value
+                    embedHeight: 42.5
+                    embedWidth: 42.5
+                  localizations: example_value
       responses:
         '200':
           description: Successful response containing the updated video resource.
@@ -153,28 +323,80 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Video'
+              examples:
+                YoutubeVideosUpdate200Example:
+                  summary: Default youtube.videos.update 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      channelId: '500123'
+                      title: Example Title
+                      description: A sample description for this resource.
+                      thumbnails: example_value
+                      channelTitle: example_value
+                      tags:
+                      - example_value
+                      categoryId: '500123'
+                      liveBroadcastContent: live
+                      defaultLanguage: en
+                      localized:
+                        title: Example Title
+                        description: A sample description for this resource.
+                    contentDetails:
+                      duration: example_value
+                      dimension: example_value
+                      definition: hd
+                      caption: 'false'
+                      licensedContent: true
+                      contentRating: example_value
+                    status:
+                      uploadStatus: deleted
+                      privacyStatus: private
+                      license: creativeCommon
+                      embeddable: true
+                      publicStatsViewable: true
+                      madeForKids: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+                    statistics:
+                      viewCount: 42
+                      likeCount: 42
+                      dislikeCount: 42
+                      favoriteCount: 42
+                      commentCount: 42
+                    player:
+                      embedHtml: example_value
+                      embedHeight: 42.5
+                      embedWidth: 42.5
+                    localizations: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: youtube.videos.delete
-      summary: Youtube Delete a video
+      summary: Youtube Delete a Video
       description: >-
         Deletes a YouTube video. The authenticated user must own the video or be authorized
         to delete it.
       tags:
-        - Videos
+      - Videos
       parameters:
-        - name: id
-          in: query
-          required: true
-          description: The ID of the video to delete.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/key'
+      - name: id
+        in: query
+        required: true
+        description: The ID of the video to delete.
+        schema:
+          type: string
+        example: abc123def456
+      - $ref: '#/components/parameters/key'
       responses:
         '204':
           description: The video was successfully deleted.
@@ -186,34 +408,39 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /videos/rate:
     post:
       operationId: youtube.videos.rate
-      summary: Youtube Rate a video
+      summary: Youtube Rate a Video
       description: >-
         Adds a like or dislike rating to a video or removes a rating from a video. The
         authenticated user must be authorized to rate videos.
       tags:
-        - Videos
+      - Videos
       parameters:
-        - name: id
-          in: query
-          required: true
-          description: The ID of the video to rate.
-          schema:
-            type: string
-        - name: rating
-          in: query
-          required: true
-          description: >-
-            The rating to record. Valid values are like, dislike, and none.
-          schema:
-            type: string
-            enum:
-              - like
-              - dislike
-              - none
-        - $ref: '#/components/parameters/key'
+      - name: id
+        in: query
+        required: true
+        description: The ID of the video to rate.
+        schema:
+          type: string
+        example: abc123def456
+      - name: rating
+        in: query
+        required: true
+        description: >-
+          The rating to record. Valid values are like, dislike, and none.
+        schema:
+          type: string
+          enum:
+          - like
+          - dislike
+          - none
+        example: like
+      - $ref: '#/components/parameters/key'
       responses:
         '204':
           description: The rating was successfully applied or removed.
@@ -223,41 +450,47 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /channels:
     get:
       operationId: youtube.channels.list
-      summary: Youtube List channels
+      summary: Youtube List Channels
       description: >-
         Returns a collection of zero or more channel resources that match the request
         criteria. Use the part parameter to specify the channel resource properties to include.
       tags:
-        - Channels
+      - Channels
       parameters:
-        - $ref: '#/components/parameters/part'
-        - name: id
-          in: query
-          description: >-
-            Comma-separated list of YouTube channel IDs for the resources being retrieved.
-          schema:
-            type: string
-        - name: mine
-          in: query
-          description: >-
-            Set this parameter to true to instruct the API to return channels owned by the
-            authenticated user.
-          schema:
-            type: boolean
-        - name: forUsername
-          in: query
-          description: >-
-            A YouTube username identifying a channel. The API returns the channel associated
-            with that username.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/maxResults'
-        - $ref: '#/components/parameters/pageToken'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - name: id
+        in: query
+        description: >-
+          Comma-separated list of YouTube channel IDs for the resources being retrieved.
+        schema:
+          type: string
+        example: abc123def456
+      - name: mine
+        in: query
+        description: >-
+          Set this parameter to true to instruct the API to return channels owned by the
+          authenticated user.
+        schema:
+          type: boolean
+        example: true
+      - name: forUsername
+        in: query
+        description: >-
+          A YouTube username identifying a channel. The API returns the channel associated
+          with that username.
+        schema:
+          type: string
+        example: example_value
+      - $ref: '#/components/parameters/maxResults'
+      - $ref: '#/components/parameters/pageToken'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       responses:
         '200':
           description: Successful response containing a list of channel resources.
@@ -265,24 +498,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ChannelListResponse'
+              examples:
+                YoutubeChannelsList200Example:
+                  summary: Default youtube.channels.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    prevPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    pageInfo:
+                      totalResults: 42
+                      resultsPerPage: 10
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      contentDetails:
+                        relatedPlaylists: {}
+                      brandingSettings:
+                        channel: {}
+                        image: {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: youtube.channels.update
-      summary: Youtube Update channel metadata
+      summary: Youtube Update Channel Metadata
       description: >-
         Updates a channel's metadata. The authenticated user must own the channel being
         updated. Use the part parameter to specify the channel properties to update.
       tags:
-        - Channels
+      - Channels
       parameters:
-        - $ref: '#/components/parameters/part'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       requestBody:
         description: The channel resource with updated properties.
         required: true
@@ -290,6 +547,41 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Channel'
+            examples:
+              YoutubeChannelsUpdateRequestExample:
+                summary: Default youtube.channels.update request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    title: Example Title
+                    description: A sample description for this resource.
+                    customUrl: https://www.example.com
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    thumbnails: example_value
+                    country: 42
+                    localized:
+                      title: Example Title
+                      description: A sample description for this resource.
+                  statistics:
+                    viewCount: 42
+                    subscriberCount: 42
+                    hiddenSubscriberCount: 42
+                    videoCount: 42
+                  contentDetails:
+                    relatedPlaylists:
+                      uploads: example_value
+                      likes: example_value
+                  brandingSettings:
+                    channel:
+                      title: Example Title
+                      description: A sample description for this resource.
+                      keywords: example_value
+                      defaultLanguage: en
+                    image:
+                      bannerExternalUrl: https://www.example.com
       responses:
         '200':
           description: Successful response containing the updated channel resource.
@@ -297,45 +589,86 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Channel'
+              examples:
+                YoutubeChannelsUpdate200Example:
+                  summary: Default youtube.channels.update 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      title: Example Title
+                      description: A sample description for this resource.
+                      customUrl: https://www.example.com
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      thumbnails: example_value
+                      country: 42
+                      localized:
+                        title: Example Title
+                        description: A sample description for this resource.
+                    statistics:
+                      viewCount: 42
+                      subscriberCount: 42
+                      hiddenSubscriberCount: 42
+                      videoCount: 42
+                    contentDetails:
+                      relatedPlaylists:
+                        uploads: example_value
+                        likes: example_value
+                    brandingSettings:
+                      channel:
+                        title: Example Title
+                        description: A sample description for this resource.
+                        keywords: example_value
+                        defaultLanguage: en
+                      image:
+                        bannerExternalUrl: https://www.example.com
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /playlists:
     get:
       operationId: youtube.playlists.list
-      summary: Youtube List playlists
+      summary: Youtube List Playlists
       description: >-
         Returns a collection of playlists that match the API request parameters. You can
         retrieve playlists by ID, by channel, or for the authenticated user.
       tags:
-        - Playlists
+      - Playlists
       parameters:
-        - $ref: '#/components/parameters/part'
-        - name: id
-          in: query
-          description: Comma-separated list of YouTube playlist IDs for the resources being retrieved.
-          schema:
-            type: string
-        - name: channelId
-          in: query
-          description: >-
-            Indicates that the API response should only contain resources created by the channel.
-          schema:
-            type: string
-        - name: mine
-          in: query
-          description: >-
-            Set this parameter to true to instruct the API to return playlists owned by the
-            authenticated user.
-          schema:
-            type: boolean
-        - $ref: '#/components/parameters/maxResults'
-        - $ref: '#/components/parameters/pageToken'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - name: id
+        in: query
+        description: Comma-separated list of YouTube playlist IDs for the resources being retrieved.
+        schema:
+          type: string
+        example: abc123def456
+      - name: channelId
+        in: query
+        description: >-
+          Indicates that the API response should only contain resources created by the channel.
+        schema:
+          type: string
+        example: '500123'
+      - name: mine
+        in: query
+        description: >-
+          Set this parameter to true to instruct the API to return playlists owned by the
+          authenticated user.
+        schema:
+          type: boolean
+        example: true
+      - $ref: '#/components/parameters/maxResults'
+      - $ref: '#/components/parameters/pageToken'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       responses:
         '200':
           description: Successful response containing a list of playlist resources.
@@ -343,24 +676,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlaylistListResponse'
+              examples:
+                YoutubePlaylistsList200Example:
+                  summary: Default youtube.playlists.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    prevPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    pageInfo:
+                      totalResults: 42
+                      resultsPerPage: 10
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        publishedAt: '2026-01-15T10:30:00Z'
+                        channelId: '500123'
+                        title: Example Title
+                        description: A sample description for this resource.
+                        thumbnails: example_value
+                        channelTitle: example_value
+                        tags: {}
+                        defaultLanguage: en
+                      status:
+                        privacyStatus: private
+                      contentDetails:
+                        itemCount: 42
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: youtube.playlists.insert
-      summary: Youtube Create a playlist
+      summary: Youtube Create a Playlist
       description: >-
         Creates a playlist on behalf of the authenticated user. The user must be authorized
         to create playlists.
       tags:
-        - Playlists
+      - Playlists
       parameters:
-        - $ref: '#/components/parameters/part'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       requestBody:
         description: The playlist resource to create.
         required: true
@@ -368,6 +733,28 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Playlist'
+            examples:
+              YoutubePlaylistsInsertRequestExample:
+                summary: Default youtube.playlists.insert request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    channelId: '500123'
+                    title: Example Title
+                    description: A sample description for this resource.
+                    thumbnails: example_value
+                    channelTitle: example_value
+                    tags:
+                    - example_value
+                    defaultLanguage: en
+                  status:
+                    privacyStatus: private
+                  contentDetails:
+                    itemCount: 42
       responses:
         '200':
           description: Successful response containing the newly created playlist resource.
@@ -375,24 +762,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Playlist'
+              examples:
+                YoutubePlaylistsInsert200Example:
+                  summary: Default youtube.playlists.insert 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      channelId: '500123'
+                      title: Example Title
+                      description: A sample description for this resource.
+                      thumbnails: example_value
+                      channelTitle: example_value
+                      tags:
+                      - example_value
+                      defaultLanguage: en
+                    status:
+                      privacyStatus: private
+                    contentDetails:
+                      itemCount: 42
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: youtube.playlists.update
-      summary: Youtube Update a playlist
+      summary: Youtube Update a Playlist
       description: >-
         Modifies a playlist. The authenticated user must own the playlist being updated.
         Use the part parameter to specify the properties being updated.
       tags:
-        - Playlists
+      - Playlists
       parameters:
-        - $ref: '#/components/parameters/part'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       requestBody:
         description: The playlist resource with updated properties.
         required: true
@@ -400,6 +812,28 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Playlist'
+            examples:
+              YoutubePlaylistsUpdateRequestExample:
+                summary: Default youtube.playlists.update request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    channelId: '500123'
+                    title: Example Title
+                    description: A sample description for this resource.
+                    thumbnails: example_value
+                    channelTitle: example_value
+                    tags:
+                    - example_value
+                    defaultLanguage: en
+                  status:
+                    privacyStatus: private
+                  contentDetails:
+                    itemCount: 42
       responses:
         '200':
           description: Successful response containing the updated playlist resource.
@@ -407,28 +841,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Playlist'
+              examples:
+                YoutubePlaylistsUpdate200Example:
+                  summary: Default youtube.playlists.update 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      channelId: '500123'
+                      title: Example Title
+                      description: A sample description for this resource.
+                      thumbnails: example_value
+                      channelTitle: example_value
+                      tags:
+                      - example_value
+                      defaultLanguage: en
+                    status:
+                      privacyStatus: private
+                    contentDetails:
+                      itemCount: 42
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: youtube.playlists.delete
-      summary: Youtube Delete a playlist
+      summary: Youtube Delete a Playlist
       description: >-
         Deletes a playlist. The authenticated user must own the playlist or be authorized
         to delete it.
       tags:
-        - Playlists
+      - Playlists
       parameters:
-        - name: id
-          in: query
-          required: true
-          description: The ID of the playlist to delete.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/key'
+      - name: id
+        in: query
+        required: true
+        description: The ID of the playlist to delete.
+        schema:
+          type: string
+        example: abc123def456
+      - $ref: '#/components/parameters/key'
       responses:
         '204':
           description: The playlist was successfully deleted.
@@ -440,39 +900,45 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /playlistItems:
     get:
       operationId: youtube.playlistItems.list
-      summary: Youtube List playlist items
+      summary: Youtube List Playlist Items
       description: >-
         Returns a collection of playlist items that match the API request parameters. You
         can retrieve all items in a specified playlist or retrieve one or more playlist items
         by their unique IDs.
       tags:
-        - PlaylistItems
+      - PlaylistItems
       parameters:
-        - $ref: '#/components/parameters/part'
-        - name: playlistId
-          in: query
-          description: >-
-            Identifies the playlist whose items are being listed. Required unless the id
-            parameter specifies playlist item IDs.
-          schema:
-            type: string
-        - name: id
-          in: query
-          description: Comma-separated list of playlist item IDs for the resources being retrieved.
-          schema:
-            type: string
-        - name: videoId
-          in: query
-          description: Specifies that the request should return only items containing the given video.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/maxResults'
-        - $ref: '#/components/parameters/pageToken'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - name: playlistId
+        in: query
+        description: >-
+          Identifies the playlist whose items are being listed. Required unless the id
+          parameter specifies playlist item IDs.
+        schema:
+          type: string
+        example: '500123'
+      - name: id
+        in: query
+        description: Comma-separated list of playlist item IDs for the resources being retrieved.
+        schema:
+          type: string
+        example: abc123def456
+      - name: videoId
+        in: query
+        description: Specifies that the request should return only items containing the given video.
+        schema:
+          type: string
+        example: '500123'
+      - $ref: '#/components/parameters/maxResults'
+      - $ref: '#/components/parameters/pageToken'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       responses:
         '200':
           description: Successful response containing a list of playlist item resources.
@@ -480,24 +946,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlaylistItemListResponse'
+              examples:
+                YoutubePlaylistitemsList200Example:
+                  summary: Default youtube.playlistItems.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    prevPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    pageInfo:
+                      totalResults: 42
+                      resultsPerPage: 10
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        publishedAt: '2026-01-15T10:30:00Z'
+                        channelId: '500123'
+                        title: Example Title
+                        description: A sample description for this resource.
+                        thumbnails: example_value
+                        channelTitle: example_value
+                        playlistId: '500123'
+                        position: 10
+                        resourceId: {}
+                      contentDetails:
+                        videoId: '500123'
+                        videoPublishedAt: '2026-01-15T10:30:00Z'
+                      status:
+                        privacyStatus: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: youtube.playlistItems.insert
-      summary: Youtube Add an item to a playlist
+      summary: Youtube Add an Item to a Playlist
       description: >-
         Adds a resource to a playlist. The authenticated user must own the playlist or be
         authorized to add items to it.
       tags:
-        - PlaylistItems
+      - PlaylistItems
       parameters:
-        - $ref: '#/components/parameters/part'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       requestBody:
         description: The playlist item resource to insert into the playlist.
         required: true
@@ -505,6 +1005,31 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PlaylistItem'
+            examples:
+              YoutubePlaylistitemsInsertRequestExample:
+                summary: Default youtube.playlistItems.insert request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    channelId: '500123'
+                    title: Example Title
+                    description: A sample description for this resource.
+                    thumbnails: example_value
+                    channelTitle: example_value
+                    playlistId: '500123'
+                    position: 10
+                    resourceId:
+                      kind: youtube#video
+                      videoId: '500123'
+                  contentDetails:
+                    videoId: '500123'
+                    videoPublishedAt: '2026-01-15T10:30:00Z'
+                  status:
+                    privacyStatus: example_value
       responses:
         '200':
           description: Successful response containing the newly inserted playlist item resource.
@@ -512,28 +1037,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PlaylistItem'
+              examples:
+                YoutubePlaylistitemsInsert200Example:
+                  summary: Default youtube.playlistItems.insert 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      channelId: '500123'
+                      title: Example Title
+                      description: A sample description for this resource.
+                      thumbnails: example_value
+                      channelTitle: example_value
+                      playlistId: '500123'
+                      position: 10
+                      resourceId:
+                        kind: youtube#video
+                        videoId: '500123'
+                    contentDetails:
+                      videoId: '500123'
+                      videoPublishedAt: '2026-01-15T10:30:00Z'
+                    status:
+                      privacyStatus: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: youtube.playlistItems.delete
-      summary: Youtube Remove a playlist item
+      summary: Youtube Remove a Playlist Item
       description: >-
         Deletes a playlist item. The authenticated user must own the playlist or be authorized
         to remove items from it.
       tags:
-        - PlaylistItems
+      - PlaylistItems
       parameters:
-        - name: id
-          in: query
-          required: true
-          description: The ID of the playlist item to delete.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/key'
+      - name: id
+        in: query
+        required: true
+        description: The ID of the playlist item to delete.
+        schema:
+          type: string
+        example: abc123def456
+      - $ref: '#/components/parameters/key'
       responses:
         '204':
           description: The playlist item was successfully deleted.
@@ -545,71 +1099,80 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /search:
     get:
       operationId: youtube.search.list
-      summary: Search YouTube
+      summary: Youtube Search Youtube
       description: >-
         Returns a collection of search results that match the query parameters specified in
         the API request. By default, a search result set identifies matching video, channel,
         and playlist resources, but you can also configure queries to only retrieve a
         specific type of resource.
       tags:
-        - Search
+      - Search
       parameters:
-        - $ref: '#/components/parameters/part'
-        - name: q
-          in: query
-          description: The query term to search for.
-          schema:
-            type: string
-        - name: type
-          in: query
-          description: >-
-            Restricts a search query to only retrieve a particular type of resource.
-            Acceptable values are channel, playlist, and video.
-          schema:
-            type: string
-        - name: channelId
-          in: query
-          description: >-
-            Indicates that the API response should only contain resources created by the channel.
-          schema:
-            type: string
-        - name: order
-          in: query
-          description: >-
-            Specifies the method that will be used to order resources in the API response.
-            Acceptable values are date, rating, relevance, title, videoCount, and viewCount.
-          schema:
-            type: string
-            enum:
-              - date
-              - rating
-              - relevance
-              - title
-              - videoCount
-              - viewCount
-        - name: publishedAfter
-          in: query
-          description: >-
-            Restricts results to only include resources created at or after the specified time,
-            in RFC 3339 format.
-          schema:
-            type: string
-            format: date-time
-        - name: publishedBefore
-          in: query
-          description: >-
-            Restricts results to only include resources created before or at the specified time,
-            in RFC 3339 format.
-          schema:
-            type: string
-            format: date-time
-        - $ref: '#/components/parameters/maxResults'
-        - $ref: '#/components/parameters/pageToken'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - name: q
+        in: query
+        description: The query term to search for.
+        schema:
+          type: string
+        example: youtube api tutorial
+      - name: type
+        in: query
+        description: >-
+          Restricts a search query to only retrieve a particular type of resource.
+          Acceptable values are channel, playlist, and video.
+        schema:
+          type: string
+        example: video
+      - name: channelId
+        in: query
+        description: >-
+          Indicates that the API response should only contain resources created by the channel.
+        schema:
+          type: string
+        example: '500123'
+      - name: order
+        in: query
+        description: >-
+          Specifies the method that will be used to order resources in the API response.
+          Acceptable values are date, rating, relevance, title, videoCount, and viewCount.
+        schema:
+          type: string
+          enum:
+          - date
+          - rating
+          - relevance
+          - title
+          - videoCount
+          - viewCount
+        example: date
+      - name: publishedAfter
+        in: query
+        description: >-
+          Restricts results to only include resources created at or after the specified time,
+          in RFC 3339 format.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: publishedBefore
+        in: query
+        description: >-
+          Restricts results to only include resources created before or at the specified time,
+          in RFC 3339 format.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - $ref: '#/components/parameters/maxResults'
+      - $ref: '#/components/parameters/pageToken'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       responses:
         '200':
           description: Successful response containing a list of search result resources.
@@ -617,44 +1180,79 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SearchListResponse'
+              examples:
+                YoutubeSearchList200Example:
+                  summary: Default youtube.search.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    prevPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    regionCode: US
+                    pageInfo:
+                      totalResults: 42
+                      resultsPerPage: 10
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id:
+                        kind: youtube#video
+                        videoId: '500123'
+                        channelId: '500123'
+                        playlistId: '500123'
+                      snippet:
+                        publishedAt: '2026-01-15T10:30:00Z'
+                        channelId: '500123'
+                        title: Example Title
+                        description: A sample description for this resource.
+                        thumbnails: example_value
+                        channelTitle: example_value
+                        liveBroadcastContent: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /subscriptions:
     get:
       operationId: youtube.subscriptions.list
-      summary: Youtube List subscriptions
+      summary: Youtube List Subscriptions
       description: >-
         Returns subscription resources that match the API request criteria. Retrieve
         subscriptions for the authenticated user, a specific channel, or by subscription IDs.
       tags:
-        - Subscriptions
+      - Subscriptions
       parameters:
-        - $ref: '#/components/parameters/part'
-        - name: id
-          in: query
-          description: Comma-separated list of YouTube subscription IDs for the resources being retrieved.
-          schema:
-            type: string
-        - name: mine
-          in: query
-          description: >-
-            Set this parameter to true to retrieve the subscriptions of the authenticated user.
-          schema:
-            type: boolean
-        - name: channelId
-          in: query
-          description: >-
-            Retrieves subscriptions for the channel with the specified YouTube channel ID.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/maxResults'
-        - $ref: '#/components/parameters/pageToken'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - name: id
+        in: query
+        description: Comma-separated list of YouTube subscription IDs for the resources being retrieved.
+        schema:
+          type: string
+        example: abc123def456
+      - name: mine
+        in: query
+        description: >-
+          Set this parameter to true to retrieve the subscriptions of the authenticated user.
+        schema:
+          type: boolean
+        example: true
+      - name: channelId
+        in: query
+        description: >-
+          Retrieves subscriptions for the channel with the specified YouTube channel ID.
+        schema:
+          type: string
+        example: '500123'
+      - $ref: '#/components/parameters/maxResults'
+      - $ref: '#/components/parameters/pageToken'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       responses:
         '200':
           description: Successful response containing a list of subscription resources.
@@ -662,24 +1260,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SubscriptionListResponse'
+              examples:
+                YoutubeSubscriptionsList200Example:
+                  summary: Default youtube.subscriptions.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    prevPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    pageInfo:
+                      totalResults: 42
+                      resultsPerPage: 10
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        publishedAt: '2026-01-15T10:30:00Z'
+                        title: Example Title
+                        description: A sample description for this resource.
+                        resourceId: {}
+                        channelId: '500123'
+                        thumbnails: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: youtube.subscriptions.insert
-      summary: Youtube Subscribe to a channel
+      summary: Youtube Subscribe to a Channel
       description: >-
         Adds a subscription for the authenticated user. The authenticated user must be
         authorized to create subscriptions.
       tags:
-        - Subscriptions
+      - Subscriptions
       parameters:
-        - $ref: '#/components/parameters/part'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       requestBody:
         description: The subscription resource to create.
         required: true
@@ -687,6 +1311,23 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Subscription'
+            examples:
+              YoutubeSubscriptionsInsertRequestExample:
+                summary: Default youtube.subscriptions.insert request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    title: Example Title
+                    description: A sample description for this resource.
+                    resourceId:
+                      kind: youtube#video
+                      channelId: '500123'
+                    channelId: '500123'
+                    thumbnails: example_value
       responses:
         '200':
           description: Successful response containing the newly created subscription resource.
@@ -694,27 +1335,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Subscription'
+              examples:
+                YoutubeSubscriptionsInsert200Example:
+                  summary: Default youtube.subscriptions.insert 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      title: Example Title
+                      description: A sample description for this resource.
+                      resourceId:
+                        kind: youtube#video
+                        channelId: '500123'
+                      channelId: '500123'
+                      thumbnails: example_value
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: youtube.subscriptions.delete
-      summary: Youtube Unsubscribe from a channel
+      summary: Youtube Unsubscribe From a Channel
       description: >-
         Deletes a subscription. The authenticated user must own the subscription being deleted.
       tags:
-        - Subscriptions
+      - Subscriptions
       parameters:
-        - name: id
-          in: query
-          required: true
-          description: The ID of the subscription to delete.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/key'
+      - name: id
+        in: query
+        required: true
+        description: The ID of the subscription to delete.
+        schema:
+          type: string
+        example: abc123def456
+      - $ref: '#/components/parameters/key'
       responses:
         '204':
           description: The subscription was successfully deleted.
@@ -726,42 +1388,48 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /comments:
     get:
       operationId: youtube.comments.list
-      summary: Youtube List comments
+      summary: Youtube List Comments
       description: >-
         Returns a list of comments that match the API request parameters. Use the part
         parameter to specify the comment resource properties to include in the response.
       tags:
-        - Comments
+      - Comments
       parameters:
-        - $ref: '#/components/parameters/part'
-        - name: id
-          in: query
-          description: Comma-separated list of comment IDs for the resources being retrieved.
-          schema:
-            type: string
-        - name: parentId
-          in: query
-          description: >-
-            Identifies the comment thread whose comments are being listed. Required unless the
-            id parameter specifies comment IDs directly.
-          schema:
-            type: string
-        - name: textFormat
-          in: query
-          description: >-
-            Specifies whether the API should return comments formatted as HTML or plain text.
-          schema:
-            type: string
-            enum:
-              - html
-              - plainText
-        - $ref: '#/components/parameters/maxResults'
-        - $ref: '#/components/parameters/pageToken'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - name: id
+        in: query
+        description: Comma-separated list of comment IDs for the resources being retrieved.
+        schema:
+          type: string
+        example: abc123def456
+      - name: parentId
+        in: query
+        description: >-
+          Identifies the comment thread whose comments are being listed. Required unless the
+          id parameter specifies comment IDs directly.
+        schema:
+          type: string
+        example: '500123'
+      - name: textFormat
+        in: query
+        description: >-
+          Specifies whether the API should return comments formatted as HTML or plain text.
+        schema:
+          type: string
+          enum:
+          - html
+          - plainText
+        example: html
+      - $ref: '#/components/parameters/maxResults'
+      - $ref: '#/components/parameters/pageToken'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       responses:
         '200':
           description: Successful response containing a list of comment resources.
@@ -769,24 +1437,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommentListResponse'
+              examples:
+                YoutubeCommentsList200Example:
+                  summary: Default youtube.comments.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    pageInfo:
+                      totalResults: 42
+                      resultsPerPage: 10
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        textOriginal: example_value
+                        textDisplay: example_value
+                        authorDisplayName: example_value
+                        authorProfileImageUrl: https://www.example.com
+                        authorChannelUrl: https://www.example.com
+                        authorChannelId: {}
+                        likeCount: 42
+                        viewerRating: example_value
+                        publishedAt: '2026-01-15T10:30:00Z'
+                        updatedAt: '2026-01-15T10:30:00Z'
+                        videoId: '500123'
+                        parentId: '500123'
+                        canRate: true
+                        moderationStatus: heldForReview
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: youtube.comments.insert
-      summary: Youtube Create a comment
+      summary: Youtube Create a Comment
       description: >-
         Creates a reply to an existing comment. To add a top-level comment to a video or
         channel discussion, use the commentThreads.insert method.
       tags:
-        - Comments
+      - Comments
       parameters:
-        - $ref: '#/components/parameters/part'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       requestBody:
         description: The comment resource to create.
         required: true
@@ -794,6 +1495,30 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Comment'
+            examples:
+              YoutubeCommentsInsertRequestExample:
+                summary: Default youtube.comments.insert request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    textOriginal: example_value
+                    textDisplay: example_value
+                    authorDisplayName: example_value
+                    authorProfileImageUrl: https://www.example.com
+                    authorChannelUrl: https://www.example.com
+                    authorChannelId:
+                      value: example_value
+                    likeCount: 42
+                    viewerRating: example_value
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    updatedAt: '2026-01-15T10:30:00Z'
+                    videoId: '500123'
+                    parentId: '500123'
+                    canRate: true
+                    moderationStatus: heldForReview
       responses:
         '200':
           description: Successful response containing the newly created comment resource.
@@ -801,23 +1526,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Comment'
+              examples:
+                YoutubeCommentsInsert200Example:
+                  summary: Default youtube.comments.insert 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      textOriginal: example_value
+                      textDisplay: example_value
+                      authorDisplayName: example_value
+                      authorProfileImageUrl: https://www.example.com
+                      authorChannelUrl: https://www.example.com
+                      authorChannelId:
+                        value: example_value
+                      likeCount: 42
+                      viewerRating: example_value
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      updatedAt: '2026-01-15T10:30:00Z'
+                      videoId: '500123'
+                      parentId: '500123'
+                      canRate: true
+                      moderationStatus: heldForReview
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: youtube.comments.update
-      summary: Youtube Update a comment
+      summary: Youtube Update a Comment
       description: >-
         Modifies a comment. The authenticated user must own the comment being updated.
       tags:
-        - Comments
+      - Comments
       parameters:
-        - $ref: '#/components/parameters/part'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       requestBody:
         description: The comment resource with updated properties.
         required: true
@@ -825,6 +1577,30 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Comment'
+            examples:
+              YoutubeCommentsUpdateRequestExample:
+                summary: Default youtube.comments.update request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    textOriginal: example_value
+                    textDisplay: example_value
+                    authorDisplayName: example_value
+                    authorProfileImageUrl: https://www.example.com
+                    authorChannelUrl: https://www.example.com
+                    authorChannelId:
+                      value: example_value
+                    likeCount: 42
+                    viewerRating: example_value
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    updatedAt: '2026-01-15T10:30:00Z'
+                    videoId: '500123'
+                    parentId: '500123'
+                    canRate: true
+                    moderationStatus: heldForReview
       responses:
         '200':
           description: Successful response containing the updated comment resource.
@@ -832,28 +1608,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Comment'
+              examples:
+                YoutubeCommentsUpdate200Example:
+                  summary: Default youtube.comments.update 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      textOriginal: example_value
+                      textDisplay: example_value
+                      authorDisplayName: example_value
+                      authorProfileImageUrl: https://www.example.com
+                      authorChannelUrl: https://www.example.com
+                      authorChannelId:
+                        value: example_value
+                      likeCount: 42
+                      viewerRating: example_value
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      updatedAt: '2026-01-15T10:30:00Z'
+                      videoId: '500123'
+                      parentId: '500123'
+                      canRate: true
+                      moderationStatus: heldForReview
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: youtube.comments.delete
-      summary: Youtube Delete a comment
+      summary: Youtube Delete a Comment
       description: >-
         Deletes a comment. The authenticated user must own the comment or be authorized
         to delete it.
       tags:
-        - Comments
+      - Comments
       parameters:
-        - name: id
-          in: query
-          required: true
-          description: The ID of the comment to delete.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/key'
+      - name: id
+        in: query
+        required: true
+        description: The ID of the comment to delete.
+        schema:
+          type: string
+        example: abc123def456
+      - $ref: '#/components/parameters/key'
       responses:
         '204':
           description: The comment was successfully deleted.
@@ -865,42 +1669,48 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /comments/setModerationStatus:
     post:
       operationId: youtube.comments.setModerationStatus
-      summary: Youtube Set comment moderation status
+      summary: Youtube Set Comment Moderation Status
       description: >-
         Sets the moderation status of one or more comments. The authenticated user must be
         authorized to moderate comments for the associated video or channel.
       tags:
-        - Comments
+      - Comments
       parameters:
-        - name: id
-          in: query
-          required: true
-          description: Comma-separated list of comment IDs to set moderation status for.
-          schema:
-            type: string
-        - name: moderationStatus
-          in: query
-          required: true
-          description: >-
-            Identifies the new moderation status. Acceptable values are heldForReview,
-            published, and rejected.
-          schema:
-            type: string
-            enum:
-              - heldForReview
-              - published
-              - rejected
-        - name: banAuthor
-          in: query
-          description: >-
-            Set to true to ban the comment author from making future comments on the channel
-            or video.
-          schema:
-            type: boolean
-        - $ref: '#/components/parameters/key'
+      - name: id
+        in: query
+        required: true
+        description: Comma-separated list of comment IDs to set moderation status for.
+        schema:
+          type: string
+        example: abc123def456
+      - name: moderationStatus
+        in: query
+        required: true
+        description: >-
+          Identifies the new moderation status. Acceptable values are heldForReview,
+          published, and rejected.
+        schema:
+          type: string
+          enum:
+          - heldForReview
+          - published
+          - rejected
+        example: heldForReview
+      - name: banAuthor
+        in: query
+        description: >-
+          Set to true to ban the comment author from making future comments on the channel
+          or video.
+        schema:
+          type: boolean
+        example: true
+      - $ref: '#/components/parameters/key'
       responses:
         '204':
           description: The moderation status was successfully updated.
@@ -910,49 +1720,56 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /commentThreads:
     get:
       operationId: youtube.commentThreads.list
-      summary: Youtube List comment threads
+      summary: Youtube List Comment Threads
       description: >-
         Returns a list of comment threads that match the API request parameters. The response
         includes top-level comments and optionally their replies.
       tags:
-        - CommentThreads
+      - CommentThreads
       parameters:
-        - $ref: '#/components/parameters/part'
-        - name: id
-          in: query
-          description: Comma-separated list of comment thread IDs for the resources being retrieved.
-          schema:
-            type: string
-        - name: videoId
-          in: query
-          description: >-
-            Instructs the API to return comment threads for the video with the specified ID.
-          schema:
-            type: string
-        - name: channelId
-          in: query
-          description: >-
-            Instructs the API to return comment threads for the channel with the specified ID.
-          schema:
-            type: string
-        - name: moderationStatus
-          in: query
-          description: >-
-            Set this parameter to limit the returned comment threads to only those with the
-            specified moderation status.
-          schema:
-            type: string
-            enum:
-              - heldForReview
-              - likelySpam
-              - published
-        - $ref: '#/components/parameters/maxResults'
-        - $ref: '#/components/parameters/pageToken'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - name: id
+        in: query
+        description: Comma-separated list of comment thread IDs for the resources being retrieved.
+        schema:
+          type: string
+        example: abc123def456
+      - name: videoId
+        in: query
+        description: >-
+          Instructs the API to return comment threads for the video with the specified ID.
+        schema:
+          type: string
+        example: '500123'
+      - name: channelId
+        in: query
+        description: >-
+          Instructs the API to return comment threads for the channel with the specified ID.
+        schema:
+          type: string
+        example: '500123'
+      - name: moderationStatus
+        in: query
+        description: >-
+          Set this parameter to limit the returned comment threads to only those with the
+          specified moderation status.
+        schema:
+          type: string
+          enum:
+          - heldForReview
+          - likelySpam
+          - published
+        example: heldForReview
+      - $ref: '#/components/parameters/maxResults'
+      - $ref: '#/components/parameters/pageToken'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       responses:
         '200':
           description: Successful response containing a list of comment thread resources.
@@ -960,24 +1777,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommentThreadListResponse'
+              examples:
+                YoutubeCommentthreadsList200Example:
+                  summary: Default youtube.commentThreads.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    pageInfo:
+                      totalResults: 42
+                      resultsPerPage: 10
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        channelId: '500123'
+                        videoId: '500123'
+                        canReply: true
+                        totalReplyCount: 42
+                        isPublic: true
+                      replies:
+                        comments: {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: youtube.commentThreads.insert
-      summary: Youtube Create a comment thread
+      summary: Youtube Create a Comment Thread
       description: >-
         Creates a new top-level comment. To add a reply to an existing comment, use the
         comments.insert method.
       tags:
-        - CommentThreads
+      - CommentThreads
       parameters:
-        - $ref: '#/components/parameters/part'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       requestBody:
         description: The comment thread resource to create.
         required: true
@@ -985,6 +1828,45 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CommentThread'
+            examples:
+              YoutubeCommentthreadsInsertRequestExample:
+                summary: Default youtube.commentThreads.insert request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    channelId: '500123'
+                    videoId: '500123'
+                    topLevelComment:
+                      kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        textOriginal: example_value
+                        textDisplay: example_value
+                        authorDisplayName: example_value
+                        authorProfileImageUrl: https://www.example.com
+                        authorChannelUrl: https://www.example.com
+                        authorChannelId: {}
+                        likeCount: 42
+                        viewerRating: example_value
+                        publishedAt: '2026-01-15T10:30:00Z'
+                        updatedAt: '2026-01-15T10:30:00Z'
+                        videoId: '500123'
+                        parentId: '500123'
+                        canRate: true
+                        moderationStatus: heldForReview
+                    canReply: true
+                    totalReplyCount: 42
+                    isPublic: true
+                  replies:
+                    comments:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet: {}
       responses:
         '200':
           description: Successful response containing the newly created comment thread resource.
@@ -992,24 +1874,66 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommentThread'
+              examples:
+                YoutubeCommentthreadsInsert200Example:
+                  summary: Default youtube.commentThreads.insert 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      channelId: '500123'
+                      videoId: '500123'
+                      topLevelComment:
+                        kind: youtube#video
+                        etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                        id: abc123def456
+                        snippet:
+                          textOriginal: example_value
+                          textDisplay: example_value
+                          authorDisplayName: example_value
+                          authorProfileImageUrl: https://www.example.com
+                          authorChannelUrl: https://www.example.com
+                          authorChannelId: {}
+                          likeCount: 42
+                          viewerRating: example_value
+                          publishedAt: '2026-01-15T10:30:00Z'
+                          updatedAt: '2026-01-15T10:30:00Z'
+                          videoId: '500123'
+                          parentId: '500123'
+                          canRate: true
+                          moderationStatus: heldForReview
+                      canReply: true
+                      totalReplyCount: 42
+                      isPublic: true
+                    replies:
+                      comments:
+                      - kind: youtube#video
+                        etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                        id: abc123def456
+                        snippet: {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: youtube.commentThreads.update
-      summary: Youtube Update a comment thread
+      summary: Youtube Update a Comment Thread
       description: >-
         Modifies the top-level comment in a comment thread. The authenticated user must
         own the comment being updated.
       tags:
-        - CommentThreads
+      - CommentThreads
       parameters:
-        - $ref: '#/components/parameters/part'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       requestBody:
         description: The comment thread resource with updated properties.
         required: true
@@ -1017,6 +1941,45 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CommentThread'
+            examples:
+              YoutubeCommentthreadsUpdateRequestExample:
+                summary: Default youtube.commentThreads.update request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    channelId: '500123'
+                    videoId: '500123'
+                    topLevelComment:
+                      kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        textOriginal: example_value
+                        textDisplay: example_value
+                        authorDisplayName: example_value
+                        authorProfileImageUrl: https://www.example.com
+                        authorChannelUrl: https://www.example.com
+                        authorChannelId: {}
+                        likeCount: 42
+                        viewerRating: example_value
+                        publishedAt: '2026-01-15T10:30:00Z'
+                        updatedAt: '2026-01-15T10:30:00Z'
+                        videoId: '500123'
+                        parentId: '500123'
+                        canRate: true
+                        moderationStatus: heldForReview
+                    canReply: true
+                    totalReplyCount: 42
+                    isPublic: true
+                  replies:
+                    comments:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet: {}
       responses:
         '200':
           description: Successful response containing the updated comment thread resource.
@@ -1024,37 +1987,81 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CommentThread'
+              examples:
+                YoutubeCommentthreadsUpdate200Example:
+                  summary: Default youtube.commentThreads.update 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      channelId: '500123'
+                      videoId: '500123'
+                      topLevelComment:
+                        kind: youtube#video
+                        etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                        id: abc123def456
+                        snippet:
+                          textOriginal: example_value
+                          textDisplay: example_value
+                          authorDisplayName: example_value
+                          authorProfileImageUrl: https://www.example.com
+                          authorChannelUrl: https://www.example.com
+                          authorChannelId: {}
+                          likeCount: 42
+                          viewerRating: example_value
+                          publishedAt: '2026-01-15T10:30:00Z'
+                          updatedAt: '2026-01-15T10:30:00Z'
+                          videoId: '500123'
+                          parentId: '500123'
+                          canRate: true
+                          moderationStatus: heldForReview
+                      canReply: true
+                      totalReplyCount: 42
+                      isPublic: true
+                    replies:
+                      comments:
+                      - kind: youtube#video
+                        etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                        id: abc123def456
+                        snippet: {}
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /captions:
     get:
       operationId: youtube.captions.list
-      summary: Youtube List caption tracks
+      summary: Youtube List Caption Tracks
       description: >-
         Returns a list of caption tracks that are associated with a specified video. The
         API response does not contain the actual captions and the captions.download method
         can be used to retrieve a caption track.
       tags:
-        - Captions
+      - Captions
       parameters:
-        - $ref: '#/components/parameters/part'
-        - name: videoId
-          in: query
-          required: true
-          description: The ID of the video for which the API should return caption tracks.
-          schema:
-            type: string
-        - name: id
-          in: query
-          description: Comma-separated list of caption track IDs to retrieve.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - name: videoId
+        in: query
+        required: true
+        description: The ID of the video for which the API should return caption tracks.
+        schema:
+          type: string
+        example: '500123'
+      - name: id
+        in: query
+        description: Comma-separated list of caption track IDs to retrieve.
+        schema:
+          type: string
+        example: abc123def456
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       responses:
         '200':
           description: Successful response containing a list of caption track resources.
@@ -1062,24 +2069,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CaptionListResponse'
+              examples:
+                YoutubeCaptionsList200Example:
+                  summary: Default youtube.captions.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        videoId: '500123'
+                        lastUpdated: '2026-01-15T10:30:00Z'
+                        trackKind: asr
+                        language: en
+                        name: Example Title
+                        audioTrackType: commentary
+                        isCC: true
+                        isLarge: true
+                        isEasyReader: true
+                        isDraft: true
+                        isAutoSynced: true
+                        status: failed
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: youtube.captions.insert
-      summary: Youtube Upload a caption track
+      summary: Youtube Upload a Caption Track
       description: >-
         Uploads a caption track. The authenticated user must own the video associated with
         the caption track. This method supports media upload.
       tags:
-        - Captions
+      - Captions
       parameters:
-        - $ref: '#/components/parameters/part'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       requestBody:
         description: The caption resource to upload.
         required: true
@@ -1087,6 +2121,27 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Caption'
+            examples:
+              YoutubeCaptionsInsertRequestExample:
+                summary: Default youtube.captions.insert request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    videoId: '500123'
+                    lastUpdated: '2026-01-15T10:30:00Z'
+                    trackKind: asr
+                    language: en
+                    name: Example Title
+                    audioTrackType: commentary
+                    isCC: true
+                    isLarge: true
+                    isEasyReader: true
+                    isDraft: true
+                    isAutoSynced: true
+                    status: failed
       responses:
         '200':
           description: Successful response containing the newly uploaded caption resource.
@@ -1094,24 +2149,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Caption'
+              examples:
+                YoutubeCaptionsInsert200Example:
+                  summary: Default youtube.captions.insert 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      videoId: '500123'
+                      lastUpdated: '2026-01-15T10:30:00Z'
+                      trackKind: asr
+                      language: en
+                      name: Example Title
+                      audioTrackType: commentary
+                      isCC: true
+                      isLarge: true
+                      isEasyReader: true
+                      isDraft: true
+                      isAutoSynced: true
+                      status: failed
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: youtube.captions.update
-      summary: Youtube Update a caption track
+      summary: Youtube Update a Caption Track
       description: >-
         Updates a caption track. When updating a caption track, you can change the track's
         draft status, upload a new caption file, or both.
       tags:
-        - Captions
+      - Captions
       parameters:
-        - $ref: '#/components/parameters/part'
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       requestBody:
         description: The caption resource with updated properties.
         required: true
@@ -1119,6 +2198,27 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Caption'
+            examples:
+              YoutubeCaptionsUpdateRequestExample:
+                summary: Default youtube.captions.update request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    videoId: '500123'
+                    lastUpdated: '2026-01-15T10:30:00Z'
+                    trackKind: asr
+                    language: en
+                    name: Example Title
+                    audioTrackType: commentary
+                    isCC: true
+                    isLarge: true
+                    isEasyReader: true
+                    isDraft: true
+                    isAutoSynced: true
+                    status: failed
       responses:
         '200':
           description: Successful response containing the updated caption resource.
@@ -1126,28 +2226,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Caption'
+              examples:
+                YoutubeCaptionsUpdate200Example:
+                  summary: Default youtube.captions.update 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      videoId: '500123'
+                      lastUpdated: '2026-01-15T10:30:00Z'
+                      trackKind: asr
+                      language: en
+                      name: Example Title
+                      audioTrackType: commentary
+                      isCC: true
+                      isLarge: true
+                      isEasyReader: true
+                      isDraft: true
+                      isAutoSynced: true
+                      status: failed
         '400':
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: youtube.captions.delete
-      summary: Youtube Delete a caption track
+      summary: Youtube Delete a Caption Track
       description: >-
         Deletes a specified caption track. The authenticated user must own the video that
         the caption track is associated with.
       tags:
-        - Captions
+      - Captions
       parameters:
-        - name: id
-          in: query
-          required: true
-          description: The ID of the caption track to delete.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/key'
+      - name: id
+        in: query
+        required: true
+        description: The ID of the caption track to delete.
+        schema:
+          type: string
+        example: abc123def456
+      - $ref: '#/components/parameters/key'
       responses:
         '204':
           description: The caption track was successfully deleted.
@@ -1159,38 +2284,44 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /videoCategories:
     get:
       operationId: youtube.videoCategories.list
-      summary: Youtube List video categories
+      summary: Youtube List Video Categories
       description: >-
         Returns a list of categories that can be associated with YouTube videos. Provide
         the hl parameter to specify the language for category names and regionCode to filter
         by region.
       tags:
-        - VideoCategories
+      - VideoCategories
       parameters:
-        - $ref: '#/components/parameters/part'
-        - name: regionCode
-          in: query
-          description: >-
-            Instructs the API to return the list of video categories available in the
-            specified country.
-          schema:
-            type: string
-        - name: id
-          in: query
-          description: Comma-separated list of video category IDs to retrieve.
-          schema:
-            type: string
-        - name: hl
-          in: query
-          description: >-
-            Specifies the language that will be used for text values in the API response.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - name: regionCode
+        in: query
+        description: >-
+          Instructs the API to return the list of video categories available in the
+          specified country.
+        schema:
+          type: string
+        example: US
+      - name: id
+        in: query
+        description: Comma-separated list of video category IDs to retrieve.
+        schema:
+          type: string
+        example: abc123def456
+      - name: hl
+        in: query
+        description: >-
+          Specifies the language that will be used for text values in the API response.
+        schema:
+          type: string
+        example: example_value
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       responses:
         '200':
           description: Successful response containing a list of video category resources.
@@ -1198,29 +2329,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/VideoCategoryListResponse'
+              examples:
+                YoutubeVideocategoriesList200Example:
+                  summary: Default youtube.videoCategories.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        channelId: '500123'
+                        title: Example Title
+                        assignable: true
         '400':
           $ref: '#/components/responses/BadRequest'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /i18nLanguages:
     get:
       operationId: youtube.i18nLanguages.list
-      summary: Youtube List i18n languages
+      summary: Youtube List I18n Languages
       description: >-
         Returns a list of application languages that the YouTube website supports. The list
         includes both the language code and the human-readable name of each supported language.
       tags:
-        - I18n
+      - I18n
       parameters:
-        - $ref: '#/components/parameters/part'
-        - name: hl
-          in: query
-          description: >-
-            Specifies the language that should be used for text values in the API response.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - name: hl
+        in: query
+        description: >-
+          Specifies the language that should be used for text values in the API response.
+        schema:
+          type: string
+        example: example_value
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       responses:
         '200':
           description: Successful response containing a list of i18n language resources.
@@ -1228,30 +2378,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/I18nLanguageListResponse'
+              examples:
+                YoutubeI18nlanguagesList200Example:
+                  summary: Default youtube.i18nLanguages.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        hl: example_value
+                        name: Example Title
         '400':
           $ref: '#/components/responses/BadRequest'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /i18nRegions:
     get:
       operationId: youtube.i18nRegions.list
-      summary: Youtube List i18n regions
+      summary: Youtube List I18n Regions
       description: >-
         Returns a list of content regions that the YouTube website supports. The list
         includes region codes and human-readable names used for region-specific content
         filtering.
       tags:
-        - I18n
+      - I18n
       parameters:
-        - $ref: '#/components/parameters/part'
-        - name: hl
-          in: query
-          description: >-
-            Specifies the language that should be used for text values in the API response.
-          schema:
-            type: string
-        - $ref: '#/components/parameters/fields'
-        - $ref: '#/components/parameters/key'
+      - $ref: '#/components/parameters/part'
+      - name: hl
+        in: query
+        description: >-
+          Specifies the language that should be used for text values in the API response.
+        schema:
+          type: string
+        example: example_value
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
       responses:
         '200':
           description: Successful response containing a list of i18n region resources.
@@ -1259,10 +2427,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/I18nRegionListResponse'
+              examples:
+                YoutubeI18nregionsList200Example:
+                  summary: Default youtube.i18nRegions.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        gl: example_value
+                        name: Example Title
         '400':
           $ref: '#/components/responses/BadRequest'
         '403':
           $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     oauth2:
@@ -1362,9 +2547,11 @@ components:
         totalResults:
           type: integer
           description: The total number of results in the result set.
+          example: 42
         resultsPerPage:
           type: integer
           description: The number of results included in the API response.
+          example: 10
     VideoSnippet:
       type: object
       description: Basic details about a video, including its title, description, tags, and category.
@@ -1373,15 +2560,19 @@ components:
           type: string
           format: date-time
           description: The date and time when the video was published.
+          example: '2026-01-15T10:30:00Z'
         channelId:
           type: string
           description: The ID of the YouTube channel that published the video.
+          example: '500123'
         title:
           type: string
           description: The video title.
+          example: Example Title
         description:
           type: string
           description: The video description.
+          example: A sample description for this resource.
         thumbnails:
           type: object
           description: A map of thumbnail images associated with the video.
@@ -1397,27 +2588,33 @@ components:
               height:
                 type: integer
                 description: The thumbnail height in pixels.
+          example: example_value
         channelTitle:
           type: string
           description: The channel title of the YouTube channel that published the video.
+          example: example_value
         tags:
           type: array
           description: A list of keyword tags associated with the video.
           items:
             type: string
+          example: []
         categoryId:
           type: string
           description: The YouTube video category associated with the video.
+          example: '500123'
         liveBroadcastContent:
           type: string
           description: Indicates if the video is an upcoming/active live broadcast.
           enum:
-            - live
-            - none
-            - upcoming
+          - live
+          - none
+          - upcoming
+          example: live
         defaultLanguage:
           type: string
           description: The language of the text in the video resource's snippet.title and snippet.description properties.
+          example: en
         localized:
           type: object
           description: The snippet.localized object contains either a localized title and description for the video or the title in the default language.
@@ -1428,6 +2625,7 @@ components:
             description:
               type: string
               description: The localized video description.
+          example: example_value
     VideoStatistics:
       type: object
       description: Statistics about the video such as the number of times the video has been viewed or liked.
@@ -1435,18 +2633,23 @@ components:
         viewCount:
           type: string
           description: The number of times the video has been viewed.
+          example: 42
         likeCount:
           type: string
           description: The number of users who have indicated that they liked the video.
+          example: 42
         dislikeCount:
           type: string
           description: The number of users who have indicated that they disliked the video.
+          example: 42
         favoriteCount:
           type: string
           description: The number of users who have added the video to their favorites list.
+          example: 42
         commentCount:
           type: string
           description: The number of comments for the video.
+          example: 42
     VideoContentDetails:
       type: object
       description: Information about the video content, including the length of the video and an indication of whether captions are available.
@@ -1454,30 +2657,36 @@ components:
         duration:
           type: string
           description: The length of the video in ISO 8601 format.
+          example: example_value
         dimension:
           type: string
           description: >-
             Indicates whether the video is available in 3D or in 2D.
+          example: example_value
         definition:
           type: string
           description: Indicates whether the video is available in high definition or standard definition.
           enum:
-            - hd
-            - sd
+          - hd
+          - sd
+          example: hd
         caption:
           type: string
           description: Indicates whether captions are available for the video.
           enum:
-            - 'false'
-            - 'true'
+          - 'false'
+          - 'true'
+          example: 'false'
         licensedContent:
           type: boolean
           description: >-
             Indicates whether the video represents licensed content, which means that the
             content has been claimed by a YouTube content partner.
+          example: true
         contentRating:
           type: object
           description: Specifies the ratings that the video received under various rating schemes.
+          example: example_value
     VideoStatus:
       type: object
       description: The status of an uploaded video.
@@ -1486,35 +2695,41 @@ components:
           type: string
           description: The status of the uploaded video.
           enum:
-            - deleted
-            - failed
-            - processed
-            - rejected
-            - uploaded
+          - deleted
+          - failed
+          - processed
+          - rejected
+          - uploaded
+          example: deleted
         privacyStatus:
           type: string
           description: The video's privacy status.
           enum:
-            - private
-            - public
-            - unlisted
+          - private
+          - public
+          - unlisted
+          example: private
         license:
           type: string
           description: The video's license.
           enum:
-            - creativeCommon
-            - youtube
+          - creativeCommon
+          - youtube
+          example: creativeCommon
         embeddable:
           type: boolean
           description: Indicates whether the video can be embedded on another website.
+          example: true
         publicStatsViewable:
           type: boolean
           description: >-
             Indicates whether the video's extended statistics on the video's watch page are
             publicly viewable.
+          example: true
         madeForKids:
           type: boolean
           description: Indicates whether the video is designated as child-directed.
+          example: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
     VideoPlayer:
       type: object
       description: Information used to play the video.
@@ -1522,29 +2737,35 @@ components:
         embedHtml:
           type: string
           description: An iframe tag that embeds a player that will play the video.
+          example: example_value
         embedHeight:
           type: number
           description: The height of the embedded player returned in the player.embedHtml property.
+          example: 42.5
         embedWidth:
           type: number
           description: The width of the embedded player returned in the player.embedHtml property.
+          example: 42.5
     Video:
       type: object
       description: A video resource represents a YouTube video.
       required:
-        - kind
-        - etag
+      - kind
+      - etag
       properties:
         kind:
           type: string
           description: Identifies the API resource's type. Value is youtube#video.
           default: youtube#video
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         id:
           type: string
           description: The ID that YouTube uses to uniquely identify the video.
+          example: abc123def456
         snippet:
           $ref: '#/components/schemas/VideoSnippet'
         contentDetails:
@@ -1567,6 +2788,7 @@ components:
               description:
                 type: string
                 description: The localized video description.
+          example: example_value
     VideoListResponse:
       type: object
       description: A list of video resources matching the request criteria.
@@ -1575,19 +2797,23 @@ components:
           type: string
           description: Identifies the API resource's type. Value is youtube#videoListResponse.
           default: youtube#videoListResponse
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         nextPageToken:
           type: string
           description: >-
             The token that can be used as the pageToken parameter to retrieve the next page
             of results in the result set.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         prevPageToken:
           type: string
           description: >-
             The token that can be used as the pageToken parameter to retrieve the previous
             page of results in the result set.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         pageInfo:
           $ref: '#/components/schemas/PageInfo'
         items:
@@ -1595,6 +2821,7 @@ components:
           description: A list of videos that match the request criteria.
           items:
             $ref: '#/components/schemas/Video'
+          example: []
     ChannelSnippet:
       type: object
       description: Basic details about a channel, including its title, description, and thumbnails.
@@ -1602,16 +2829,20 @@ components:
         title:
           type: string
           description: The channel title.
+          example: Example Title
         description:
           type: string
           description: The channel description.
+          example: A sample description for this resource.
         customUrl:
           type: string
           description: The channel's custom URL.
+          example: https://www.example.com
         publishedAt:
           type: string
           format: date-time
           description: The date and time that the channel was created.
+          example: '2026-01-15T10:30:00Z'
         thumbnails:
           type: object
           description: A map of thumbnail images associated with the channel.
@@ -1627,9 +2858,11 @@ components:
               height:
                 type: integer
                 description: The thumbnail height in pixels.
+          example: example_value
         country:
           type: string
           description: The country with which the channel is associated.
+          example: 42
         localized:
           type: object
           description: The snippet.localized object contains a localized title and description for the channel.
@@ -1640,6 +2873,7 @@ components:
             description:
               type: string
               description: The localized channel description.
+          example: example_value
     ChannelStatistics:
       type: object
       description: Statistics about a YouTube channel.
@@ -1647,32 +2881,39 @@ components:
         viewCount:
           type: string
           description: The number of times the channel has been viewed.
+          example: 42
         subscriberCount:
           type: string
           description: The number of subscribers that the channel has.
+          example: 42
         hiddenSubscriberCount:
           type: boolean
           description: Indicates whether the channel's subscriber count is publicly visible.
+          example: 42
         videoCount:
           type: string
           description: The number of public videos uploaded to the channel.
+          example: 42
     Channel:
       type: object
       description: A channel resource represents a YouTube channel.
       required:
-        - kind
-        - etag
+      - kind
+      - etag
       properties:
         kind:
           type: string
           description: Identifies the API resource's type. Value is youtube#channel.
           default: youtube#channel
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         id:
           type: string
           description: The ID that YouTube uses to uniquely identify the channel.
+          example: abc123def456
         snippet:
           $ref: '#/components/schemas/ChannelSnippet'
         statistics:
@@ -1691,6 +2932,7 @@ components:
                 likes:
                   type: string
                   description: The ID of the playlist that contains the videos that the channel has liked.
+          example: example_value
         brandingSettings:
           type: object
           description: The brandingSettings object encapsulates information about the branding of the channel.
@@ -1718,6 +2960,7 @@ components:
                 bannerExternalUrl:
                   type: string
                   description: The URL for the banner image shown on the channel page on the YouTube website.
+          example: example_value
     ChannelListResponse:
       type: object
       description: A list of channel resources matching the request criteria.
@@ -1726,15 +2969,19 @@ components:
           type: string
           description: Identifies the API resource's type. Value is youtube#channelListResponse.
           default: youtube#channelListResponse
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         nextPageToken:
           type: string
           description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         prevPageToken:
           type: string
           description: The token for the previous page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         pageInfo:
           $ref: '#/components/schemas/PageInfo'
         items:
@@ -1742,23 +2989,27 @@ components:
           description: A list of channels that match the request criteria.
           items:
             $ref: '#/components/schemas/Channel'
+          example: []
     Playlist:
       type: object
       description: A playlist resource represents a YouTube playlist.
       required:
-        - kind
-        - etag
+      - kind
+      - etag
       properties:
         kind:
           type: string
           description: Identifies the API resource's type. Value is youtube#playlist.
           default: youtube#playlist
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         id:
           type: string
           description: The ID that YouTube uses to uniquely identify the playlist.
+          example: abc123def456
         snippet:
           type: object
           description: Basic details about the playlist such as its title, description, and thumbnails.
@@ -1790,6 +3041,7 @@ components:
             defaultLanguage:
               type: string
               description: The language of the text in the playlist resource's snippet.title and snippet.description properties.
+          example: example_value
         status:
           type: object
           description: The status object contains status information for the playlist.
@@ -1798,9 +3050,10 @@ components:
               type: string
               description: The playlist's privacy status.
               enum:
-                - private
-                - public
-                - unlisted
+              - private
+              - public
+              - unlisted
+          example: example_value
         contentDetails:
           type: object
           description: The contentDetails object contains information about the playlist content.
@@ -1808,6 +3061,7 @@ components:
             itemCount:
               type: integer
               description: The number of videos in the playlist.
+          example: example_value
     PlaylistListResponse:
       type: object
       description: A list of playlist resources matching the request criteria.
@@ -1816,15 +3070,19 @@ components:
           type: string
           description: Identifies the API resource's type. Value is youtube#playlistListResponse.
           default: youtube#playlistListResponse
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         nextPageToken:
           type: string
           description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         prevPageToken:
           type: string
           description: The token for the previous page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         pageInfo:
           $ref: '#/components/schemas/PageInfo'
         items:
@@ -1832,23 +3090,27 @@ components:
           description: A list of playlists that match the request criteria.
           items:
             $ref: '#/components/schemas/Playlist'
+          example: []
     PlaylistItem:
       type: object
       description: A playlistItem resource identifies another resource, such as a video, that is included in a playlist.
       required:
-        - kind
-        - etag
+      - kind
+      - etag
       properties:
         kind:
           type: string
           description: Identifies the API resource's type. Value is youtube#playlistItem.
           default: youtube#playlistItem
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         id:
           type: string
           description: The ID that YouTube uses to uniquely identify the playlist item.
+          example: abc123def456
         snippet:
           type: object
           description: Basic details about the playlist item such as its title and position in the playlist.
@@ -1888,6 +3150,7 @@ components:
                 videoId:
                   type: string
                   description: If the snippet.resourceId.kind property has a value of youtube#video, this property is present.
+          example: example_value
         contentDetails:
           type: object
           description: The contentDetails object is included in the resource if the included item is a YouTube video.
@@ -1899,6 +3162,7 @@ components:
               type: string
               format: date-time
               description: The date and time that the video was published to YouTube.
+          example: example_value
         status:
           type: object
           description: The status object contains information about the playlist item's privacy status.
@@ -1906,6 +3170,7 @@ components:
             privacyStatus:
               type: string
               description: The playlist item's privacy status.
+          example: example_value
     PlaylistItemListResponse:
       type: object
       description: A list of playlist item resources matching the request criteria.
@@ -1914,15 +3179,19 @@ components:
           type: string
           description: Identifies the API resource's type. Value is youtube#playlistItemListResponse.
           default: youtube#playlistItemListResponse
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         nextPageToken:
           type: string
           description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         prevPageToken:
           type: string
           description: The token for the previous page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         pageInfo:
           $ref: '#/components/schemas/PageInfo'
         items:
@@ -1930,6 +3199,7 @@ components:
           description: A list of playlist items that match the request criteria.
           items:
             $ref: '#/components/schemas/PlaylistItem'
+          example: []
     SearchResult:
       type: object
       description: A search result contains information about a YouTube video, channel, or playlist that matches the search query.
@@ -1938,9 +3208,11 @@ components:
           type: string
           description: Identifies the API resource's type. Value is youtube#searchResult.
           default: youtube#searchResult
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         id:
           type: object
           description: The id object contains information that can be used to uniquely identify the resource that matches the search request.
@@ -1957,6 +3229,7 @@ components:
             playlistId:
               type: string
               description: If the id.kind property's value is youtube#playlist, then this property is present.
+          example: abc123def456
         snippet:
           type: object
           description: The snippet object contains basic details about a search result, such as its title or description.
@@ -1983,6 +3256,7 @@ components:
             liveBroadcastContent:
               type: string
               description: An indication of whether a video or channel resource has live broadcast content.
+          example: example_value
     SearchListResponse:
       type: object
       description: A list of search results matching the query criteria.
@@ -1991,18 +3265,23 @@ components:
           type: string
           description: Identifies the API resource's type. Value is youtube#searchListResponse.
           default: youtube#searchListResponse
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         nextPageToken:
           type: string
           description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         prevPageToken:
           type: string
           description: The token for the previous page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         regionCode:
           type: string
           description: The region code that was used for the search query.
+          example: US
         pageInfo:
           $ref: '#/components/schemas/PageInfo'
         items:
@@ -2010,23 +3289,27 @@ components:
           description: A list of results that match the search criteria.
           items:
             $ref: '#/components/schemas/SearchResult'
+          example: []
     Subscription:
       type: object
       description: A subscription resource contains information about a YouTube user's subscription to a channel.
       required:
-        - kind
-        - etag
+      - kind
+      - etag
       properties:
         kind:
           type: string
           description: Identifies the API resource's type. Value is youtube#subscription.
           default: youtube#subscription
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         id:
           type: string
           description: The ID that YouTube uses to uniquely identify the subscription.
+          example: abc123def456
         snippet:
           type: object
           description: The snippet object contains basic details about the subscription.
@@ -2057,6 +3340,7 @@ components:
             thumbnails:
               type: object
               description: A map of thumbnail images associated with the subscription.
+          example: example_value
     SubscriptionListResponse:
       type: object
       description: A list of subscription resources matching the request criteria.
@@ -2065,15 +3349,19 @@ components:
           type: string
           description: Identifies the API resource's type. Value is youtube#subscriptionListResponse.
           default: youtube#subscriptionListResponse
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         nextPageToken:
           type: string
           description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         prevPageToken:
           type: string
           description: The token for the previous page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         pageInfo:
           $ref: '#/components/schemas/PageInfo'
         items:
@@ -2081,23 +3369,27 @@ components:
           description: A list of subscriptions that match the request criteria.
           items:
             $ref: '#/components/schemas/Subscription'
+          example: []
     Comment:
       type: object
       description: A comment resource contains information about a single YouTube comment.
       required:
-        - kind
-        - etag
+      - kind
+      - etag
       properties:
         kind:
           type: string
           description: Identifies the API resource's type. Value is youtube#comment.
           default: youtube#comment
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         id:
           type: string
           description: The ID that YouTube uses to uniquely identify the comment.
+          example: abc123def456
         snippet:
           type: object
           description: The snippet object contains basic details about the comment.
@@ -2153,10 +3445,11 @@ components:
               type: string
               description: The comment's moderation status.
               enum:
-                - heldForReview
-                - likelySpam
-                - published
-                - rejected
+              - heldForReview
+              - likelySpam
+              - published
+              - rejected
+          example: example_value
     CommentListResponse:
       type: object
       description: A list of comment resources matching the request criteria.
@@ -2165,12 +3458,15 @@ components:
           type: string
           description: Identifies the API resource's type. Value is youtube#commentListResponse.
           default: youtube#commentListResponse
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         nextPageToken:
           type: string
           description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         pageInfo:
           $ref: '#/components/schemas/PageInfo'
         items:
@@ -2178,23 +3474,27 @@ components:
           description: A list of comments that match the request criteria.
           items:
             $ref: '#/components/schemas/Comment'
+          example: []
     CommentThread:
       type: object
       description: A commentThread resource contains information about a YouTube comment thread, which comprises a top-level comment and replies.
       required:
-        - kind
-        - etag
+      - kind
+      - etag
       properties:
         kind:
           type: string
           description: Identifies the API resource's type. Value is youtube#commentThread.
           default: youtube#commentThread
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         id:
           type: string
           description: The ID that YouTube uses to uniquely identify the comment thread.
+          example: abc123def456
         snippet:
           type: object
           description: The snippet object contains basic details about the comment thread.
@@ -2216,6 +3516,7 @@ components:
             isPublic:
               type: boolean
               description: Indicates whether the thread, including all of its comments and comment replies, is visible to all YouTube users.
+          example: example_value
         replies:
           type: object
           description: The replies object contains a list of replies to the top-level comment.
@@ -2225,6 +3526,7 @@ components:
               description: A limited number of replies to the top-level comment.
               items:
                 $ref: '#/components/schemas/Comment'
+          example: example_value
     CommentThreadListResponse:
       type: object
       description: A list of comment thread resources matching the request criteria.
@@ -2233,12 +3535,15 @@ components:
           type: string
           description: Identifies the API resource's type. Value is youtube#commentThreadListResponse.
           default: youtube#commentThreadListResponse
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         nextPageToken:
           type: string
           description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
         pageInfo:
           $ref: '#/components/schemas/PageInfo'
         items:
@@ -2246,23 +3551,27 @@ components:
           description: A list of comment threads that match the request criteria.
           items:
             $ref: '#/components/schemas/CommentThread'
+          example: []
     Caption:
       type: object
       description: A caption resource represents a YouTube caption track. A caption track is associated with exactly one YouTube video.
       required:
-        - kind
-        - etag
+      - kind
+      - etag
       properties:
         kind:
           type: string
           description: Identifies the API resource's type. Value is youtube#caption.
           default: youtube#caption
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         id:
           type: string
           description: The ID that YouTube uses to uniquely identify the caption track.
+          example: abc123def456
         snippet:
           type: object
           description: The snippet object contains basic details about the caption.
@@ -2278,9 +3587,9 @@ components:
               type: string
               description: The caption track's type.
               enum:
-                - asr
-                - forced
-                - standard
+              - asr
+              - forced
+              - standard
             language:
               type: string
               description: The language of the caption track. The property value is a BCP-47 language tag.
@@ -2291,10 +3600,10 @@ components:
               type: string
               description: The type of audio track associated with the caption track.
               enum:
-                - commentary
-                - descriptive
-                - primary
-                - unknown
+              - commentary
+              - descriptive
+              - primary
+              - unknown
             isCC:
               type: boolean
               description: Indicates whether the track contains closed captions for the deaf and hard of hearing.
@@ -2317,9 +3626,10 @@ components:
               type: string
               description: The caption track's status.
               enum:
-                - failed
-                - serving
-                - syncing
+              - failed
+              - serving
+              - syncing
+          example: example_value
     CaptionListResponse:
       type: object
       description: A list of caption resources associated with the specified video.
@@ -2328,14 +3638,17 @@ components:
           type: string
           description: Identifies the API resource's type. Value is youtube#captionListResponse.
           default: youtube#captionListResponse
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         items:
           type: array
           description: A list of captions that match the request criteria.
           items:
             $ref: '#/components/schemas/Caption'
+          example: []
     VideoCategory:
       type: object
       description: A videoCategory resource identifies a category that has been or could be associated with uploaded videos.
@@ -2344,12 +3657,15 @@ components:
           type: string
           description: Identifies the API resource's type. Value is youtube#videoCategory.
           default: youtube#videoCategory
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         id:
           type: string
           description: The ID that YouTube uses to uniquely identify the video category.
+          example: abc123def456
         snippet:
           type: object
           description: The snippet object contains basic details about the video category.
@@ -2363,6 +3679,7 @@ components:
             assignable:
               type: boolean
               description: Indicates whether videos can be associated with the category.
+          example: example_value
     VideoCategoryListResponse:
       type: object
       description: A list of video category resources matching the request criteria.
@@ -2371,14 +3688,17 @@ components:
           type: string
           description: Identifies the API resource's type. Value is youtube#videoCategoryListResponse.
           default: youtube#videoCategoryListResponse
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         items:
           type: array
           description: A list of video categories that match the request criteria.
           items:
             $ref: '#/components/schemas/VideoCategory'
+          example: []
     I18nLanguageListResponse:
       type: object
       description: A list of i18n language resources supported by the YouTube website.
@@ -2387,9 +3707,11 @@ components:
           type: string
           description: Identifies the API resource's type. Value is youtube#i18nLanguageListResponse.
           default: youtube#i18nLanguageListResponse
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         items:
           type: array
           description: A list of supported i18n languages.
@@ -2415,6 +3737,7 @@ components:
                   name:
                     type: string
                     description: The name of the language as it is written in the language itself.
+          example: []
     I18nRegionListResponse:
       type: object
       description: A list of i18n region resources supported by the YouTube website.
@@ -2423,9 +3746,11 @@ components:
           type: string
           description: Identifies the API resource's type. Value is youtube#i18nRegionListResponse.
           default: youtube#i18nRegionListResponse
+          example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
         items:
           type: array
           description: A list of regions where YouTube is available.
@@ -2451,6 +3776,7 @@ components:
                   name:
                     type: string
                     description: The name of the region.
+          example: []
     ErrorResponse:
       type: object
       description: A standard error response returned by the YouTube Data API.
@@ -2480,3 +3806,4 @@ components:
                   reason:
                     type: string
                     description: The reason for the error.
+          example: example_value

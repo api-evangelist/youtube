@@ -1,0 +1,134 @@
+{
+  "type": "object",
+  "description": "A list of comment resources matching the request criteria.",
+  "name": "CommentListResponse",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#commentListResponse."
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource."
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "The token for the next page of results."
+    },
+    "pageInfo": {
+      "type": "object",
+      "description": "Paging details for a list operation, including information about the total number of resources and the number per page.",
+      "properties": {
+        "totalResults": {
+          "type": "integer",
+          "description": "The total number of results in the result set."
+        },
+        "resultsPerPage": {
+          "type": "integer",
+          "description": "The number of results included in the API response."
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of comments that match the request criteria.",
+      "items": {
+        "type": "object",
+        "description": "A comment resource contains information about a single YouTube comment.",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Identifies the API resource's type. Value is youtube#comment."
+          },
+          "etag": {
+            "type": "string",
+            "description": "The Etag of this resource."
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID that YouTube uses to uniquely identify the comment."
+          },
+          "snippet": {
+            "type": "object",
+            "description": "The snippet object contains basic details about the comment.",
+            "properties": {
+              "textOriginal": {
+                "type": "string",
+                "description": "The original text of the comment as it was initially posted."
+              },
+              "textDisplay": {
+                "type": "string",
+                "description": "The comment text as displayed to users."
+              },
+              "authorDisplayName": {
+                "type": "string",
+                "description": "The display name of the user who posted the comment."
+              },
+              "authorProfileImageUrl": {
+                "type": "string",
+                "description": "The URL for the avatar of the user who posted the comment."
+              },
+              "authorChannelUrl": {
+                "type": "string",
+                "description": "A link to the YouTube channel of the comment's author."
+              },
+              "authorChannelId": {
+                "type": "object",
+                "description": "An object that encapsulates information about the comment author's YouTube channel.",
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "description": "The author's YouTube channel ID."
+                  }
+                }
+              },
+              "likeCount": {
+                "type": "integer",
+                "description": "The total number of likes that the comment has received."
+              },
+              "viewerRating": {
+                "type": "string",
+                "description": "The rating the viewer has given to this comment. Note that this property does not currently identify dislike ratings."
+              },
+              "publishedAt": {
+                "type": "datetime",
+                "description": "The date and time when the comment was originally published."
+              },
+              "updatedAt": {
+                "type": "datetime",
+                "description": "The date and time when the comment was last updated."
+              },
+              "videoId": {
+                "type": "string",
+                "description": "The ID of the video the comment refers to."
+              },
+              "parentId": {
+                "type": "string",
+                "description": "The unique ID of the parent comment."
+              },
+              "canRate": {
+                "type": "boolean",
+                "description": "Indicates whether the current viewer can rate the comment."
+              },
+              "moderationStatus": {
+                "type": "string",
+                "description": "The comment's moderation status.",
+                "enum": [
+                  "heldForReview",
+                  "likelySpam",
+                  "published",
+                  "rejected"
+                ]
+              }
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag"
+        ]
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

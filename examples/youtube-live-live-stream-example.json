@@ -1,0 +1,21 @@
+{
+  "kind": "youtube#video",
+  "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+  "id": "abc123def456",
+  "snippet": {
+    "channelId": "500123",
+    "title": "Example Title",
+    "description": "A sample description for this resource.",
+    "publishedAt": "2026-01-15T10:30:00Z",
+    "isDefaultStream": 1
+  },
+  "cdn": "example_value",
+  "status": {
+    "streamStatus": "active",
+    "healthStatus": "example_value"
+  },
+  "contentDetails": {
+    "boundBroadcastId": "500123",
+    "isReusable": 1
+  }
+}

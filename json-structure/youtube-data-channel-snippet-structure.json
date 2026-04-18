@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "description": "Basic details about a channel, including its title, description, and thumbnails.",
+  "name": "ChannelSnippet",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The channel title."
+    },
+    "description": {
+      "type": "string",
+      "description": "The channel description."
+    },
+    "customUrl": {
+      "type": "string",
+      "description": "The channel's custom URL."
+    },
+    "publishedAt": {
+      "type": "datetime",
+      "description": "The date and time that the channel was created."
+    },
+    "thumbnails": {
+      "type": "object",
+      "description": "A map of thumbnail images associated with the channel."
+    },
+    "country": {
+      "type": "string",
+      "description": "The country with which the channel is associated."
+    },
+    "localized": {
+      "type": "object",
+      "description": "The snippet.localized object contains a localized title and description for the channel.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The localized channel title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The localized channel description."
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

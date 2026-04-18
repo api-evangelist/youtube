@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "description": "Paging details for a list operation, including information about the total number of resources and the number per page.",
+  "properties": {
+    "totalResults": {
+      "type": "integer",
+      "description": "The total number of results in the result set.",
+      "example": 42
+    },
+    "resultsPerPage": {
+      "type": "integer",
+      "description": "The number of results included in the API response.",
+      "example": 10
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PageInfo",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-data-api-openapi.yml"
+}

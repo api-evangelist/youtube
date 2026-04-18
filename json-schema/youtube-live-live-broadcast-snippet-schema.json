@@ -1,0 +1,70 @@
+{
+  "type": "object",
+  "description": "Basic details about a live broadcast including its title, description, and scheduled start and end times.",
+  "properties": {
+    "publishedAt": {
+      "type": "string",
+      "description": "The date and time that the broadcast was added to YouTube's live broadcast schedule.",
+      "example": "2026-01-15T10:30:00Z",
+      "format": "date-time"
+    },
+    "channelId": {
+      "type": "string",
+      "description": "The ID of the channel to which this broadcast is affiliated.",
+      "example": "500123"
+    },
+    "title": {
+      "type": "string",
+      "description": "The broadcast's title. The title is a required field when inserting a broadcast.",
+      "example": "Example Title"
+    },
+    "description": {
+      "type": "string",
+      "description": "The broadcast's description.",
+      "example": "A sample description for this resource."
+    },
+    "thumbnails": {
+      "type": "object",
+      "description": "A map of thumbnail images associated with the broadcast.",
+      "example": "example_value"
+    },
+    "scheduledStartTime": {
+      "type": "string",
+      "description": "The date and time that the broadcast is scheduled to begin.",
+      "example": "2026-01-15T10:30:00Z",
+      "format": "date-time"
+    },
+    "scheduledEndTime": {
+      "type": "string",
+      "description": "The date and time that the broadcast is scheduled to end.",
+      "example": "2026-01-15T10:30:00Z",
+      "format": "date-time"
+    },
+    "actualStartTime": {
+      "type": "string",
+      "description": "The date and time that the broadcast actually started.",
+      "example": "2026-01-15T10:30:00Z",
+      "format": "date-time"
+    },
+    "actualEndTime": {
+      "type": "string",
+      "description": "The date and time that the broadcast actually ended.",
+      "example": "2026-01-15T10:30:00Z",
+      "format": "date-time"
+    },
+    "liveChatId": {
+      "type": "string",
+      "description": "The live chat ID associated with the broadcast.",
+      "example": "500123"
+    },
+    "isDefaultBroadcast": {
+      "type": "boolean",
+      "description": "Indicates whether this broadcast is the default broadcast.",
+      "example": true
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LiveBroadcastSnippet",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-live-streaming-openapi.yml"
+}

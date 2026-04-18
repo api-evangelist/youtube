@@ -1,0 +1,14 @@
+{
+  "boundStreamId": "500123",
+  "boundStreamLastUpdateTimeMs": "example_value",
+  "monitorStream": "example_value",
+  "enableEmbed": 1,
+  "enableDvr": 1,
+  "enableContentEncryption": 1,
+  "startWithSlate": 1,
+  "closedCaptionsType": "closedCaptionsDisabled",
+  "enableLowLatency": 1,
+  "latencyPreference": "low",
+  "enableAutoStart": 1,
+  "enableAutoStop": 1
+}

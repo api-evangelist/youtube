@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "description": "Describes the content of a YouTube Analytics group in terms of the number of items it contains and the type of items it contains.",
+  "properties": {
+    "itemCount": {
+      "type": "integer",
+      "description": "The number of items in the group.",
+      "example": 42,
+      "format": "int64"
+    },
+    "itemType": {
+      "type": "string",
+      "description": "The type of resources contained in the group. Valid values are youtube#channel, youtube#playlist, youtube#video, and youtubePartner#asset.",
+      "example": "youtube#channel",
+      "enum": [
+        "youtube#channel",
+        "youtube#playlist",
+        "youtube#video",
+        "youtubePartner#asset"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GroupContentDetails",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-analytics-openapi.yml"
+}

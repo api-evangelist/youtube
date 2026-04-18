@@ -1,0 +1,811 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "YouTube Live Streaming API"
+  description: "The YouTube Live Streaming API lets you create, update, and manage live video broadcasts and live video streams on YouTube. The API provides resources for liveBroadcasts, liveStreams, liveChatMessages, liveChatModerators, liveChatBans, and superChatEvents. Broadcasts are scheduled events that viewers can watch live, while streams are the actual video feed bound to a broadcast."
+  tags:
+    - YouTube
+    - Live Streaming
+    - Broadcasts
+    - Live Chat
+    - Video Streaming
+    - Google Cloud
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      YOUTUBE_API_KEY: YOUTUBE_API_KEY
+      YOUTUBE_OAUTH_TOKEN: YOUTUBE_OAUTH_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: youtube-live-streaming
+      baseUri: https://www.googleapis.com/youtube/v3
+      description: "YouTube Live Streaming API for managing live broadcasts, streams, chat messages, and moderators."
+      authentication:
+        type: bearer
+        token: "{{YOUTUBE_OAUTH_TOKEN}}"
+      resources:
+        - name: live-broadcasts
+          path: /liveBroadcasts
+          description: "Operations for managing YouTube live broadcast events"
+          operations:
+            - name: list-live-broadcasts
+              method: GET
+              description: "Returns a list of YouTube broadcasts that match the API request parameters"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of YouTube broadcast IDs for the resources being retrieved."
+                - name: mine
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Set to true to return only broadcasts owned by the authenticated user."
+                - name: broadcastStatus
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filters the API response to only include broadcasts with the specified status."
+                - name: broadcastType
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filters results by the type of broadcast."
+                - name: maxResults
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items that should be returned."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies a specific page in the result set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: insert-live-broadcast
+              method: POST
+              description: "Creates a broadcast"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-live-broadcast
+              method: PUT
+              description: "Updates a broadcast's settings"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to update."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-live-broadcast
+              method: DELETE
+              description: "Deletes a broadcast"
+              inputParameters:
+                - name: id
+                  in: query
+                  type: string
+                  required: true
+                  description: "The ID of the broadcast to delete."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: live-broadcast-bind
+          path: /liveBroadcasts/bind
+          description: "Operations for binding YouTube broadcasts to streams"
+          operations:
+            - name: bind-live-broadcast
+              method: POST
+              description: "Binds a YouTube broadcast to a stream or removes an existing binding"
+              inputParameters:
+                - name: id
+                  in: query
+                  type: string
+                  required: true
+                  description: "The unique ID of the broadcast that is being bound to a video stream."
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: streamId
+                  in: query
+                  type: string
+                  required: false
+                  description: "The unique ID of the video stream that is being bound to a broadcast."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: live-broadcast-transition
+          path: /liveBroadcasts/transition
+          description: "Operations for transitioning YouTube broadcast states"
+          operations:
+            - name: transition-live-broadcast
+              method: POST
+              description: "Changes the status of a YouTube live broadcast"
+              inputParameters:
+                - name: id
+                  in: query
+                  type: string
+                  required: true
+                  description: "The unique ID of the broadcast that is transitioning to another status."
+                - name: broadcastStatus
+                  in: query
+                  type: string
+                  required: true
+                  description: "The broadcastStatus parameter identifies the state to which the broadcast is changing."
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: live-streams
+          path: /liveStreams
+          description: "Operations for managing YouTube live video streams"
+          operations:
+            - name: list-live-streams
+              method: GET
+              description: "Returns a list of video streams that match the API request parameters"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of live stream IDs for the resources being retrieved."
+                - name: mine
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Set to true to return only streams owned by the authenticated user."
+                - name: maxResults
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items that should be returned."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies a specific page in the result set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: insert-live-stream
+              method: POST
+              description: "Creates a video stream"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-live-stream
+              method: PUT
+              description: "Updates a video stream"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to update."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-live-stream
+              method: DELETE
+              description: "Deletes a video stream"
+              inputParameters:
+                - name: id
+                  in: query
+                  type: string
+                  required: true
+                  description: "The ID of the live stream to delete."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: live-chat-messages
+          path: /liveChatMessages
+          description: "Operations for managing messages in YouTube live chat"
+          operations:
+            - name: list-live-chat-messages
+              method: GET
+              description: "Lists live chat messages for a specific live broadcast"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: liveChatId
+                  in: query
+                  type: string
+                  required: true
+                  description: "The liveChatId parameter specifies the ID of the live chat whose messages will be returned."
+                - name: maxResults
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items that should be returned."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies a specific page in the result set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: insert-live-chat-message
+              method: POST
+              description: "Adds a message to a live chat"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-live-chat-message
+              method: DELETE
+              description: "Deletes a chat message"
+              inputParameters:
+                - name: id
+                  in: query
+                  type: string
+                  required: true
+                  description: "The ID of the live chat message to delete."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: live-chat-moderators
+          path: /liveChatModerators
+          description: "Operations for managing moderators in YouTube live chat"
+          operations:
+            - name: list-live-chat-moderators
+              method: GET
+              description: "Lists moderators for a live chat"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: liveChatId
+                  in: query
+                  type: string
+                  required: true
+                  description: "The liveChatId parameter specifies the YouTube live chat for which the API should return moderators."
+                - name: maxResults
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items that should be returned."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies a specific page in the result set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: insert-live-chat-moderator
+              method: POST
+              description: "Adds a new moderator for a live chat"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-live-chat-moderator
+              method: DELETE
+              description: "Removes a chat moderator"
+              inputParameters:
+                - name: id
+                  in: query
+                  type: string
+                  required: true
+                  description: "The ID of the live chat moderator to remove."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: youtube-live-streaming-rest
+      resources:
+        - path: /v1/live-broadcasts
+          name: live-broadcasts
+          operations:
+            - method: GET
+              name: list-live-broadcasts
+              description: "Returns a list of YouTube broadcasts that match the API request parameters"
+              call: "youtube-live-streaming.list-live-broadcasts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: insert-live-broadcast
+              description: "Creates a broadcast"
+              call: "youtube-live-streaming.insert-live-broadcast"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-live-broadcast
+              description: "Updates a broadcast's settings"
+              call: "youtube-live-streaming.update-live-broadcast"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-live-broadcast
+              description: "Deletes a broadcast"
+              call: "youtube-live-streaming.delete-live-broadcast"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/live-broadcasts-bind
+          name: live-broadcast-bind
+          operations:
+            - method: POST
+              name: bind-live-broadcast
+              description: "Binds a YouTube broadcast to a stream or removes an existing binding"
+              call: "youtube-live-streaming.bind-live-broadcast"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/live-broadcasts-transition
+          name: live-broadcast-transition
+          operations:
+            - method: POST
+              name: transition-live-broadcast
+              description: "Changes the status of a YouTube live broadcast"
+              call: "youtube-live-streaming.transition-live-broadcast"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/live-streams
+          name: live-streams
+          operations:
+            - method: GET
+              name: list-live-streams
+              description: "Returns a list of video streams that match the API request parameters"
+              call: "youtube-live-streaming.list-live-streams"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: insert-live-stream
+              description: "Creates a video stream"
+              call: "youtube-live-streaming.insert-live-stream"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-live-stream
+              description: "Updates a video stream"
+              call: "youtube-live-streaming.update-live-stream"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-live-stream
+              description: "Deletes a video stream"
+              call: "youtube-live-streaming.delete-live-stream"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/live-chat-messages
+          name: live-chat-messages
+          operations:
+            - method: GET
+              name: list-live-chat-messages
+              description: "Lists live chat messages for a specific live broadcast"
+              call: "youtube-live-streaming.list-live-chat-messages"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: insert-live-chat-message
+              description: "Adds a message to a live chat"
+              call: "youtube-live-streaming.insert-live-chat-message"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-live-chat-message
+              description: "Deletes a chat message"
+              call: "youtube-live-streaming.delete-live-chat-message"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/live-chat-moderators
+          name: live-chat-moderators
+          operations:
+            - method: GET
+              name: list-live-chat-moderators
+              description: "Lists moderators for a live chat"
+              call: "youtube-live-streaming.list-live-chat-moderators"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: insert-live-chat-moderator
+              description: "Adds a new moderator for a live chat"
+              call: "youtube-live-streaming.insert-live-chat-moderator"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-live-chat-moderator
+              description: "Removes a chat moderator"
+              call: "youtube-live-streaming.delete-live-chat-moderator"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: youtube-live-streaming-mcp
+      transport: http
+      tools:
+        - name: list-live-broadcasts
+          description: "Returns a list of YouTube broadcasts that match the API request parameters"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-live-streaming.list-live-broadcasts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: insert-live-broadcast
+          description: "Creates a broadcast"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-live-streaming.insert-live-broadcast"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-live-broadcast
+          description: "Updates a broadcast's settings"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "youtube-live-streaming.update-live-broadcast"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-live-broadcast
+          description: "Deletes a broadcast"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-live-streaming.delete-live-broadcast"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: bind-live-broadcast
+          description: "Binds a YouTube broadcast to a stream or removes an existing binding"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-live-streaming.bind-live-broadcast"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: transition-live-broadcast
+          description: "Changes the status of a YouTube live broadcast"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-live-streaming.transition-live-broadcast"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-live-streams
+          description: "Returns a list of video streams that match the API request parameters"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-live-streaming.list-live-streams"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: insert-live-stream
+          description: "Creates a video stream"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-live-streaming.insert-live-stream"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-live-stream
+          description: "Updates a video stream"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "youtube-live-streaming.update-live-stream"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-live-stream
+          description: "Deletes a video stream"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-live-streaming.delete-live-stream"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-live-chat-messages
+          description: "Lists live chat messages for a specific live broadcast"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-live-streaming.list-live-chat-messages"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: insert-live-chat-message
+          description: "Adds a message to a live chat"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-live-streaming.insert-live-chat-message"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-live-chat-message
+          description: "Deletes a chat message"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-live-streaming.delete-live-chat-message"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-live-chat-moderators
+          description: "Lists moderators for a live chat"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-live-streaming.list-live-chat-moderators"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: insert-live-chat-moderator
+          description: "Adds a new moderator for a live chat"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-live-streaming.insert-live-chat-moderator"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-live-chat-moderator
+          description: "Removes a chat moderator"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-live-streaming.delete-live-chat-moderator"
+          outputParameters:
+            - type: object
+              mapping: "$."

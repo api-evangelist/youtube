@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "description": "A videoCategory resource identifies a category that has been or could be associated with uploaded videos.",
+  "name": "VideoCategory",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#videoCategory."
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource."
+    },
+    "id": {
+      "type": "string",
+      "description": "The ID that YouTube uses to uniquely identify the video category."
+    },
+    "snippet": {
+      "type": "object",
+      "description": "The snippet object contains basic details about the video category.",
+      "properties": {
+        "channelId": {
+          "type": "string",
+          "description": "The YouTube channel that created the video category."
+        },
+        "title": {
+          "type": "string",
+          "description": "The video category's title."
+        },
+        "assignable": {
+          "type": "boolean",
+          "description": "Indicates whether videos can be associated with the category."
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "name": "ReportType",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID of the report type."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the report type."
+    },
+    "systemManaged": {
+      "type": "boolean",
+      "description": "Whether the report type is system-managed."
+    },
+    "deprecateTime": {
+      "type": "datetime",
+      "description": "The date and time when the report type was deprecated."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

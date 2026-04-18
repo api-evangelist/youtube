@@ -1,0 +1,13 @@
+{
+  "publishedAt": "2026-01-15T10:30:00Z",
+  "channelId": "500123",
+  "title": "Example Title",
+  "description": "A sample description for this resource.",
+  "thumbnails": "example_value",
+  "scheduledStartTime": "2026-01-15T10:30:00Z",
+  "scheduledEndTime": "2026-01-15T10:30:00Z",
+  "actualStartTime": "2026-01-15T10:30:00Z",
+  "actualEndTime": "2026-01-15T10:30:00Z",
+  "liveChatId": "500123",
+  "isDefaultBroadcast": 1
+}

@@ -1,0 +1,48 @@
+{
+  "type": "object",
+  "description": "The status of an uploaded video.",
+  "name": "VideoStatus",
+  "properties": {
+    "uploadStatus": {
+      "type": "string",
+      "description": "The status of the uploaded video.",
+      "enum": [
+        "deleted",
+        "failed",
+        "processed",
+        "rejected",
+        "uploaded"
+      ]
+    },
+    "privacyStatus": {
+      "type": "string",
+      "description": "The video's privacy status.",
+      "enum": [
+        "private",
+        "public",
+        "unlisted"
+      ]
+    },
+    "license": {
+      "type": "string",
+      "description": "The video's license.",
+      "enum": [
+        "creativeCommon",
+        "youtube"
+      ]
+    },
+    "embeddable": {
+      "type": "boolean",
+      "description": "Indicates whether the video can be embedded on another website."
+    },
+    "publicStatsViewable": {
+      "type": "boolean",
+      "description": "Indicates whether the video's extended statistics on the video's watch page are publicly viewable."
+    },
+    "madeForKids": {
+      "type": "boolean",
+      "description": "Indicates whether the video is designated as child-directed."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

@@ -1,0 +1,70 @@
+{
+  "type": "object",
+  "description": "Basic details about a video, including its title, description, tags, and category.",
+  "name": "VideoSnippet",
+  "properties": {
+    "publishedAt": {
+      "type": "datetime",
+      "description": "The date and time when the video was published."
+    },
+    "channelId": {
+      "type": "string",
+      "description": "The ID of the YouTube channel that published the video."
+    },
+    "title": {
+      "type": "string",
+      "description": "The video title."
+    },
+    "description": {
+      "type": "string",
+      "description": "The video description."
+    },
+    "thumbnails": {
+      "type": "object",
+      "description": "A map of thumbnail images associated with the video."
+    },
+    "channelTitle": {
+      "type": "string",
+      "description": "The channel title of the YouTube channel that published the video."
+    },
+    "tags": {
+      "type": "array",
+      "description": "A list of keyword tags associated with the video.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "categoryId": {
+      "type": "string",
+      "description": "The YouTube video category associated with the video."
+    },
+    "liveBroadcastContent": {
+      "type": "string",
+      "description": "Indicates if the video is an upcoming/active live broadcast.",
+      "enum": [
+        "live",
+        "none",
+        "upcoming"
+      ]
+    },
+    "defaultLanguage": {
+      "type": "string",
+      "description": "The language of the text in the video resource's snippet.title and snippet.description properties."
+    },
+    "localized": {
+      "type": "object",
+      "description": "The snippet.localized object contains either a localized title and description for the video or the title in the default language.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The localized video title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The localized video description."
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

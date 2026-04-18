@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "description": "Statistics about a YouTube channel.",
+  "properties": {
+    "viewCount": {
+      "type": "string",
+      "description": "The number of times the channel has been viewed.",
+      "example": 42
+    },
+    "subscriberCount": {
+      "type": "string",
+      "description": "The number of subscribers that the channel has.",
+      "example": 42
+    },
+    "hiddenSubscriberCount": {
+      "type": "boolean",
+      "description": "Indicates whether the channel's subscriber count is publicly visible.",
+      "example": 42
+    },
+    "videoCount": {
+      "type": "string",
+      "description": "The number of public videos uploaded to the channel.",
+      "example": 42
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChannelStatistics",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-data-api-openapi.yml"
+}

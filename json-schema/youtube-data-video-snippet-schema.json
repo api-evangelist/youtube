@@ -1,0 +1,84 @@
+{
+  "type": "object",
+  "description": "Basic details about a video, including its title, description, tags, and category.",
+  "properties": {
+    "publishedAt": {
+      "type": "string",
+      "description": "The date and time when the video was published.",
+      "example": "2026-01-15T10:30:00Z",
+      "format": "date-time"
+    },
+    "channelId": {
+      "type": "string",
+      "description": "The ID of the YouTube channel that published the video.",
+      "example": "500123"
+    },
+    "title": {
+      "type": "string",
+      "description": "The video title.",
+      "example": "Example Title"
+    },
+    "description": {
+      "type": "string",
+      "description": "The video description.",
+      "example": "A sample description for this resource."
+    },
+    "thumbnails": {
+      "type": "object",
+      "description": "A map of thumbnail images associated with the video.",
+      "example": "example_value"
+    },
+    "channelTitle": {
+      "type": "string",
+      "description": "The channel title of the YouTube channel that published the video.",
+      "example": "example_value"
+    },
+    "tags": {
+      "type": "array",
+      "description": "A list of keyword tags associated with the video.",
+      "example": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "categoryId": {
+      "type": "string",
+      "description": "The YouTube video category associated with the video.",
+      "example": "500123"
+    },
+    "liveBroadcastContent": {
+      "type": "string",
+      "description": "Indicates if the video is an upcoming/active live broadcast.",
+      "example": "live",
+      "enum": [
+        "live",
+        "none",
+        "upcoming"
+      ]
+    },
+    "defaultLanguage": {
+      "type": "string",
+      "description": "The language of the text in the video resource's snippet.title and snippet.description properties.",
+      "example": "en"
+    },
+    "localized": {
+      "type": "object",
+      "description": "The snippet.localized object contains either a localized title and description for the video or the title in the default language.",
+      "example": "example_value",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The localized video title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The localized video description."
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VideoSnippet",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-data-api-openapi.yml"
+}

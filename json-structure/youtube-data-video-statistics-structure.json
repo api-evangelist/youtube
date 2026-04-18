@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "description": "Statistics about the video such as the number of times the video has been viewed or liked.",
+  "name": "VideoStatistics",
+  "properties": {
+    "viewCount": {
+      "type": "string",
+      "description": "The number of times the video has been viewed."
+    },
+    "likeCount": {
+      "type": "string",
+      "description": "The number of users who have indicated that they liked the video."
+    },
+    "dislikeCount": {
+      "type": "string",
+      "description": "The number of users who have indicated that they disliked the video."
+    },
+    "favoriteCount": {
+      "type": "string",
+      "description": "The number of users who have added the video to their favorites list."
+    },
+    "commentCount": {
+      "type": "string",
+      "description": "The number of comments for the video."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

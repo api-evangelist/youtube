@@ -1,0 +1,22 @@
+{
+  "kind": "youtube#video",
+  "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+  "id": "abc123def456",
+  "snippet": {
+    "title": "Example Title",
+    "description": "A sample description for this resource.",
+    "customUrl": "https://www.example.com",
+    "publishedAt": "2026-01-15T10:30:00Z",
+    "thumbnails": "example_value",
+    "country": 42,
+    "localized": "example_value"
+  },
+  "statistics": {
+    "viewCount": 42,
+    "subscriberCount": 42,
+    "hiddenSubscriberCount": 42,
+    "videoCount": 42
+  },
+  "contentDetails": "example_value",
+  "brandingSettings": "example_value"
+}

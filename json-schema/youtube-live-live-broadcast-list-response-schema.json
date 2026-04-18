@@ -1,0 +1,298 @@
+{
+  "type": "object",
+  "description": "A list of live broadcast resources matching the request criteria.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#liveBroadcastListResponse.",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "The token for the next page of results.",
+      "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+    },
+    "prevPageToken": {
+      "type": "string",
+      "description": "The token for the previous page of results.",
+      "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+    },
+    "pageInfo": {
+      "type": "object",
+      "description": "Paging details for a list of live streaming resources.",
+      "properties": {
+        "totalResults": {
+          "type": "integer",
+          "description": "The total number of results in the result set.",
+          "example": 42
+        },
+        "resultsPerPage": {
+          "type": "integer",
+          "description": "The number of results included in the API response.",
+          "example": 10
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of live broadcasts that match the request criteria.",
+      "example": [],
+      "items": {
+        "type": "object",
+        "description": "A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Identifies the API resource's type. Value is youtube#liveBroadcast.",
+            "example": "youtube#video"
+          },
+          "etag": {
+            "type": "string",
+            "description": "The Etag of this resource.",
+            "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID that YouTube assigns to uniquely identify the broadcast.",
+            "example": "abc123def456"
+          },
+          "snippet": {
+            "type": "object",
+            "description": "Basic details about a live broadcast including its title, description, and scheduled start and end times.",
+            "properties": {
+              "publishedAt": {
+                "type": "string",
+                "description": "The date and time that the broadcast was added to YouTube's live broadcast schedule.",
+                "example": "2026-01-15T10:30:00Z",
+                "format": "date-time"
+              },
+              "channelId": {
+                "type": "string",
+                "description": "The ID of the channel to which this broadcast is affiliated.",
+                "example": "500123"
+              },
+              "title": {
+                "type": "string",
+                "description": "The broadcast's title. The title is a required field when inserting a broadcast.",
+                "example": "Example Title"
+              },
+              "description": {
+                "type": "string",
+                "description": "The broadcast's description.",
+                "example": "A sample description for this resource."
+              },
+              "thumbnails": {
+                "type": "object",
+                "description": "A map of thumbnail images associated with the broadcast.",
+                "example": "example_value"
+              },
+              "scheduledStartTime": {
+                "type": "string",
+                "description": "The date and time that the broadcast is scheduled to begin.",
+                "example": "2026-01-15T10:30:00Z",
+                "format": "date-time"
+              },
+              "scheduledEndTime": {
+                "type": "string",
+                "description": "The date and time that the broadcast is scheduled to end.",
+                "example": "2026-01-15T10:30:00Z",
+                "format": "date-time"
+              },
+              "actualStartTime": {
+                "type": "string",
+                "description": "The date and time that the broadcast actually started.",
+                "example": "2026-01-15T10:30:00Z",
+                "format": "date-time"
+              },
+              "actualEndTime": {
+                "type": "string",
+                "description": "The date and time that the broadcast actually ended.",
+                "example": "2026-01-15T10:30:00Z",
+                "format": "date-time"
+              },
+              "liveChatId": {
+                "type": "string",
+                "description": "The live chat ID associated with the broadcast.",
+                "example": "500123"
+              },
+              "isDefaultBroadcast": {
+                "type": "boolean",
+                "description": "Indicates whether this broadcast is the default broadcast.",
+                "example": true
+              }
+            }
+          },
+          "status": {
+            "type": "object",
+            "description": "Status information about a live broadcast including its privacy status and lifecycle status.",
+            "properties": {
+              "lifeCycleStatus": {
+                "type": "string",
+                "description": "The broadcast's status as it relates to the lifecycle of the broadcast.",
+                "example": "abandoned",
+                "enum": [
+                  "abandoned",
+                  "complete",
+                  "completeStarting",
+                  "created",
+                  "live",
+                  "liveStarting",
+                  "ready",
+                  "reclaimed",
+                  "revoked",
+                  "testStarting",
+                  "testing"
+                ]
+              },
+              "privacyStatus": {
+                "type": "string",
+                "description": "The broadcast's privacy status.",
+                "example": "private",
+                "enum": [
+                  "private",
+                  "public",
+                  "unlisted"
+                ]
+              },
+              "recordingStatus": {
+                "type": "string",
+                "description": "The broadcast's recording status.",
+                "example": "notRecording",
+                "enum": [
+                  "notRecording",
+                  "recorded",
+                  "recording"
+                ]
+              },
+              "madeForKids": {
+                "type": "boolean",
+                "description": "Indicates whether the broadcast is designated as child-directed.",
+                "example": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+              },
+              "selfDeclaredMadeForKids": {
+                "type": "boolean",
+                "description": "Indicates whether the channel owner has designated the broadcast as being made for kids.",
+                "example": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+              }
+            }
+          },
+          "contentDetails": {
+            "type": "object",
+            "description": "Detailed settings for a live broadcast including stream configuration, DVR settings, and content configuration.",
+            "properties": {
+              "boundStreamId": {
+                "type": "string",
+                "description": "The ID of the stream that is bound to the broadcast.",
+                "example": "500123"
+              },
+              "boundStreamLastUpdateTimeMs": {
+                "type": "string",
+                "description": "The date and time that the live stream referenced by boundStreamId was last updated.",
+                "example": "example_value"
+              },
+              "monitorStream": {
+                "type": "object",
+                "description": "The monitorStream object contains information about the monitor stream, which the broadcaster can use to review the event content before the broadcast stream is shown publicly.",
+                "example": "example_value",
+                "properties": {
+                  "enableMonitorStream": {
+                    "type": "boolean",
+                    "description": "This value determines whether the monitor stream is enabled for the broadcast."
+                  },
+                  "broadcastStreamDelayMs": {
+                    "type": "integer",
+                    "description": "If you have set the enableMonitorStream property to true, this value sets the delay between the video input and the broadcast monitor stream."
+                  },
+                  "embedHtml": {
+                    "type": "string",
+                    "description": "The HTML code that embeds a player that plays the monitor stream."
+                  }
+                }
+              },
+              "enableEmbed": {
+                "type": "boolean",
+                "description": "Indicates whether the broadcast video can be played in an embedded player.",
+                "example": true
+              },
+              "enableDvr": {
+                "type": "boolean",
+                "description": "Indicates whether the broadcast enables DVR controls. DVR controls enable the viewer to control the video playback experience by pausing, rewinding, or fast forwarding portions of the broadcast.",
+                "example": true
+              },
+              "enableContentEncryption": {
+                "type": "boolean",
+                "description": "Indicates whether YouTube should enable content encryption for the broadcast.",
+                "example": true
+              },
+              "startWithSlate": {
+                "type": "boolean",
+                "description": "Indicates whether the broadcast should automatically begin with an in-stream slate when you update the broadcast's status to live.",
+                "example": true
+              },
+              "closedCaptionsType": {
+                "type": "string",
+                "description": "Indicates whether the broadcast has captions enabled.",
+                "example": "closedCaptionsDisabled",
+                "enum": [
+                  "closedCaptionsDisabled",
+                  "closedCaptionsEmbedded",
+                  "closedCaptionsHttpPost"
+                ]
+              },
+              "enableLowLatency": {
+                "type": "boolean",
+                "description": "Indicates whether this broadcast has low latency enabled.",
+                "example": true
+              },
+              "latencyPreference": {
+                "type": "string",
+                "description": "Indicates latency preference for the broadcast. The options are ultraLow, low, and normal.",
+                "example": "low",
+                "enum": [
+                  "low",
+                  "normal",
+                  "ultraLow"
+                ]
+              },
+              "enableAutoStart": {
+                "type": "boolean",
+                "description": "This setting indicates whether the broadcast should automatically begin streaming.",
+                "example": true
+              },
+              "enableAutoStop": {
+                "type": "boolean",
+                "description": "Indicates whether the broadcast should automatically stop streaming.",
+                "example": true
+              }
+            }
+          },
+          "statistics": {
+            "type": "object",
+            "description": "The statistics object contains info about the live broadcast.",
+            "example": "example_value",
+            "properties": {
+              "totalChatCount": {
+                "type": "integer",
+                "description": "The number of live chat messages currently on the broadcast.",
+                "format": "int64"
+              }
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag"
+        ]
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LiveBroadcastListResponse",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-live-streaming-openapi.yml"
+}

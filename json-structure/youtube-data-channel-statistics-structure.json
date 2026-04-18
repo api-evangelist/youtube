@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "description": "Statistics about a YouTube channel.",
+  "name": "ChannelStatistics",
+  "properties": {
+    "viewCount": {
+      "type": "string",
+      "description": "The number of times the channel has been viewed."
+    },
+    "subscriberCount": {
+      "type": "string",
+      "description": "The number of subscribers that the channel has."
+    },
+    "hiddenSubscriberCount": {
+      "type": "boolean",
+      "description": "Indicates whether the channel's subscriber count is publicly visible."
+    },
+    "videoCount": {
+      "type": "string",
+      "description": "The number of public videos uploaded to the channel."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

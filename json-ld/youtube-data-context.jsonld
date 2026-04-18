@@ -1,0 +1,666 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "yt": "https://developers.google.com/youtube/v3/ns/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "PageInfo": {
+      "@id": "yt:PageInfo",
+      "@context": {
+        "totalResults": {
+          "@id": "yt:totalResults",
+          "@type": "xsd:integer"
+        },
+        "resultsPerPage": {
+          "@id": "yt:resultsPerPage",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+    "VideoSnippet": {
+      "@id": "yt:VideoSnippet",
+      "@context": {
+        "publishedAt": "dcterms:created",
+        "channelId": {
+          "@id": "yt:channelId",
+          "@type": "xsd:string"
+        },
+        "title": "dcterms:title",
+        "description": "dcterms:description",
+        "thumbnails": "yt:thumbnails",
+        "channelTitle": {
+          "@id": "yt:channelTitle",
+          "@type": "xsd:string"
+        },
+        "tags": "yt:tags",
+        "categoryId": {
+          "@id": "yt:categoryId",
+          "@type": "xsd:string"
+        },
+        "liveBroadcastContent": {
+          "@id": "yt:liveBroadcastContent",
+          "@type": "xsd:string"
+        },
+        "defaultLanguage": {
+          "@id": "yt:defaultLanguage",
+          "@type": "xsd:string"
+        },
+        "localized": "yt:localized"
+      }
+    },
+    "VideoStatistics": {
+      "@id": "yt:VideoStatistics",
+      "@context": {
+        "viewCount": {
+          "@id": "yt:viewCount",
+          "@type": "xsd:string"
+        },
+        "likeCount": {
+          "@id": "yt:likeCount",
+          "@type": "xsd:string"
+        },
+        "dislikeCount": {
+          "@id": "yt:dislikeCount",
+          "@type": "xsd:string"
+        },
+        "favoriteCount": {
+          "@id": "yt:favoriteCount",
+          "@type": "xsd:string"
+        },
+        "commentCount": {
+          "@id": "yt:commentCount",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "VideoContentDetails": {
+      "@id": "yt:VideoContentDetails",
+      "@context": {
+        "duration": {
+          "@id": "yt:duration",
+          "@type": "xsd:string"
+        },
+        "dimension": {
+          "@id": "yt:dimension",
+          "@type": "xsd:string"
+        },
+        "definition": {
+          "@id": "yt:definition",
+          "@type": "xsd:string"
+        },
+        "caption": {
+          "@id": "yt:caption",
+          "@type": "xsd:string"
+        },
+        "licensedContent": {
+          "@id": "yt:licensedContent",
+          "@type": "xsd:boolean"
+        },
+        "contentRating": "yt:contentRating"
+      }
+    },
+    "VideoStatus": {
+      "@id": "yt:VideoStatus",
+      "@context": {
+        "uploadStatus": {
+          "@id": "yt:uploadStatus",
+          "@type": "xsd:string"
+        },
+        "privacyStatus": {
+          "@id": "yt:privacyStatus",
+          "@type": "xsd:string"
+        },
+        "license": {
+          "@id": "yt:license",
+          "@type": "xsd:string"
+        },
+        "embeddable": {
+          "@id": "yt:embeddable",
+          "@type": "xsd:boolean"
+        },
+        "publicStatsViewable": {
+          "@id": "yt:publicStatsViewable",
+          "@type": "xsd:boolean"
+        },
+        "madeForKids": {
+          "@id": "yt:madeForKids",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+    "VideoPlayer": {
+      "@id": "yt:VideoPlayer",
+      "@context": {
+        "embedHtml": {
+          "@id": "yt:embedHtml",
+          "@type": "xsd:string"
+        },
+        "embedHeight": {
+          "@id": "yt:embedHeight",
+          "@type": "xsd:decimal"
+        },
+        "embedWidth": {
+          "@id": "yt:embedWidth",
+          "@type": "xsd:decimal"
+        }
+      }
+    },
+    "Video": {
+      "@id": "yt:Video",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "snippet": {
+          "@id": "yt:snippet",
+          "@type": "xsd:string"
+        },
+        "contentDetails": {
+          "@id": "yt:contentDetails",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "yt:status",
+          "@type": "xsd:string"
+        },
+        "statistics": {
+          "@id": "yt:statistics",
+          "@type": "xsd:string"
+        },
+        "player": {
+          "@id": "yt:player",
+          "@type": "xsd:string"
+        },
+        "localizations": "yt:localizations"
+      }
+    },
+    "VideoListResponse": {
+      "@id": "yt:VideoListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        },
+        "prevPageToken": {
+          "@id": "yt:prevPageToken",
+          "@type": "xsd:string"
+        },
+        "pageInfo": {
+          "@id": "yt:pageInfo",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "ChannelSnippet": {
+      "@id": "yt:ChannelSnippet",
+      "@context": {
+        "title": "dcterms:title",
+        "description": "dcterms:description",
+        "customUrl": {
+          "@id": "yt:customUrl",
+          "@type": "xsd:string"
+        },
+        "publishedAt": "dcterms:created",
+        "thumbnails": "yt:thumbnails",
+        "country": {
+          "@id": "yt:country",
+          "@type": "xsd:string"
+        },
+        "localized": "yt:localized"
+      }
+    },
+    "ChannelStatistics": {
+      "@id": "yt:ChannelStatistics",
+      "@context": {
+        "viewCount": {
+          "@id": "yt:viewCount",
+          "@type": "xsd:string"
+        },
+        "subscriberCount": {
+          "@id": "yt:subscriberCount",
+          "@type": "xsd:string"
+        },
+        "hiddenSubscriberCount": {
+          "@id": "yt:hiddenSubscriberCount",
+          "@type": "xsd:boolean"
+        },
+        "videoCount": {
+          "@id": "yt:videoCount",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "Channel": {
+      "@id": "yt:Channel",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "snippet": {
+          "@id": "yt:snippet",
+          "@type": "xsd:string"
+        },
+        "statistics": {
+          "@id": "yt:statistics",
+          "@type": "xsd:string"
+        },
+        "contentDetails": "yt:contentDetails",
+        "brandingSettings": "yt:brandingSettings"
+      }
+    },
+    "ChannelListResponse": {
+      "@id": "yt:ChannelListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        },
+        "prevPageToken": {
+          "@id": "yt:prevPageToken",
+          "@type": "xsd:string"
+        },
+        "pageInfo": {
+          "@id": "yt:pageInfo",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "Playlist": {
+      "@id": "yt:Playlist",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "snippet": "yt:snippet",
+        "status": "yt:status",
+        "contentDetails": "yt:contentDetails"
+      }
+    },
+    "PlaylistListResponse": {
+      "@id": "yt:PlaylistListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        },
+        "prevPageToken": {
+          "@id": "yt:prevPageToken",
+          "@type": "xsd:string"
+        },
+        "pageInfo": {
+          "@id": "yt:pageInfo",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "PlaylistItem": {
+      "@id": "yt:PlaylistItem",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "snippet": "yt:snippet",
+        "contentDetails": "yt:contentDetails",
+        "status": "yt:status"
+      }
+    },
+    "PlaylistItemListResponse": {
+      "@id": "yt:PlaylistItemListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        },
+        "prevPageToken": {
+          "@id": "yt:prevPageToken",
+          "@type": "xsd:string"
+        },
+        "pageInfo": {
+          "@id": "yt:pageInfo",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "SearchResult": {
+      "@id": "yt:SearchResult",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": "yt:id",
+        "snippet": "yt:snippet"
+      }
+    },
+    "SearchListResponse": {
+      "@id": "yt:SearchListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        },
+        "prevPageToken": {
+          "@id": "yt:prevPageToken",
+          "@type": "xsd:string"
+        },
+        "regionCode": {
+          "@id": "yt:regionCode",
+          "@type": "xsd:string"
+        },
+        "pageInfo": {
+          "@id": "yt:pageInfo",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "Subscription": {
+      "@id": "yt:Subscription",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "snippet": "yt:snippet"
+      }
+    },
+    "SubscriptionListResponse": {
+      "@id": "yt:SubscriptionListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        },
+        "prevPageToken": {
+          "@id": "yt:prevPageToken",
+          "@type": "xsd:string"
+        },
+        "pageInfo": {
+          "@id": "yt:pageInfo",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "Comment": {
+      "@id": "yt:Comment",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "snippet": "yt:snippet"
+      }
+    },
+    "CommentListResponse": {
+      "@id": "yt:CommentListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        },
+        "pageInfo": {
+          "@id": "yt:pageInfo",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "CommentThread": {
+      "@id": "yt:CommentThread",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "snippet": "yt:snippet",
+        "replies": "yt:replies"
+      }
+    },
+    "CommentThreadListResponse": {
+      "@id": "yt:CommentThreadListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        },
+        "pageInfo": {
+          "@id": "yt:pageInfo",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "Caption": {
+      "@id": "yt:Caption",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "snippet": "yt:snippet"
+      }
+    },
+    "CaptionListResponse": {
+      "@id": "yt:CaptionListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "VideoCategory": {
+      "@id": "yt:VideoCategory",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "snippet": "yt:snippet"
+      }
+    },
+    "VideoCategoryListResponse": {
+      "@id": "yt:VideoCategoryListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "I18nLanguageListResponse": {
+      "@id": "yt:I18nLanguageListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "I18nRegionListResponse": {
+      "@id": "yt:I18nRegionListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "ErrorResponse": {
+      "@id": "yt:ErrorResponse",
+      "@context": {
+        "error": "yt:error"
+      }
+    }
+  }
+}

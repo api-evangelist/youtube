@@ -1,0 +1,51 @@
+{
+  "type": "object",
+  "description": "A list of i18n region resources supported by the YouTube website.",
+  "name": "I18nRegionListResponse",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#i18nRegionListResponse."
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource."
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of regions where YouTube is available.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Identifies the API resource's type. Value is youtube#i18nRegion."
+          },
+          "etag": {
+            "type": "string",
+            "description": "The Etag of this resource."
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID uniquely identifying the i18n region."
+          },
+          "snippet": {
+            "type": "object",
+            "description": "The snippet object contains basic details about the i18n region.",
+            "properties": {
+              "gl": {
+                "type": "string",
+                "description": "The region code as a 2-letter ISO country code."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the region."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

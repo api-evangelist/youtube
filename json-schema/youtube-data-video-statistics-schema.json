@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "description": "Statistics about the video such as the number of times the video has been viewed or liked.",
+  "properties": {
+    "viewCount": {
+      "type": "string",
+      "description": "The number of times the video has been viewed.",
+      "example": 42
+    },
+    "likeCount": {
+      "type": "string",
+      "description": "The number of users who have indicated that they liked the video.",
+      "example": 42
+    },
+    "dislikeCount": {
+      "type": "string",
+      "description": "The number of users who have indicated that they disliked the video.",
+      "example": 42
+    },
+    "favoriteCount": {
+      "type": "string",
+      "description": "The number of users who have added the video to their favorites list.",
+      "example": 42
+    },
+    "commentCount": {
+      "type": "string",
+      "description": "The number of comments for the video.",
+      "example": 42
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "VideoStatistics",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-data-api-openapi.yml"
+}

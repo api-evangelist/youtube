@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "description": "Basic details about a channel, including its title, description, and thumbnails.",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The channel title.",
+      "example": "Example Title"
+    },
+    "description": {
+      "type": "string",
+      "description": "The channel description.",
+      "example": "A sample description for this resource."
+    },
+    "customUrl": {
+      "type": "string",
+      "description": "The channel's custom URL.",
+      "example": "https://www.example.com"
+    },
+    "publishedAt": {
+      "type": "string",
+      "description": "The date and time that the channel was created.",
+      "example": "2026-01-15T10:30:00Z",
+      "format": "date-time"
+    },
+    "thumbnails": {
+      "type": "object",
+      "description": "A map of thumbnail images associated with the channel.",
+      "example": "example_value"
+    },
+    "country": {
+      "type": "string",
+      "description": "The country with which the channel is associated.",
+      "example": 42
+    },
+    "localized": {
+      "type": "object",
+      "description": "The snippet.localized object contains a localized title and description for the channel.",
+      "example": "example_value",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The localized channel title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The localized channel description."
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ChannelSnippet",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-data-api-openapi.yml"
+}

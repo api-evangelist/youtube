@@ -1,0 +1,79 @@
+{
+  "type": "object",
+  "description": "A search result contains information about a YouTube video, channel, or playlist that matches the search query.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#searchResult.",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "id": {
+      "type": "object",
+      "description": "The id object contains information that can be used to uniquely identify the resource that matches the search request.",
+      "example": "abc123def456",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The type of the API resource."
+        },
+        "videoId": {
+          "type": "string",
+          "description": "If the id.kind property's value is youtube#video, then this property is present."
+        },
+        "channelId": {
+          "type": "string",
+          "description": "If the id.kind property's value is youtube#channel, then this property is present."
+        },
+        "playlistId": {
+          "type": "string",
+          "description": "If the id.kind property's value is youtube#playlist, then this property is present."
+        }
+      }
+    },
+    "snippet": {
+      "type": "object",
+      "description": "The snippet object contains basic details about a search result, such as its title or description.",
+      "example": "example_value",
+      "properties": {
+        "publishedAt": {
+          "type": "string",
+          "description": "The creation date and time of the resource that the search result identifies.",
+          "format": "date-time"
+        },
+        "channelId": {
+          "type": "string",
+          "description": "The value that YouTube uses to uniquely identify the channel that published the resource identified by the search result."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the search result."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the search result."
+        },
+        "thumbnails": {
+          "type": "object",
+          "description": "A map of thumbnail images associated with the search result."
+        },
+        "channelTitle": {
+          "type": "string",
+          "description": "The title of the channel that published the resource identified by the search result."
+        },
+        "liveBroadcastContent": {
+          "type": "string",
+          "description": "An indication of whether a video or channel resource has live broadcast content."
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SearchResult",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-data-api-openapi.yml"
+}

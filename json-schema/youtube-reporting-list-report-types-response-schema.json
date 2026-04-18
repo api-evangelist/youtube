@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "properties": {
+    "reportTypes": {
+      "type": "array",
+      "description": "The list of report types.",
+      "example": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the report type.",
+            "example": "abc123def456"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the report type.",
+            "example": "Example Title"
+          },
+          "systemManaged": {
+            "type": "boolean",
+            "description": "Whether the report type is system-managed.",
+            "example": true
+          },
+          "deprecateTime": {
+            "type": "string",
+            "description": "The date and time when the report type was deprecated.",
+            "example": "2026-01-15T10:30:00Z",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "A token to retrieve the next page of results.",
+      "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListReportTypesResponse",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-reporting-openapi.yml"
+}

@@ -1,0 +1,110 @@
+{
+  "type": "object",
+  "description": "A playlistItem resource identifies another resource, such as a video, that is included in a playlist.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#playlistItem.",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "id": {
+      "type": "string",
+      "description": "The ID that YouTube uses to uniquely identify the playlist item.",
+      "example": "abc123def456"
+    },
+    "snippet": {
+      "type": "object",
+      "description": "Basic details about the playlist item such as its title and position in the playlist.",
+      "example": "example_value",
+      "properties": {
+        "publishedAt": {
+          "type": "string",
+          "description": "The date and time that the item was added to the playlist.",
+          "format": "date-time"
+        },
+        "channelId": {
+          "type": "string",
+          "description": "The ID of the user that added the video to the playlist."
+        },
+        "title": {
+          "type": "string",
+          "description": "The item title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The item description."
+        },
+        "thumbnails": {
+          "type": "object",
+          "description": "A map of thumbnail images associated with the playlist item."
+        },
+        "channelTitle": {
+          "type": "string",
+          "description": "The channel title of the channel that the playlist item belongs to."
+        },
+        "playlistId": {
+          "type": "string",
+          "description": "The ID of the playlist that the playlist item is in."
+        },
+        "position": {
+          "type": "integer",
+          "description": "The order in which the item appears in the playlist."
+        },
+        "resourceId": {
+          "type": "object",
+          "description": "The id object contains information that can be used to uniquely identify the resource that is included in the playlist as the playlist item.",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "description": "The kind, or type, of the referred resource."
+            },
+            "videoId": {
+              "type": "string",
+              "description": "If the snippet.resourceId.kind property has a value of youtube#video, this property is present."
+            }
+          }
+        }
+      }
+    },
+    "contentDetails": {
+      "type": "object",
+      "description": "The contentDetails object is included in the resource if the included item is a YouTube video.",
+      "example": "example_value",
+      "properties": {
+        "videoId": {
+          "type": "string",
+          "description": "The ID that YouTube uses to uniquely identify a video."
+        },
+        "videoPublishedAt": {
+          "type": "string",
+          "description": "The date and time that the video was published to YouTube.",
+          "format": "date-time"
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "The status object contains information about the playlist item's privacy status.",
+      "example": "example_value",
+      "properties": {
+        "privacyStatus": {
+          "type": "string",
+          "description": "The playlist item's privacy status."
+        }
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "etag"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PlaylistItem",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-data-api-openapi.yml"
+}

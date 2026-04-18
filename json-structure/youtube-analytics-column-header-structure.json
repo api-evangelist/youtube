@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "description": "Describes a single column in an Analytics report response, including its name, type, and data type.",
+  "name": "ColumnHeader",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the dimension or metric."
+    },
+    "columnType": {
+      "type": "string",
+      "description": "The type of the column. Valid values are DIMENSION and METRIC.",
+      "enum": [
+        "DIMENSION",
+        "METRIC"
+      ]
+    },
+    "dataType": {
+      "type": "string",
+      "description": "The type of data that the column contains. Valid values are STRING, INTEGER, FLOAT, and CURRENCY.",
+      "enum": [
+        "CURRENCY",
+        "FLOAT",
+        "INTEGER",
+        "STRING"
+      ]
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

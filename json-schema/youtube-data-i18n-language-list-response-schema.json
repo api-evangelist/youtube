@@ -1,0 +1,56 @@
+{
+  "type": "object",
+  "description": "A list of i18n language resources supported by the YouTube website.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#i18nLanguageListResponse.",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of supported i18n languages.",
+      "example": [],
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Identifies the API resource's type. Value is youtube#i18nLanguage."
+          },
+          "etag": {
+            "type": "string",
+            "description": "The Etag of this resource."
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID uniquely identifying the i18n language."
+          },
+          "snippet": {
+            "type": "object",
+            "description": "The snippet object contains basic details about the i18n language.",
+            "properties": {
+              "hl": {
+                "type": "string",
+                "description": "A BCP-47 code that uniquely identifies a language."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the language as it is written in the language itself."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "I18nLanguageListResponse",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-data-api-openapi.yml"
+}

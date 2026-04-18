@@ -1,0 +1,375 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "YouTube Reporting API"
+  description: "The YouTube Reporting API enables scheduling reporting jobs and downloading bulk YouTube Analytics data as CSV datasets. Reports are generated daily and cover 24-hour periods, accessible for 30 to 60 days depending on the report type."
+  tags:
+    - YouTube
+    - Reporting
+    - Bulk Data
+    - Analytics
+    - Data Export
+    - Google Cloud
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      YOUTUBE_API_KEY: YOUTUBE_API_KEY
+      YOUTUBE_OAUTH_TOKEN: YOUTUBE_OAUTH_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: youtube-reporting
+      baseUri: https://youtubereporting.googleapis.com/v1
+      description: "YouTube Reporting API v1 for scheduling reporting jobs and downloading bulk analytics data."
+      authentication:
+        type: bearer
+        token: "{{YOUTUBE_OAUTH_TOKEN}}"
+      resources:
+        - name: jobs
+          path: /jobs
+          description: "Operations for managing YouTube reporting jobs"
+          operations:
+            - name: create-job
+              method: POST
+              description: "Creates a reporting job"
+              inputParameters:
+                - name: onBehalfOfContentOwner
+                  in: query
+                  type: string
+                  required: false
+                  description: "The content owner's external ID on which behalf the user is acting on."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: list-jobs
+              method: GET
+              description: "Lists all reporting jobs that have been scheduled for the channel or content owner"
+              inputParameters:
+                - name: onBehalfOfContentOwner
+                  in: query
+                  type: string
+                  required: false
+                  description: "The content owner's external ID on which behalf the user is acting on."
+                - name: includeSystemManaged
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "If set to true, also returns system-managed reporting jobs."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "A token identifying a page of results to return."
+                - name: pageSize
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items to return in the response."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: job-details
+          path: /jobs/{jobId}
+          description: "Operations for retrieving and deleting specific reporting jobs"
+          operations:
+            - name: get-job
+              method: GET
+              description: "Gets the metadata for a specific reporting job"
+              inputParameters:
+                - name: jobId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The ID of the job to retrieve."
+                - name: onBehalfOfContentOwner
+                  in: query
+                  type: string
+                  required: false
+                  description: "The content owner's external ID on which behalf the user is acting on."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-job
+              method: DELETE
+              description: "Deletes a reporting job"
+              inputParameters:
+                - name: jobId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The ID of the job to delete."
+                - name: onBehalfOfContentOwner
+                  in: query
+                  type: string
+                  required: false
+                  description: "The content owner's external ID on which behalf the user is acting on."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: reports
+          path: /jobs/{jobId}/reports
+          description: "Operations for retrieving generated reports"
+          operations:
+            - name: list-reports
+              method: GET
+              description: "Lists reports created by a specific reporting job"
+              inputParameters:
+                - name: jobId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The ID of the job whose reports are being listed."
+                - name: onBehalfOfContentOwner
+                  in: query
+                  type: string
+                  required: false
+                  description: "The content owner's external ID on which behalf the user is acting on."
+                - name: createdAfter
+                  in: query
+                  type: string
+                  required: false
+                  description: "If specified, only reports created after the specified date/time are returned."
+                - name: startTimeAtOrAfter
+                  in: query
+                  type: string
+                  required: false
+                  description: "If specified, only reports covering data on or after this date are returned."
+                - name: startTimeBefore
+                  in: query
+                  type: string
+                  required: false
+                  description: "If specified, only reports covering data before this date are returned."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "A token identifying a page of results to return."
+                - name: pageSize
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items to return in the response."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: report-details
+          path: /jobs/{jobId}/reports/{reportId}
+          description: "Operations for retrieving specific report metadata"
+          operations:
+            - name: get-report
+              method: GET
+              description: "Gets the metadata for a specific report including its download URL"
+              inputParameters:
+                - name: jobId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The ID of the job that created the report."
+                - name: reportId
+                  in: path
+                  type: string
+                  required: true
+                  description: "The ID of the report to retrieve."
+                - name: onBehalfOfContentOwner
+                  in: query
+                  type: string
+                  required: false
+                  description: "The content owner's external ID on which behalf the user is acting on."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: report-types
+          path: /reportTypes
+          description: "Operations for listing available report types"
+          operations:
+            - name: list-report-types
+              method: GET
+              description: "Lists report types that the channel or content owner can retrieve"
+              inputParameters:
+                - name: onBehalfOfContentOwner
+                  in: query
+                  type: string
+                  required: false
+                  description: "The content owner's external ID on which behalf the user is acting on."
+                - name: includeSystemManaged
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "If set to true, also returns system-managed report types."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "A token identifying a page of results to return."
+                - name: pageSize
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items to return in the response."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8103
+      namespace: youtube-reporting-rest
+      resources:
+        - path: /v1/jobs
+          name: jobs
+          operations:
+            - method: POST
+              name: create-job
+              description: "Creates a reporting job"
+              call: "youtube-reporting.create-job"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: list-jobs
+              description: "Lists all reporting jobs that have been scheduled"
+              call: "youtube-reporting.list-jobs"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/jobs/{jobId}
+          name: job-details
+          operations:
+            - method: GET
+              name: get-job
+              description: "Gets the metadata for a specific reporting job"
+              call: "youtube-reporting.get-job"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-job
+              description: "Deletes a reporting job"
+              call: "youtube-reporting.delete-job"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/jobs/{jobId}/reports
+          name: reports
+          operations:
+            - method: GET
+              name: list-reports
+              description: "Lists reports created by a specific reporting job"
+              call: "youtube-reporting.list-reports"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/jobs/{jobId}/reports/{reportId}
+          name: report-details
+          operations:
+            - method: GET
+              name: get-report
+              description: "Gets the metadata for a specific report including its download URL"
+              call: "youtube-reporting.get-report"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/report-types
+          name: report-types
+          operations:
+            - method: GET
+              name: list-report-types
+              description: "Lists report types that the channel or content owner can retrieve"
+              call: "youtube-reporting.list-report-types"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9103
+      namespace: youtube-reporting-mcp
+      transport: http
+      tools:
+        - name: create-job
+          description: "Creates a reporting job"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-reporting.create-job"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-jobs
+          description: "Lists all reporting jobs that have been scheduled"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-reporting.list-jobs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-job
+          description: "Gets the metadata for a specific reporting job"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-reporting.get-job"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-job
+          description: "Deletes a reporting job"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-reporting.delete-job"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-reports
+          description: "Lists reports created by a specific reporting job"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-reporting.list-reports"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-report
+          description: "Gets the metadata for a specific report including its download URL"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-reporting.get-report"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-report-types
+          description: "Lists report types that the channel or content owner can retrieve"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-reporting.list-report-types"
+          outputParameters:
+            - type: object
+              mapping: "$."

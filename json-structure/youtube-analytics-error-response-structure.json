@@ -1,0 +1,51 @@
+{
+  "type": "object",
+  "description": "A standard error response returned by the YouTube Analytics API.",
+  "name": "ErrorResponse",
+  "properties": {
+    "error": {
+      "type": "object",
+      "description": "The error details.",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "description": "The HTTP status code of the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable description of the error."
+        },
+        "status": {
+          "type": "string",
+          "description": "The error status code."
+        },
+        "details": {
+          "type": "array",
+          "description": "A list of additional error details.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The type of the error detail."
+              },
+              "reason": {
+                "type": "string",
+                "description": "The reason code for the error."
+              },
+              "domain": {
+                "type": "string",
+                "description": "The domain in which the error occurred."
+              },
+              "metadata": {
+                "type": "object",
+                "description": "Additional metadata about the error."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

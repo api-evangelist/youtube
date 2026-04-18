@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "description": "Detailed settings for a live stream including the stream key and ingestion settings.",
+  "properties": {
+    "boundBroadcastId": {
+      "type": "string",
+      "description": "The ID of the live broadcast to which this stream is bound.",
+      "example": "500123"
+    },
+    "isReusable": {
+      "type": "boolean",
+      "description": "Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts.",
+      "example": true
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LiveStreamContentDetails",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-live-streaming-openapi.yml"
+}

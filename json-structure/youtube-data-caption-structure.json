@@ -1,0 +1,94 @@
+{
+  "type": "object",
+  "description": "A caption resource represents a YouTube caption track. A caption track is associated with exactly one YouTube video.",
+  "name": "Caption",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#caption."
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource."
+    },
+    "id": {
+      "type": "string",
+      "description": "The ID that YouTube uses to uniquely identify the caption track."
+    },
+    "snippet": {
+      "type": "object",
+      "description": "The snippet object contains basic details about the caption.",
+      "properties": {
+        "videoId": {
+          "type": "string",
+          "description": "The ID of the video that the caption track is associated with."
+        },
+        "lastUpdated": {
+          "type": "datetime",
+          "description": "The date and time when the caption track was last updated."
+        },
+        "trackKind": {
+          "type": "string",
+          "description": "The caption track's type.",
+          "enum": [
+            "asr",
+            "forced",
+            "standard"
+          ]
+        },
+        "language": {
+          "type": "string",
+          "description": "The language of the caption track. The property value is a BCP-47 language tag."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the caption track."
+        },
+        "audioTrackType": {
+          "type": "string",
+          "description": "The type of audio track associated with the caption track.",
+          "enum": [
+            "commentary",
+            "descriptive",
+            "primary",
+            "unknown"
+          ]
+        },
+        "isCC": {
+          "type": "boolean",
+          "description": "Indicates whether the track contains closed captions for the deaf and hard of hearing."
+        },
+        "isLarge": {
+          "type": "boolean",
+          "description": "Indicates whether the caption track uses large text for the vision-impaired."
+        },
+        "isEasyReader": {
+          "type": "boolean",
+          "description": "Indicates whether caption track is formatted for easy reader."
+        },
+        "isDraft": {
+          "type": "boolean",
+          "description": "Indicates whether the caption track is a draft."
+        },
+        "isAutoSynced": {
+          "type": "boolean",
+          "description": "Indicates whether YouTube synchronized the caption track to the audio track in the video."
+        },
+        "status": {
+          "type": "string",
+          "description": "The caption track's status.",
+          "enum": [
+            "failed",
+            "serving",
+            "syncing"
+          ]
+        }
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "etag"
+  ],
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

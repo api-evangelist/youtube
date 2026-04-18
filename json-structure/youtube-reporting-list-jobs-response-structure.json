@@ -1,0 +1,44 @@
+{
+  "type": "object",
+  "name": "ListJobsResponse",
+  "properties": {
+    "jobs": {
+      "type": "array",
+      "description": "The list of jobs.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The server-generated ID of the job."
+          },
+          "reportTypeId": {
+            "type": "string",
+            "description": "The type of reports that the job creates."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the job. Max length is 100 characters."
+          },
+          "createTime": {
+            "type": "datetime",
+            "description": "The date and time when the job was created."
+          },
+          "expireTime": {
+            "type": "datetime",
+            "description": "The date and time when the job will expire."
+          },
+          "systemManaged": {
+            "type": "boolean",
+            "description": "Whether the job is system-managed."
+          }
+        }
+      }
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "A token to retrieve the next page of results."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

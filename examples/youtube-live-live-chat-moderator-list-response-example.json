@@ -1,0 +1,11 @@
+{
+  "kind": "youtube#video",
+  "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+  "nextPageToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+  "prevPageToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+  "pageInfo": {
+    "totalResults": 42,
+    "resultsPerPage": 10
+  },
+  "items": []
+}

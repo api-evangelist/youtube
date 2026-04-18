@@ -1,0 +1,129 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "yt": "https://developers.google.com/youtube/v3/ns/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "ColumnHeader": {
+      "@id": "yt:ColumnHeader",
+      "@context": {
+        "name": "schema:name",
+        "columnType": {
+          "@id": "yt:columnType",
+          "@type": "xsd:string"
+        },
+        "dataType": {
+          "@id": "yt:dataType",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "QueryResponse": {
+      "@id": "yt:QueryResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "columnHeaders": "yt:columnHeaders",
+        "rows": "yt:rows"
+      }
+    },
+    "GroupContentDetails": {
+      "@id": "yt:GroupContentDetails",
+      "@context": {
+        "itemCount": {
+          "@id": "yt:itemCount",
+          "@type": "xsd:integer"
+        },
+        "itemType": {
+          "@id": "yt:itemType",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "Group": {
+      "@id": "yt:Group",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "snippet": "yt:snippet",
+        "contentDetails": {
+          "@id": "yt:contentDetails",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "GroupListResponse": {
+      "@id": "yt:GroupListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "GroupItem": {
+      "@id": "yt:GroupItem",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "groupId": {
+          "@id": "yt:groupId",
+          "@type": "xsd:string"
+        },
+        "resource": "yt:resource"
+      }
+    },
+    "GroupItemListResponse": {
+      "@id": "yt:GroupItemListResponse",
+      "@context": {
+        "kind": {
+          "@id": "yt:kind",
+          "@type": "xsd:string"
+        },
+        "etag": {
+          "@id": "yt:etag",
+          "@type": "xsd:string"
+        },
+        "items": "yt:items"
+      }
+    },
+    "ErrorResponse": {
+      "@id": "yt:ErrorResponse",
+      "@context": {
+        "error": "yt:error"
+      }
+    }
+  }
+}

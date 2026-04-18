@@ -1,0 +1,167 @@
+{
+  "type": "object",
+  "description": "A channel resource represents a YouTube channel.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#channel.",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "id": {
+      "type": "string",
+      "description": "The ID that YouTube uses to uniquely identify the channel.",
+      "example": "abc123def456"
+    },
+    "snippet": {
+      "type": "object",
+      "description": "Basic details about a channel, including its title, description, and thumbnails.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The channel title.",
+          "example": "Example Title"
+        },
+        "description": {
+          "type": "string",
+          "description": "The channel description.",
+          "example": "A sample description for this resource."
+        },
+        "customUrl": {
+          "type": "string",
+          "description": "The channel's custom URL.",
+          "example": "https://www.example.com"
+        },
+        "publishedAt": {
+          "type": "string",
+          "description": "The date and time that the channel was created.",
+          "example": "2026-01-15T10:30:00Z",
+          "format": "date-time"
+        },
+        "thumbnails": {
+          "type": "object",
+          "description": "A map of thumbnail images associated with the channel.",
+          "example": "example_value"
+        },
+        "country": {
+          "type": "string",
+          "description": "The country with which the channel is associated.",
+          "example": 42
+        },
+        "localized": {
+          "type": "object",
+          "description": "The snippet.localized object contains a localized title and description for the channel.",
+          "example": "example_value",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "The localized channel title."
+            },
+            "description": {
+              "type": "string",
+              "description": "The localized channel description."
+            }
+          }
+        }
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "description": "Statistics about a YouTube channel.",
+      "properties": {
+        "viewCount": {
+          "type": "string",
+          "description": "The number of times the channel has been viewed.",
+          "example": 42
+        },
+        "subscriberCount": {
+          "type": "string",
+          "description": "The number of subscribers that the channel has.",
+          "example": 42
+        },
+        "hiddenSubscriberCount": {
+          "type": "boolean",
+          "description": "Indicates whether the channel's subscriber count is publicly visible.",
+          "example": 42
+        },
+        "videoCount": {
+          "type": "string",
+          "description": "The number of public videos uploaded to the channel.",
+          "example": 42
+        }
+      }
+    },
+    "contentDetails": {
+      "type": "object",
+      "description": "The contentDetails object encapsulates information about the channel's content.",
+      "example": "example_value",
+      "properties": {
+        "relatedPlaylists": {
+          "type": "object",
+          "description": "A map that identifies playlists associated with the channel.",
+          "properties": {
+            "uploads": {
+              "type": "string",
+              "description": "The ID of the playlist that contains the channel's uploaded videos."
+            },
+            "likes": {
+              "type": "string",
+              "description": "The ID of the playlist that contains the videos that the channel has liked."
+            }
+          }
+        }
+      }
+    },
+    "brandingSettings": {
+      "type": "object",
+      "description": "The brandingSettings object encapsulates information about the branding of the channel.",
+      "example": "example_value",
+      "properties": {
+        "channel": {
+          "type": "object",
+          "description": "Branding settings for the channel page.",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "The channel title."
+            },
+            "description": {
+              "type": "string",
+              "description": "The channel description."
+            },
+            "keywords": {
+              "type": "string",
+              "description": "Keywords associated with the channel."
+            },
+            "defaultLanguage": {
+              "type": "string",
+              "description": "The content tab that users should display by default on the channel page."
+            }
+          }
+        },
+        "image": {
+          "type": "object",
+          "description": "Branding images associated with the channel page.",
+          "properties": {
+            "bannerExternalUrl": {
+              "type": "string",
+              "description": "The URL for the banner image shown on the channel page on the YouTube website."
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "etag"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Channel",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-data-api-openapi.yml"
+}

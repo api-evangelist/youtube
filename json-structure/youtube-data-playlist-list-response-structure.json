@@ -1,0 +1,130 @@
+{
+  "type": "object",
+  "description": "A list of playlist resources matching the request criteria.",
+  "name": "PlaylistListResponse",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#playlistListResponse."
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource."
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "The token for the next page of results."
+    },
+    "prevPageToken": {
+      "type": "string",
+      "description": "The token for the previous page of results."
+    },
+    "pageInfo": {
+      "type": "object",
+      "description": "Paging details for a list operation, including information about the total number of resources and the number per page.",
+      "properties": {
+        "totalResults": {
+          "type": "integer",
+          "description": "The total number of results in the result set."
+        },
+        "resultsPerPage": {
+          "type": "integer",
+          "description": "The number of results included in the API response."
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of playlists that match the request criteria.",
+      "items": {
+        "type": "object",
+        "description": "A playlist resource represents a YouTube playlist.",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Identifies the API resource's type. Value is youtube#playlist."
+          },
+          "etag": {
+            "type": "string",
+            "description": "The Etag of this resource."
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID that YouTube uses to uniquely identify the playlist."
+          },
+          "snippet": {
+            "type": "object",
+            "description": "Basic details about the playlist such as its title, description, and thumbnails.",
+            "properties": {
+              "publishedAt": {
+                "type": "datetime",
+                "description": "The date and time that the playlist was created."
+              },
+              "channelId": {
+                "type": "string",
+                "description": "The ID of the channel that published the playlist."
+              },
+              "title": {
+                "type": "string",
+                "description": "The playlist title."
+              },
+              "description": {
+                "type": "string",
+                "description": "The playlist description."
+              },
+              "thumbnails": {
+                "type": "object",
+                "description": "A map of thumbnail images associated with the playlist."
+              },
+              "channelTitle": {
+                "type": "string",
+                "description": "The channel title of the channel that the video belongs to."
+              },
+              "tags": {
+                "type": "array",
+                "description": "Keyword tags associated with the playlist.",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "defaultLanguage": {
+                "type": "string",
+                "description": "The language of the text in the playlist resource's snippet.title and snippet.description properties."
+              }
+            }
+          },
+          "status": {
+            "type": "object",
+            "description": "The status object contains status information for the playlist.",
+            "properties": {
+              "privacyStatus": {
+                "type": "string",
+                "description": "The playlist's privacy status.",
+                "enum": [
+                  "private",
+                  "public",
+                  "unlisted"
+                ]
+              }
+            }
+          },
+          "contentDetails": {
+            "type": "object",
+            "description": "The contentDetails object contains information about the playlist content.",
+            "properties": {
+              "itemCount": {
+                "type": "integer",
+                "description": "The number of videos in the playlist."
+              }
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag"
+        ]
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

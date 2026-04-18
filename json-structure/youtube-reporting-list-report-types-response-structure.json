@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "name": "ListReportTypesResponse",
+  "properties": {
+    "reportTypes": {
+      "type": "array",
+      "description": "The list of report types.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the report type."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the report type."
+          },
+          "systemManaged": {
+            "type": "boolean",
+            "description": "Whether the report type is system-managed."
+          },
+          "deprecateTime": {
+            "type": "datetime",
+            "description": "The date and time when the report type was deprecated."
+          }
+        }
+      }
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "A token to retrieve the next page of results."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

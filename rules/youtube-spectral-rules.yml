@@ -1,0 +1,543 @@
+# =============================================================================
+# YouTube API Spectral Ruleset
+# Generated from analysis of YouTube Data API, Analytics API,
+# Live Streaming API, and Reporting API OpenAPI specifications
+# =============================================================================
+
+rules:
+
+  # ---------------------------------------------------------------------------
+  # INFO / METADATA
+  # ---------------------------------------------------------------------------
+
+  info-title-required:
+    description: Info title must be present and non-empty
+    severity: error
+    given: $.info
+    then:
+      field: title
+      function: truthy
+
+  info-title-prefix:
+    description: Info title should start with "YouTube"
+    severity: warn
+    given: $.info.title
+    then:
+      function: pattern
+      functionOptions:
+        match: ^YouTube
+
+  info-description-required:
+    description: Info description must be present
+    severity: error
+    given: $.info
+    then:
+      field: description
+      function: truthy
+
+  info-description-min-length:
+    description: Info description should be at least 50 characters
+    severity: warn
+    given: $.info.description
+    then:
+      function: length
+      functionOptions:
+        min: 50
+
+  info-version-required:
+    description: API version must be specified
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+
+  info-contact-required:
+    description: Contact information should be provided
+    severity: warn
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  info-terms-of-service:
+    description: Terms of service URL should be provided
+    severity: info
+    given: $.info
+    then:
+      field: termsOfService
+      function: truthy
+
+  # ---------------------------------------------------------------------------
+  # OPENAPI VERSION
+  # ---------------------------------------------------------------------------
+
+  openapi-version:
+    description: OpenAPI version should be 3.0.x or 3.1.x
+    severity: error
+    given: $
+    then:
+      field: openapi
+      function: pattern
+      functionOptions:
+        match: ^3\.[01]\.\d+$
+
+  # ---------------------------------------------------------------------------
+  # SERVERS
+  # ---------------------------------------------------------------------------
+
+  servers-defined:
+    description: At least one server must be defined
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: truthy
+
+  servers-https:
+    description: Server URLs must use HTTPS
+    severity: error
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: ^https://
+
+  servers-description:
+    description: Each server should have a description
+    severity: warn
+    given: $.servers[*]
+    then:
+      field: description
+      function: truthy
+
+  servers-googleapis-domain:
+    description: Server URLs should use googleapis.com domain
+    severity: info
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: googleapis\.com
+
+  # ---------------------------------------------------------------------------
+  # PATHS — NAMING CONVENTIONS
+  # ---------------------------------------------------------------------------
+
+  paths-no-trailing-slash:
+    description: Paths must not have trailing slashes
+    severity: error
+    given: $.paths
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        notMatch: .+\/$
+
+  paths-no-query-strings:
+    description: Paths must not include query strings
+    severity: error
+    given: $.paths
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        notMatch: \?
+
+  paths-camel-case:
+    description: YouTube paths use camelCase for resource names
+    severity: warn
+    given: $.paths
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: ^(/[a-z][a-zA-Z0-9]*(\/{[a-zA-Z]+})?)+$
+
+  paths-plural-resources:
+    description: Resource paths should use plural nouns
+    severity: info
+    given: $.paths
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: ^(/[a-z][a-zA-Z]*s|/[a-z][a-zA-Z]*s/|/[a-z][a-zA-Z]*(Items|Types|Reasons|Languages|Regions|Banners|Sections|Levels|Events))
+
+  # ---------------------------------------------------------------------------
+  # OPERATIONS
+  # ---------------------------------------------------------------------------
+
+  operation-operationid-required:
+    description: Every operation must have an operationId
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+
+  operation-operationid-format:
+    description: OperationId should follow youtube.resource.action or youtubeAnalytics.resource.action format
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: pattern
+      functionOptions:
+        match: ^(youtube|youtubeAnalytics|youtubeReporting)\.[a-zA-Z]+\.[a-zA-Z]+$
+
+  operation-summary-required:
+    description: Every operation must have a summary
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+
+  operation-summary-prefix:
+    description: Operation summaries should start with "Youtube" prefix
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: ^Youtube
+
+  operation-summary-title-case:
+    description: Operation summaries should use Title Case
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z]+(\\s[A-Za-z]+)*$"
+
+  operation-description-required:
+    description: Every operation must have a description
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+
+  operation-tags-required:
+    description: Every operation must have at least one tag
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+
+  operation-single-tag:
+    description: Operations should have exactly one tag
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].tags
+    then:
+      function: length
+      functionOptions:
+        max: 1
+
+  # ---------------------------------------------------------------------------
+  # TAGS
+  # ---------------------------------------------------------------------------
+
+  tags-defined:
+    description: Global tags array should be defined
+    severity: warn
+    given: $
+    then:
+      field: tags
+      function: truthy
+
+  tags-description:
+    description: Each tag should have a description
+    severity: warn
+    given: $.tags[*]
+    then:
+      field: description
+      function: truthy
+
+  tags-pascal-case:
+    description: Tag names should use PascalCase (YouTube convention)
+    severity: warn
+    given: $.tags[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: ^[A-Z][a-zA-Z0-9]+$
+
+  # ---------------------------------------------------------------------------
+  # PARAMETERS
+  # ---------------------------------------------------------------------------
+
+  parameter-description-required:
+    description: Every parameter must have a description
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    then:
+      field: description
+      function: truthy
+
+  parameter-schema-required:
+    description: Every parameter must have a schema
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    then:
+      field: schema
+      function: truthy
+
+  parameter-camel-case:
+    description: Parameter names should use camelCase (YouTube convention)
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[*].name
+    then:
+      function: pattern
+      functionOptions:
+        match: ^[a-z][a-zA-Z0-9]*$
+
+  parameter-example:
+    description: Parameters should have example values
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    then:
+      field: example
+      function: truthy
+
+  parameter-pagination-naming:
+    description: Pagination should use pageToken and maxResults (YouTube convention)
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.name=='page' || @.name=='offset' || @.name=='cursor')]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: ^(pageToken|maxResults|pageSize)$
+
+  # ---------------------------------------------------------------------------
+  # REQUEST BODIES
+  # ---------------------------------------------------------------------------
+
+  request-body-json:
+    description: Request bodies should use application/json content type
+    severity: warn
+    given: $.paths[*][post,put,patch].requestBody.content
+    then:
+      field: application/json
+      function: truthy
+
+  # ---------------------------------------------------------------------------
+  # RESPONSES
+  # ---------------------------------------------------------------------------
+
+  response-success-required:
+    description: Every operation must have a 2xx success response
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ["200"]
+            - required: ["201"]
+            - required: ["204"]
+
+  response-description-required:
+    description: Every response must have a description
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses[*]
+    then:
+      field: description
+      function: truthy
+
+  response-json-content:
+    description: Success responses should use application/json
+    severity: warn
+    given: $.paths[*][get,post,put,patch].responses[?(@property >= 200 && @property < 300)].content
+    then:
+      field: application/json
+      function: truthy
+
+  response-examples:
+    description: Responses should include named examples for Microcks compatibility
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete].responses[*].content.application/json
+    then:
+      field: examples
+      function: truthy
+
+  # ---------------------------------------------------------------------------
+  # SCHEMAS — PROPERTY NAMING
+  # ---------------------------------------------------------------------------
+
+  schema-description:
+    description: Top-level schemas should have descriptions
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: description
+      function: truthy
+
+  schema-type-required:
+    description: Schema properties must define a type
+    severity: error
+    given: $.components.schemas[*].properties[*]
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ["type"]
+            - required: ["$ref"]
+            - required: ["allOf"]
+            - required: ["oneOf"]
+            - required: ["anyOf"]
+
+  schema-property-camel-case:
+    description: Schema property names should use camelCase (YouTube convention)
+    severity: warn
+    given: $.components.schemas[*].properties
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: ^[a-z][a-zA-Z0-9]*$
+
+  schema-kind-property:
+    description: YouTube resource schemas should include a kind property
+    severity: info
+    given: $.components.schemas[?(@.properties.etag)].properties
+    then:
+      field: kind
+      function: truthy
+
+  schema-etag-property:
+    description: YouTube resource schemas should include an etag property
+    severity: info
+    given: $.components.schemas[?(@.properties.kind)].properties
+    then:
+      field: etag
+      function: truthy
+
+  schema-property-example:
+    description: Schema properties should have example values
+    severity: info
+    given: $.components.schemas[*].properties[*]
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ["example"]
+            - required: ["$ref"]
+            - required: ["enum"]
+
+  # ---------------------------------------------------------------------------
+  # SECURITY
+  # ---------------------------------------------------------------------------
+
+  security-global-defined:
+    description: Global security must be defined
+    severity: error
+    given: $
+    then:
+      field: security
+      function: truthy
+
+  security-schemes-defined:
+    description: Security schemes must be defined in components
+    severity: error
+    given: $.components
+    then:
+      field: securitySchemes
+      function: truthy
+
+  security-oauth2-scheme:
+    description: YouTube APIs should use OAuth 2.0 authentication
+    severity: warn
+    given: $.components.securitySchemes
+    then:
+      field: oauth2
+      function: truthy
+
+  security-api-key-scheme:
+    description: YouTube APIs should support API key authentication for read operations
+    severity: info
+    given: $.components.securitySchemes
+    then:
+      field: apiKey
+      function: truthy
+
+  # ---------------------------------------------------------------------------
+  # HTTP METHOD CONVENTIONS
+  # ---------------------------------------------------------------------------
+
+  http-get-no-body:
+    description: GET operations must not have a request body
+    severity: error
+    given: $.paths[*].get
+    then:
+      field: requestBody
+      function: falsy
+
+  http-delete-no-body:
+    description: DELETE operations must not have a request body
+    severity: error
+    given: $.paths[*].delete
+    then:
+      field: requestBody
+      function: falsy
+
+  http-post-has-body:
+    description: POST operations should have a request body
+    severity: warn
+    given: $.paths[*].post
+    then:
+      field: requestBody
+      function: truthy
+
+  http-put-has-body:
+    description: PUT operations should have a request body
+    severity: warn
+    given: $.paths[*].put
+    then:
+      field: requestBody
+      function: truthy
+
+  # ---------------------------------------------------------------------------
+  # MICROCKS COMPATIBILITY
+  # ---------------------------------------------------------------------------
+
+  microcks-operation-extension:
+    description: Operations should have x-microcks-operation for mock server compatibility
+    severity: info
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: x-microcks-operation
+      function: truthy
+
+  # ---------------------------------------------------------------------------
+  # GENERAL QUALITY
+  # ---------------------------------------------------------------------------
+
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings
+    severity: error
+    given: $..description
+    then:
+      function: truthy
+
+  deprecated-documented:
+    description: Deprecated operations should have a description explaining the deprecation
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete][?(@.deprecated==true)]
+    then:
+      field: description
+      function: truthy
+
+  list-response-items-array:
+    description: List responses should contain an items array (YouTube convention)
+    severity: info
+    given: $.components.schemas[?(@.properties.nextPageToken)].properties
+    then:
+      field: items
+      function: truthy

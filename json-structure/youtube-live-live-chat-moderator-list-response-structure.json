@@ -1,0 +1,96 @@
+{
+  "type": "object",
+  "description": "A list of live chat moderator resources for a given live chat.",
+  "name": "LiveChatModeratorListResponse",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#liveChatModeratorListResponse."
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource."
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "The token for the next page of results."
+    },
+    "prevPageToken": {
+      "type": "string",
+      "description": "The token for the previous page of results."
+    },
+    "pageInfo": {
+      "type": "object",
+      "description": "Paging details for a list of live streaming resources.",
+      "properties": {
+        "totalResults": {
+          "type": "integer",
+          "description": "The total number of results in the result set."
+        },
+        "resultsPerPage": {
+          "type": "integer",
+          "description": "The number of results included in the API response."
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of moderators that match the request criteria.",
+      "items": {
+        "type": "object",
+        "description": "A liveChatModerator resource identifies a user who has moderator privileges in a YouTube live chat.",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Identifies the API resource's type. Value is youtube#liveChatModerator."
+          },
+          "etag": {
+            "type": "string",
+            "description": "The Etag of this resource."
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID that YouTube assigns to uniquely identify the moderator."
+          },
+          "snippet": {
+            "type": "object",
+            "description": "The snippet object contains basic details about the moderator.",
+            "properties": {
+              "liveChatId": {
+                "type": "string",
+                "description": "The liveChatId is the live chat id for this moderator resource."
+              },
+              "moderatorDetails": {
+                "type": "object",
+                "description": "Details about the moderator.",
+                "properties": {
+                  "channelId": {
+                    "type": "string",
+                    "description": "The YouTube channel ID of the moderator."
+                  },
+                  "channelUrl": {
+                    "type": "string",
+                    "description": "The channel URL of the moderator."
+                  },
+                  "displayName": {
+                    "type": "string",
+                    "description": "The channel's display name."
+                  },
+                  "profileImageUrl": {
+                    "type": "string",
+                    "description": "The channel's avatar URL."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag"
+        ]
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

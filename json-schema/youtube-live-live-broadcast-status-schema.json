@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "description": "Status information about a live broadcast including its privacy status and lifecycle status.",
+  "properties": {
+    "lifeCycleStatus": {
+      "type": "string",
+      "description": "The broadcast's status as it relates to the lifecycle of the broadcast.",
+      "example": "abandoned",
+      "enum": [
+        "abandoned",
+        "complete",
+        "completeStarting",
+        "created",
+        "live",
+        "liveStarting",
+        "ready",
+        "reclaimed",
+        "revoked",
+        "testStarting",
+        "testing"
+      ]
+    },
+    "privacyStatus": {
+      "type": "string",
+      "description": "The broadcast's privacy status.",
+      "example": "private",
+      "enum": [
+        "private",
+        "public",
+        "unlisted"
+      ]
+    },
+    "recordingStatus": {
+      "type": "string",
+      "description": "The broadcast's recording status.",
+      "example": "notRecording",
+      "enum": [
+        "notRecording",
+        "recorded",
+        "recording"
+      ]
+    },
+    "madeForKids": {
+      "type": "boolean",
+      "description": "Indicates whether the broadcast is designated as child-directed.",
+      "example": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "selfDeclaredMadeForKids": {
+      "type": "boolean",
+      "description": "Indicates whether the channel owner has designated the broadcast as being made for kids.",
+      "example": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LiveBroadcastStatus",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-live-streaming-openapi.yml"
+}

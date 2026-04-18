@@ -1,0 +1,8 @@
+{
+  "kind": "youtube#video",
+  "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+  "id": "abc123def456",
+  "snippet": "example_value",
+  "contentDetails": "example_value",
+  "status": "example_value"
+}

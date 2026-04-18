@@ -1,0 +1,224 @@
+{
+  "type": "object",
+  "description": "A video resource represents a YouTube video.",
+  "name": "Video",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#video."
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource."
+    },
+    "id": {
+      "type": "string",
+      "description": "The ID that YouTube uses to uniquely identify the video."
+    },
+    "snippet": {
+      "type": "object",
+      "description": "Basic details about a video, including its title, description, tags, and category.",
+      "properties": {
+        "publishedAt": {
+          "type": "datetime",
+          "description": "The date and time when the video was published."
+        },
+        "channelId": {
+          "type": "string",
+          "description": "The ID of the YouTube channel that published the video."
+        },
+        "title": {
+          "type": "string",
+          "description": "The video title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The video description."
+        },
+        "thumbnails": {
+          "type": "object",
+          "description": "A map of thumbnail images associated with the video."
+        },
+        "channelTitle": {
+          "type": "string",
+          "description": "The channel title of the YouTube channel that published the video."
+        },
+        "tags": {
+          "type": "array",
+          "description": "A list of keyword tags associated with the video.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "categoryId": {
+          "type": "string",
+          "description": "The YouTube video category associated with the video."
+        },
+        "liveBroadcastContent": {
+          "type": "string",
+          "description": "Indicates if the video is an upcoming/active live broadcast.",
+          "enum": [
+            "live",
+            "none",
+            "upcoming"
+          ]
+        },
+        "defaultLanguage": {
+          "type": "string",
+          "description": "The language of the text in the video resource's snippet.title and snippet.description properties."
+        },
+        "localized": {
+          "type": "object",
+          "description": "The snippet.localized object contains either a localized title and description for the video or the title in the default language.",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "The localized video title."
+            },
+            "description": {
+              "type": "string",
+              "description": "The localized video description."
+            }
+          }
+        }
+      }
+    },
+    "contentDetails": {
+      "type": "object",
+      "description": "Information about the video content, including the length of the video and an indication of whether captions are available.",
+      "properties": {
+        "duration": {
+          "type": "string",
+          "description": "The length of the video in ISO 8601 format."
+        },
+        "dimension": {
+          "type": "string",
+          "description": "Indicates whether the video is available in 3D or in 2D."
+        },
+        "definition": {
+          "type": "string",
+          "description": "Indicates whether the video is available in high definition or standard definition.",
+          "enum": [
+            "hd",
+            "sd"
+          ]
+        },
+        "caption": {
+          "type": "string",
+          "description": "Indicates whether captions are available for the video.",
+          "enum": [
+            "false",
+            "true"
+          ]
+        },
+        "licensedContent": {
+          "type": "boolean",
+          "description": "Indicates whether the video represents licensed content, which means that the content has been claimed by a YouTube content partner."
+        },
+        "contentRating": {
+          "type": "object",
+          "description": "Specifies the ratings that the video received under various rating schemes."
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "The status of an uploaded video.",
+      "properties": {
+        "uploadStatus": {
+          "type": "string",
+          "description": "The status of the uploaded video.",
+          "enum": [
+            "deleted",
+            "failed",
+            "processed",
+            "rejected",
+            "uploaded"
+          ]
+        },
+        "privacyStatus": {
+          "type": "string",
+          "description": "The video's privacy status.",
+          "enum": [
+            "private",
+            "public",
+            "unlisted"
+          ]
+        },
+        "license": {
+          "type": "string",
+          "description": "The video's license.",
+          "enum": [
+            "creativeCommon",
+            "youtube"
+          ]
+        },
+        "embeddable": {
+          "type": "boolean",
+          "description": "Indicates whether the video can be embedded on another website."
+        },
+        "publicStatsViewable": {
+          "type": "boolean",
+          "description": "Indicates whether the video's extended statistics on the video's watch page are publicly viewable."
+        },
+        "madeForKids": {
+          "type": "boolean",
+          "description": "Indicates whether the video is designated as child-directed."
+        }
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "description": "Statistics about the video such as the number of times the video has been viewed or liked.",
+      "properties": {
+        "viewCount": {
+          "type": "string",
+          "description": "The number of times the video has been viewed."
+        },
+        "likeCount": {
+          "type": "string",
+          "description": "The number of users who have indicated that they liked the video."
+        },
+        "dislikeCount": {
+          "type": "string",
+          "description": "The number of users who have indicated that they disliked the video."
+        },
+        "favoriteCount": {
+          "type": "string",
+          "description": "The number of users who have added the video to their favorites list."
+        },
+        "commentCount": {
+          "type": "string",
+          "description": "The number of comments for the video."
+        }
+      }
+    },
+    "player": {
+      "type": "object",
+      "description": "Information used to play the video.",
+      "properties": {
+        "embedHtml": {
+          "type": "string",
+          "description": "An iframe tag that embeds a player that will play the video."
+        },
+        "embedHeight": {
+          "type": "number",
+          "description": "The height of the embedded player returned in the player.embedHtml property."
+        },
+        "embedWidth": {
+          "type": "number",
+          "description": "The width of the embedded player returned in the player.embedHtml property."
+        }
+      }
+    },
+    "localizations": {
+      "type": "object",
+      "description": "The localizations object contains translations of the video's metadata."
+    }
+  },
+  "required": [
+    "kind",
+    "etag"
+  ],
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

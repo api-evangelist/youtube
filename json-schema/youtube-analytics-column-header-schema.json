@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "description": "Describes a single column in an Analytics report response, including its name, type, and data type.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the dimension or metric.",
+      "example": "Example Title"
+    },
+    "columnType": {
+      "type": "string",
+      "description": "The type of the column. Valid values are DIMENSION and METRIC.",
+      "example": "DIMENSION",
+      "enum": [
+        "DIMENSION",
+        "METRIC"
+      ]
+    },
+    "dataType": {
+      "type": "string",
+      "description": "The type of data that the column contains. Valid values are STRING, INTEGER, FLOAT, and CURRENCY.",
+      "example": "CURRENCY",
+      "enum": [
+        "CURRENCY",
+        "FLOAT",
+        "INTEGER",
+        "STRING"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ColumnHeader",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-analytics-openapi.yml"
+}

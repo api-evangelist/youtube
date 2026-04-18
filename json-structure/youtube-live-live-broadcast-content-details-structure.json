@@ -1,0 +1,80 @@
+{
+  "type": "object",
+  "description": "Detailed settings for a live broadcast including stream configuration, DVR settings, and content configuration.",
+  "name": "LiveBroadcastContentDetails",
+  "properties": {
+    "boundStreamId": {
+      "type": "string",
+      "description": "The ID of the stream that is bound to the broadcast."
+    },
+    "boundStreamLastUpdateTimeMs": {
+      "type": "string",
+      "description": "The date and time that the live stream referenced by boundStreamId was last updated."
+    },
+    "monitorStream": {
+      "type": "object",
+      "description": "The monitorStream object contains information about the monitor stream, which the broadcaster can use to review the event content before the broadcast stream is shown publicly.",
+      "properties": {
+        "enableMonitorStream": {
+          "type": "boolean",
+          "description": "This value determines whether the monitor stream is enabled for the broadcast."
+        },
+        "broadcastStreamDelayMs": {
+          "type": "integer",
+          "description": "If you have set the enableMonitorStream property to true, this value sets the delay between the video input and the broadcast monitor stream."
+        },
+        "embedHtml": {
+          "type": "string",
+          "description": "The HTML code that embeds a player that plays the monitor stream."
+        }
+      }
+    },
+    "enableEmbed": {
+      "type": "boolean",
+      "description": "Indicates whether the broadcast video can be played in an embedded player."
+    },
+    "enableDvr": {
+      "type": "boolean",
+      "description": "Indicates whether the broadcast enables DVR controls. DVR controls enable the viewer to control the video playback experience by pausing, rewinding, or fast forwarding portions of the broadcast."
+    },
+    "enableContentEncryption": {
+      "type": "boolean",
+      "description": "Indicates whether YouTube should enable content encryption for the broadcast."
+    },
+    "startWithSlate": {
+      "type": "boolean",
+      "description": "Indicates whether the broadcast should automatically begin with an in-stream slate when you update the broadcast's status to live."
+    },
+    "closedCaptionsType": {
+      "type": "string",
+      "description": "Indicates whether the broadcast has captions enabled.",
+      "enum": [
+        "closedCaptionsDisabled",
+        "closedCaptionsEmbedded",
+        "closedCaptionsHttpPost"
+      ]
+    },
+    "enableLowLatency": {
+      "type": "boolean",
+      "description": "Indicates whether this broadcast has low latency enabled."
+    },
+    "latencyPreference": {
+      "type": "string",
+      "description": "Indicates latency preference for the broadcast. The options are ultraLow, low, and normal.",
+      "enum": [
+        "low",
+        "normal",
+        "ultraLow"
+      ]
+    },
+    "enableAutoStart": {
+      "type": "boolean",
+      "description": "This setting indicates whether the broadcast should automatically begin streaming."
+    },
+    "enableAutoStop": {
+      "type": "boolean",
+      "description": "Indicates whether the broadcast should automatically stop streaming."
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

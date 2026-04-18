@@ -1,0 +1,116 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "yt": "https://developers.google.com/youtube/v3/ns/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "Job": {
+      "@id": "yt:Job",
+      "@context": {
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "reportTypeId": {
+          "@id": "yt:reportTypeId",
+          "@type": "xsd:string"
+        },
+        "name": "schema:name",
+        "createTime": {
+          "@id": "yt:createTime",
+          "@type": "xsd:string"
+        },
+        "expireTime": {
+          "@id": "yt:expireTime",
+          "@type": "xsd:string"
+        },
+        "systemManaged": {
+          "@id": "yt:systemManaged",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+    "Report": {
+      "@id": "yt:Report",
+      "@context": {
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "jobId": {
+          "@id": "yt:jobId",
+          "@type": "xsd:string"
+        },
+        "startTime": {
+          "@id": "yt:startTime",
+          "@type": "xsd:string"
+        },
+        "endTime": {
+          "@id": "yt:endTime",
+          "@type": "xsd:string"
+        },
+        "createTime": {
+          "@id": "yt:createTime",
+          "@type": "xsd:string"
+        },
+        "downloadUrl": {
+          "@id": "yt:downloadUrl",
+          "@type": "xsd:string"
+        },
+        "jobExpireTime": {
+          "@id": "yt:jobExpireTime",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ReportType": {
+      "@id": "yt:ReportType",
+      "@context": {
+        "id": {
+          "@id": "yt:id",
+          "@type": "xsd:string"
+        },
+        "name": "schema:name",
+        "systemManaged": {
+          "@id": "yt:systemManaged",
+          "@type": "xsd:boolean"
+        },
+        "deprecateTime": {
+          "@id": "yt:deprecateTime",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ListJobsResponse": {
+      "@id": "yt:ListJobsResponse",
+      "@context": {
+        "jobs": "yt:jobs",
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ListReportsResponse": {
+      "@id": "yt:ListReportsResponse",
+      "@context": {
+        "reports": "yt:reports",
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ListReportTypesResponse": {
+      "@id": "yt:ListReportTypesResponse",
+      "@context": {
+        "reportTypes": "yt:reportTypes",
+        "nextPageToken": {
+          "@id": "yt:nextPageToken",
+          "@type": "xsd:string"
+        }
+      }
+    }
+  }
+}

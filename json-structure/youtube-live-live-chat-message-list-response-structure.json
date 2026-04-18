@@ -1,0 +1,166 @@
+{
+  "type": "object",
+  "description": "A list of live chat message resources for a given broadcast.",
+  "name": "LiveChatMessageListResponse",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#liveChatMessageListResponse."
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource."
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "The token for the next page of results."
+    },
+    "pollingIntervalMillis": {
+      "type": "integer",
+      "description": "The amount of time the client should wait before polling again, in milliseconds."
+    },
+    "offlineAt": {
+      "type": "datetime",
+      "description": "The date and time when the underlying stream went offline."
+    },
+    "pageInfo": {
+      "type": "object",
+      "description": "Paging details for a list of live streaming resources.",
+      "properties": {
+        "totalResults": {
+          "type": "integer",
+          "description": "The total number of results in the result set."
+        },
+        "resultsPerPage": {
+          "type": "integer",
+          "description": "The number of results included in the API response."
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of chat messages that match the request criteria.",
+      "items": {
+        "type": "object",
+        "description": "A liveChatMessage resource represents a chat message in a YouTube live broadcast.",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Identifies the API resource's type. Value is youtube#liveChatMessage."
+          },
+          "etag": {
+            "type": "string",
+            "description": "The Etag of this resource."
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID that YouTube assigns to uniquely identify the message."
+          },
+          "snippet": {
+            "type": "object",
+            "description": "The snippet object contains basic details about the message.",
+            "properties": {
+              "liveChatId": {
+                "type": "string",
+                "description": "The ID of the live chat to which this message belongs."
+              },
+              "type": {
+                "type": "string",
+                "description": "The type of message.",
+                "enum": [
+                  "chatEndedEvent",
+                  "fanFundingEvent",
+                  "giftMembershipReceivedEvent",
+                  "memberMilestoneChatEvent",
+                  "membershipGiftingEvent",
+                  "messageDeletedEvent",
+                  "newSponsorEvent",
+                  "pollClosedEvent",
+                  "pollEditedEvent",
+                  "pollOpenedEvent",
+                  "pollVotedEvent",
+                  "sponsorOnlyModeEndedEvent",
+                  "sponsorOnlyModeStartedEvent",
+                  "superChatEvent",
+                  "superStickerEvent",
+                  "textMessageEvent",
+                  "tombstone",
+                  "userBannedEvent"
+                ]
+              },
+              "displayMessage": {
+                "type": "string",
+                "description": "Contains a string that can be displayed to the user. The string is not necessarily the message text itself."
+              },
+              "authorChannelId": {
+                "type": "string",
+                "description": "The ID of the user that authored this message."
+              },
+              "publishedAt": {
+                "type": "datetime",
+                "description": "The date and time when the message was orignally published."
+              },
+              "hasDisplayContent": {
+                "type": "boolean",
+                "description": "Whether the message has display content that should be displayed to users."
+              },
+              "textMessageDetails": {
+                "type": "object",
+                "description": "Details about the text message. This object is only present if the type is textMessageEvent.",
+                "properties": {
+                  "messageText": {
+                    "type": "string",
+                    "description": "The user's message."
+                  }
+                }
+              }
+            }
+          },
+          "authorDetails": {
+            "type": "object",
+            "description": "The authorDetails object contains basic details about the user that posted this message.",
+            "properties": {
+              "channelId": {
+                "type": "string",
+                "description": "The YouTube channel ID of the message author."
+              },
+              "channelUrl": {
+                "type": "string",
+                "description": "The channel URL of the message author."
+              },
+              "displayName": {
+                "type": "string",
+                "description": "The channel's display name."
+              },
+              "profileImageUrl": {
+                "type": "string",
+                "description": "The channel's avatar URL."
+              },
+              "isVerified": {
+                "type": "boolean",
+                "description": "Indicates whether YouTube has verified the authenticity of the channel owner's identity."
+              },
+              "isChatOwner": {
+                "type": "boolean",
+                "description": "Indicates whether the user is the owner of the live chat."
+              },
+              "isChatSponsor": {
+                "type": "boolean",
+                "description": "Indicates whether the user is a sponsor of the live chat."
+              },
+              "isChatModerator": {
+                "type": "boolean",
+                "description": "Indicates whether the user is a moderator of the live chat."
+              }
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag"
+        ]
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

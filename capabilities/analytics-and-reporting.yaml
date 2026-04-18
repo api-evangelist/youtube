@@ -1,0 +1,282 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "YouTube Analytics And Reporting"
+  description: "Workflow combining YouTube Analytics and Reporting APIs for comprehensive channel performance monitoring, custom report generation, and bulk data export. Designed for data analysts, marketing teams, and content strategists."
+  tags:
+    - YouTube
+    - Analytics
+    - Reporting
+    - Metrics
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      YOUTUBE_OAUTH_TOKEN: YOUTUBE_OAUTH_TOKEN
+
+capability:
+  consumes:
+    - import: youtube-analytics
+      location: ./shared/analytics.yaml
+    - import: youtube-reporting
+      location: ./shared/reporting.yaml
+
+  exposes:
+    - type: rest
+      port: 8083
+      namespace: analytics-reporting-api
+      description: "Unified REST API for YouTube analytics and reporting workflows."
+      resources:
+        - path: /v1/reports
+          name: analytics-reports
+          description: "Query real-time analytics reports"
+          operations:
+            - method: GET
+              name: query-analytics
+              description: "Query YouTube Analytics data"
+              call: "youtube-analytics.query-reports"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/groups
+          name: analytics-groups
+          description: "Manage analytics groups"
+          operations:
+            - method: GET
+              name: list-groups
+              description: "List analytics groups"
+              call: "youtube-analytics.list-groups"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-group
+              description: "Create an analytics group"
+              call: "youtube-analytics.insert-group"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-group
+              description: "Update an analytics group"
+              call: "youtube-analytics.update-group"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-group
+              description: "Delete an analytics group"
+              call: "youtube-analytics.delete-group"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/group-items
+          name: group-items
+          description: "Manage items within analytics groups"
+          operations:
+            - method: GET
+              name: list-group-items
+              description: "List items in an analytics group"
+              call: "youtube-analytics.list-group-items"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: add-group-item
+              description: "Add an item to a group"
+              call: "youtube-analytics.insert-group-item"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: remove-group-item
+              description: "Remove an item from a group"
+              call: "youtube-analytics.delete-group-item"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/reporting-jobs
+          name: reporting-jobs
+          description: "Manage bulk reporting jobs"
+          operations:
+            - method: GET
+              name: list-jobs
+              description: "List reporting jobs"
+              call: "youtube-reporting.list-jobs"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-job
+              description: "Create a reporting job"
+              call: "youtube-reporting.create-job"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-job
+              description: "Delete a reporting job"
+              call: "youtube-reporting.delete-job"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/bulk-reports
+          name: bulk-reports
+          description: "Access generated bulk reports"
+          operations:
+            - method: GET
+              name: list-bulk-reports
+              description: "List generated reports for a job"
+              call: "youtube-reporting.list-reports"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/report-types
+          name: report-types
+          description: "Available report types"
+          operations:
+            - method: GET
+              name: list-report-types
+              description: "List available report types"
+              call: "youtube-reporting.list-report-types"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9093
+      namespace: analytics-reporting-mcp
+      transport: http
+      description: "MCP server for AI-assisted YouTube analytics and reporting."
+      tools:
+        - name: query-analytics
+          description: "Query YouTube Analytics data with dimensions and metrics"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "youtube-analytics.query-reports"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-analytics-groups
+          description: "List YouTube Analytics groups"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "youtube-analytics.list-groups"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-analytics-group
+          description: "Create an analytics group for organizing data"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "youtube-analytics.insert-group"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-analytics-group
+          description: "Update an analytics group"
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "youtube-analytics.update-group"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-analytics-group
+          description: "Delete an analytics group"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-analytics.delete-group"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-group-items
+          description: "List items in an analytics group"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "youtube-analytics.list-group-items"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: add-group-item
+          description: "Add an item to an analytics group"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "youtube-analytics.insert-group-item"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: remove-group-item
+          description: "Remove an item from an analytics group"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-analytics.delete-group-item"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-reporting-jobs
+          description: "List bulk reporting jobs"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "youtube-reporting.list-jobs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-reporting-job
+          description: "Create a new bulk reporting job"
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "youtube-reporting.create-job"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-reporting-job
+          description: "Delete a bulk reporting job"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-reporting.delete-job"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-bulk-reports
+          description: "List generated bulk reports for a job"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "youtube-reporting.list-reports"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-bulk-report
+          description: "Get metadata for a specific bulk report"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "youtube-reporting.get-report"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-report-types
+          description: "List available report types"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "youtube-reporting.list-report-types"
+          outputParameters:
+            - type: object
+              mapping: "$."

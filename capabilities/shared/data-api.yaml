@@ -1,0 +1,1728 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "YouTube Data API v3"
+  description: "The YouTube Data API v3 provides access to YouTube data including videos, channels, playlists, comments, subscriptions, captions, and other YouTube resources. It allows applications to search for content and manage YouTube accounts programmatically."
+  tags:
+    - YouTube
+    - Video Management
+    - Content Discovery
+    - Channel Management
+    - Playlist Management
+    - Comments
+    - Subscriptions
+    - Captions
+    - Search
+    - Google Cloud
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      YOUTUBE_API_KEY: YOUTUBE_API_KEY
+      YOUTUBE_OAUTH_TOKEN: YOUTUBE_OAUTH_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: youtube-data-api
+      baseUri: https://www.googleapis.com/youtube/v3
+      description: "YouTube Data API v3 providing access to YouTube videos, channels, playlists, comments, subscriptions, captions, and other resources."
+      authentication:
+        type: bearer
+        token: "{{YOUTUBE_OAUTH_TOKEN}}"
+      resources:
+        - name: videos
+          path: /videos
+          description: "Operations related to YouTube video resources"
+          operations:
+            - name: list-videos
+              method: GET
+              description: "Returns a list of videos that match the API request parameters"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties that the API response will include."
+                - name: id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of YouTube video IDs for the resources being retrieved."
+                - name: chart
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies the chart that the API returns chart data for."
+                - name: myRating
+                  in: query
+                  type: string
+                  required: false
+                  description: "Set this parameter to like or dislike to instruct the API to return only videos liked or disliked by the authenticated user."
+                - name: maxResults
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items that should be returned in the result set."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies a specific page in the result set that should be returned."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: insert-video
+              method: POST
+              description: "Uploads a video to YouTube and optionally sets the video's metadata"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-video
+              method: PUT
+              description: "Updates a video's metadata"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to update."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-video
+              method: DELETE
+              description: "Deletes a YouTube video"
+              inputParameters:
+                - name: id
+                  in: query
+                  type: string
+                  required: true
+                  description: "The ID of the video to delete."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: video-ratings
+          path: /videos/rate
+          description: "Operations related to YouTube video ratings"
+          operations:
+            - name: rate-video
+              method: POST
+              description: "Adds a like or dislike rating to a video or removes a rating from a video"
+              inputParameters:
+                - name: id
+                  in: query
+                  type: string
+                  required: true
+                  description: "The ID of the video to rate."
+                - name: rating
+                  in: query
+                  type: string
+                  required: true
+                  description: "The rating to record. Valid values are like, dislike, and none."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: channels
+          path: /channels
+          description: "Operations related to YouTube channel resources"
+          operations:
+            - name: list-channels
+              method: GET
+              description: "Returns a collection of zero or more channel resources that match the request criteria"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of YouTube channel IDs for the resources being retrieved."
+                - name: mine
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Set to true to return channels owned by the authenticated user."
+                - name: forUsername
+                  in: query
+                  type: string
+                  required: false
+                  description: "A YouTube username identifying a channel."
+                - name: maxResults
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items that should be returned."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies a specific page in the result set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-channel
+              method: PUT
+              description: "Updates a channel's metadata"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to update."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: playlists
+          path: /playlists
+          description: "Operations related to YouTube playlist resources"
+          operations:
+            - name: list-playlists
+              method: GET
+              description: "Returns a collection of playlists that match the API request parameters"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of YouTube playlist IDs."
+                - name: channelId
+                  in: query
+                  type: string
+                  required: false
+                  description: "Indicates that the API response should only contain resources created by the channel."
+                - name: mine
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Set to true to return playlists owned by the authenticated user."
+                - name: maxResults
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items that should be returned."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies a specific page in the result set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: insert-playlist
+              method: POST
+              description: "Creates a playlist on behalf of the authenticated user"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-playlist
+              method: PUT
+              description: "Modifies a playlist"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to update."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-playlist
+              method: DELETE
+              description: "Deletes a playlist"
+              inputParameters:
+                - name: id
+                  in: query
+                  type: string
+                  required: true
+                  description: "The ID of the playlist to delete."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: playlist-items
+          path: /playlistItems
+          description: "Operations related to items within YouTube playlists"
+          operations:
+            - name: list-playlist-items
+              method: GET
+              description: "Returns a collection of playlist items that match the API request parameters"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: playlistId
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies the playlist whose items are being listed."
+                - name: id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of playlist item IDs."
+                - name: videoId
+                  in: query
+                  type: string
+                  required: false
+                  description: "Specifies that the request should return only items containing the given video."
+                - name: maxResults
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items that should be returned."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies a specific page in the result set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: insert-playlist-item
+              method: POST
+              description: "Adds a resource to a playlist"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-playlist-item
+              method: DELETE
+              description: "Deletes a playlist item"
+              inputParameters:
+                - name: id
+                  in: query
+                  type: string
+                  required: true
+                  description: "The ID of the playlist item to delete."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: search
+          path: /search
+          description: "Operations for searching YouTube content"
+          operations:
+            - name: search-list
+              method: GET
+              description: "Returns a collection of search results that match the query parameters"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: q
+                  in: query
+                  type: string
+                  required: false
+                  description: "The query term to search for."
+                - name: type
+                  in: query
+                  type: string
+                  required: false
+                  description: "Restricts a search query to only retrieve a particular type of resource."
+                - name: channelId
+                  in: query
+                  type: string
+                  required: false
+                  description: "Indicates that the API response should only contain resources created by the channel."
+                - name: order
+                  in: query
+                  type: string
+                  required: false
+                  description: "Specifies the method that will be used to order resources in the API response."
+                - name: publishedAfter
+                  in: query
+                  type: string
+                  required: false
+                  description: "Restricts results to only include resources created at or after the specified time."
+                - name: publishedBefore
+                  in: query
+                  type: string
+                  required: false
+                  description: "Restricts results to only include resources created before or at the specified time."
+                - name: maxResults
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items that should be returned."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies a specific page in the result set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: subscriptions
+          path: /subscriptions
+          description: "Operations related to YouTube channel subscriptions"
+          operations:
+            - name: list-subscriptions
+              method: GET
+              description: "Returns subscription resources that match the API request criteria"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of YouTube subscription IDs."
+                - name: mine
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Set to true to retrieve the subscriptions of the authenticated user."
+                - name: channelId
+                  in: query
+                  type: string
+                  required: false
+                  description: "Retrieves subscriptions for the channel with the specified YouTube channel ID."
+                - name: maxResults
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items that should be returned."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies a specific page in the result set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: insert-subscription
+              method: POST
+              description: "Adds a subscription for the authenticated user"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-subscription
+              method: DELETE
+              description: "Deletes a subscription"
+              inputParameters:
+                - name: id
+                  in: query
+                  type: string
+                  required: true
+                  description: "The ID of the subscription to delete."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: comments
+          path: /comments
+          description: "Operations related to individual YouTube comments"
+          operations:
+            - name: list-comments
+              method: GET
+              description: "Returns a list of comments that match the API request parameters"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of comment IDs."
+                - name: parentId
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies the comment thread whose comments are being listed."
+                - name: textFormat
+                  in: query
+                  type: string
+                  required: false
+                  description: "Specifies whether the API should return comments formatted as HTML or plain text."
+                - name: maxResults
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items that should be returned."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies a specific page in the result set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: insert-comment
+              method: POST
+              description: "Creates a reply to an existing comment"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-comment
+              method: PUT
+              description: "Modifies a comment"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to update."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-comment
+              method: DELETE
+              description: "Deletes a comment"
+              inputParameters:
+                - name: id
+                  in: query
+                  type: string
+                  required: true
+                  description: "The ID of the comment to delete."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: comment-moderation
+          path: /comments/setModerationStatus
+          description: "Operations related to YouTube comment moderation"
+          operations:
+            - name: set-comment-moderation-status
+              method: POST
+              description: "Sets the moderation status of one or more comments"
+              inputParameters:
+                - name: id
+                  in: query
+                  type: string
+                  required: true
+                  description: "Comma-separated list of comment IDs to set moderation status for."
+                - name: moderationStatus
+                  in: query
+                  type: string
+                  required: true
+                  description: "Identifies the new moderation status. Acceptable values are heldForReview, published, and rejected."
+                - name: banAuthor
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Set to true to ban the comment author from making future comments."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: comment-threads
+          path: /commentThreads
+          description: "Operations related to YouTube comment threads"
+          operations:
+            - name: list-comment-threads
+              method: GET
+              description: "Returns a list of comment threads that match the API request parameters"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of comment thread IDs."
+                - name: videoId
+                  in: query
+                  type: string
+                  required: false
+                  description: "Instructs the API to return comment threads for the video with the specified ID."
+                - name: channelId
+                  in: query
+                  type: string
+                  required: false
+                  description: "Instructs the API to return comment threads for the channel with the specified ID."
+                - name: moderationStatus
+                  in: query
+                  type: string
+                  required: false
+                  description: "Set this parameter to limit the returned comment threads to only those with the specified moderation status."
+                - name: maxResults
+                  in: query
+                  type: integer
+                  required: false
+                  description: "The maximum number of items that should be returned."
+                - name: pageToken
+                  in: query
+                  type: string
+                  required: false
+                  description: "Identifies a specific page in the result set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: insert-comment-thread
+              method: POST
+              description: "Creates a new top-level comment"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-comment-thread
+              method: PUT
+              description: "Modifies the top-level comment in a comment thread"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to update."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: captions
+          path: /captions
+          description: "Operations related to YouTube video caption tracks"
+          operations:
+            - name: list-captions
+              method: GET
+              description: "Returns a list of caption tracks that are associated with a specified video"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: videoId
+                  in: query
+                  type: string
+                  required: true
+                  description: "The ID of the video for which the API should return caption tracks."
+                - name: id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of caption track IDs to retrieve."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: insert-caption
+              method: POST
+              description: "Uploads a caption track"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to set."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-caption
+              method: PUT
+              description: "Updates a caption track"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to update."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: delete-caption
+              method: DELETE
+              description: "Deletes a specified caption track"
+              inputParameters:
+                - name: id
+                  in: query
+                  type: string
+                  required: true
+                  description: "The ID of the caption track to delete."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: video-categories
+          path: /videoCategories
+          description: "Operations related to YouTube video categories"
+          operations:
+            - name: list-video-categories
+              method: GET
+              description: "Returns a list of categories that can be associated with YouTube videos"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: regionCode
+                  in: query
+                  type: string
+                  required: false
+                  description: "Instructs the API to return the list of video categories available in the specified country."
+                - name: id
+                  in: query
+                  type: string
+                  required: false
+                  description: "Comma-separated list of video category IDs to retrieve."
+                - name: hl
+                  in: query
+                  type: string
+                  required: false
+                  description: "Specifies the language that will be used for text values in the API response."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: i18n-languages
+          path: /i18nLanguages
+          description: "Operations related to internationalization language resources"
+          operations:
+            - name: list-i18n-languages
+              method: GET
+              description: "Returns a list of application languages that the YouTube website supports"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: hl
+                  in: query
+                  type: string
+                  required: false
+                  description: "Specifies the language that should be used for text values in the API response."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: i18n-regions
+          path: /i18nRegions
+          description: "Operations related to internationalization region resources"
+          operations:
+            - name: list-i18n-regions
+              method: GET
+              description: "Returns a list of content regions that the YouTube website supports"
+              inputParameters:
+                - name: part
+                  in: query
+                  type: string
+                  required: true
+                  description: "Specifies a comma-separated list of one or more resource properties to include."
+                - name: hl
+                  in: query
+                  type: string
+                  required: false
+                  description: "Specifies the language that should be used for text values in the API response."
+                - name: fields
+                  in: query
+                  type: string
+                  required: false
+                  description: "Selector specifying which fields to include in a partial response."
+                - name: key
+                  in: query
+                  type: string
+                  required: false
+                  description: "API key for authentication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: youtube-data-api-rest
+      resources:
+        - path: /v1/videos
+          name: videos
+          operations:
+            - method: GET
+              name: list-videos
+              description: "Returns a list of videos that match the API request parameters"
+              call: "youtube-data-api.list-videos"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: insert-video
+              description: "Uploads a video to YouTube and optionally sets the video's metadata"
+              call: "youtube-data-api.insert-video"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-video
+              description: "Updates a video's metadata"
+              call: "youtube-data-api.update-video"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-video
+              description: "Deletes a YouTube video"
+              call: "youtube-data-api.delete-video"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/videos-rate
+          name: video-ratings
+          operations:
+            - method: POST
+              name: rate-video
+              description: "Adds a like or dislike rating to a video or removes a rating from a video"
+              call: "youtube-data-api.rate-video"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/channels
+          name: channels
+          operations:
+            - method: GET
+              name: list-channels
+              description: "Returns a collection of zero or more channel resources that match the request criteria"
+              call: "youtube-data-api.list-channels"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-channel
+              description: "Updates a channel's metadata"
+              call: "youtube-data-api.update-channel"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/playlists
+          name: playlists
+          operations:
+            - method: GET
+              name: list-playlists
+              description: "Returns a collection of playlists that match the API request parameters"
+              call: "youtube-data-api.list-playlists"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: insert-playlist
+              description: "Creates a playlist on behalf of the authenticated user"
+              call: "youtube-data-api.insert-playlist"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-playlist
+              description: "Modifies a playlist"
+              call: "youtube-data-api.update-playlist"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-playlist
+              description: "Deletes a playlist"
+              call: "youtube-data-api.delete-playlist"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/playlist-items
+          name: playlist-items
+          operations:
+            - method: GET
+              name: list-playlist-items
+              description: "Returns a collection of playlist items that match the API request parameters"
+              call: "youtube-data-api.list-playlist-items"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: insert-playlist-item
+              description: "Adds a resource to a playlist"
+              call: "youtube-data-api.insert-playlist-item"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-playlist-item
+              description: "Deletes a playlist item"
+              call: "youtube-data-api.delete-playlist-item"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/search
+          name: search
+          operations:
+            - method: GET
+              name: search-list
+              description: "Returns a collection of search results that match the query parameters"
+              call: "youtube-data-api.search-list"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/subscriptions
+          name: subscriptions
+          operations:
+            - method: GET
+              name: list-subscriptions
+              description: "Returns subscription resources that match the API request criteria"
+              call: "youtube-data-api.list-subscriptions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: insert-subscription
+              description: "Adds a subscription for the authenticated user"
+              call: "youtube-data-api.insert-subscription"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-subscription
+              description: "Deletes a subscription"
+              call: "youtube-data-api.delete-subscription"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/comments
+          name: comments
+          operations:
+            - method: GET
+              name: list-comments
+              description: "Returns a list of comments that match the API request parameters"
+              call: "youtube-data-api.list-comments"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: insert-comment
+              description: "Creates a reply to an existing comment"
+              call: "youtube-data-api.insert-comment"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-comment
+              description: "Modifies a comment"
+              call: "youtube-data-api.update-comment"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-comment
+              description: "Deletes a comment"
+              call: "youtube-data-api.delete-comment"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/comments-moderation-status
+          name: comment-moderation
+          operations:
+            - method: POST
+              name: set-comment-moderation-status
+              description: "Sets the moderation status of one or more comments"
+              call: "youtube-data-api.set-comment-moderation-status"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/comment-threads
+          name: comment-threads
+          operations:
+            - method: GET
+              name: list-comment-threads
+              description: "Returns a list of comment threads that match the API request parameters"
+              call: "youtube-data-api.list-comment-threads"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: insert-comment-thread
+              description: "Creates a new top-level comment"
+              call: "youtube-data-api.insert-comment-thread"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-comment-thread
+              description: "Modifies the top-level comment in a comment thread"
+              call: "youtube-data-api.update-comment-thread"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/captions
+          name: captions
+          operations:
+            - method: GET
+              name: list-captions
+              description: "Returns a list of caption tracks that are associated with a specified video"
+              call: "youtube-data-api.list-captions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: insert-caption
+              description: "Uploads a caption track"
+              call: "youtube-data-api.insert-caption"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-caption
+              description: "Updates a caption track"
+              call: "youtube-data-api.update-caption"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-caption
+              description: "Deletes a specified caption track"
+              call: "youtube-data-api.delete-caption"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/video-categories
+          name: video-categories
+          operations:
+            - method: GET
+              name: list-video-categories
+              description: "Returns a list of categories that can be associated with YouTube videos"
+              call: "youtube-data-api.list-video-categories"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/i18n-languages
+          name: i18n-languages
+          operations:
+            - method: GET
+              name: list-i18n-languages
+              description: "Returns a list of application languages that the YouTube website supports"
+              call: "youtube-data-api.list-i18n-languages"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/i18n-regions
+          name: i18n-regions
+          operations:
+            - method: GET
+              name: list-i18n-regions
+              description: "Returns a list of content regions that the YouTube website supports"
+              call: "youtube-data-api.list-i18n-regions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: youtube-data-api-mcp
+      transport: http
+      tools:
+        - name: list-videos
+          description: "Returns a list of videos that match the API request parameters"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.list-videos"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: insert-video
+          description: "Uploads a video to YouTube and optionally sets the video's metadata"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-data-api.insert-video"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-video
+          description: "Updates a video's metadata"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.update-video"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-video
+          description: "Deletes a YouTube video"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-data-api.delete-video"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: rate-video
+          description: "Adds a like or dislike rating to a video or removes a rating from a video"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-data-api.rate-video"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-channels
+          description: "Returns a collection of zero or more channel resources that match the request criteria"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.list-channels"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-channel
+          description: "Updates a channel's metadata"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.update-channel"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-playlists
+          description: "Returns a collection of playlists that match the API request parameters"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.list-playlists"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: insert-playlist
+          description: "Creates a playlist on behalf of the authenticated user"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-data-api.insert-playlist"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-playlist
+          description: "Modifies a playlist"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.update-playlist"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-playlist
+          description: "Deletes a playlist"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-data-api.delete-playlist"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-playlist-items
+          description: "Returns a collection of playlist items that match the API request parameters"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.list-playlist-items"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: insert-playlist-item
+          description: "Adds a resource to a playlist"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-data-api.insert-playlist-item"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-playlist-item
+          description: "Deletes a playlist item"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-data-api.delete-playlist-item"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: search-list
+          description: "Returns a collection of search results that match the query parameters"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.search-list"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-subscriptions
+          description: "Returns subscription resources that match the API request criteria"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.list-subscriptions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: insert-subscription
+          description: "Adds a subscription for the authenticated user"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-data-api.insert-subscription"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-subscription
+          description: "Deletes a subscription"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-data-api.delete-subscription"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-comments
+          description: "Returns a list of comments that match the API request parameters"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.list-comments"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: insert-comment
+          description: "Creates a reply to an existing comment"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-data-api.insert-comment"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-comment
+          description: "Modifies a comment"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.update-comment"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-comment
+          description: "Deletes a comment"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-data-api.delete-comment"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: set-comment-moderation-status
+          description: "Sets the moderation status of one or more comments"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-data-api.set-comment-moderation-status"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-comment-threads
+          description: "Returns a list of comment threads that match the API request parameters"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.list-comment-threads"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: insert-comment-thread
+          description: "Creates a new top-level comment"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-data-api.insert-comment-thread"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-comment-thread
+          description: "Modifies the top-level comment in a comment thread"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.update-comment-thread"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-captions
+          description: "Returns a list of caption tracks that are associated with a specified video"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.list-captions"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: insert-caption
+          description: "Uploads a caption track"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "youtube-data-api.insert-caption"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-caption
+          description: "Updates a caption track"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.update-caption"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-caption
+          description: "Deletes a specified caption track"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "youtube-data-api.delete-caption"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-video-categories
+          description: "Returns a list of categories that can be associated with YouTube videos"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.list-video-categories"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-i18n-languages
+          description: "Returns a list of application languages that the YouTube website supports"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.list-i18n-languages"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-i18n-regions
+          description: "Returns a list of content regions that the YouTube website supports"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "youtube-data-api.list-i18n-regions"
+          outputParameters:
+            - type: object
+              mapping: "$."

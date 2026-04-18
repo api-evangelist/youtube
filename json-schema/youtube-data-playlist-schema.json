@@ -1,0 +1,99 @@
+{
+  "type": "object",
+  "description": "A playlist resource represents a YouTube playlist.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#playlist.",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "id": {
+      "type": "string",
+      "description": "The ID that YouTube uses to uniquely identify the playlist.",
+      "example": "abc123def456"
+    },
+    "snippet": {
+      "type": "object",
+      "description": "Basic details about the playlist such as its title, description, and thumbnails.",
+      "example": "example_value",
+      "properties": {
+        "publishedAt": {
+          "type": "string",
+          "description": "The date and time that the playlist was created.",
+          "format": "date-time"
+        },
+        "channelId": {
+          "type": "string",
+          "description": "The ID of the channel that published the playlist."
+        },
+        "title": {
+          "type": "string",
+          "description": "The playlist title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The playlist description."
+        },
+        "thumbnails": {
+          "type": "object",
+          "description": "A map of thumbnail images associated with the playlist."
+        },
+        "channelTitle": {
+          "type": "string",
+          "description": "The channel title of the channel that the video belongs to."
+        },
+        "tags": {
+          "type": "array",
+          "description": "Keyword tags associated with the playlist.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "defaultLanguage": {
+          "type": "string",
+          "description": "The language of the text in the playlist resource's snippet.title and snippet.description properties."
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "description": "The status object contains status information for the playlist.",
+      "example": "example_value",
+      "properties": {
+        "privacyStatus": {
+          "type": "string",
+          "description": "The playlist's privacy status.",
+          "enum": [
+            "private",
+            "public",
+            "unlisted"
+          ]
+        }
+      }
+    },
+    "contentDetails": {
+      "type": "object",
+      "description": "The contentDetails object contains information about the playlist content.",
+      "example": "example_value",
+      "properties": {
+        "itemCount": {
+          "type": "integer",
+          "description": "The number of videos in the playlist."
+        }
+      }
+    }
+  },
+  "required": [
+    "kind",
+    "etag"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Playlist",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-data-api-openapi.yml"
+}

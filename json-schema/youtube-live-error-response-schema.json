@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "description": "A standard error response returned by the YouTube Live Streaming API.",
+  "properties": {
+    "error": {
+      "type": "object",
+      "description": "The error details.",
+      "example": "example_value",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "description": "The HTTP status code of the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable description of the error."
+        },
+        "errors": {
+          "type": "array",
+          "description": "A list of individual errors.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "A human-readable description of the error."
+              },
+              "domain": {
+                "type": "string",
+                "description": "The domain in which the error occurred."
+              },
+              "reason": {
+                "type": "string",
+                "description": "The reason for the error."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ErrorResponse",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-live-streaming-openapi.yml"
+}

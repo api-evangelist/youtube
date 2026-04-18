@@ -1,0 +1,205 @@
+{
+  "type": "object",
+  "description": "A list of comment thread resources matching the request criteria.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#commentThreadListResponse.",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "The token for the next page of results.",
+      "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+    },
+    "pageInfo": {
+      "type": "object",
+      "description": "Paging details for a list operation, including information about the total number of resources and the number per page.",
+      "properties": {
+        "totalResults": {
+          "type": "integer",
+          "description": "The total number of results in the result set.",
+          "example": 42
+        },
+        "resultsPerPage": {
+          "type": "integer",
+          "description": "The number of results included in the API response.",
+          "example": 10
+        }
+      }
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of comment threads that match the request criteria.",
+      "example": [],
+      "items": {
+        "type": "object",
+        "description": "A commentThread resource contains information about a YouTube comment thread, which comprises a top-level comment and replies.",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "description": "Identifies the API resource's type. Value is youtube#commentThread.",
+            "example": "youtube#video"
+          },
+          "etag": {
+            "type": "string",
+            "description": "The Etag of this resource.",
+            "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+          },
+          "id": {
+            "type": "string",
+            "description": "The ID that YouTube uses to uniquely identify the comment thread.",
+            "example": "abc123def456"
+          },
+          "snippet": {
+            "type": "object",
+            "description": "The snippet object contains basic details about the comment thread.",
+            "example": "example_value",
+            "properties": {
+              "channelId": {
+                "type": "string",
+                "description": "The YouTube channel that is associated with the comments in the thread."
+              },
+              "videoId": {
+                "type": "string",
+                "description": "The ID of the video that the comments refer to."
+              },
+              "topLevelComment": {
+                "type": "object",
+                "description": "A comment resource contains information about a single YouTube comment.",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "description": "Identifies the API resource's type. Value is youtube#comment.",
+                    "example": "youtube#video"
+                  },
+                  "etag": {
+                    "type": "string",
+                    "description": "The Etag of this resource.",
+                    "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "The ID that YouTube uses to uniquely identify the comment.",
+                    "example": "abc123def456"
+                  },
+                  "snippet": {
+                    "type": "object",
+                    "description": "The snippet object contains basic details about the comment.",
+                    "example": "example_value",
+                    "properties": {
+                      "textOriginal": {
+                        "type": "object"
+                      },
+                      "textDisplay": {
+                        "type": "object"
+                      },
+                      "authorDisplayName": {
+                        "type": "object"
+                      },
+                      "authorProfileImageUrl": {
+                        "type": "object"
+                      },
+                      "authorChannelUrl": {
+                        "type": "object"
+                      },
+                      "authorChannelId": {
+                        "type": "object"
+                      },
+                      "likeCount": {
+                        "type": "object"
+                      },
+                      "viewerRating": {
+                        "type": "object"
+                      },
+                      "publishedAt": {
+                        "type": "object"
+                      },
+                      "updatedAt": {
+                        "type": "object"
+                      },
+                      "videoId": {
+                        "type": "object"
+                      },
+                      "parentId": {
+                        "type": "object"
+                      },
+                      "canRate": {
+                        "type": "object"
+                      },
+                      "moderationStatus": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "kind",
+                  "etag"
+                ]
+              },
+              "canReply": {
+                "type": "boolean",
+                "description": "Whether the current viewer can reply to the thread."
+              },
+              "totalReplyCount": {
+                "type": "integer",
+                "description": "The total number of replies that have been submitted in response to the top-level comment."
+              },
+              "isPublic": {
+                "type": "boolean",
+                "description": "Indicates whether the thread, including all of its comments and comment replies, is visible to all YouTube users."
+              }
+            }
+          },
+          "replies": {
+            "type": "object",
+            "description": "The replies object contains a list of replies to the top-level comment.",
+            "example": "example_value",
+            "properties": {
+              "comments": {
+                "type": "array",
+                "description": "A limited number of replies to the top-level comment.",
+                "items": {
+                  "type": "object",
+                  "description": "A comment resource contains information about a single YouTube comment.",
+                  "properties": {
+                    "kind": {
+                      "type": "object"
+                    },
+                    "etag": {
+                      "type": "object"
+                    },
+                    "id": {
+                      "type": "object"
+                    },
+                    "snippet": {
+                      "type": "object"
+                    }
+                  },
+                  "required": [
+                    "kind",
+                    "etag"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag"
+        ]
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CommentThreadListResponse",
+  "x-schema-source": "openapi",
+  "x-source-url": "openapi/youtube-data-api-openapi.yml"
+}
