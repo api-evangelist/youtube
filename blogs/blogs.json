@@ -1,0 +1,13 @@
+{
+  "repo": "youtube",
+  "feeds": [
+    {
+      "source": "https://blog.youtube/news-and-events/",
+      "feed_url": "https://blog.youtube/rss/",
+      "saved": 10,
+      "title": "YouTube Official Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:38:40Z"
+}
