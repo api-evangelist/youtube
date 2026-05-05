@@ -18,7 +18,8 @@ apis:
         type: Authentication
       - url: openapi/youtube-data-api-openapi.yml
         type: OpenAPI
-    description: Manages YouTube user activities, including videos liked, channels subscribed to, and other user interactions on YouTube.
+    description: Manages YouTube user activities, including videos liked, channels subscribed to, and
+      other user interactions on YouTube.
   - aid: youtube:youtube-channels-api
     name: Youtube Channels API
     tags:
@@ -38,7 +39,8 @@ apis:
         type: OpenAPI
       - url: json-schema/youtube-channel-schema.json
         type: JSONSchema
-    description: Provides access to YouTube channel data including channel metadata, statistics, and settings for both the authenticated user and other public channels.
+    description: Provides access to YouTube channel data including channel metadata, statistics, and settings
+      for both the authenticated user and other public channels.
   - aid: youtube:youtube-comments-api
     name: Youtube Comments API
     tags:
@@ -56,7 +58,8 @@ apis:
         type: Authentication
       - url: openapi/youtube-data-api-openapi.yml
         type: OpenAPI
-    description: Manages individual comments on YouTube videos and other resources, supporting retrieval, creation, update, deletion, and moderation operations.
+    description: Manages individual comments on YouTube videos and other resources, supporting retrieval,
+      creation, update, deletion, and moderation operations.
   - aid: youtube:youtube-comment-threads-api
     name: Youtube Comment Threads API
     tags:
@@ -74,7 +77,8 @@ apis:
         type: Authentication
       - url: openapi/youtube-data-api-openapi.yml
         type: OpenAPI
-    description: Provides access to comment threads on YouTube videos and channels, where a comment thread includes a top-level comment and any replies to that comment.
+    description: Provides access to comment threads on YouTube videos and channels, where a comment thread
+      includes a top-level comment and any replies to that comment.
   - aid: youtube:youtube-playlists-api
     name: Youtube Playlists API
     tags:
@@ -92,7 +96,8 @@ apis:
         type: Authentication
       - url: openapi/youtube-data-api-openapi.yml
         type: OpenAPI
-    description: Manages YouTube playlists including creating, updating, deleting, and listing playlists associated with a channel or the authenticated user.
+    description: Manages YouTube playlists including creating, updating, deleting, and listing playlists
+      associated with a channel or the authenticated user.
   - aid: youtube:youtube-playlist-items-api
     name: Youtube Playlist Items API
     tags:
@@ -110,7 +115,8 @@ apis:
         type: Authentication
       - url: openapi/youtube-data-api-openapi.yml
         type: OpenAPI
-    description: Manages individual items within a YouTube playlist, enabling retrieval, addition, update, and removal of videos from playlists.
+    description: Manages individual items within a YouTube playlist, enabling retrieval, addition, update,
+      and removal of videos from playlists.
   - aid: youtube:youtube-search-api
     name: Youtube Search API
     tags:
@@ -128,7 +134,8 @@ apis:
         type: Authentication
       - url: openapi/youtube-data-api-openapi.yml
         type: OpenAPI
-    description: Searches across YouTube content including videos, channels, and playlists matching specified query parameters, returning a collection of results.
+    description: Searches across YouTube content including videos, channels, and playlists matching specified
+      query parameters, returning a collection of results.
   - aid: youtube:youtube-subscriptions-api
     name: Youtube Subscriptions API
     tags:
@@ -146,7 +153,8 @@ apis:
         type: Authentication
       - url: openapi/youtube-data-api-openapi.yml
         type: OpenAPI
-    description: Manages YouTube channel subscriptions, allowing retrieval, creation, and deletion of subscriptions for the authenticated user.
+    description: Manages YouTube channel subscriptions, allowing retrieval, creation, and deletion of
+      subscriptions for the authenticated user.
   - aid: youtube:youtube-videos-api
     name: Youtube Videos API
     tags:
@@ -165,7 +173,8 @@ apis:
         type: OpenAPI
       - url: json-schema/youtube-video-schema.json
         type: JSONSchema
-    description: Provides access to YouTube video data including metadata, statistics, and content details, and supports uploading, updating, rating, and deleting videos.
+    description: Provides access to YouTube video data including metadata, statistics, and content details,
+      and supports uploading, updating, rating, and deleting videos.
   - aid: youtube:youtube-captions-api
     name: Youtube Captions API
     tags:
@@ -183,7 +192,8 @@ apis:
         type: Authentication
       - url: openapi/youtube-data-api-openapi.yml
         type: OpenAPI
-    description: Manages caption tracks associated with YouTube videos. A caption track is associated with exactly one YouTube video and supports upload, update, download, and deletion operations.
+    description: Manages caption tracks associated with YouTube videos. A caption track is associated
+      with exactly one YouTube video and supports upload, update, download, and deletion operations.
   - aid: youtube:youtube-channel-sections-api
     name: Youtube Channel Sections API
     tags:
@@ -199,7 +209,8 @@ apis:
         type: GettingStarted
       - url: https://developers.google.com/youtube/v3/guides/authentication
         type: Authentication
-    description: Manages sections that a channel has chosen to feature on its channel page, including inserting, updating, and deleting channel sections.
+    description: Manages sections that a channel has chosen to feature on its channel page, including
+      inserting, updating, and deleting channel sections.
   - aid: youtube:youtube-channel-banners-api
     name: Youtube Channel Banners API
     tags:
@@ -215,7 +226,8 @@ apis:
         type: GettingStarted
       - url: https://developers.google.com/youtube/v3/guides/authentication
         type: Authentication
-    description: Enables uploading a new banner image to a YouTube channel, returning the URL that identifies the uploaded image for use with the channels.update method.
+    description: Enables uploading a new banner image to a YouTube channel, returning the URL that identifies
+      the uploaded image for use with the channels.update method.
   - aid: youtube:youtube-members-api
     name: Youtube Members API
     tags:
@@ -232,7 +244,8 @@ apis:
         type: GettingStarted
       - url: https://developers.google.com/youtube/v3/guides/authentication
         type: Authentication
-    description: Provides access to channel membership data, allowing channel owners to retrieve a list of paying members who support the channel in exchange for exclusive benefits.
+    description: Provides access to channel membership data, allowing channel owners to retrieve a list
+      of paying members who support the channel in exchange for exclusive benefits.
   - aid: youtube:youtube-memberships-levels-api
     name: Youtube Memberships Levels API
     tags:
@@ -249,7 +262,8 @@ apis:
         type: GettingStarted
       - url: https://developers.google.com/youtube/v3/guides/authentication
         type: Authentication
-    description: Provides information about membership pricing tiers that a channel has set up, allowing retrieval of the levels that members can subscribe to.
+    description: Provides information about membership pricing tiers that a channel has set up, allowing
+      retrieval of the levels that members can subscribe to.
   - aid: youtube:youtube-thumbnails-api
     name: Youtube Thumbnails API
     tags:
@@ -265,7 +279,8 @@ apis:
         type: GettingStarted
       - url: https://developers.google.com/youtube/v3/guides/authentication
         type: Authentication
-    description: Manages custom video thumbnail images, enabling upload of a custom thumbnail image for a video that the authenticated user owns.
+    description: Manages custom video thumbnail images, enabling upload of a custom thumbnail image for
+      a video that the authenticated user owns.
   - aid: youtube:youtube-watermarks-api
     name: Youtube Watermarks API
     tags:
@@ -281,7 +296,8 @@ apis:
         type: GettingStarted
       - url: https://developers.google.com/youtube/v3/guides/authentication
         type: Authentication
-    description: Manages images that display in the corner of a player during playback of a channel's videos, supporting upload and deletion of channel watermarks.
+    description: Manages images that display in the corner of a player during playback of a channel's
+      videos, supporting upload and deletion of channel watermarks.
   - aid: youtube:youtube-video-categories-api
     name: Youtube Video Categories API
     tags:
@@ -299,7 +315,8 @@ apis:
         type: Authentication
       - url: openapi/youtube-data-api-openapi.yml
         type: OpenAPI
-    description: Provides a list of categories that can be associated with YouTube videos, allowing retrieval of video categories available in a given region.
+    description: Provides a list of categories that can be associated with YouTube videos, allowing retrieval
+      of video categories available in a given region.
   - aid: youtube:youtube-video-abuse-report-reasons-api
     name: Youtube Video Abuse Report Reasons API
     tags:
@@ -315,7 +332,8 @@ apis:
         type: GettingStarted
       - url: https://developers.google.com/youtube/v3/guides/authentication
         type: Authentication
-    description: Retrieves a list of reasons that can be used to report abusive videos, supporting programmatic submission of video abuse reports.
+    description: Retrieves a list of reasons that can be used to report abusive videos, supporting programmatic
+      submission of video abuse reports.
   - aid: youtube:youtube-i18n-languages-api
     name: Youtube I18n Languages API
     tags:
@@ -333,7 +351,8 @@ apis:
         type: Authentication
       - url: openapi/youtube-data-api-openapi.yml
         type: OpenAPI
-    description: Returns a list of application languages that the YouTube website supports, providing the language codes and human-readable names for localization purposes.
+    description: Returns a list of application languages that the YouTube website supports, providing
+      the language codes and human-readable names for localization purposes.
   - aid: youtube:youtube-i18n-regions-api
     name: Youtube I18n Regions API
     tags:
@@ -351,7 +370,8 @@ apis:
         type: Authentication
       - url: openapi/youtube-data-api-openapi.yml
         type: OpenAPI
-    description: Returns a list of content regions that the YouTube website supports, providing region codes and human-readable names used for region-specific content filtering.
+    description: Returns a list of content regions that the YouTube website supports, providing region
+      codes and human-readable names used for region-specific content filtering.
   - aid: youtube:youtube-analytics-api
     name: YouTube Analytics API
     tags:
@@ -374,7 +394,9 @@ apis:
         type: CodeExamples
       - url: openapi/youtube-analytics-openapi.yml
         type: OpenAPI
-    description: Generates custom reports containing YouTube Analytics data for channels and content owners. Reports can be filtered by dimensions such as date, country, and video, and measured by metrics including views, likes, and watch time.
+    description: Generates custom reports containing YouTube Analytics data for channels and content owners.
+      Reports can be filtered by dimensions such as date, country, and video, and measured by metrics
+      including views, likes, and watch time.
   - aid: youtube:youtube-reporting-api
     name: YouTube Reporting API
     tags:
@@ -399,7 +421,9 @@ apis:
         type: CodeExamples
       - url: openapi/youtube-reporting-openapi.yml
         type: OpenAPI
-    description: Retrieves bulk YouTube Analytics data through predefined reports for a channel or content owner. Reports are generated daily as CSV datasets covering 24-hour periods and are accessible for 30 to 60 days depending on the report type.
+    description: Retrieves bulk YouTube Analytics data through predefined reports for a channel or content
+      owner. Reports are generated daily as CSV datasets covering 24-hour periods and are accessible for
+      30 to 60 days depending on the report type.
   - aid: youtube:youtube-live-streaming-api
     name: YouTube Live Streaming API
     tags:
@@ -424,7 +448,10 @@ apis:
         type: Support
       - url: openapi/youtube-live-streaming-openapi.yml
         type: OpenAPI
-    description: Enables creating, updating, and managing live events on YouTube including scheduling broadcasts, linking video streams, managing live chat, and controlling ad insertion during live events. The API provides resources for liveBroadcasts, liveStreams, liveChatMessages, liveChatModerators, liveChatBans, and superChatEvents.
+    description: Enables creating, updating, and managing live events on YouTube including scheduling
+      broadcasts, linking video streams, managing live chat, and controlling ad insertion during live
+      events. The API provides resources for liveBroadcasts, liveStreams, liveChatMessages, liveChatModerators,
+      liveChatBans, and superChatEvents.
   - aid: youtube:youtube-iframe-player-api
     name: YouTube IFrame Player API
     tags:
@@ -440,7 +467,9 @@ apis:
         type: GettingStarted
       - url: https://developers.google.com/youtube/player_parameters
         type: APIReference
-    description: Enables embedding a YouTube video player on websites and controlling playback through JavaScript. The API supports queuing and playing videos, adjusting volume, retrieving video information, and subscribing to player state change events.
+    description: Enables embedding a YouTube video player on websites and controlling playback through
+      JavaScript. The API supports queuing and playing videos, adjusting volume, retrieving video information,
+      and subscribing to player state change events.
   - aid: youtube:youtube-subscribe-button
     name: YouTube Subscribe Button
     tags:
@@ -454,7 +483,8 @@ apis:
         type: Documentation
       - url: https://developers.google.com/youtube/subscribe/reference
         type: APIReference
-    description: Provides an embeddable subscribe button that website owners can configure and add to their pages, enabling one-click channel subscriptions for visitors without leaving the page.
+    description: Provides an embeddable subscribe button that website owners can configure and add to
+      their pages, enabling one-click channel subscriptions for visitors without leaving the page.
   - aid: youtube:youtube-playlist-images-api
     name: Youtube Playlist Images API
     tags:
@@ -473,7 +503,8 @@ apis:
         type: GettingStarted
       - url: https://developers.google.com/youtube/v3/guides/authentication
         type: Authentication
-    description: Manages thumbnail images associated with YouTube playlists, supporting retrieval, insertion, update, and deletion of custom playlist thumbnail images.
+    description: Manages thumbnail images associated with YouTube playlists, supporting retrieval, insertion,
+      update, and deletion of custom playlist thumbnail images.
   - aid: youtube:youtube-content-id-api
     name: YouTube Content ID API
     tags:
@@ -491,7 +522,9 @@ apis:
         type: APIReference
       - url: https://developers.google.com/youtube/partner/terms
         type: TermsOfService
-    description: Enables YouTube content partners to interact with the rights management system, allowing creation and management of assets, content references, ownership data, claims, and policies for intellectual property on YouTube.
+    description: Enables YouTube content partners to interact with the rights management system, allowing
+      creation and management of assets, content references, ownership data, claims, and policies for
+      intellectual property on YouTube.
   - aid: youtube:youtube-oembed-api
     name: YouTube oEmbed API
     tags:
@@ -504,7 +537,8 @@ apis:
     properties:
       - url: https://oembed.com/
         type: Documentation
-    description: Provides an oEmbed-compliant endpoint that returns embed code and metadata for YouTube videos in JSON or XML format, enabling easy embedding of YouTube content on external websites.
+    description: Provides an oEmbed-compliant endpoint that returns embed code and metadata for YouTube
+      videos in JSON or XML format, enabling easy embedding of YouTube content on external websites.
 name: Youtube
 tags:
   - Google
@@ -697,39 +731,25 @@ common:
   - name: Features
     type: Features
     data:
-      - name: Video Management
-        description: Upload, update, rate, and delete videos programmatically with full metadata control.
-      - name: Playlist Management
-        description: Create, update, and delete playlists and manage playlist items for content organization.
-      - name: Channel Management
-        description: Access and update channel metadata, branding, settings, and sections.
-      - name: Search
-        description: Search across videos, channels, and playlists with filters for date, location, topic, and more.
-      - name: Comments And Moderation
-        description: Create, retrieve, update, and moderate comments and comment threads on videos.
-      - name: Live Streaming
-        description: Schedule and manage live broadcasts, streams, live chat, moderators, and super chat events.
-      - name: Analytics And Reporting
-        description: Generate custom analytics reports with views, watch time, revenue, and demographic data.
-      - name: Captions
-        description: Upload, update, download, and delete caption tracks for video accessibility.
-      - name: Channel Memberships
-        description: Access membership data and pricing tiers for channel monetization features.
-      - name: Content ID
-        description: Manage digital rights, assets, claims, and policies for intellectual property protection.
-      - name: Embedded Players
-        description: Embed YouTube players on websites with full JavaScript playback control.
-      - name: Internationalization
-        description: Retrieve supported languages and regions for localized content and UI.
-      - name: OAuth 2.0 Authentication
-        description: Secure API access with OAuth 2.0 for user-authorized operations.
-      - name: Quota Management
-        description: Monitor and manage API quota usage with per-operation cost tracking.
+      - 'YouTube (Google): hundreds of services across Video Platform'
+      - 'Detailed pricing: see https://developers.google.com/youtube/v3/getting-started'
+      - 'Service: YouTube Data API v3 (free, quota-limited at 10K units/day)'
+      - 'Service: YouTube Live Streaming API'
+      - 'Service: YouTube Analytics API'
+      - 'Service: YouTube Reporting API'
+      - 'Service: YouTube Player API'
+      - 'Service: YouTube oEmbed'
+      - 'Service: Google Cloud quota increases via cloud console'
+    sources:
+      - https://developers.google.com/youtube/v3/getting-started
+      - https://focus.finops.org/
+    updated: '2026-05-04'
   - name: Use Cases
     type: UseCases
     data:
       - name: Video Publishing Platform
-        description: Build automated video upload and management workflows for content creators and media companies.
+        description: Build automated video upload and management workflows for content creators and media
+          companies.
       - name: Social Media Dashboard
         description: Aggregate YouTube analytics with other social platforms for unified performance monitoring.
       - name: Content Moderation
@@ -739,7 +759,8 @@ common:
       - name: Education Platform
         description: Organize educational video content into playlists with searchable course catalogs.
       - name: Digital Rights Management
-        description: Track and manage content ownership, claims, and monetization policies using Content ID.
+        description: Track and manage content ownership, claims, and monetization policies using Content
+          ID.
       - name: Video Search Application
         description: Build custom video search experiences with filters for topics, dates, and regions.
       - name: Analytics Dashboard
@@ -754,7 +775,8 @@ common:
       - name: Google Cloud Platform
         description: Integrates with GCP for authentication, hosting, and infrastructure services.
       - name: Google Analytics
-        description: Combine YouTube Analytics data with Google Analytics for comprehensive web and video metrics.
+        description: Combine YouTube Analytics data with Google Analytics for comprehensive web and video
+          metrics.
       - name: Google Ads
         description: Connect YouTube content with Google Ads for video advertising campaigns.
       - name: Firebase
@@ -762,8 +784,9 @@ common:
       - name: Google Workspace
         description: Embed YouTube videos in Google Docs, Slides, and Sites for collaborative content.
 created: '2025-07-29'
-modified: '2026-04-18'
-description: YouTube APIs provide programmatic access to YouTube data including videos, playlists, channels, user interactions, live streaming, analytics, captions, and embedded player controls.
+modified: '2026-05-04'
+description: YouTube APIs provide programmatic access to YouTube data including videos, playlists, channels,
+  user interactions, live streaming, analytics, captions, and embedded player controls.
 maintainers:
   - FN: Kin Lane
     url: https://apievangelist.com
