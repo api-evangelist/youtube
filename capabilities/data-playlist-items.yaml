@@ -1,0 +1,137 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Data API — Playlist Items
+  description: 'YouTube Data API — Playlist Items. 3 operations. Lead operation: Youtube List Playlist Items. Self-contained
+    Naftiko capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - Playlist Items
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-playlist-items
+    baseUri: https://www.googleapis.com/youtube/v3
+    description: YouTube Data API — Playlist Items business capability. Self-contained, no shared references.
+    resources:
+    - name: playlistItems
+      path: /playlistItems
+      operations:
+      - name: listplaylistitems
+        method: GET
+        description: Youtube List Playlist Items
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: insertplaylistitem
+        method: POST
+        description: Youtube Add Item to Playlist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: playlistItems-playlistItemId
+      path: /playlistItems/{playlistItemId}
+      operations:
+      - name: deleteplaylistitem
+        method: DELETE
+        description: Youtube Remove Item from Playlist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-playlist-items-rest
+    port: 8080
+    description: REST adapter for YouTube Data API — Playlist Items. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/playlistitems
+      name: playlistitems
+      description: REST surface for playlistItems.
+      operations:
+      - method: GET
+        name: listplaylistitems
+        description: Youtube List Playlist Items
+        call: data-playlist-items.listplaylistitems
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: insertplaylistitem
+        description: Youtube Add Item to Playlist
+        call: data-playlist-items.insertplaylistitem
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/playlistitems/{playlistitemid}
+      name: playlistitems-playlistitemid
+      description: REST surface for playlistItems-playlistItemId.
+      operations:
+      - method: DELETE
+        name: deleteplaylistitem
+        description: Youtube Remove Item from Playlist
+        call: data-playlist-items.deleteplaylistitem
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-playlist-items-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Data API — Playlist Items. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: youtube-list-playlist-items
+      description: Youtube List Playlist Items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-playlist-items.listplaylistitems
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-add-item-playlist
+      description: Youtube Add Item to Playlist
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-playlist-items.insertplaylistitem
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-remove-item-playlist
+      description: Youtube Remove Item from Playlist
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: data-playlist-items.deleteplaylistitem
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,301 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Live Streaming API — LiveBroadcasts
+  description: 'YouTube Live Streaming API — LiveBroadcasts. 6 operations. Lead operation: Youtube List Live Broadcasts. Self-contained
+    Naftiko capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - LiveBroadcasts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: live-streaming-livebroadcasts
+    baseUri: https://www.googleapis.com/youtube/v3
+    description: YouTube Live Streaming API — LiveBroadcasts business capability. Self-contained, no shared references.
+    resources:
+    - name: liveBroadcasts
+      path: /liveBroadcasts
+      operations:
+      - name: youtubelivebroadcastslist
+        method: GET
+        description: Youtube List Live Broadcasts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: Comma-separated list of YouTube broadcast IDs for the resources being retrieved.
+        - name: mine
+          in: query
+          type: boolean
+          description: Set this parameter to true to instruct the API to return only broadcasts owned by the authenticated
+            user.
+        - name: broadcastStatus
+          in: query
+          type: string
+          description: Filters the API response to only include broadcasts with the specified status.
+        - name: broadcastType
+          in: query
+          type: string
+          description: Filters results by the type of broadcast. Acceptable values are event and persistent.
+      - name: youtubelivebroadcastsinsert
+        method: POST
+        description: Youtube Create a Live Broadcast
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: youtubelivebroadcastsupdate
+        method: PUT
+        description: Youtube Update a Live Broadcast
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: youtubelivebroadcastsdelete
+        method: DELETE
+        description: Youtube Delete a Live Broadcast
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: The ID of the broadcast to delete.
+          required: true
+    - name: liveBroadcasts-bind
+      path: /liveBroadcasts/bind
+      operations:
+      - name: youtubelivebroadcastsbind
+        method: POST
+        description: Youtube Bind Broadcast to Stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: The id parameter specifies the unique ID of the broadcast that is being bound to a video stream.
+          required: true
+        - name: streamId
+          in: query
+          type: string
+          description: The streamId parameter specifies the unique ID of the video stream that is being bound to a broadcast.
+            If this parameter is omitted, the API will remove any exi
+    - name: liveBroadcasts-transition
+      path: /liveBroadcasts/transition
+      operations:
+      - name: youtubelivebroadcaststransition
+        method: POST
+        description: Youtube Transition Broadcast State
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: The id parameter specifies the unique ID of the broadcast that is transitioning to another status.
+          required: true
+        - name: broadcastStatus
+          in: query
+          type: string
+          description: The broadcastStatus parameter identifies the state to which the broadcast is changing.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: live-streaming-livebroadcasts-rest
+    port: 8080
+    description: REST adapter for YouTube Live Streaming API — LiveBroadcasts. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/livebroadcasts
+      name: livebroadcasts
+      description: REST surface for liveBroadcasts.
+      operations:
+      - method: GET
+        name: youtubelivebroadcastslist
+        description: Youtube List Live Broadcasts
+        call: live-streaming-livebroadcasts.youtubelivebroadcastslist
+        with:
+          id: rest.id
+          mine: rest.mine
+          broadcastStatus: rest.broadcastStatus
+          broadcastType: rest.broadcastType
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: youtubelivebroadcastsinsert
+        description: Youtube Create a Live Broadcast
+        call: live-streaming-livebroadcasts.youtubelivebroadcastsinsert
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: youtubelivebroadcastsupdate
+        description: Youtube Update a Live Broadcast
+        call: live-streaming-livebroadcasts.youtubelivebroadcastsupdate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: youtubelivebroadcastsdelete
+        description: Youtube Delete a Live Broadcast
+        call: live-streaming-livebroadcasts.youtubelivebroadcastsdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/livebroadcasts/bind
+      name: livebroadcasts-bind
+      description: REST surface for liveBroadcasts-bind.
+      operations:
+      - method: POST
+        name: youtubelivebroadcastsbind
+        description: Youtube Bind Broadcast to Stream
+        call: live-streaming-livebroadcasts.youtubelivebroadcastsbind
+        with:
+          id: rest.id
+          streamId: rest.streamId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/livebroadcasts/transition
+      name: livebroadcasts-transition
+      description: REST surface for liveBroadcasts-transition.
+      operations:
+      - method: POST
+        name: youtubelivebroadcaststransition
+        description: Youtube Transition Broadcast State
+        call: live-streaming-livebroadcasts.youtubelivebroadcaststransition
+        with:
+          id: rest.id
+          broadcastStatus: rest.broadcastStatus
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: live-streaming-livebroadcasts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Live Streaming API — LiveBroadcasts. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: youtube-list-live-broadcasts
+      description: Youtube List Live Broadcasts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: live-streaming-livebroadcasts.youtubelivebroadcastslist
+      with:
+        id: tools.id
+        mine: tools.mine
+        broadcastStatus: tools.broadcastStatus
+        broadcastType: tools.broadcastType
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-create-live-broadcast
+      description: Youtube Create a Live Broadcast
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: live-streaming-livebroadcasts.youtubelivebroadcastsinsert
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-update-live-broadcast
+      description: Youtube Update a Live Broadcast
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: live-streaming-livebroadcasts.youtubelivebroadcastsupdate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-delete-live-broadcast
+      description: Youtube Delete a Live Broadcast
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: live-streaming-livebroadcasts.youtubelivebroadcastsdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-bind-broadcast-stream
+      description: Youtube Bind Broadcast to Stream
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: live-streaming-livebroadcasts.youtubelivebroadcastsbind
+      with:
+        id: tools.id
+        streamId: tools.streamId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-transition-broadcast-state
+      description: Youtube Transition Broadcast State
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: live-streaming-livebroadcasts.youtubelivebroadcaststransition
+      with:
+        id: tools.id
+        broadcastStatus: tools.broadcastStatus
+      outputParameters:
+      - type: object
+        mapping: $.

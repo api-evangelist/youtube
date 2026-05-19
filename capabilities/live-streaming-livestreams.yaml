@@ -1,0 +1,190 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Live Streaming API — LiveStreams
+  description: 'YouTube Live Streaming API — LiveStreams. 4 operations. Lead operation: Youtube List Live Streams. Self-contained
+    Naftiko capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - LiveStreams
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: live-streaming-livestreams
+    baseUri: https://www.googleapis.com/youtube/v3
+    description: YouTube Live Streaming API — LiveStreams business capability. Self-contained, no shared references.
+    resources:
+    - name: liveStreams
+      path: /liveStreams
+      operations:
+      - name: youtubelivestreamslist
+        method: GET
+        description: Youtube List Live Streams
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: Comma-separated list of live stream IDs for the resources being retrieved.
+        - name: mine
+          in: query
+          type: boolean
+          description: Set this parameter to true to instruct the API to return only streams owned by the authenticated user.
+      - name: youtubelivestreamsinsert
+        method: POST
+        description: Youtube Create a Live Stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: youtubelivestreamsupdate
+        method: PUT
+        description: Youtube Update a Live Stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: youtubelivestreamsdelete
+        method: DELETE
+        description: Youtube Delete a Live Stream
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: The ID of the live stream to delete.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: live-streaming-livestreams-rest
+    port: 8080
+    description: REST adapter for YouTube Live Streaming API — LiveStreams. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/livestreams
+      name: livestreams
+      description: REST surface for liveStreams.
+      operations:
+      - method: GET
+        name: youtubelivestreamslist
+        description: Youtube List Live Streams
+        call: live-streaming-livestreams.youtubelivestreamslist
+        with:
+          id: rest.id
+          mine: rest.mine
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: youtubelivestreamsinsert
+        description: Youtube Create a Live Stream
+        call: live-streaming-livestreams.youtubelivestreamsinsert
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: youtubelivestreamsupdate
+        description: Youtube Update a Live Stream
+        call: live-streaming-livestreams.youtubelivestreamsupdate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: youtubelivestreamsdelete
+        description: Youtube Delete a Live Stream
+        call: live-streaming-livestreams.youtubelivestreamsdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: live-streaming-livestreams-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Live Streaming API — LiveStreams. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: youtube-list-live-streams
+      description: Youtube List Live Streams
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: live-streaming-livestreams.youtubelivestreamslist
+      with:
+        id: tools.id
+        mine: tools.mine
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-create-live-stream
+      description: Youtube Create a Live Stream
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: live-streaming-livestreams.youtubelivestreamsinsert
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-update-live-stream
+      description: Youtube Update a Live Stream
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: live-streaming-livestreams.youtubelivestreamsupdate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-delete-live-stream
+      description: Youtube Delete a Live Stream
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: live-streaming-livestreams.youtubelivestreamsdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

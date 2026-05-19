@@ -1,0 +1,172 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Data API — Videos
+  description: 'YouTube Data API — Videos. 4 operations. Lead operation: Youtube List Video Resources. Self-contained Naftiko
+    capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - Videos
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-videos-2
+    baseUri: https://www.googleapis.com/youtube/v3
+    description: YouTube Data API — Videos business capability. Self-contained, no shared references.
+    resources:
+    - name: videos
+      path: /videos
+      operations:
+      - name: listvideos
+        method: GET
+        description: Youtube List Video Resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: insertvideo
+        method: POST
+        description: Youtube Upload Video
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: videos-videoId
+      path: /videos/{videoId}
+      operations:
+      - name: updatevideo
+        method: PUT
+        description: Youtube Update Video Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletevideo
+        method: DELETE
+        description: Youtube Delete Video
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-videos-2-rest
+    port: 8080
+    description: REST adapter for YouTube Data API — Videos. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/videos
+      name: videos
+      description: REST surface for videos.
+      operations:
+      - method: GET
+        name: listvideos
+        description: Youtube List Video Resources
+        call: data-videos-2.listvideos
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: insertvideo
+        description: Youtube Upload Video
+        call: data-videos-2.insertvideo
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/videos/{videoid}
+      name: videos-videoid
+      description: REST surface for videos-videoId.
+      operations:
+      - method: PUT
+        name: updatevideo
+        description: Youtube Update Video Metadata
+        call: data-videos-2.updatevideo
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletevideo
+        description: Youtube Delete Video
+        call: data-videos-2.deletevideo
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-videos-2-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Data API — Videos. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: youtube-list-video-resources
+      description: Youtube List Video Resources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-videos-2.listvideos
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-upload-video
+      description: Youtube Upload Video
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-videos-2.insertvideo
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-update-video-metadata
+      description: Youtube Update Video Metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: data-videos-2.updatevideo
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-delete-video
+      description: Youtube Delete Video
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: data-videos-2.deletevideo
+      outputParameters:
+      - type: object
+        mapping: $.

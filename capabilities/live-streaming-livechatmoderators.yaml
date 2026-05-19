@@ -1,0 +1,150 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Live Streaming API — LiveChatModerators
+  description: 'YouTube Live Streaming API — LiveChatModerators. 3 operations. Lead operation: Youtube List Live Chat Moderators.
+    Self-contained Naftiko capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - LiveChatModerators
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: live-streaming-livechatmoderators
+    baseUri: https://www.googleapis.com/youtube/v3
+    description: YouTube Live Streaming API — LiveChatModerators business capability. Self-contained, no shared references.
+    resources:
+    - name: liveChatModerators
+      path: /liveChatModerators
+      operations:
+      - name: youtubelivechatmoderatorslist
+        method: GET
+        description: Youtube List Live Chat Moderators
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: liveChatId
+          in: query
+          type: string
+          description: The liveChatId parameter specifies the YouTube live chat for which the API should return moderators.
+          required: true
+      - name: youtubelivechatmoderatorsinsert
+        method: POST
+        description: Youtube Add a Live Chat Moderator
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: youtubelivechatmoderatorsdelete
+        method: DELETE
+        description: Youtube Remove a Live Chat Moderator
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: The ID of the live chat moderator to remove.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: live-streaming-livechatmoderators-rest
+    port: 8080
+    description: REST adapter for YouTube Live Streaming API — LiveChatModerators. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/livechatmoderators
+      name: livechatmoderators
+      description: REST surface for liveChatModerators.
+      operations:
+      - method: GET
+        name: youtubelivechatmoderatorslist
+        description: Youtube List Live Chat Moderators
+        call: live-streaming-livechatmoderators.youtubelivechatmoderatorslist
+        with:
+          liveChatId: rest.liveChatId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: youtubelivechatmoderatorsinsert
+        description: Youtube Add a Live Chat Moderator
+        call: live-streaming-livechatmoderators.youtubelivechatmoderatorsinsert
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: youtubelivechatmoderatorsdelete
+        description: Youtube Remove a Live Chat Moderator
+        call: live-streaming-livechatmoderators.youtubelivechatmoderatorsdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: live-streaming-livechatmoderators-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Live Streaming API — LiveChatModerators. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: youtube-list-live-chat-moderators
+      description: Youtube List Live Chat Moderators
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: live-streaming-livechatmoderators.youtubelivechatmoderatorslist
+      with:
+        liveChatId: tools.liveChatId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-add-live-chat-moderator
+      description: Youtube Add a Live Chat Moderator
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: live-streaming-livechatmoderators.youtubelivechatmoderatorsinsert
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-remove-live-chat-moderator
+      description: Youtube Remove a Live Chat Moderator
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: live-streaming-livechatmoderators.youtubelivechatmoderatorsdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

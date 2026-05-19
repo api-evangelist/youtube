@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Data API — Channels
+  description: 'YouTube Data API — Channels. 1 operations. Lead operation: Youtube List Channel Resources. Self-contained
+    Naftiko capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - Channels
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-channels-2
+    baseUri: https://www.googleapis.com/youtube/v3
+    description: YouTube Data API — Channels business capability. Self-contained, no shared references.
+    resources:
+    - name: channels
+      path: /channels
+      operations:
+      - name: listchannels
+        method: GET
+        description: Youtube List Channel Resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-channels-2-rest
+    port: 8080
+    description: REST adapter for YouTube Data API — Channels. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/channels
+      name: channels
+      description: REST surface for channels.
+      operations:
+      - method: GET
+        name: listchannels
+        description: Youtube List Channel Resources
+        call: data-channels-2.listchannels
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-channels-2-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Data API — Channels. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: youtube-list-channel-resources
+      description: Youtube List Channel Resources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-channels-2.listchannels
+      outputParameters:
+      - type: object
+        mapping: $.

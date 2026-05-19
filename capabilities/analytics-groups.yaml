@@ -1,0 +1,226 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Analytics API — Groups
+  description: 'YouTube Analytics API — Groups. 4 operations. Lead operation: Youtube List Groups. Self-contained Naftiko
+    capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: analytics-groups
+    baseUri: https://youtubeanalytics.googleapis.com/v2
+    description: YouTube Analytics API — Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: groups
+      path: /groups
+      operations:
+      - name: youtubeanalyticsgroupslist
+        method: GET
+        description: Youtube List Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: Comma-separated list of YouTube group IDs for the resources being retrieved. If this parameter is not
+            specified, the API will return all groups owned by the aut
+        - name: mine
+          in: query
+          type: boolean
+          description: Set this parameter to true to retrieve all groups owned by the authenticated user.
+        - name: pageToken
+          in: query
+          type: string
+          description: Identifies a specific page in the result set that should be returned. If specified, the API response
+            should contain only that page.
+        - name: onBehalfOfContentOwner
+          in: query
+          type: string
+          description: The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
+            a YouTube CMS user who is acting on behalf of the content o
+      - name: youtubeanalyticsgroupsinsert
+        method: POST
+        description: Youtube Create a Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: onBehalfOfContentOwner
+          in: query
+          type: string
+          description: The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
+            a YouTube CMS user.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: youtubeanalyticsgroupsupdate
+        method: PUT
+        description: Youtube Update a Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: onBehalfOfContentOwner
+          in: query
+          type: string
+          description: The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
+            a YouTube CMS user.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: youtubeanalyticsgroupsdelete
+        method: DELETE
+        description: Youtube Delete a Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: The id parameter specifies the YouTube group ID for the group being deleted.
+          required: true
+        - name: onBehalfOfContentOwner
+          in: query
+          type: string
+          description: The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
+            a YouTube CMS user.
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: analytics-groups-rest
+    port: 8080
+    description: REST adapter for YouTube Analytics API — Groups. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/groups
+      name: groups
+      description: REST surface for groups.
+      operations:
+      - method: GET
+        name: youtubeanalyticsgroupslist
+        description: Youtube List Groups
+        call: analytics-groups.youtubeanalyticsgroupslist
+        with:
+          id: rest.id
+          mine: rest.mine
+          pageToken: rest.pageToken
+          onBehalfOfContentOwner: rest.onBehalfOfContentOwner
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: youtubeanalyticsgroupsinsert
+        description: Youtube Create a Group
+        call: analytics-groups.youtubeanalyticsgroupsinsert
+        with:
+          onBehalfOfContentOwner: rest.onBehalfOfContentOwner
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: youtubeanalyticsgroupsupdate
+        description: Youtube Update a Group
+        call: analytics-groups.youtubeanalyticsgroupsupdate
+        with:
+          onBehalfOfContentOwner: rest.onBehalfOfContentOwner
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: youtubeanalyticsgroupsdelete
+        description: Youtube Delete a Group
+        call: analytics-groups.youtubeanalyticsgroupsdelete
+        with:
+          id: rest.id
+          onBehalfOfContentOwner: rest.onBehalfOfContentOwner
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: analytics-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Analytics API — Groups. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: youtube-list-groups
+      description: Youtube List Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: analytics-groups.youtubeanalyticsgroupslist
+      with:
+        id: tools.id
+        mine: tools.mine
+        pageToken: tools.pageToken
+        onBehalfOfContentOwner: tools.onBehalfOfContentOwner
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-create-group
+      description: Youtube Create a Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: analytics-groups.youtubeanalyticsgroupsinsert
+      with:
+        onBehalfOfContentOwner: tools.onBehalfOfContentOwner
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-update-group
+      description: Youtube Update a Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: analytics-groups.youtubeanalyticsgroupsupdate
+      with:
+        onBehalfOfContentOwner: tools.onBehalfOfContentOwner
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-delete-group
+      description: Youtube Delete a Group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: analytics-groups.youtubeanalyticsgroupsdelete
+      with:
+        id: tools.id
+        onBehalfOfContentOwner: tools.onBehalfOfContentOwner
+      outputParameters:
+      - type: object
+        mapping: $.

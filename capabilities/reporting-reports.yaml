@@ -1,0 +1,171 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Reporting API — Reports
+  description: 'YouTube Reporting API — Reports. 2 operations. Lead operation: Youtube List Reports. Self-contained Naftiko
+    capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - Reports
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: reporting-reports
+    baseUri: https://youtubereporting.googleapis.com/v1
+    description: YouTube Reporting API — Reports business capability. Self-contained, no shared references.
+    resources:
+    - name: jobs-jobId-reports
+      path: /jobs/{jobId}/reports
+      operations:
+      - name: youtubereportingreportslist
+        method: GET
+        description: Youtube List Reports
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The ID of the job whose reports are being listed.
+          required: true
+        - name: onBehalfOfContentOwner
+          in: query
+          type: string
+          description: The content owner's external ID on which behalf the user is acting on.
+        - name: createdAfter
+          in: query
+          type: string
+          description: If specified, only reports created after the specified date/time are returned.
+        - name: startTimeAtOrAfter
+          in: query
+          type: string
+          description: If specified, only reports covering data on or after this date are returned.
+        - name: startTimeBefore
+          in: query
+          type: string
+          description: If specified, only reports covering data before this date are returned.
+        - name: pageToken
+          in: query
+          type: string
+          description: A token identifying a page of results to return.
+        - name: pageSize
+          in: query
+          type: integer
+          description: The maximum number of items to return in the response.
+    - name: jobs-jobId-reports-reportId
+      path: /jobs/{jobId}/reports/{reportId}
+      operations:
+      - name: youtubereportingreportsget
+        method: GET
+        description: Youtube Get Report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: jobId
+          in: path
+          type: string
+          description: The ID of the job that created the report.
+          required: true
+        - name: reportId
+          in: path
+          type: string
+          description: The ID of the report to retrieve.
+          required: true
+        - name: onBehalfOfContentOwner
+          in: query
+          type: string
+          description: The content owner's external ID on which behalf the user is acting on.
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: reporting-reports-rest
+    port: 8080
+    description: REST adapter for YouTube Reporting API — Reports. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/jobs/{jobid}/reports
+      name: jobs-jobid-reports
+      description: REST surface for jobs-jobId-reports.
+      operations:
+      - method: GET
+        name: youtubereportingreportslist
+        description: Youtube List Reports
+        call: reporting-reports.youtubereportingreportslist
+        with:
+          jobId: rest.jobId
+          onBehalfOfContentOwner: rest.onBehalfOfContentOwner
+          createdAfter: rest.createdAfter
+          startTimeAtOrAfter: rest.startTimeAtOrAfter
+          startTimeBefore: rest.startTimeBefore
+          pageToken: rest.pageToken
+          pageSize: rest.pageSize
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/jobs/{jobid}/reports/{reportid}
+      name: jobs-jobid-reports-reportid
+      description: REST surface for jobs-jobId-reports-reportId.
+      operations:
+      - method: GET
+        name: youtubereportingreportsget
+        description: Youtube Get Report
+        call: reporting-reports.youtubereportingreportsget
+        with:
+          jobId: rest.jobId
+          reportId: rest.reportId
+          onBehalfOfContentOwner: rest.onBehalfOfContentOwner
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: reporting-reports-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Reporting API — Reports. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: youtube-list-reports
+      description: Youtube List Reports
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reporting-reports.youtubereportingreportslist
+      with:
+        jobId: tools.jobId
+        onBehalfOfContentOwner: tools.onBehalfOfContentOwner
+        createdAfter: tools.createdAfter
+        startTimeAtOrAfter: tools.startTimeAtOrAfter
+        startTimeBefore: tools.startTimeBefore
+        pageToken: tools.pageToken
+        pageSize: tools.pageSize
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-get-report
+      description: Youtube Get Report
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: reporting-reports.youtubereportingreportsget
+      with:
+        jobId: tools.jobId
+        reportId: tools.reportId
+        onBehalfOfContentOwner: tools.onBehalfOfContentOwner
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,151 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Live Streaming API — LiveChatMessages
+  description: 'YouTube Live Streaming API — LiveChatMessages. 3 operations. Lead operation: Youtube List Live Chat Messages.
+    Self-contained Naftiko capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - LiveChatMessages
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: live-streaming-livechatmessages
+    baseUri: https://www.googleapis.com/youtube/v3
+    description: YouTube Live Streaming API — LiveChatMessages business capability. Self-contained, no shared references.
+    resources:
+    - name: liveChatMessages
+      path: /liveChatMessages
+      operations:
+      - name: youtubelivechatmessageslist
+        method: GET
+        description: Youtube List Live Chat Messages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: liveChatId
+          in: query
+          type: string
+          description: The liveChatId parameter specifies the ID of the live chat whose messages will be returned. The live
+            chat ID associated with a broadcast is returned in the live
+          required: true
+      - name: youtubelivechatmessagesinsert
+        method: POST
+        description: Youtube Send a Live Chat Message
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: youtubelivechatmessagesdelete
+        method: DELETE
+        description: Youtube Delete a Live Chat Message
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: The ID of the live chat message to delete.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: live-streaming-livechatmessages-rest
+    port: 8080
+    description: REST adapter for YouTube Live Streaming API — LiveChatMessages. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/livechatmessages
+      name: livechatmessages
+      description: REST surface for liveChatMessages.
+      operations:
+      - method: GET
+        name: youtubelivechatmessageslist
+        description: Youtube List Live Chat Messages
+        call: live-streaming-livechatmessages.youtubelivechatmessageslist
+        with:
+          liveChatId: rest.liveChatId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: youtubelivechatmessagesinsert
+        description: Youtube Send a Live Chat Message
+        call: live-streaming-livechatmessages.youtubelivechatmessagesinsert
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: youtubelivechatmessagesdelete
+        description: Youtube Delete a Live Chat Message
+        call: live-streaming-livechatmessages.youtubelivechatmessagesdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: live-streaming-livechatmessages-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Live Streaming API — LiveChatMessages. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: youtube-list-live-chat-messages
+      description: Youtube List Live Chat Messages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: live-streaming-livechatmessages.youtubelivechatmessageslist
+      with:
+        liveChatId: tools.liveChatId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-send-live-chat-message
+      description: Youtube Send a Live Chat Message
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: live-streaming-livechatmessages.youtubelivechatmessagesinsert
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-delete-live-chat-message
+      description: Youtube Delete a Live Chat Message
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: live-streaming-livechatmessages.youtubelivechatmessagesdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

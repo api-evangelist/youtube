@@ -1,0 +1,168 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Data API v3 — CommentThreads
+  description: 'YouTube Data API v3 — CommentThreads. 3 operations. Lead operation: Youtube List Comment Threads. Self-contained
+    Naftiko capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - CommentThreads
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-commentthreads
+    baseUri: https://www.googleapis.com/youtube/v3
+    description: YouTube Data API v3 — CommentThreads business capability. Self-contained, no shared references.
+    resources:
+    - name: commentThreads
+      path: /commentThreads
+      operations:
+      - name: youtubecommentthreadslist
+        method: GET
+        description: Youtube List Comment Threads
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: Comma-separated list of comment thread IDs for the resources being retrieved.
+        - name: videoId
+          in: query
+          type: string
+          description: Instructs the API to return comment threads for the video with the specified ID.
+        - name: channelId
+          in: query
+          type: string
+          description: Instructs the API to return comment threads for the channel with the specified ID.
+        - name: moderationStatus
+          in: query
+          type: string
+          description: Set this parameter to limit the returned comment threads to only those with the specified moderation
+            status.
+      - name: youtubecommentthreadsinsert
+        method: POST
+        description: Youtube Create a Comment Thread
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: youtubecommentthreadsupdate
+        method: PUT
+        description: Youtube Update a Comment Thread
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-commentthreads-rest
+    port: 8080
+    description: REST adapter for YouTube Data API v3 — CommentThreads. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/commentthreads
+      name: commentthreads
+      description: REST surface for commentThreads.
+      operations:
+      - method: GET
+        name: youtubecommentthreadslist
+        description: Youtube List Comment Threads
+        call: data-commentthreads.youtubecommentthreadslist
+        with:
+          id: rest.id
+          videoId: rest.videoId
+          channelId: rest.channelId
+          moderationStatus: rest.moderationStatus
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: youtubecommentthreadsinsert
+        description: Youtube Create a Comment Thread
+        call: data-commentthreads.youtubecommentthreadsinsert
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: youtubecommentthreadsupdate
+        description: Youtube Update a Comment Thread
+        call: data-commentthreads.youtubecommentthreadsupdate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-commentthreads-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Data API v3 — CommentThreads. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: youtube-list-comment-threads
+      description: Youtube List Comment Threads
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-commentthreads.youtubecommentthreadslist
+      with:
+        id: tools.id
+        videoId: tools.videoId
+        channelId: tools.channelId
+        moderationStatus: tools.moderationStatus
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-create-comment-thread
+      description: Youtube Create a Comment Thread
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-commentthreads.youtubecommentthreadsinsert
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-update-comment-thread
+      description: Youtube Update a Comment Thread
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: data-commentthreads.youtubecommentthreadsupdate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,172 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Data API — Playlists
+  description: 'YouTube Data API — Playlists. 4 operations. Lead operation: Youtube List Playlists. Self-contained Naftiko
+    capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - Playlists
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-playlists-2
+    baseUri: https://www.googleapis.com/youtube/v3
+    description: YouTube Data API — Playlists business capability. Self-contained, no shared references.
+    resources:
+    - name: playlists
+      path: /playlists
+      operations:
+      - name: listplaylists
+        method: GET
+        description: Youtube List Playlists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: insertplaylist
+        method: POST
+        description: Youtube Create Playlist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: playlists-playlistId
+      path: /playlists/{playlistId}
+      operations:
+      - name: updateplaylist
+        method: PUT
+        description: Youtube Update Playlist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteplaylist
+        method: DELETE
+        description: Youtube Delete Playlist
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-playlists-2-rest
+    port: 8080
+    description: REST adapter for YouTube Data API — Playlists. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/playlists
+      name: playlists
+      description: REST surface for playlists.
+      operations:
+      - method: GET
+        name: listplaylists
+        description: Youtube List Playlists
+        call: data-playlists-2.listplaylists
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: insertplaylist
+        description: Youtube Create Playlist
+        call: data-playlists-2.insertplaylist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/playlists/{playlistid}
+      name: playlists-playlistid
+      description: REST surface for playlists-playlistId.
+      operations:
+      - method: PUT
+        name: updateplaylist
+        description: Youtube Update Playlist
+        call: data-playlists-2.updateplaylist
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteplaylist
+        description: Youtube Delete Playlist
+        call: data-playlists-2.deleteplaylist
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-playlists-2-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Data API — Playlists. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: youtube-list-playlists
+      description: Youtube List Playlists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-playlists-2.listplaylists
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-create-playlist
+      description: Youtube Create Playlist
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-playlists-2.insertplaylist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-update-playlist
+      description: Youtube Update Playlist
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: data-playlists-2.updateplaylist
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-delete-playlist
+      description: Youtube Delete Playlist
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: data-playlists-2.deleteplaylist
+      outputParameters:
+      - type: object
+        mapping: $.

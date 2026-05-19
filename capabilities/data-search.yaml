@@ -1,0 +1,111 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Data API v3 — Search
+  description: 'YouTube Data API v3 — Search. 1 operations. Lead operation: Youtube Search Youtube. Self-contained Naftiko
+    capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - Search
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-search
+    baseUri: https://www.googleapis.com/youtube/v3
+    description: YouTube Data API v3 — Search business capability. Self-contained, no shared references.
+    resources:
+    - name: search
+      path: /search
+      operations:
+      - name: youtubesearchlist
+        method: GET
+        description: Youtube Search Youtube
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: q
+          in: query
+          type: string
+          description: The query term to search for.
+        - name: type
+          in: query
+          type: string
+          description: Restricts a search query to only retrieve a particular type of resource. Acceptable values are channel,
+            playlist, and video.
+        - name: channelId
+          in: query
+          type: string
+          description: Indicates that the API response should only contain resources created by the channel.
+        - name: order
+          in: query
+          type: string
+          description: Specifies the method that will be used to order resources in the API response. Acceptable values are
+            date, rating, relevance, title, videoCount, and viewCount.
+        - name: publishedAfter
+          in: query
+          type: string
+          description: Restricts results to only include resources created at or after the specified time, in RFC 3339 format.
+        - name: publishedBefore
+          in: query
+          type: string
+          description: Restricts results to only include resources created before or at the specified time, in RFC 3339 format.
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-search-rest
+    port: 8080
+    description: REST adapter for YouTube Data API v3 — Search. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/search
+      name: search
+      description: REST surface for search.
+      operations:
+      - method: GET
+        name: youtubesearchlist
+        description: Youtube Search Youtube
+        call: data-search.youtubesearchlist
+        with:
+          q: rest.q
+          type: rest.type
+          channelId: rest.channelId
+          order: rest.order
+          publishedAfter: rest.publishedAfter
+          publishedBefore: rest.publishedBefore
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-search-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Data API v3 — Search. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: youtube-search-youtube
+      description: Youtube Search Youtube
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-search.youtubesearchlist
+      with:
+        q: tools.q
+        type: tools.type
+        channelId: tools.channelId
+        order: tools.order
+        publishedAfter: tools.publishedAfter
+        publishedBefore: tools.publishedBefore
+      outputParameters:
+      - type: object
+        mapping: $.

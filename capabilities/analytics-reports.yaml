@@ -1,0 +1,152 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Analytics API — Reports
+  description: 'YouTube Analytics API — Reports. 1 operations. Lead operation: Youtube Query Analytics Reports. Self-contained
+    Naftiko capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - Reports
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: analytics-reports
+    baseUri: https://youtubeanalytics.googleapis.com/v2
+    description: YouTube Analytics API — Reports business capability. Self-contained, no shared references.
+    resources:
+    - name: reports
+      path: /reports
+      operations:
+      - name: youtubeanalyticsreportsquery
+        method: GET
+        description: Youtube Query Analytics Reports
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: ids
+          in: query
+          type: string
+          description: Identifies the YouTube channel or content owner for which the report is being retrieved. To request
+            data for a YouTube user, set the parameter value to channel=
+          required: true
+        - name: startDate
+          in: query
+          type: string
+          description: The start date for fetching YouTube Analytics data in YYYY-MM-DD format. The API response will include
+            data from this date up to and including the end date.
+          required: true
+        - name: endDate
+          in: query
+          type: string
+          description: The end date for fetching YouTube Analytics data in YYYY-MM-DD format. The value must be less than
+            or equal to today's date.
+          required: true
+        - name: metrics
+          in: query
+          type: string
+          description: 'A comma-separated list of YouTube Analytics metrics, such as views or likes, dislikes. See the Available
+            Reports document or the Metrics document for a list of '
+          required: true
+        - name: dimensions
+          in: query
+          type: string
+          description: A comma-separated list of YouTube Analytics dimensions, such as video or country. See the Available
+            Reports document for a list of reports that you can retrieve
+        - name: filters
+          in: query
+          type: string
+          description: A list of filters that should be applied when retrieving YouTube Analytics data. The Available Reports
+            document identifies the dimensions that can be used to fi
+        - name: maxResults
+          in: query
+          type: integer
+          description: The maximum number of rows to include in the response. The maximum value is 200.
+        - name: sort
+          in: query
+          type: string
+          description: 'A comma-separated list of dimensions or metrics that determine the sort order for YouTube Analytics
+            data. By default the sort order is ascending. Prefix with a '
+        - name: startIndex
+          in: query
+          type: integer
+          description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the
+            max-results parameter.
+        - name: currency
+          in: query
+          type: string
+          description: The currency to which financial metrics should be converted. The default value is USD (US Dollar).
+            Specify the parameter value as an ISO 4217 currency code.
+        - name: alt
+          in: query
+          type: string
+          description: Data format for the response.
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: analytics-reports-rest
+    port: 8080
+    description: REST adapter for YouTube Analytics API — Reports. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/reports
+      name: reports
+      description: REST surface for reports.
+      operations:
+      - method: GET
+        name: youtubeanalyticsreportsquery
+        description: Youtube Query Analytics Reports
+        call: analytics-reports.youtubeanalyticsreportsquery
+        with:
+          ids: rest.ids
+          startDate: rest.startDate
+          endDate: rest.endDate
+          metrics: rest.metrics
+          dimensions: rest.dimensions
+          filters: rest.filters
+          maxResults: rest.maxResults
+          sort: rest.sort
+          startIndex: rest.startIndex
+          currency: rest.currency
+          alt: rest.alt
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: analytics-reports-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Analytics API — Reports. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: youtube-query-analytics-reports
+      description: Youtube Query Analytics Reports
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: analytics-reports.youtubeanalyticsreportsquery
+      with:
+        ids: tools.ids
+        startDate: tools.startDate
+        endDate: tools.endDate
+        metrics: tools.metrics
+        dimensions: tools.dimensions
+        filters: tools.filters
+        maxResults: tools.maxResults
+        sort: tools.sort
+        startIndex: tools.startIndex
+        currency: tools.currency
+        alt: tools.alt
+      outputParameters:
+      - type: object
+        mapping: $.

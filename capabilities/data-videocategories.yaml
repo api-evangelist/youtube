@@ -1,0 +1,91 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Data API v3 — VideoCategories
+  description: 'YouTube Data API v3 — VideoCategories. 1 operations. Lead operation: Youtube List Video Categories. Self-contained
+    Naftiko capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - VideoCategories
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-videocategories
+    baseUri: https://www.googleapis.com/youtube/v3
+    description: YouTube Data API v3 — VideoCategories business capability. Self-contained, no shared references.
+    resources:
+    - name: videoCategories
+      path: /videoCategories
+      operations:
+      - name: youtubevideocategorieslist
+        method: GET
+        description: Youtube List Video Categories
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: regionCode
+          in: query
+          type: string
+          description: Instructs the API to return the list of video categories available in the specified country.
+        - name: id
+          in: query
+          type: string
+          description: Comma-separated list of video category IDs to retrieve.
+        - name: hl
+          in: query
+          type: string
+          description: Specifies the language that will be used for text values in the API response.
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-videocategories-rest
+    port: 8080
+    description: REST adapter for YouTube Data API v3 — VideoCategories. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/videocategories
+      name: videocategories
+      description: REST surface for videoCategories.
+      operations:
+      - method: GET
+        name: youtubevideocategorieslist
+        description: Youtube List Video Categories
+        call: data-videocategories.youtubevideocategorieslist
+        with:
+          regionCode: rest.regionCode
+          id: rest.id
+          hl: rest.hl
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-videocategories-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Data API v3 — VideoCategories. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: youtube-list-video-categories
+      description: Youtube List Video Categories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-videocategories.youtubevideocategorieslist
+      with:
+        regionCode: tools.regionCode
+        id: tools.id
+        hl: tools.hl
+      outputParameters:
+      - type: object
+        mapping: $.

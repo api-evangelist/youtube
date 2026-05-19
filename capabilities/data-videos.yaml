@@ -1,0 +1,246 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Data API v3 — Videos
+  description: 'YouTube Data API v3 — Videos. 5 operations. Lead operation: Youtube List Videos. Self-contained Naftiko capability
+    covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - Videos
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-videos
+    baseUri: https://www.googleapis.com/youtube/v3
+    description: YouTube Data API v3 — Videos business capability. Self-contained, no shared references.
+    resources:
+    - name: videos
+      path: /videos
+      operations:
+      - name: youtubevideoslist
+        method: GET
+        description: Youtube List Videos
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: Comma-separated list of YouTube video IDs for the resources being retrieved.
+        - name: chart
+          in: query
+          type: string
+          description: Identifies the chart that the API returns chart data for. Acceptable values are mostPopular and videoCategoryId.
+        - name: myRating
+          in: query
+          type: string
+          description: Set this parameter to like or dislike to instruct the API to return only videos liked or disliked by
+            the authenticated user.
+      - name: youtubevideosinsert
+        method: POST
+        description: Youtube Upload or Insert a Video
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: youtubevideosupdate
+        method: PUT
+        description: Youtube Update Video Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: youtubevideosdelete
+        method: DELETE
+        description: Youtube Delete a Video
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: The ID of the video to delete.
+          required: true
+    - name: videos-rate
+      path: /videos/rate
+      operations:
+      - name: youtubevideosrate
+        method: POST
+        description: Youtube Rate a Video
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: The ID of the video to rate.
+          required: true
+        - name: rating
+          in: query
+          type: string
+          description: The rating to record. Valid values are like, dislike, and none.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-videos-rest
+    port: 8080
+    description: REST adapter for YouTube Data API v3 — Videos. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/videos
+      name: videos
+      description: REST surface for videos.
+      operations:
+      - method: GET
+        name: youtubevideoslist
+        description: Youtube List Videos
+        call: data-videos.youtubevideoslist
+        with:
+          id: rest.id
+          chart: rest.chart
+          myRating: rest.myRating
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: youtubevideosinsert
+        description: Youtube Upload or Insert a Video
+        call: data-videos.youtubevideosinsert
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: youtubevideosupdate
+        description: Youtube Update Video Metadata
+        call: data-videos.youtubevideosupdate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: youtubevideosdelete
+        description: Youtube Delete a Video
+        call: data-videos.youtubevideosdelete
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/videos/rate
+      name: videos-rate
+      description: REST surface for videos-rate.
+      operations:
+      - method: POST
+        name: youtubevideosrate
+        description: Youtube Rate a Video
+        call: data-videos.youtubevideosrate
+        with:
+          id: rest.id
+          rating: rest.rating
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-videos-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Data API v3 — Videos. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: youtube-list-videos
+      description: Youtube List Videos
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-videos.youtubevideoslist
+      with:
+        id: tools.id
+        chart: tools.chart
+        myRating: tools.myRating
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-upload-insert-video
+      description: Youtube Upload or Insert a Video
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-videos.youtubevideosinsert
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-update-video-metadata
+      description: Youtube Update Video Metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: data-videos.youtubevideosupdate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-delete-video
+      description: Youtube Delete a Video
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: data-videos.youtubevideosdelete
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-rate-video
+      description: Youtube Rate a Video
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-videos.youtubevideosrate
+      with:
+        id: tools.id
+        rating: tools.rating
+      outputParameters:
+      - type: object
+        mapping: $.

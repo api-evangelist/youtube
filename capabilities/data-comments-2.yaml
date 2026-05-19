@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Data API — Comments
+  description: 'YouTube Data API — Comments. 1 operations. Lead operation: Youtube List Comment Threads. Self-contained Naftiko
+    capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - Comments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-comments-2
+    baseUri: https://www.googleapis.com/youtube/v3
+    description: YouTube Data API — Comments business capability. Self-contained, no shared references.
+    resources:
+    - name: commentThreads
+      path: /commentThreads
+      operations:
+      - name: listcommentthreads
+        method: GET
+        description: Youtube List Comment Threads
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-comments-2-rest
+    port: 8080
+    description: REST adapter for YouTube Data API — Comments. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/commentthreads
+      name: commentthreads
+      description: REST surface for commentThreads.
+      operations:
+      - method: GET
+        name: listcommentthreads
+        description: Youtube List Comment Threads
+        call: data-comments-2.listcommentthreads
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-comments-2-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Data API — Comments. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: youtube-list-comment-threads
+      description: Youtube List Comment Threads
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-comments-2.listcommentthreads
+      outputParameters:
+      - type: object
+        mapping: $.

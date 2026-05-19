@@ -1,0 +1,171 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: YouTube Analytics API — GroupItems
+  description: 'YouTube Analytics API — GroupItems. 3 operations. Lead operation: Youtube List Group Items. Self-contained
+    Naftiko capability covering one Youtube business surface.'
+  tags:
+  - Youtube
+  - GroupItems
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    YOUTUBE_API_KEY: YOUTUBE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: analytics-groupitems
+    baseUri: https://youtubeanalytics.googleapis.com/v2
+    description: YouTube Analytics API — GroupItems business capability. Self-contained, no shared references.
+    resources:
+    - name: groupItems
+      path: /groupItems
+      operations:
+      - name: youtubeanalyticsgroupitemslist
+        method: GET
+        description: Youtube List Group Items
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: groupId
+          in: query
+          type: string
+          description: The id parameter specifies the unique ID of the group for which you want to retrieve group items.
+          required: true
+        - name: onBehalfOfContentOwner
+          in: query
+          type: string
+          description: The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
+            a YouTube CMS user.
+      - name: youtubeanalyticsgroupitemsinsert
+        method: POST
+        description: Youtube Create a Group Item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: onBehalfOfContentOwner
+          in: query
+          type: string
+          description: The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
+            a YouTube CMS user.
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: youtubeanalyticsgroupitemsdelete
+        method: DELETE
+        description: Youtube Delete a Group Item
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: The id parameter specifies the YouTube group item ID for the group item being deleted.
+          required: true
+        - name: onBehalfOfContentOwner
+          in: query
+          type: string
+          description: The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify
+            a YouTube CMS user.
+    authentication:
+      type: bearer
+      token: '{{env.YOUTUBE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: analytics-groupitems-rest
+    port: 8080
+    description: REST adapter for YouTube Analytics API — GroupItems. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/groupitems
+      name: groupitems
+      description: REST surface for groupItems.
+      operations:
+      - method: GET
+        name: youtubeanalyticsgroupitemslist
+        description: Youtube List Group Items
+        call: analytics-groupitems.youtubeanalyticsgroupitemslist
+        with:
+          groupId: rest.groupId
+          onBehalfOfContentOwner: rest.onBehalfOfContentOwner
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: youtubeanalyticsgroupitemsinsert
+        description: Youtube Create a Group Item
+        call: analytics-groupitems.youtubeanalyticsgroupitemsinsert
+        with:
+          onBehalfOfContentOwner: rest.onBehalfOfContentOwner
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: youtubeanalyticsgroupitemsdelete
+        description: Youtube Delete a Group Item
+        call: analytics-groupitems.youtubeanalyticsgroupitemsdelete
+        with:
+          id: rest.id
+          onBehalfOfContentOwner: rest.onBehalfOfContentOwner
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: analytics-groupitems-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for YouTube Analytics API — GroupItems. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: youtube-list-group-items
+      description: Youtube List Group Items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: analytics-groupitems.youtubeanalyticsgroupitemslist
+      with:
+        groupId: tools.groupId
+        onBehalfOfContentOwner: tools.onBehalfOfContentOwner
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-create-group-item
+      description: Youtube Create a Group Item
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: analytics-groupitems.youtubeanalyticsgroupitemsinsert
+      with:
+        onBehalfOfContentOwner: tools.onBehalfOfContentOwner
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: youtube-delete-group-item
+      description: Youtube Delete a Group Item
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: analytics-groupitems.youtubeanalyticsgroupitemsdelete
+      with:
+        id: tools.id
+        onBehalfOfContentOwner: tools.onBehalfOfContentOwner
+      outputParameters:
+      - type: object
+        mapping: $.
