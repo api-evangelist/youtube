@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AnalyticsReportResponse",
+  "title": "AnalyticsReportResponse",
+  "type": "object",
+  "description": "Response object containing YouTube Analytics report data",
+  "required": [
+    "kind",
+    "columnHeaders",
+    "rows"
+  ],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource type",
+      "example": "youtubeAnalytics#resultTable"
+    },
+    "columnHeaders": {
+      "type": "array",
+      "description": "Column header definitions for the report data",
+      "items": {
+        "$ref": "#/components/schemas/ColumnHeader"
+      }
+    },
+    "rows": {
+      "type": "array",
+      "description": "Data rows containing the requested metrics and dimensions",
+      "items": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "integer"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

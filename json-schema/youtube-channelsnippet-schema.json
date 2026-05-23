@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChannelSnippet",
+  "title": "ChannelSnippet",
+  "type": "object",
+  "description": "Basic details about a channel, including its title, description, and thumbnails.",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The channel title.",
+      "example": "Example Title"
+    },
+    "description": {
+      "type": "string",
+      "description": "The channel description.",
+      "example": "A sample description for this resource."
+    },
+    "customUrl": {
+      "type": "string",
+      "description": "The channel's custom URL.",
+      "example": "https://www.example.com"
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time that the channel was created.",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "thumbnails": {
+      "type": "object",
+      "description": "A map of thumbnail images associated with the channel.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "description": "The URL of the thumbnail image."
+          },
+          "width": {
+            "type": "integer",
+            "description": "The thumbnail width in pixels."
+          },
+          "height": {
+            "type": "integer",
+            "description": "The thumbnail height in pixels."
+          }
+        }
+      },
+      "example": "example_value"
+    },
+    "country": {
+      "type": "string",
+      "description": "The country with which the channel is associated.",
+      "example": 42
+    },
+    "localized": {
+      "type": "object",
+      "description": "The snippet.localized object contains a localized title and description for the channel.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The localized channel title."
+        },
+        "description": {
+          "type": "string",
+          "description": "The localized channel description."
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

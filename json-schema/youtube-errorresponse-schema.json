@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ErrorResponse",
+  "title": "ErrorResponse",
+  "type": "object",
+  "description": "Error response object",
+  "required": [
+    "error"
+  ],
+  "properties": {
+    "error": {
+      "$ref": "#/components/schemas/ErrorDetails"
+    }
+  }
+}

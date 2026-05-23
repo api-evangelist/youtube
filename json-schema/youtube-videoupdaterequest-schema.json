@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/VideoUpdateRequest",
+  "title": "VideoUpdateRequest",
+  "type": "object",
+  "description": "Request body for updating a video",
+  "required": [
+    "id",
+    "snippet"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "ID of the video to update",
+      "example": "dQw4w9WgXcQ"
+    },
+    "snippet": {
+      "type": "object",
+      "required": [
+        "title",
+        "categoryId"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Updated title",
+          "example": "Updated Video Title"
+        },
+        "description": {
+          "type": "string",
+          "description": "Updated description",
+          "example": "Updated description..."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "categoryId": {
+          "type": "string",
+          "example": "28"
+        }
+      }
+    }
+  }
+}

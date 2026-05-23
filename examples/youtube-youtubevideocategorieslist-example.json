@@ -1,0 +1,30 @@
+{
+  "operationId": "youtube.videoCategories.list",
+  "method": "GET",
+  "path": "/videoCategories",
+  "summary": "Youtube List Video Categories",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubeVideocategoriesList200Example",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "items": [
+          {
+            "kind": "youtube#video",
+            "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+            "id": "abc123def456",
+            "snippet": {
+              "channelId": "500123",
+              "title": "Example Title",
+              "assignable": true
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

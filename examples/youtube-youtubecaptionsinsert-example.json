@@ -1,0 +1,57 @@
+{
+  "operationId": "youtube.captions.insert",
+  "method": "POST",
+  "path": "/captions",
+  "summary": "Youtube Upload a Caption Track",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "YoutubeCaptionsInsertRequestExample",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "id": "abc123def456",
+        "snippet": {
+          "videoId": "500123",
+          "lastUpdated": "2026-01-15T10:30:00Z",
+          "trackKind": "asr",
+          "language": "en",
+          "name": "Example Title",
+          "audioTrackType": "commentary",
+          "isCC": true,
+          "isLarge": true,
+          "isEasyReader": true,
+          "isDraft": true,
+          "isAutoSynced": true,
+          "status": "failed"
+        }
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubeCaptionsInsert200Example",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "id": "abc123def456",
+        "snippet": {
+          "videoId": "500123",
+          "lastUpdated": "2026-01-15T10:30:00Z",
+          "trackKind": "asr",
+          "language": "en",
+          "name": "Example Title",
+          "audioTrackType": "commentary",
+          "isCC": true,
+          "isLarge": true,
+          "isEasyReader": true,
+          "isDraft": true,
+          "isAutoSynced": true,
+          "status": "failed"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LiveBroadcastStatus",
+  "title": "LiveBroadcastStatus",
+  "type": "object",
+  "description": "Status information about a live broadcast including its privacy status and lifecycle status.",
+  "properties": {
+    "lifeCycleStatus": {
+      "type": "string",
+      "description": "The broadcast's status as it relates to the lifecycle of the broadcast.",
+      "enum": [
+        "abandoned",
+        "complete",
+        "completeStarting",
+        "created",
+        "live",
+        "liveStarting",
+        "ready",
+        "reclaimed",
+        "revoked",
+        "testStarting",
+        "testing"
+      ],
+      "example": "abandoned"
+    },
+    "privacyStatus": {
+      "type": "string",
+      "description": "The broadcast's privacy status.",
+      "enum": [
+        "private",
+        "public",
+        "unlisted"
+      ],
+      "example": "private"
+    },
+    "recordingStatus": {
+      "type": "string",
+      "description": "The broadcast's recording status.",
+      "enum": [
+        "notRecording",
+        "recorded",
+        "recording"
+      ],
+      "example": "notRecording"
+    },
+    "madeForKids": {
+      "type": "boolean",
+      "description": "Indicates whether the broadcast is designated as child-directed.",
+      "example": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "selfDeclaredMadeForKids": {
+      "type": "boolean",
+      "description": "Indicates whether the channel owner has designated the broadcast as being made for kids.",
+      "example": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    }
+  }
+}

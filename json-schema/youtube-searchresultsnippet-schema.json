@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SearchResultSnippet",
+  "title": "SearchResultSnippet",
+  "type": "object",
+  "description": "Basic information about the search result",
+  "properties": {
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the resource was published",
+      "example": "2024-03-15T10:30:00Z"
+    },
+    "channelId": {
+      "type": "string",
+      "description": "ID of the channel that owns the resource",
+      "example": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the resource",
+      "example": "OpenAPI Tutorial: Building REST APIs"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the resource",
+      "example": "Learn how to build REST APIs using OpenAPI specification..."
+    },
+    "thumbnails": {
+      "$ref": "#/components/schemas/ThumbnailDetails"
+    },
+    "channelTitle": {
+      "type": "string",
+      "description": "Title of the channel",
+      "example": "Google Developers"
+    }
+  }
+}

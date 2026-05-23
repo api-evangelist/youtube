@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LiveStreamListResponse",
+  "title": "LiveStreamListResponse",
+  "type": "object",
+  "description": "A list of live stream resources matching the request criteria.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#liveStreamListResponse.",
+      "default": "youtube#liveStreamListResponse",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "The token for the next page of results.",
+      "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+    },
+    "prevPageToken": {
+      "type": "string",
+      "description": "The token for the previous page of results.",
+      "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+    },
+    "pageInfo": {
+      "$ref": "#/components/schemas/PageInfo"
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of live streams that match the request criteria.",
+      "items": {
+        "$ref": "#/components/schemas/LiveStream"
+      },
+      "example": []
+    }
+  }
+}

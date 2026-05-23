@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ColumnHeader",
+  "title": "ColumnHeader",
+  "type": "object",
+  "description": "Defines a column in the analytics report",
+  "required": [
+    "name",
+    "columnType",
+    "dataType"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the dimension or metric",
+      "example": "views"
+    },
+    "columnType": {
+      "type": "string",
+      "description": "Whether the column is a dimension or metric",
+      "enum": [
+        "DIMENSION",
+        "METRIC"
+      ],
+      "example": "METRIC"
+    },
+    "dataType": {
+      "type": "string",
+      "description": "The data type of the column values",
+      "enum": [
+        "STRING",
+        "INTEGER",
+        "FLOAT"
+      ],
+      "example": "INTEGER"
+    }
+  }
+}

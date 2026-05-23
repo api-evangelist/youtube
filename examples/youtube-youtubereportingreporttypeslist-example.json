@@ -1,0 +1,25 @@
+{
+  "operationId": "youtubeReporting.reportTypes.list",
+  "method": "GET",
+  "path": "/reportTypes",
+  "summary": "Youtube List Report Types",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubereportingReporttypesList200Example",
+      "example": {
+        "reportTypes": [
+          {
+            "id": "abc123def456",
+            "name": "Example Title",
+            "systemManaged": true,
+            "deprecateTime": "2026-01-15T10:30:00Z"
+          }
+        ],
+        "nextPageToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+      }
+    }
+  ]
+}

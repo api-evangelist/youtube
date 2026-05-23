@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/VideoCategoryListResponse",
+  "title": "VideoCategoryListResponse",
+  "type": "object",
+  "description": "A list of video category resources matching the request criteria.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#videoCategoryListResponse.",
+      "default": "youtube#videoCategoryListResponse",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of video categories that match the request criteria.",
+      "items": {
+        "$ref": "#/components/schemas/VideoCategory"
+      },
+      "example": []
+    }
+  }
+}

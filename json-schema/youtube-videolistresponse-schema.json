@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/VideoListResponse",
+  "title": "VideoListResponse",
+  "type": "object",
+  "description": "A list of video resources matching the request criteria.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#videoListResponse.",
+      "default": "youtube#videoListResponse",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "The token that can be used as the pageToken parameter to retrieve the next page of results in the result set.",
+      "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+    },
+    "prevPageToken": {
+      "type": "string",
+      "description": "The token that can be used as the pageToken parameter to retrieve the previous page of results in the result set.",
+      "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+    },
+    "pageInfo": {
+      "$ref": "#/components/schemas/PageInfo"
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of videos that match the request criteria.",
+      "items": {
+        "$ref": "#/components/schemas/Video"
+      },
+      "example": []
+    }
+  }
+}

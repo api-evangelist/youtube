@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GroupSnippet",
+  "title": "GroupSnippet",
+  "type": "object",
+  "description": "Basic information about an analytics group",
+  "required": [
+    "title",
+    "publishedAt"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "The title of the group",
+      "example": "Top Performing Videos Q1 2024"
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the group was created",
+      "example": "2024-01-15T10:30:00Z"
+    }
+  }
+}

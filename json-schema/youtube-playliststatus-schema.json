@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlaylistStatus",
+  "title": "PlaylistStatus",
+  "type": "object",
+  "description": "Status information for the playlist",
+  "properties": {
+    "privacyStatus": {
+      "type": "string",
+      "description": "Privacy status of the playlist",
+      "enum": [
+        "private",
+        "public",
+        "unlisted"
+      ],
+      "example": "public"
+    }
+  }
+}

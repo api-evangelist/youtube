@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SubscriptionContentDetails",
+  "title": "SubscriptionContentDetails",
+  "type": "object",
+  "description": "Content details for the subscription",
+  "properties": {
+    "totalItemCount": {
+      "type": "integer",
+      "description": "Total number of videos on the channel",
+      "example": 500
+    },
+    "newItemCount": {
+      "type": "integer",
+      "description": "Number of new videos since last visit",
+      "example": 5
+    }
+  }
+}

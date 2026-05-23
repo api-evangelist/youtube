@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlaylistSnippet",
+  "title": "PlaylistSnippet",
+  "type": "object",
+  "description": "Basic information about the playlist",
+  "properties": {
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the playlist was created",
+      "example": "2024-01-15T10:30:00Z"
+    },
+    "channelId": {
+      "type": "string",
+      "description": "ID of the channel that owns the playlist",
+      "example": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the playlist",
+      "example": "API Development Tutorials"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the playlist",
+      "example": "A collection of tutorials for API development..."
+    },
+    "thumbnails": {
+      "$ref": "#/components/schemas/ThumbnailDetails"
+    },
+    "channelTitle": {
+      "type": "string",
+      "description": "Title of the channel",
+      "example": "Google Developers"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "operationId": "youtubeAnalytics.reports.query",
+  "method": "GET",
+  "path": "/reports",
+  "summary": "Youtube Query Analytics Reports",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubeanalyticsReportsQuery200Example",
+      "example": {
+        "kind": "youtube#video",
+        "columnHeaders": [
+          {
+            "name": "Example Title",
+            "columnType": "DIMENSION",
+            "dataType": "CURRENCY"
+          }
+        ],
+        "rows": []
+      }
+    }
+  ]
+}

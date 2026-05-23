@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GroupListResponse",
+  "title": "GroupListResponse",
+  "type": "object",
+  "description": "Response containing a list of analytics groups",
+  "required": [
+    "kind",
+    "items"
+  ],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource type",
+      "example": "youtube#groupListResponse"
+    },
+    "etag": {
+      "type": "string",
+      "description": "ETag for caching purposes"
+    },
+    "items": {
+      "type": "array",
+      "description": "List of analytics groups",
+      "items": {
+        "$ref": "#/components/schemas/Group"
+      }
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "Token to retrieve the next page of results"
+    }
+  }
+}

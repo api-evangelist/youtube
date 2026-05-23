@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CommentSnippet",
+  "title": "CommentSnippet",
+  "type": "object",
+  "description": "Basic information about the comment",
+  "properties": {
+    "authorDisplayName": {
+      "type": "string",
+      "description": "Display name of the comment author",
+      "example": "John Doe"
+    },
+    "authorProfileImageUrl": {
+      "type": "string",
+      "description": "URL of the author's profile image"
+    },
+    "authorChannelUrl": {
+      "type": "string",
+      "description": "URL of the author's channel"
+    },
+    "authorChannelId": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "textDisplay": {
+      "type": "string",
+      "description": "Display text of the comment",
+      "example": "Great tutorial! Very helpful."
+    },
+    "textOriginal": {
+      "type": "string",
+      "description": "Original text of the comment"
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "example": "2024-03-15T12:30:00Z"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "likeCount": {
+      "type": "integer",
+      "example": 25
+    }
+  }
+}

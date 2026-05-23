@@ -1,0 +1,37 @@
+{
+  "operationId": "youtube.liveStreams.list",
+  "method": "GET",
+  "path": "/liveStreams",
+  "summary": "Youtube List Live Streams",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubeLivestreamsList200Example",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "nextPageToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+        "prevPageToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+        "pageInfo": {
+          "totalResults": 42,
+          "resultsPerPage": 10
+        },
+        "items": [
+          {
+            "kind": "youtube#video",
+            "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+            "id": "abc123def456",
+            "cdn": {
+              "ingestionType": "dash",
+              "ingestionInfo": {},
+              "resolution": "example_value",
+              "frameRate": "example_value"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

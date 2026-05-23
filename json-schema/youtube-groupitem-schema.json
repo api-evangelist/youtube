@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GroupItem",
+  "title": "GroupItem",
+  "type": "object",
+  "description": "An item (channel or video) within an analytics group",
+  "required": [
+    "kind",
+    "id",
+    "groupId",
+    "resource"
+  ],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource type",
+      "example": "youtube#groupItem"
+    },
+    "etag": {
+      "type": "string",
+      "description": "ETag for caching purposes"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the group item",
+      "example": "XYZ789abc123"
+    },
+    "groupId": {
+      "type": "string",
+      "description": "ID of the group this item belongs to",
+      "example": "ABCdef123456"
+    },
+    "resource": {
+      "$ref": "#/components/schemas/GroupItemResource"
+    }
+  }
+}

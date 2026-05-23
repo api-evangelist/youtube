@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/VideoStatus",
+  "title": "VideoStatus",
+  "type": "object",
+  "description": "The status of an uploaded video.",
+  "properties": {
+    "uploadStatus": {
+      "type": "string",
+      "description": "The status of the uploaded video.",
+      "enum": [
+        "deleted",
+        "failed",
+        "processed",
+        "rejected",
+        "uploaded"
+      ],
+      "example": "deleted"
+    },
+    "privacyStatus": {
+      "type": "string",
+      "description": "The video's privacy status.",
+      "enum": [
+        "private",
+        "public",
+        "unlisted"
+      ],
+      "example": "private"
+    },
+    "license": {
+      "type": "string",
+      "description": "The video's license.",
+      "enum": [
+        "creativeCommon",
+        "youtube"
+      ],
+      "example": "creativeCommon"
+    },
+    "embeddable": {
+      "type": "boolean",
+      "description": "Indicates whether the video can be embedded on another website.",
+      "example": true
+    },
+    "publicStatsViewable": {
+      "type": "boolean",
+      "description": "Indicates whether the video's extended statistics on the video's watch page are publicly viewable.",
+      "example": true
+    },
+    "madeForKids": {
+      "type": "boolean",
+      "description": "Indicates whether the video is designated as child-directed.",
+      "example": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    }
+  }
+}

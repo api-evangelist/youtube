@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LiveChatMessageListResponse",
+  "title": "LiveChatMessageListResponse",
+  "type": "object",
+  "description": "A list of live chat message resources for a given broadcast.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#liveChatMessageListResponse.",
+      "default": "youtube#liveChatMessageListResponse",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "The token for the next page of results.",
+      "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+    },
+    "pollingIntervalMillis": {
+      "type": "integer",
+      "description": "The amount of time the client should wait before polling again, in milliseconds.",
+      "example": 10
+    },
+    "offlineAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the underlying stream went offline.",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "pageInfo": {
+      "$ref": "#/components/schemas/PageInfo"
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of chat messages that match the request criteria.",
+      "items": {
+        "$ref": "#/components/schemas/LiveChatMessage"
+      },
+      "example": []
+    }
+  }
+}

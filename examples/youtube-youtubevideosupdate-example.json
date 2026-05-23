@@ -1,0 +1,123 @@
+{
+  "operationId": "youtube.videos.update",
+  "method": "PUT",
+  "path": "/videos",
+  "summary": "Youtube Update Video Metadata",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "YoutubeVideosUpdateRequestExample",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "id": "abc123def456",
+        "snippet": {
+          "publishedAt": "2026-01-15T10:30:00Z",
+          "channelId": "500123",
+          "title": "Example Title",
+          "description": "A sample description for this resource.",
+          "thumbnails": "example_value",
+          "channelTitle": "example_value",
+          "tags": [
+            "example_value"
+          ],
+          "categoryId": "500123",
+          "liveBroadcastContent": "live",
+          "defaultLanguage": "en",
+          "localized": {
+            "title": "Example Title",
+            "description": "A sample description for this resource."
+          }
+        },
+        "contentDetails": {
+          "duration": "example_value",
+          "dimension": "example_value",
+          "definition": "hd",
+          "caption": "false",
+          "licensedContent": true,
+          "contentRating": "example_value"
+        },
+        "status": {
+          "uploadStatus": "deleted",
+          "privacyStatus": "private",
+          "license": "creativeCommon",
+          "embeddable": true,
+          "publicStatsViewable": true,
+          "madeForKids": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "statistics": {
+          "viewCount": 42,
+          "likeCount": 42,
+          "dislikeCount": 42,
+          "favoriteCount": 42,
+          "commentCount": 42
+        },
+        "player": {
+          "embedHtml": "example_value",
+          "embedHeight": 42.5,
+          "embedWidth": 42.5
+        },
+        "localizations": "example_value"
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubeVideosUpdate200Example",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "id": "abc123def456",
+        "snippet": {
+          "publishedAt": "2026-01-15T10:30:00Z",
+          "channelId": "500123",
+          "title": "Example Title",
+          "description": "A sample description for this resource.",
+          "thumbnails": "example_value",
+          "channelTitle": "example_value",
+          "tags": [
+            "example_value"
+          ],
+          "categoryId": "500123",
+          "liveBroadcastContent": "live",
+          "defaultLanguage": "en",
+          "localized": {
+            "title": "Example Title",
+            "description": "A sample description for this resource."
+          }
+        },
+        "contentDetails": {
+          "duration": "example_value",
+          "dimension": "example_value",
+          "definition": "hd",
+          "caption": "false",
+          "licensedContent": true,
+          "contentRating": "example_value"
+        },
+        "status": {
+          "uploadStatus": "deleted",
+          "privacyStatus": "private",
+          "license": "creativeCommon",
+          "embeddable": true,
+          "publicStatsViewable": true,
+          "madeForKids": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        },
+        "statistics": {
+          "viewCount": 42,
+          "likeCount": 42,
+          "dislikeCount": 42,
+          "favoriteCount": 42,
+          "commentCount": 42
+        },
+        "player": {
+          "embedHtml": "example_value",
+          "embedHeight": 42.5,
+          "embedWidth": 42.5
+        },
+        "localizations": "example_value"
+      }
+    }
+  ]
+}

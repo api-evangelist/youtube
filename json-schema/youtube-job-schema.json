@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Job",
+  "title": "Job",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The server-generated ID of the job.",
+      "readOnly": true,
+      "example": "abc123def456"
+    },
+    "reportTypeId": {
+      "type": "string",
+      "description": "The type of reports that the job creates.",
+      "example": "500123"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the job. Max length is 100 characters.",
+      "example": "Example Title"
+    },
+    "createTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the job was created.",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "expireTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the job will expire.",
+      "readOnly": true,
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "systemManaged": {
+      "type": "boolean",
+      "description": "Whether the job is system-managed.",
+      "readOnly": true,
+      "example": true
+    }
+  }
+}

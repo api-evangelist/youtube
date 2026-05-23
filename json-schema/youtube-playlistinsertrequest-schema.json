@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlaylistInsertRequest",
+  "title": "PlaylistInsertRequest",
+  "type": "object",
+  "description": "Request body for creating a playlist",
+  "required": [
+    "snippet"
+  ],
+  "properties": {
+    "snippet": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title for the playlist",
+          "example": "My New Playlist"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the playlist",
+          "example": "A collection of my favorite videos"
+        },
+        "defaultLanguage": {
+          "type": "string",
+          "description": "Default language",
+          "example": "en"
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "privacyStatus": {
+          "type": "string",
+          "enum": [
+            "private",
+            "public",
+            "unlisted"
+          ],
+          "example": "public"
+        }
+      }
+    }
+  }
+}

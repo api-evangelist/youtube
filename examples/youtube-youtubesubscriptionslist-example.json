@@ -1,0 +1,39 @@
+{
+  "operationId": "youtube.subscriptions.list",
+  "method": "GET",
+  "path": "/subscriptions",
+  "summary": "Youtube List Subscriptions",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubeSubscriptionsList200Example",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "nextPageToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+        "prevPageToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+        "pageInfo": {
+          "totalResults": 42,
+          "resultsPerPage": 10
+        },
+        "items": [
+          {
+            "kind": "youtube#video",
+            "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+            "id": "abc123def456",
+            "snippet": {
+              "publishedAt": "2026-01-15T10:30:00Z",
+              "title": "Example Title",
+              "description": "A sample description for this resource.",
+              "resourceId": {},
+              "channelId": "500123",
+              "thumbnails": "example_value"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

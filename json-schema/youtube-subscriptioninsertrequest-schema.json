@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SubscriptionInsertRequest",
+  "title": "SubscriptionInsertRequest",
+  "type": "object",
+  "description": "Request body for creating a subscription",
+  "required": [
+    "snippet"
+  ],
+  "properties": {
+    "snippet": {
+      "type": "object",
+      "required": [
+        "resourceId"
+      ],
+      "properties": {
+        "resourceId": {
+          "type": "object",
+          "required": [
+            "kind",
+            "channelId"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "example": "youtube#channel"
+            },
+            "channelId": {
+              "type": "string",
+              "description": "ID of the channel to subscribe to",
+              "example": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+            }
+          }
+        }
+      }
+    }
+  }
+}

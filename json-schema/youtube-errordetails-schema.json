@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ErrorDetails",
+  "title": "ErrorDetails",
+  "type": "object",
+  "description": "Details about an API error",
+  "required": [
+    "code",
+    "message"
+  ],
+  "properties": {
+    "code": {
+      "type": "integer",
+      "description": "HTTP status code",
+      "example": 400
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable error message",
+      "example": "Invalid parameter value"
+    },
+    "errors": {
+      "type": "array",
+      "description": "List of specific errors",
+      "items": {
+        "$ref": "#/components/schemas/ErrorItem"
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ListReportsResponse",
+  "title": "ListReportsResponse",
+  "type": "object",
+  "properties": {
+    "reports": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Report"
+      },
+      "description": "The list of reports.",
+      "example": []
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "A token to retrieve the next page of results.",
+      "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+    }
+  }
+}

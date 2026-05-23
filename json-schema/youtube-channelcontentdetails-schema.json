@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChannelContentDetails",
+  "title": "ChannelContentDetails",
+  "type": "object",
+  "description": "Content details for the channel",
+  "properties": {
+    "relatedPlaylists": {
+      "type": "object",
+      "properties": {
+        "likes": {
+          "type": "string",
+          "description": "Playlist ID for liked videos"
+        },
+        "favorites": {
+          "type": "string",
+          "description": "Playlist ID for favorited videos"
+        },
+        "uploads": {
+          "type": "string",
+          "description": "Playlist ID for uploaded videos",
+          "example": "UU_x5XG1OV2P6uZZ5FSM9Ttw"
+        }
+      }
+    }
+  }
+}

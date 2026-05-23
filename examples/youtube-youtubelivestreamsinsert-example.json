@@ -1,0 +1,91 @@
+{
+  "operationId": "youtube.liveStreams.insert",
+  "method": "POST",
+  "path": "/liveStreams",
+  "summary": "Youtube Create a Live Stream",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "YoutubeLivestreamsInsertRequestExample",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "id": "abc123def456",
+        "snippet": {
+          "channelId": "500123",
+          "title": "Example Title",
+          "description": "A sample description for this resource.",
+          "publishedAt": "2026-01-15T10:30:00Z",
+          "isDefaultStream": true
+        },
+        "cdn": {
+          "ingestionType": "dash",
+          "ingestionInfo": {
+            "streamName": "example_value",
+            "ingestionAddress": "example_value",
+            "backupIngestionAddress": "example_value",
+            "rtmpsIngestionAddress": "example_value",
+            "backupRtmpsIngestionAddress": "example_value"
+          },
+          "resolution": "example_value",
+          "frameRate": "example_value"
+        },
+        "status": {
+          "streamStatus": "active",
+          "healthStatus": {
+            "status": "bad",
+            "lastUpdateTimeSeconds": 10,
+            "configurationIssues": []
+          }
+        },
+        "contentDetails": {
+          "boundBroadcastId": "500123",
+          "isReusable": true
+        }
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubeLivestreamsInsert200Example",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "id": "abc123def456",
+        "snippet": {
+          "channelId": "500123",
+          "title": "Example Title",
+          "description": "A sample description for this resource.",
+          "publishedAt": "2026-01-15T10:30:00Z",
+          "isDefaultStream": true
+        },
+        "cdn": {
+          "ingestionType": "dash",
+          "ingestionInfo": {
+            "streamName": "example_value",
+            "ingestionAddress": "example_value",
+            "backupIngestionAddress": "example_value",
+            "rtmpsIngestionAddress": "example_value",
+            "backupRtmpsIngestionAddress": "example_value"
+          },
+          "resolution": "example_value",
+          "frameRate": "example_value"
+        },
+        "status": {
+          "streamStatus": "active",
+          "healthStatus": {
+            "status": "bad",
+            "lastUpdateTimeSeconds": 10,
+            "configurationIssues": []
+          }
+        },
+        "contentDetails": {
+          "boundBroadcastId": "500123",
+          "isReusable": true
+        }
+      }
+    }
+  ]
+}

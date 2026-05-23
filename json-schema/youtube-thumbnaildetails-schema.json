@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ThumbnailDetails",
+  "title": "ThumbnailDetails",
+  "type": "object",
+  "description": "Thumbnail images at various resolutions",
+  "properties": {
+    "default": {
+      "$ref": "#/components/schemas/Thumbnail"
+    },
+    "medium": {
+      "$ref": "#/components/schemas/Thumbnail"
+    },
+    "high": {
+      "$ref": "#/components/schemas/Thumbnail"
+    },
+    "standard": {
+      "$ref": "#/components/schemas/Thumbnail"
+    },
+    "maxres": {
+      "$ref": "#/components/schemas/Thumbnail"
+    }
+  }
+}

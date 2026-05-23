@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ChannelStatistics",
+  "title": "ChannelStatistics",
+  "type": "object",
+  "description": "Statistics about a YouTube channel.",
+  "properties": {
+    "viewCount": {
+      "type": "string",
+      "description": "The number of times the channel has been viewed.",
+      "example": 42
+    },
+    "subscriberCount": {
+      "type": "string",
+      "description": "The number of subscribers that the channel has.",
+      "example": 42
+    },
+    "hiddenSubscriberCount": {
+      "type": "boolean",
+      "description": "Indicates whether the channel's subscriber count is publicly visible.",
+      "example": 42
+    },
+    "videoCount": {
+      "type": "string",
+      "description": "The number of public videos uploaded to the channel.",
+      "example": 42
+    }
+  }
+}

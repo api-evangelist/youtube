@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GroupUpdateRequest",
+  "title": "GroupUpdateRequest",
+  "type": "object",
+  "description": "Request body for updating an analytics group",
+  "required": [
+    "id",
+    "snippet"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The ID of the group to update",
+      "example": "ABCdef123456"
+    },
+    "snippet": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The updated title for the group",
+          "example": "Updated Analytics Group Name"
+        }
+      }
+    }
+  }
+}

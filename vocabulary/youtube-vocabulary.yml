@@ -1,0 +1,27 @@
+name: Youtube Domain Vocabulary
+provider: Youtube
+providerId: youtube
+description: Tag-derived vocabulary for the Youtube API surface; sourced from openapi/ tags.
+terms:
+- term: Captions
+  description: Operations related to YouTube video caption tracks
+- term: Channels
+  description: Operations related to YouTube channel resources
+- term: Comments
+  description: Operations related to individual YouTube comments
+- term: CommentThreads
+  description: Operations related to YouTube comment threads
+- term: I18n
+  description: Operations related to internationalization resources
+- term: PlaylistItems
+  description: Operations related to items within YouTube playlists
+- term: Playlists
+  description: Operations related to YouTube playlist resources
+- term: Search
+  description: Operations for searching YouTube content
+- term: Subscriptions
+  description: Operations related to YouTube channel subscriptions
+- term: VideoCategories
+  description: Operations related to YouTube video categories
+- term: Videos
+  description: Operations related to YouTube video resources

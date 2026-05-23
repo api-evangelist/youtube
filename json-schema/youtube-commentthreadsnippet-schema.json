@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CommentThreadSnippet",
+  "title": "CommentThreadSnippet",
+  "type": "object",
+  "description": "Basic information about the comment thread",
+  "properties": {
+    "channelId": {
+      "type": "string",
+      "description": "ID of the channel associated with the comment",
+      "example": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "videoId": {
+      "type": "string",
+      "description": "ID of the video the comment is for",
+      "example": "dQw4w9WgXcQ"
+    },
+    "topLevelComment": {
+      "$ref": "#/components/schemas/Comment"
+    },
+    "canReply": {
+      "type": "boolean",
+      "description": "Whether the user can reply",
+      "example": true
+    },
+    "totalReplyCount": {
+      "type": "integer",
+      "description": "Total number of replies",
+      "example": 10
+    },
+    "isPublic": {
+      "type": "boolean",
+      "description": "Whether the comment thread is public",
+      "example": true
+    }
+  }
+}

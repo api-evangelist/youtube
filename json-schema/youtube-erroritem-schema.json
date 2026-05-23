@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ErrorItem",
+  "title": "ErrorItem",
+  "type": "object",
+  "description": "Individual error detail",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "description": "Error domain",
+      "example": "youtube.analytics"
+    },
+    "reason": {
+      "type": "string",
+      "description": "Error reason code",
+      "example": "invalidParameter"
+    },
+    "message": {
+      "type": "string",
+      "description": "Detailed error message",
+      "example": "The parameter 'startDate' has an invalid value"
+    },
+    "locationType": {
+      "type": "string",
+      "description": "Type of location where error occurred",
+      "example": "parameter"
+    },
+    "location": {
+      "type": "string",
+      "description": "Specific location of the error",
+      "example": "startDate"
+    }
+  }
+}

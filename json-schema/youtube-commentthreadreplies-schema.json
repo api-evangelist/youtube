@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CommentThreadReplies",
+  "title": "CommentThreadReplies",
+  "type": "object",
+  "description": "Replies to the comment thread",
+  "properties": {
+    "comments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Comment"
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LiveStream",
+  "title": "LiveStream",
+  "type": "object",
+  "description": "A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users.",
+  "required": [
+    "kind",
+    "etag"
+  ],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#liveStream.",
+      "default": "youtube#liveStream",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "id": {
+      "type": "string",
+      "description": "The ID that YouTube assigns to uniquely identify the stream.",
+      "example": "abc123def456"
+    },
+    "snippet": {
+      "$ref": "#/components/schemas/LiveStreamSnippet"
+    },
+    "cdn": {
+      "type": "object",
+      "description": "The cdn object defines the live stream's content delivery network (CDN) settings.",
+      "properties": {
+        "ingestionType": {
+          "type": "string",
+          "description": "The method or protocol used to transmit the video stream.",
+          "enum": [
+            "dash",
+            "rtmp",
+            "webrtc"
+          ]
+        },
+        "ingestionInfo": {
+          "type": "object",
+          "description": "The ingestionInfo object contains information that YouTube provides that you need to transmit your RTMP or HTTP stream to YouTube.",
+          "properties": {
+            "streamName": {
+              "type": "string",
+              "description": "The stream name that YouTube assigns to the video stream."
+            },
+            "ingestionAddress": {
+              "type": "string",
+              "description": "The primary ingestion URL that you should use to stream video to YouTube."
+            },
+            "backupIngestionAddress": {
+              "type": "string",
+              "description": "The backup ingestion URL that you should use to stream video to YouTube."
+            },
+            "rtmpsIngestionAddress": {
+              "type": "string",
+              "description": "The primary secured ingestion URL that you should use to stream video to YouTube."
+            },
+            "backupRtmpsIngestionAddress": {
+              "type": "string",
+              "description": "The backup secured ingestion URL that you should use to stream video to YouTube."
+            }
+          }
+        },
+        "resolution": {
+          "type": "string",
+          "description": "The resolution of the inbound video data."
+        },
+        "frameRate": {
+          "type": "string",
+          "description": "The frame rate of the inbound video data."
+        }
+      },
+      "example": "example_value"
+    },
+    "status": {
+      "$ref": "#/components/schemas/LiveStreamStatus"
+    },
+    "contentDetails": {
+      "$ref": "#/components/schemas/LiveStreamContentDetails"
+    }
+  }
+}

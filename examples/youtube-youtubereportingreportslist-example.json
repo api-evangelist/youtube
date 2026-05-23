@@ -1,0 +1,28 @@
+{
+  "operationId": "youtubeReporting.reports.list",
+  "method": "GET",
+  "path": "/jobs/{jobId}/reports",
+  "summary": "Youtube List Reports",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubereportingReportsList200Example",
+      "example": {
+        "reports": [
+          {
+            "id": "abc123def456",
+            "jobId": "abc123def456",
+            "startTime": "2026-01-15T10:30:00Z",
+            "endTime": "2026-01-15T10:30:00Z",
+            "createTime": "2026-01-15T10:30:00Z",
+            "downloadUrl": "https://www.example.com",
+            "jobExpireTime": "2026-01-15T10:30:00Z"
+          }
+        ],
+        "nextPageToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+      }
+    }
+  ]
+}

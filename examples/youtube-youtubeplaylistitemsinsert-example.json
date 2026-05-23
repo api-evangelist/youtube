@@ -1,0 +1,71 @@
+{
+  "operationId": "youtube.playlistItems.insert",
+  "method": "POST",
+  "path": "/playlistItems",
+  "summary": "Youtube Add an Item to a Playlist",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "YoutubePlaylistitemsInsertRequestExample",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "id": "abc123def456",
+        "snippet": {
+          "publishedAt": "2026-01-15T10:30:00Z",
+          "channelId": "500123",
+          "title": "Example Title",
+          "description": "A sample description for this resource.",
+          "thumbnails": "example_value",
+          "channelTitle": "example_value",
+          "playlistId": "500123",
+          "position": 10,
+          "resourceId": {
+            "kind": "youtube#video",
+            "videoId": "500123"
+          }
+        },
+        "contentDetails": {
+          "videoId": "500123",
+          "videoPublishedAt": "2026-01-15T10:30:00Z"
+        },
+        "status": {
+          "privacyStatus": "example_value"
+        }
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubePlaylistitemsInsert200Example",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "id": "abc123def456",
+        "snippet": {
+          "publishedAt": "2026-01-15T10:30:00Z",
+          "channelId": "500123",
+          "title": "Example Title",
+          "description": "A sample description for this resource.",
+          "thumbnails": "example_value",
+          "channelTitle": "example_value",
+          "playlistId": "500123",
+          "position": 10,
+          "resourceId": {
+            "kind": "youtube#video",
+            "videoId": "500123"
+          }
+        },
+        "contentDetails": {
+          "videoId": "500123",
+          "videoPublishedAt": "2026-01-15T10:30:00Z"
+        },
+        "status": {
+          "privacyStatus": "example_value"
+        }
+      }
+    }
+  ]
+}

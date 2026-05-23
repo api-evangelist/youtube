@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/VideoInsertRequest",
+  "title": "VideoInsertRequest",
+  "type": "object",
+  "description": "Request body for uploading a video",
+  "required": [
+    "snippet",
+    "status"
+  ],
+  "properties": {
+    "snippet": {
+      "type": "object",
+      "required": [
+        "title",
+        "categoryId"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Title for the video",
+          "example": "My New Video"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the video",
+          "example": "This is my new video about..."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "tutorial",
+            "demo"
+          ]
+        },
+        "categoryId": {
+          "type": "string",
+          "description": "YouTube video category ID",
+          "example": "28"
+        },
+        "defaultLanguage": {
+          "type": "string",
+          "description": "Default language of the video",
+          "example": "en"
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "privacyStatus": {
+          "type": "string",
+          "enum": [
+            "private",
+            "public",
+            "unlisted"
+          ],
+          "example": "public"
+        },
+        "embeddable": {
+          "type": "boolean",
+          "example": true
+        },
+        "license": {
+          "type": "string",
+          "enum": [
+            "creativeCommon",
+            "youtube"
+          ],
+          "example": "youtube"
+        }
+      }
+    }
+  }
+}

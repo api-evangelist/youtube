@@ -1,0 +1,30 @@
+{
+  "operationId": "youtubeAnalytics.groups.list",
+  "method": "GET",
+  "path": "/groups",
+  "summary": "Youtube List Groups",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubeanalyticsGroupsList200Example",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "nextPageToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+        "items": [
+          {
+            "kind": "youtube#video",
+            "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+            "id": "abc123def456",
+            "snippet": {
+              "publishedAt": "2026-01-15T10:30:00Z",
+              "title": "Example Title"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

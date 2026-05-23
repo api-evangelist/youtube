@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/LiveBroadcast",
+  "title": "LiveBroadcast",
+  "type": "object",
+  "description": "A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.",
+  "required": [
+    "kind",
+    "etag"
+  ],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#liveBroadcast.",
+      "default": "youtube#liveBroadcast",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "id": {
+      "type": "string",
+      "description": "The ID that YouTube assigns to uniquely identify the broadcast.",
+      "example": "abc123def456"
+    },
+    "snippet": {
+      "$ref": "#/components/schemas/LiveBroadcastSnippet"
+    },
+    "status": {
+      "$ref": "#/components/schemas/LiveBroadcastStatus"
+    },
+    "contentDetails": {
+      "$ref": "#/components/schemas/LiveBroadcastContentDetails"
+    },
+    "statistics": {
+      "type": "object",
+      "description": "The statistics object contains info about the live broadcast.",
+      "properties": {
+        "totalChatCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of live chat messages currently on the broadcast."
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

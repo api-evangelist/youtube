@@ -1,0 +1,65 @@
+{
+  "operationId": "youtube.comments.insert",
+  "method": "POST",
+  "path": "/comments",
+  "summary": "Youtube Create a Comment",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "YoutubeCommentsInsertRequestExample",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "id": "abc123def456",
+        "snippet": {
+          "textOriginal": "example_value",
+          "textDisplay": "example_value",
+          "authorDisplayName": "example_value",
+          "authorProfileImageUrl": "https://www.example.com",
+          "authorChannelUrl": "https://www.example.com",
+          "authorChannelId": {
+            "value": "example_value"
+          },
+          "likeCount": 42,
+          "viewerRating": "example_value",
+          "publishedAt": "2026-01-15T10:30:00Z",
+          "updatedAt": "2026-01-15T10:30:00Z",
+          "videoId": "500123",
+          "parentId": "500123",
+          "canRate": true,
+          "moderationStatus": "heldForReview"
+        }
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubeCommentsInsert200Example",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "id": "abc123def456",
+        "snippet": {
+          "textOriginal": "example_value",
+          "textDisplay": "example_value",
+          "authorDisplayName": "example_value",
+          "authorProfileImageUrl": "https://www.example.com",
+          "authorChannelUrl": "https://www.example.com",
+          "authorChannelId": {
+            "value": "example_value"
+          },
+          "likeCount": 42,
+          "viewerRating": "example_value",
+          "publishedAt": "2026-01-15T10:30:00Z",
+          "updatedAt": "2026-01-15T10:30:00Z",
+          "videoId": "500123",
+          "parentId": "500123",
+          "canRate": true,
+          "moderationStatus": "heldForReview"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Group",
+  "title": "Group",
+  "type": "object",
+  "description": "An analytics group for aggregating channel or video data",
+  "required": [
+    "kind",
+    "id",
+    "snippet",
+    "contentDetails"
+  ],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource type",
+      "example": "youtube#group"
+    },
+    "etag": {
+      "type": "string",
+      "description": "ETag for caching purposes"
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the group",
+      "example": "ABCdef123456"
+    },
+    "snippet": {
+      "$ref": "#/components/schemas/GroupSnippet"
+    },
+    "contentDetails": {
+      "$ref": "#/components/schemas/GroupContentDetails"
+    }
+  }
+}

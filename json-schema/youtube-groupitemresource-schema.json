@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GroupItemResource",
+  "title": "GroupItemResource",
+  "type": "object",
+  "description": "Resource information for a group item",
+  "required": [
+    "kind",
+    "id"
+  ],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Type of resource",
+      "enum": [
+        "youtube#channel",
+        "youtube#video"
+      ],
+      "example": "youtube#video"
+    },
+    "id": {
+      "type": "string",
+      "description": "YouTube ID of the channel or video",
+      "example": "dQw4w9WgXcQ"
+    }
+  }
+}

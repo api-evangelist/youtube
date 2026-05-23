@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CommentThread",
+  "title": "CommentThread",
+  "type": "object",
+  "description": "A commentThread resource contains information about a YouTube comment thread, which comprises a top-level comment and replies.",
+  "required": [
+    "kind",
+    "etag"
+  ],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#commentThread.",
+      "default": "youtube#commentThread",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "id": {
+      "type": "string",
+      "description": "The ID that YouTube uses to uniquely identify the comment thread.",
+      "example": "abc123def456"
+    },
+    "snippet": {
+      "type": "object",
+      "description": "The snippet object contains basic details about the comment thread.",
+      "properties": {
+        "channelId": {
+          "type": "string",
+          "description": "The YouTube channel that is associated with the comments in the thread."
+        },
+        "videoId": {
+          "type": "string",
+          "description": "The ID of the video that the comments refer to."
+        },
+        "topLevelComment": {
+          "$ref": "#/components/schemas/Comment"
+        },
+        "canReply": {
+          "type": "boolean",
+          "description": "Whether the current viewer can reply to the thread."
+        },
+        "totalReplyCount": {
+          "type": "integer",
+          "description": "The total number of replies that have been submitted in response to the top-level comment."
+        },
+        "isPublic": {
+          "type": "boolean",
+          "description": "Indicates whether the thread, including all of its comments and comment replies, is visible to all YouTube users."
+        }
+      },
+      "example": "example_value"
+    },
+    "replies": {
+      "type": "object",
+      "description": "The replies object contains a list of replies to the top-level comment.",
+      "properties": {
+        "comments": {
+          "type": "array",
+          "description": "A limited number of replies to the top-level comment.",
+          "items": {
+            "$ref": "#/components/schemas/Comment"
+          }
+        }
+      },
+      "example": "example_value"
+    }
+  }
+}

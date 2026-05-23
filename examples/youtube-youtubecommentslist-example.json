@@ -1,0 +1,46 @@
+{
+  "operationId": "youtube.comments.list",
+  "method": "GET",
+  "path": "/comments",
+  "summary": "Youtube List Comments",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubeCommentsList200Example",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "nextPageToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+        "pageInfo": {
+          "totalResults": 42,
+          "resultsPerPage": 10
+        },
+        "items": [
+          {
+            "kind": "youtube#video",
+            "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+            "id": "abc123def456",
+            "snippet": {
+              "textOriginal": "example_value",
+              "textDisplay": "example_value",
+              "authorDisplayName": "example_value",
+              "authorProfileImageUrl": "https://www.example.com",
+              "authorChannelUrl": "https://www.example.com",
+              "authorChannelId": {},
+              "likeCount": 42,
+              "viewerRating": "example_value",
+              "publishedAt": "2026-01-15T10:30:00Z",
+              "updatedAt": "2026-01-15T10:30:00Z",
+              "videoId": "500123",
+              "parentId": "500123",
+              "canRate": true,
+              "moderationStatus": "heldForReview"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

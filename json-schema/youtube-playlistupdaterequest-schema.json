@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlaylistUpdateRequest",
+  "title": "PlaylistUpdateRequest",
+  "type": "object",
+  "description": "Request body for updating a playlist",
+  "required": [
+    "id",
+    "snippet"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "ID of the playlist to update",
+      "example": "PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf"
+    },
+    "snippet": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Updated title",
+          "example": "Updated Playlist Name"
+        },
+        "description": {
+          "type": "string",
+          "description": "Updated description"
+        }
+      }
+    }
+  }
+}

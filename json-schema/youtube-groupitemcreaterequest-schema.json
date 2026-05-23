@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GroupItemCreateRequest",
+  "title": "GroupItemCreateRequest",
+  "type": "object",
+  "description": "Request body for adding an item to a group",
+  "required": [
+    "groupId",
+    "resource"
+  ],
+  "properties": {
+    "groupId": {
+      "type": "string",
+      "description": "ID of the group to add the item to",
+      "example": "ABCdef123456"
+    },
+    "resource": {
+      "type": "object",
+      "required": [
+        "kind",
+        "id"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Type of resource to add",
+          "enum": [
+            "youtube#channel",
+            "youtube#video"
+          ],
+          "example": "youtube#video"
+        },
+        "id": {
+          "type": "string",
+          "description": "YouTube ID of the channel or video",
+          "example": "dQw4w9WgXcQ"
+        }
+      }
+    }
+  }
+}

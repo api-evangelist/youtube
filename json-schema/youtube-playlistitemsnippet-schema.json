@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlaylistItemSnippet",
+  "title": "PlaylistItemSnippet",
+  "type": "object",
+  "description": "Basic information about the playlist item",
+  "properties": {
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the item was added to the playlist",
+      "example": "2024-03-15T10:30:00Z"
+    },
+    "channelId": {
+      "type": "string",
+      "description": "ID of the channel that owns the playlist",
+      "example": "UC_x5XG1OV2P6uZZ5FSM9Ttw"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the video",
+      "example": "OpenAPI Tutorial: Building REST APIs"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the video"
+    },
+    "thumbnails": {
+      "$ref": "#/components/schemas/ThumbnailDetails"
+    },
+    "channelTitle": {
+      "type": "string",
+      "description": "Title of the channel"
+    },
+    "playlistId": {
+      "type": "string",
+      "description": "ID of the playlist",
+      "example": "PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf"
+    },
+    "position": {
+      "type": "integer",
+      "description": "Position in the playlist (0-indexed)",
+      "example": 0
+    },
+    "resourceId": {
+      "$ref": "#/components/schemas/ResourceId"
+    }
+  }
+}

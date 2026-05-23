@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CommentListResponse",
+  "title": "CommentListResponse",
+  "type": "object",
+  "description": "A list of comment resources matching the request criteria.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#commentListResponse.",
+      "default": "youtube#commentListResponse",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "The token for the next page of results.",
+      "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+    },
+    "pageInfo": {
+      "$ref": "#/components/schemas/PageInfo"
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of comments that match the request criteria.",
+      "items": {
+        "$ref": "#/components/schemas/Comment"
+      },
+      "example": []
+    }
+  }
+}

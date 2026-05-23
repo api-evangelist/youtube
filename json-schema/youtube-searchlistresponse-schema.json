@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SearchListResponse",
+  "title": "SearchListResponse",
+  "type": "object",
+  "description": "A list of search results matching the query criteria.",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource's type. Value is youtube#searchListResponse.",
+      "default": "youtube#searchListResponse",
+      "example": "youtube#video"
+    },
+    "etag": {
+      "type": "string",
+      "description": "The Etag of this resource.",
+      "example": "XI7nbFXulYBIpL0ayR_gDh3eu1k"
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "The token for the next page of results.",
+      "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+    },
+    "prevPageToken": {
+      "type": "string",
+      "description": "The token for the previous page of results.",
+      "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+    },
+    "regionCode": {
+      "type": "string",
+      "description": "The region code that was used for the search query.",
+      "example": "US"
+    },
+    "pageInfo": {
+      "$ref": "#/components/schemas/PageInfo"
+    },
+    "items": {
+      "type": "array",
+      "description": "A list of results that match the search criteria.",
+      "items": {
+        "$ref": "#/components/schemas/SearchResult"
+      },
+      "example": []
+    }
+  }
+}

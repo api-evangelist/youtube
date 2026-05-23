@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/CaptionSnippet",
+  "title": "CaptionSnippet",
+  "type": "object",
+  "description": "Basic information about the caption track",
+  "properties": {
+    "videoId": {
+      "type": "string",
+      "description": "ID of the video",
+      "example": "dQw4w9WgXcQ"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the caption was last updated"
+    },
+    "trackKind": {
+      "type": "string",
+      "description": "Type of caption track",
+      "enum": [
+        "ASR",
+        "forced",
+        "standard"
+      ],
+      "example": "standard"
+    },
+    "language": {
+      "type": "string",
+      "description": "Language of the caption track",
+      "example": "en"
+    },
+    "name": {
+      "type": "string",
+      "description": "Name of the caption track",
+      "example": "English"
+    },
+    "audioTrackType": {
+      "type": "string",
+      "description": "Type of audio track",
+      "enum": [
+        "commentary",
+        "descriptive",
+        "primary",
+        "unknown"
+      ],
+      "example": "primary"
+    },
+    "isCC": {
+      "type": "boolean",
+      "description": "Whether this is closed caption",
+      "example": true
+    },
+    "isLarge": {
+      "type": "boolean",
+      "description": "Whether the track has large text",
+      "example": false
+    },
+    "isEasyReader": {
+      "type": "boolean",
+      "description": "Whether the track is easy reader",
+      "example": false
+    },
+    "isDraft": {
+      "type": "boolean",
+      "description": "Whether the track is a draft",
+      "example": false
+    },
+    "isAutoSynced": {
+      "type": "boolean",
+      "description": "Whether the track is auto-synced",
+      "example": false
+    },
+    "status": {
+      "type": "string",
+      "description": "Status of the caption track",
+      "enum": [
+        "failed",
+        "serving",
+        "syncing"
+      ],
+      "example": "serving"
+    }
+  }
+}

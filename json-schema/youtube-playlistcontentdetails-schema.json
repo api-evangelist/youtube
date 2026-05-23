@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlaylistContentDetails",
+  "title": "PlaylistContentDetails",
+  "type": "object",
+  "description": "Content details for the playlist",
+  "properties": {
+    "itemCount": {
+      "type": "integer",
+      "description": "Number of videos in the playlist",
+      "example": 25
+    }
+  }
+}

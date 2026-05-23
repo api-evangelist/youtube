@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlaylistItemContentDetails",
+  "title": "PlaylistItemContentDetails",
+  "type": "object",
+  "description": "Content details for the playlist item",
+  "properties": {
+    "videoId": {
+      "type": "string",
+      "description": "ID of the video",
+      "example": "dQw4w9WgXcQ"
+    },
+    "videoPublishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the video was published"
+    }
+  }
+}

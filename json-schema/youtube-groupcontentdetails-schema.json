@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GroupContentDetails",
+  "title": "GroupContentDetails",
+  "type": "object",
+  "description": "Content details for an analytics group",
+  "required": [
+    "itemCount",
+    "itemType"
+  ],
+  "properties": {
+    "itemCount": {
+      "type": "integer",
+      "description": "Number of items in the group",
+      "example": 25
+    },
+    "itemType": {
+      "type": "string",
+      "description": "Type of items in the group",
+      "enum": [
+        "youtube#channel",
+        "youtube#video"
+      ],
+      "example": "youtube#video"
+    }
+  }
+}

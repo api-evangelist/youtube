@@ -1,0 +1,519 @@
+{
+  "provider": "Youtube",
+  "providerId": "youtube",
+  "kind": "json-structure",
+  "description": "Structural overview of the Youtube API surface; extracted from openapi/.",
+  "schemaCount": 31,
+  "operationCount": 33,
+  "schemas": [
+    {
+      "name": "PageInfo",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "VideoSnippet",
+      "type": "object",
+      "propertyCount": 11,
+      "required": []
+    },
+    {
+      "name": "VideoStatistics",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "VideoContentDetails",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "VideoStatus",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "VideoPlayer",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "Video",
+      "type": "object",
+      "propertyCount": 9,
+      "required": [
+        "kind",
+        "etag"
+      ]
+    },
+    {
+      "name": "VideoListResponse",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "ChannelSnippet",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "ChannelStatistics",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Channel",
+      "type": "object",
+      "propertyCount": 7,
+      "required": [
+        "kind",
+        "etag"
+      ]
+    },
+    {
+      "name": "ChannelListResponse",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "Playlist",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "kind",
+        "etag"
+      ]
+    },
+    {
+      "name": "PlaylistListResponse",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "PlaylistItem",
+      "type": "object",
+      "propertyCount": 6,
+      "required": [
+        "kind",
+        "etag"
+      ]
+    },
+    {
+      "name": "PlaylistItemListResponse",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "SearchResult",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "SearchListResponse",
+      "type": "object",
+      "propertyCount": 7,
+      "required": []
+    },
+    {
+      "name": "Subscription",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "kind",
+        "etag"
+      ]
+    },
+    {
+      "name": "SubscriptionListResponse",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "Comment",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "kind",
+        "etag"
+      ]
+    },
+    {
+      "name": "CommentListResponse",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "CommentThread",
+      "type": "object",
+      "propertyCount": 5,
+      "required": [
+        "kind",
+        "etag"
+      ]
+    },
+    {
+      "name": "CommentThreadListResponse",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "Caption",
+      "type": "object",
+      "propertyCount": 4,
+      "required": [
+        "kind",
+        "etag"
+      ]
+    },
+    {
+      "name": "CaptionListResponse",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "VideoCategory",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "VideoCategoryListResponse",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "I18nLanguageListResponse",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "I18nRegionListResponse",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "ErrorResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/videos",
+      "operationId": "youtube.videos.list",
+      "summary": "Youtube List Videos",
+      "tags": [
+        "Videos"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/videos",
+      "operationId": "youtube.videos.insert",
+      "summary": "Youtube Upload or Insert a Video",
+      "tags": [
+        "Videos"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/videos",
+      "operationId": "youtube.videos.update",
+      "summary": "Youtube Update Video Metadata",
+      "tags": [
+        "Videos"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/videos",
+      "operationId": "youtube.videos.delete",
+      "summary": "Youtube Delete a Video",
+      "tags": [
+        "Videos"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/videos/rate",
+      "operationId": "youtube.videos.rate",
+      "summary": "Youtube Rate a Video",
+      "tags": [
+        "Videos"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/channels",
+      "operationId": "youtube.channels.list",
+      "summary": "Youtube List Channels",
+      "tags": [
+        "Channels"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/channels",
+      "operationId": "youtube.channels.update",
+      "summary": "Youtube Update Channel Metadata",
+      "tags": [
+        "Channels"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/playlists",
+      "operationId": "youtube.playlists.list",
+      "summary": "Youtube List Playlists",
+      "tags": [
+        "Playlists"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/playlists",
+      "operationId": "youtube.playlists.insert",
+      "summary": "Youtube Create a Playlist",
+      "tags": [
+        "Playlists"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/playlists",
+      "operationId": "youtube.playlists.update",
+      "summary": "Youtube Update a Playlist",
+      "tags": [
+        "Playlists"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/playlists",
+      "operationId": "youtube.playlists.delete",
+      "summary": "Youtube Delete a Playlist",
+      "tags": [
+        "Playlists"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/playlistItems",
+      "operationId": "youtube.playlistItems.list",
+      "summary": "Youtube List Playlist Items",
+      "tags": [
+        "PlaylistItems"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/playlistItems",
+      "operationId": "youtube.playlistItems.insert",
+      "summary": "Youtube Add an Item to a Playlist",
+      "tags": [
+        "PlaylistItems"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/playlistItems",
+      "operationId": "youtube.playlistItems.delete",
+      "summary": "Youtube Remove a Playlist Item",
+      "tags": [
+        "PlaylistItems"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/search",
+      "operationId": "youtube.search.list",
+      "summary": "Youtube Search Youtube",
+      "tags": [
+        "Search"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/subscriptions",
+      "operationId": "youtube.subscriptions.list",
+      "summary": "Youtube List Subscriptions",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/subscriptions",
+      "operationId": "youtube.subscriptions.insert",
+      "summary": "Youtube Subscribe to a Channel",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/subscriptions",
+      "operationId": "youtube.subscriptions.delete",
+      "summary": "Youtube Unsubscribe From a Channel",
+      "tags": [
+        "Subscriptions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/comments",
+      "operationId": "youtube.comments.list",
+      "summary": "Youtube List Comments",
+      "tags": [
+        "Comments"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/comments",
+      "operationId": "youtube.comments.insert",
+      "summary": "Youtube Create a Comment",
+      "tags": [
+        "Comments"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/comments",
+      "operationId": "youtube.comments.update",
+      "summary": "Youtube Update a Comment",
+      "tags": [
+        "Comments"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/comments",
+      "operationId": "youtube.comments.delete",
+      "summary": "Youtube Delete a Comment",
+      "tags": [
+        "Comments"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/comments/setModerationStatus",
+      "operationId": "youtube.comments.setModerationStatus",
+      "summary": "Youtube Set Comment Moderation Status",
+      "tags": [
+        "Comments"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/commentThreads",
+      "operationId": "youtube.commentThreads.list",
+      "summary": "Youtube List Comment Threads",
+      "tags": [
+        "CommentThreads"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/commentThreads",
+      "operationId": "youtube.commentThreads.insert",
+      "summary": "Youtube Create a Comment Thread",
+      "tags": [
+        "CommentThreads"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/commentThreads",
+      "operationId": "youtube.commentThreads.update",
+      "summary": "Youtube Update a Comment Thread",
+      "tags": [
+        "CommentThreads"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/captions",
+      "operationId": "youtube.captions.list",
+      "summary": "Youtube List Caption Tracks",
+      "tags": [
+        "Captions"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/captions",
+      "operationId": "youtube.captions.insert",
+      "summary": "Youtube Upload a Caption Track",
+      "tags": [
+        "Captions"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/captions",
+      "operationId": "youtube.captions.update",
+      "summary": "Youtube Update a Caption Track",
+      "tags": [
+        "Captions"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/captions",
+      "operationId": "youtube.captions.delete",
+      "summary": "Youtube Delete a Caption Track",
+      "tags": [
+        "Captions"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/videoCategories",
+      "operationId": "youtube.videoCategories.list",
+      "summary": "Youtube List Video Categories",
+      "tags": [
+        "VideoCategories"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/i18nLanguages",
+      "operationId": "youtube.i18nLanguages.list",
+      "summary": "Youtube List I18n Languages",
+      "tags": [
+        "I18n"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/i18nRegions",
+      "operationId": "youtube.i18nRegions.list",
+      "summary": "Youtube List I18n Regions",
+      "tags": [
+        "I18n"
+      ]
+    }
+  ]
+}

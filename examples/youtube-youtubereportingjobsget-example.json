@@ -1,0 +1,22 @@
+{
+  "operationId": "youtubeReporting.jobs.get",
+  "method": "GET",
+  "path": "/jobs/{jobId}",
+  "summary": "Youtube Get Reporting Job",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubereportingJobsGet200Example",
+      "example": {
+        "id": "abc123def456",
+        "reportTypeId": "500123",
+        "name": "Example Title",
+        "createTime": "2026-01-15T10:30:00Z",
+        "expireTime": "2026-01-15T10:30:00Z",
+        "systemManaged": true
+      }
+    }
+  ]
+}

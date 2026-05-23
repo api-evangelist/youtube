@@ -1,0 +1,49 @@
+{
+  "operationId": "youtube.playlistItems.list",
+  "method": "GET",
+  "path": "/playlistItems",
+  "summary": "Youtube List Playlist Items",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubePlaylistitemsList200Example",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "nextPageToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+        "prevPageToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+        "pageInfo": {
+          "totalResults": 42,
+          "resultsPerPage": 10
+        },
+        "items": [
+          {
+            "kind": "youtube#video",
+            "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+            "id": "abc123def456",
+            "snippet": {
+              "publishedAt": "2026-01-15T10:30:00Z",
+              "channelId": "500123",
+              "title": "Example Title",
+              "description": "A sample description for this resource.",
+              "thumbnails": "example_value",
+              "channelTitle": "example_value",
+              "playlistId": "500123",
+              "position": 10,
+              "resourceId": {}
+            },
+            "contentDetails": {
+              "videoId": "500123",
+              "videoPublishedAt": "2026-01-15T10:30:00Z"
+            },
+            "status": {
+              "privacyStatus": "example_value"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

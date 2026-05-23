@@ -1,0 +1,27 @@
+{
+  "operationId": "youtubeReporting.jobs.list",
+  "method": "GET",
+  "path": "/jobs",
+  "summary": "Youtube List Reporting Jobs",
+  "requestExamples": [],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubereportingJobsList200Example",
+      "example": {
+        "jobs": [
+          {
+            "id": "abc123def456",
+            "reportTypeId": "500123",
+            "name": "Example Title",
+            "createTime": "2026-01-15T10:30:00Z",
+            "expireTime": "2026-01-15T10:30:00Z",
+            "systemManaged": true
+          }
+        ],
+        "nextPageToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+      }
+    }
+  ]
+}

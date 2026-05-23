@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Thumbnail",
+  "title": "Thumbnail",
+  "type": "object",
+  "description": "A thumbnail image",
+  "properties": {
+    "url": {
+      "type": "string",
+      "description": "URL of the thumbnail image",
+      "example": "https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg"
+    },
+    "width": {
+      "type": "integer",
+      "description": "Width of the thumbnail",
+      "example": 120
+    },
+    "height": {
+      "type": "integer",
+      "description": "Height of the thumbnail",
+      "example": 90
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ListJobsResponse",
+  "title": "ListJobsResponse",
+  "type": "object",
+  "properties": {
+    "jobs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Job"
+      },
+      "description": "The list of jobs.",
+      "example": []
+    },
+    "nextPageToken": {
+      "type": "string",
+      "description": "A token to retrieve the next page of results.",
+      "example": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+    }
+  }
+}

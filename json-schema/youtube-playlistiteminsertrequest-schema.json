@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/PlaylistItemInsertRequest",
+  "title": "PlaylistItemInsertRequest",
+  "type": "object",
+  "description": "Request body for adding an item to a playlist",
+  "required": [
+    "snippet"
+  ],
+  "properties": {
+    "snippet": {
+      "type": "object",
+      "required": [
+        "playlistId",
+        "resourceId"
+      ],
+      "properties": {
+        "playlistId": {
+          "type": "string",
+          "description": "ID of the playlist",
+          "example": "PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf"
+        },
+        "position": {
+          "type": "integer",
+          "description": "Position in the playlist",
+          "example": 0
+        },
+        "resourceId": {
+          "type": "object",
+          "required": [
+            "kind",
+            "videoId"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "example": "youtube#video"
+            },
+            "videoId": {
+              "type": "string",
+              "example": "dQw4w9WgXcQ"
+            }
+          }
+        }
+      }
+    }
+  }
+}

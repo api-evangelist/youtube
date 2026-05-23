@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GroupCreateRequest",
+  "title": "GroupCreateRequest",
+  "type": "object",
+  "description": "Request body for creating a new analytics group",
+  "required": [
+    "snippet",
+    "contentDetails"
+  ],
+  "properties": {
+    "snippet": {
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title for the new group",
+          "example": "My New Analytics Group"
+        }
+      }
+    },
+    "contentDetails": {
+      "type": "object",
+      "required": [
+        "itemType"
+      ],
+      "properties": {
+        "itemType": {
+          "type": "string",
+          "description": "Type of items the group will contain",
+          "enum": [
+            "youtube#channel",
+            "youtube#video"
+          ],
+          "example": "youtube#video"
+        }
+      }
+    }
+  }
+}

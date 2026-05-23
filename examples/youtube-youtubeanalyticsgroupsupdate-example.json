@@ -1,0 +1,45 @@
+{
+  "operationId": "youtubeAnalytics.groups.update",
+  "method": "PUT",
+  "path": "/groups",
+  "summary": "Youtube Update a Group",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "YoutubeanalyticsGroupsUpdateRequestExample",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "id": "abc123def456",
+        "snippet": {
+          "publishedAt": "2026-01-15T10:30:00Z",
+          "title": "Example Title"
+        },
+        "contentDetails": {
+          "itemCount": 42,
+          "itemType": "youtube#channel"
+        }
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubeanalyticsGroupsUpdate200Example",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "id": "abc123def456",
+        "snippet": {
+          "publishedAt": "2026-01-15T10:30:00Z",
+          "title": "Example Title"
+        },
+        "contentDetails": {
+          "itemCount": 42,
+          "itemType": "youtube#channel"
+        }
+      }
+    }
+  ]
+}

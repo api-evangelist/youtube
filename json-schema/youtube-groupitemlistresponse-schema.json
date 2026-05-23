@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/GroupItemListResponse",
+  "title": "GroupItemListResponse",
+  "type": "object",
+  "description": "Response containing a list of group items",
+  "required": [
+    "kind",
+    "items"
+  ],
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "Identifies the API resource type",
+      "example": "youtube#groupItemListResponse"
+    },
+    "etag": {
+      "type": "string",
+      "description": "ETag for caching purposes"
+    },
+    "items": {
+      "type": "array",
+      "description": "List of group items",
+      "items": {
+        "$ref": "#/components/schemas/GroupItem"
+      }
+    }
+  }
+}

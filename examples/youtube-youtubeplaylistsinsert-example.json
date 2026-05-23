@@ -1,0 +1,65 @@
+{
+  "operationId": "youtube.playlists.insert",
+  "method": "POST",
+  "path": "/playlists",
+  "summary": "Youtube Create a Playlist",
+  "requestExamples": [
+    {
+      "contentType": "application/json",
+      "name": "YoutubePlaylistsInsertRequestExample",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "id": "abc123def456",
+        "snippet": {
+          "publishedAt": "2026-01-15T10:30:00Z",
+          "channelId": "500123",
+          "title": "Example Title",
+          "description": "A sample description for this resource.",
+          "thumbnails": "example_value",
+          "channelTitle": "example_value",
+          "tags": [
+            "example_value"
+          ],
+          "defaultLanguage": "en"
+        },
+        "status": {
+          "privacyStatus": "private"
+        },
+        "contentDetails": {
+          "itemCount": 42
+        }
+      }
+    }
+  ],
+  "responseExamples": [
+    {
+      "status": "200",
+      "contentType": "application/json",
+      "name": "YoutubePlaylistsInsert200Example",
+      "example": {
+        "kind": "youtube#video",
+        "etag": "XI7nbFXulYBIpL0ayR_gDh3eu1k",
+        "id": "abc123def456",
+        "snippet": {
+          "publishedAt": "2026-01-15T10:30:00Z",
+          "channelId": "500123",
+          "title": "Example Title",
+          "description": "A sample description for this resource.",
+          "thumbnails": "example_value",
+          "channelTitle": "example_value",
+          "tags": [
+            "example_value"
+          ],
+          "defaultLanguage": "en"
+        },
+        "status": {
+          "privacyStatus": "private"
+        },
+        "contentDetails": {
+          "itemCount": 42
+        }
+      }
+    }
+  ]
+}
