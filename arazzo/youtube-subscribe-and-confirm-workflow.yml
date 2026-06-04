@@ -1,0 +1,78 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Subscribe and Confirm
+  summary: Subscribe the authenticated user to a channel, then confirm by listing their subscriptions.
+  description: >-
+    A write-then-verify flow. It subscribes the authenticated user to a channel
+    and then lists that user's subscriptions to confirm the new subscription is
+    present. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: subscribe-and-confirm
+  summary: Create a subscription and verify it by listing the user's subscriptions.
+  description: >-
+    Subscribes the authenticated user to a channel, then lists the user's own
+    subscriptions to confirm the action.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - channelId
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      channelId:
+        type: string
+        description: The id of the channel to subscribe to.
+  steps:
+  - stepId: subscribe
+    description: Subscribe the authenticated user to the supplied channel.
+    operationId: youtube.subscriptions.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          resourceId:
+            kind: youtube#channel
+            channelId: $inputs.channelId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      subscriptionId: $response.body#/id
+  - stepId: confirmSubscription
+    description: List the authenticated user's subscriptions to confirm the new entry.
+    operationId: youtube.subscriptions.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: mine
+      in: query
+      value: true
+    - name: maxResults
+      in: query
+      value: 50
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      subscriptions: $response.body#/items
+      totalResults: $response.body#/pageInfo/totalResults
+  outputs:
+    subscriptionId: $steps.subscribe.outputs.subscriptionId
+    subscriptions: $steps.confirmSubscription.outputs.subscriptions

@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Moderate Comment Threads
+  summary: List held-for-review comment threads on a video and set the top one's moderation status.
+  description: >-
+    A moderation flow for channel owners. It lists the comment threads on a video
+    filtered to those held for review, and then sets the moderation status of the
+    first held top-level comment, optionally banning its author. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: moderate-comment-threads
+  summary: Review held comments on a video and moderate the first one.
+  description: >-
+    Lists comment threads held for review on a video, captures the id of the
+    first held top-level comment, and applies a new moderation status to it.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - videoId
+    - moderationStatus
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      videoId:
+        type: string
+        description: The id of the video whose held comments should be moderated.
+      moderationStatus:
+        type: string
+        description: The new moderation status to apply (heldForReview, published, or rejected).
+      banAuthor:
+        type: boolean
+        description: Whether to ban the comment author from future comments.
+        default: false
+  steps:
+  - stepId: listHeldThreads
+    description: >-
+      List comment threads on the video that are currently held for review and
+      capture the id of the first held top-level comment.
+    operationId: youtube.commentThreads.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: videoId
+      in: query
+      value: $inputs.videoId
+    - name: moderationStatus
+      in: query
+      value: heldForReview
+    - name: maxResults
+      in: query
+      value: 50
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      heldCommentId: $response.body#/items/0/snippet/topLevelComment/id
+      heldCount: $response.body#/pageInfo/totalResults
+    onSuccess:
+    - name: hasHeldComments
+      type: goto
+      stepId: setModeration
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+  - stepId: setModeration
+    description: >-
+      Apply the requested moderation status to the first held top-level comment,
+      optionally banning the author.
+    operationId: youtube.comments.setModerationStatus
+    parameters:
+    - name: id
+      in: query
+      value: $steps.listHeldThreads.outputs.heldCommentId
+    - name: moderationStatus
+      in: query
+      value: $inputs.moderationStatus
+    - name: banAuthor
+      in: query
+      value: $inputs.banAuthor
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      moderatedCommentId: $steps.listHeldThreads.outputs.heldCommentId
+  outputs:
+    heldCount: $steps.listHeldThreads.outputs.heldCount
+    moderatedCommentId: $steps.setModeration.outputs.moderatedCommentId

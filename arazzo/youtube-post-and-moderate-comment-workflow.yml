@@ -1,0 +1,84 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Post and Moderate a Comment Thread
+  summary: Post a top-level comment on a video, then immediately set its moderation status.
+  description: >-
+    A channel-owner flow that posts a comment and governs its visibility in one
+    pass. It creates a new top-level comment thread on a video, captures the
+    top-level comment id, and then sets the moderation status of that comment.
+    Every step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: post-and-moderate-comment
+  summary: Create a top-level comment and apply a moderation status to it.
+  description: >-
+    Posts a new top-level comment via commentThreads.insert and then applies a
+    moderation status to the created comment via comments.setModerationStatus.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - videoId
+    - commentText
+    - moderationStatus
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      videoId:
+        type: string
+        description: The id of the video to comment on.
+      commentText:
+        type: string
+        description: The text of the top-level comment to post.
+      moderationStatus:
+        type: string
+        description: The moderation status to apply (heldForReview, published, or rejected).
+  steps:
+  - stepId: postThread
+    description: Create a new top-level comment thread on the video.
+    operationId: youtube.commentThreads.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          videoId: $inputs.videoId
+          topLevelComment:
+            snippet:
+              textOriginal: $inputs.commentText
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      topLevelCommentId: $response.body#/snippet/topLevelComment/id
+  - stepId: moderate
+    description: Apply the requested moderation status to the newly created comment.
+    operationId: youtube.comments.setModerationStatus
+    parameters:
+    - name: id
+      in: query
+      value: $steps.postThread.outputs.topLevelCommentId
+    - name: moderationStatus
+      in: query
+      value: $inputs.moderationStatus
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      moderatedCommentId: $steps.postThread.outputs.topLevelCommentId
+  outputs:
+    topLevelCommentId: $steps.postThread.outputs.topLevelCommentId
+    moderatedCommentId: $steps.moderate.outputs.moderatedCommentId

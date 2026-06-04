@@ -1,0 +1,124 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Upload Video and Add to Playlist
+  summary: Insert a video resource, create a playlist, and add the new video to that playlist.
+  description: >-
+    A publishing flow that wires a new upload into a curated collection. It
+    inserts a video resource with its metadata, creates a new playlist, and then
+    adds the newly inserted video to the new playlist. Note the YouTube videos
+    upload endpoint also supports resumable media upload for the binary file;
+    this workflow inserts the metadata resource only, which is the JSON portion
+    the OpenAPI description models. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: upload-video-add-to-playlist
+  summary: Insert a video, create a playlist, and place the video in it.
+  description: >-
+    Inserts a video resource with snippet and status, creates a new playlist,
+    and inserts a playlist item that references the new video into the new
+    playlist.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - videoTitle
+    - playlistTitle
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      videoTitle:
+        type: string
+        description: The title to set on the inserted video.
+      videoDescription:
+        type: string
+        description: The description to set on the inserted video.
+        default: ""
+      categoryId:
+        type: string
+        description: The numeric video category id to assign to the video.
+        default: "22"
+      privacyStatus:
+        type: string
+        description: The privacy status for both the video and the playlist.
+        default: private
+      playlistTitle:
+        type: string
+        description: The title for the new playlist that will hold the video.
+  steps:
+  - stepId: insertVideo
+    description: Insert the video resource with its snippet and status metadata.
+    operationId: youtube.videos.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet,status
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          title: $inputs.videoTitle
+          description: $inputs.videoDescription
+          categoryId: $inputs.categoryId
+        status:
+          privacyStatus: $inputs.privacyStatus
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      videoId: $response.body#/id
+  - stepId: createPlaylist
+    description: Create a new playlist that will hold the inserted video.
+    operationId: youtube.playlists.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet,status
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          title: $inputs.playlistTitle
+        status:
+          privacyStatus: $inputs.privacyStatus
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      playlistId: $response.body#/id
+  - stepId: addVideoToPlaylist
+    description: Insert a playlist item that places the new video into the new playlist.
+    operationId: youtube.playlistItems.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          playlistId: $steps.createPlaylist.outputs.playlistId
+          resourceId:
+            kind: youtube#video
+            videoId: $steps.insertVideo.outputs.videoId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      playlistItemId: $response.body#/id
+  outputs:
+    videoId: $steps.insertVideo.outputs.videoId
+    playlistId: $steps.createPlaylist.outputs.playlistId
+    playlistItemId: $steps.addVideoToPlaylist.outputs.playlistItemId

@@ -1,0 +1,132 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Copy Playlist Items
+  summary: Create a destination playlist, read items from a source playlist, and copy the first two across.
+  description: >-
+    Duplicates curated content into a new collection. It creates a destination
+    playlist, lists the items in a source playlist, and inserts the first and
+    second source videos into the destination playlist. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: copy-playlist-items
+  summary: Clone the first two items of a source playlist into a new playlist.
+  description: >-
+    Creates a new playlist, reads the first two items of a source playlist, and
+    inserts those two videos into the new playlist.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - sourcePlaylistId
+    - newPlaylistTitle
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      sourcePlaylistId:
+        type: string
+        description: The id of the playlist to copy items from.
+      newPlaylistTitle:
+        type: string
+        description: The title for the new destination playlist.
+      privacyStatus:
+        type: string
+        description: The privacy status of the new playlist.
+        default: private
+  steps:
+  - stepId: createDestination
+    description: Create the destination playlist that will receive the copied items.
+    operationId: youtube.playlists.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet,status
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          title: $inputs.newPlaylistTitle
+        status:
+          privacyStatus: $inputs.privacyStatus
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      destinationPlaylistId: $response.body#/id
+  - stepId: readSourceItems
+    description: List the first items of the source playlist and capture two video ids.
+    operationId: youtube.playlistItems.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet,contentDetails
+    - name: playlistId
+      in: query
+      value: $inputs.sourcePlaylistId
+    - name: maxResults
+      in: query
+      value: 2
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstVideoId: $response.body#/items/0/contentDetails/videoId
+      secondVideoId: $response.body#/items/1/contentDetails/videoId
+  - stepId: copyFirst
+    description: Insert the first source video into the destination playlist.
+    operationId: youtube.playlistItems.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          playlistId: $steps.createDestination.outputs.destinationPlaylistId
+          resourceId:
+            kind: youtube#video
+            videoId: $steps.readSourceItems.outputs.firstVideoId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstItemId: $response.body#/id
+  - stepId: copySecond
+    description: Insert the second source video into the destination playlist.
+    operationId: youtube.playlistItems.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          playlistId: $steps.createDestination.outputs.destinationPlaylistId
+          resourceId:
+            kind: youtube#video
+            videoId: $steps.readSourceItems.outputs.secondVideoId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      secondItemId: $response.body#/id
+  outputs:
+    destinationPlaylistId: $steps.createDestination.outputs.destinationPlaylistId
+    firstItemId: $steps.copyFirst.outputs.firstItemId
+    secondItemId: $steps.copySecond.outputs.secondItemId

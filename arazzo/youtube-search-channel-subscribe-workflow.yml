@@ -1,0 +1,100 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Search Channel and Subscribe
+  summary: Search for a channel, confirm it exists, then subscribe the authenticated user to it.
+  description: >-
+    A discover-then-act flow. It searches YouTube restricted to channel
+    resources, confirms the top result by reading the channel resource, and then
+    subscribes the authenticated user to that channel. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: search-channel-subscribe
+  summary: Find a channel by query and subscribe to it.
+  description: >-
+    Searches for channels matching a query, resolves the first result to a full
+    channel resource, and creates a subscription to that channel for the
+    authenticated user.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - query
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      query:
+        type: string
+        description: The query term used to find a channel.
+  steps:
+  - stepId: searchChannel
+    description: Search YouTube restricted to channel resources and capture the first channel id.
+    operationId: youtube.search.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: q
+      in: query
+      value: $inputs.query
+    - name: type
+      in: query
+      value: channel
+    - name: maxResults
+      in: query
+      value: 5
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channelId: $response.body#/items/0/id/channelId
+  - stepId: getChannel
+    description: Read the channel resource to confirm it exists before subscribing.
+    operationId: youtube.channels.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet,statistics
+    - name: id
+      in: query
+      value: $steps.searchChannel.outputs.channelId
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channelTitle: $response.body#/items/0/snippet/title
+  - stepId: subscribe
+    description: Subscribe the authenticated user to the confirmed channel.
+    operationId: youtube.subscriptions.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          resourceId:
+            kind: youtube#channel
+            channelId: $steps.searchChannel.outputs.channelId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      subscriptionId: $response.body#/id
+  outputs:
+    channelId: $steps.searchChannel.outputs.channelId
+    channelTitle: $steps.getChannel.outputs.channelTitle
+    subscriptionId: $steps.subscribe.outputs.subscriptionId

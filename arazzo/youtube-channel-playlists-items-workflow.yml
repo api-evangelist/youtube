@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Channel Playlists and Items
+  summary: Resolve a channel, list its playlists, then list the items inside the first playlist.
+  description: >-
+    Walks a channel's published structure. It looks up a channel by id,
+    enumerates the playlists owned by that channel, and then lists the items in
+    the first playlist returned. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: channel-playlists-items
+  summary: Drill from a channel into its playlists and the items of the first one.
+  description: >-
+    Reads a channel resource, lists the playlists created by that channel, and
+    expands the first playlist into its constituent playlist items.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - channelId
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      channelId:
+        type: string
+        description: The YouTube channel id whose playlists should be enumerated.
+  steps:
+  - stepId: getChannel
+    description: Retrieve the channel resource, including snippet and content details.
+    operationId: youtube.channels.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet,contentDetails,statistics
+    - name: id
+      in: query
+      value: $inputs.channelId
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channelTitle: $response.body#/items/0/snippet/title
+  - stepId: listPlaylists
+    description: >-
+      List the playlists created by the channel and capture the id of the first
+      playlist for further expansion.
+    operationId: youtube.playlists.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet,contentDetails
+    - name: channelId
+      in: query
+      value: $inputs.channelId
+    - name: maxResults
+      in: query
+      value: 25
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstPlaylistId: $response.body#/items/0/id
+      playlists: $response.body#/items
+  - stepId: listPlaylistItems
+    description: List the items contained in the first playlist returned for the channel.
+    operationId: youtube.playlistItems.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet,contentDetails
+    - name: playlistId
+      in: query
+      value: $steps.listPlaylists.outputs.firstPlaylistId
+    - name: maxResults
+      in: query
+      value: 50
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      items: $response.body#/items
+  outputs:
+    channelTitle: $steps.getChannel.outputs.channelTitle
+    playlists: $steps.listPlaylists.outputs.playlists
+    firstPlaylistItems: $steps.listPlaylistItems.outputs.items

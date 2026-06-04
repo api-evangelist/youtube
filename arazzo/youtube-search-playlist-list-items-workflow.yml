@@ -1,0 +1,99 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Search Playlist and List Items
+  summary: Search for a playlist, read its full resource, then list the videos it contains.
+  description: >-
+    A discovery flow for curated collections. It searches YouTube restricted to
+    playlist resources, resolves the top result to a full playlist resource, and
+    then lists the items inside that playlist. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: search-playlist-list-items
+  summary: Find a playlist by query and enumerate its items.
+  description: >-
+    Searches for playlists matching a query, reads the first result's playlist
+    resource, and lists the items in that playlist.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - query
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      query:
+        type: string
+        description: The query term used to find a playlist.
+  steps:
+  - stepId: searchPlaylists
+    description: Search YouTube restricted to playlist resources and capture the first playlist id.
+    operationId: youtube.search.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: q
+      in: query
+      value: $inputs.query
+    - name: type
+      in: query
+      value: playlist
+    - name: maxResults
+      in: query
+      value: 5
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      playlistId: $response.body#/items/0/id/playlistId
+  - stepId: getPlaylist
+    description: Read the full playlist resource for the matched id.
+    operationId: youtube.playlists.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet,contentDetails,status
+    - name: id
+      in: query
+      value: $steps.searchPlaylists.outputs.playlistId
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      title: $response.body#/items/0/snippet/title
+      itemCount: $response.body#/items/0/contentDetails/itemCount
+  - stepId: listItems
+    description: List the items contained in the matched playlist.
+    operationId: youtube.playlistItems.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet,contentDetails
+    - name: playlistId
+      in: query
+      value: $steps.searchPlaylists.outputs.playlistId
+    - name: maxResults
+      in: query
+      value: 50
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      items: $response.body#/items
+  outputs:
+    playlistId: $steps.searchPlaylists.outputs.playlistId
+    title: $steps.getPlaylist.outputs.title
+    items: $steps.listItems.outputs.items

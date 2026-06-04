@@ -1,0 +1,94 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Post Comment Thread and Reply
+  summary: Post a top-level comment on a video and then add a reply to it.
+  description: >-
+    Starts a discussion and follows up on it. It creates a new comment thread
+    (a top-level comment) on a video, captures the id of the top-level comment,
+    and then posts a reply to that comment using the comments.insert method with
+    the captured parent id. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: post-comment-thread-reply
+  summary: Create a top-level comment thread, then reply to its top-level comment.
+  description: >-
+    Posts a new top-level comment on a video via commentThreads.insert, then
+    replies to it via comments.insert using the top-level comment id as the
+    parent id.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - videoId
+    - commentText
+    - replyText
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      videoId:
+        type: string
+        description: The id of the video to comment on.
+      commentText:
+        type: string
+        description: The text of the top-level comment to post.
+      replyText:
+        type: string
+        description: The text of the reply to post under the top-level comment.
+  steps:
+  - stepId: postThread
+    description: >-
+      Create a new top-level comment thread on the video and capture the id of
+      the created top-level comment.
+    operationId: youtube.commentThreads.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          videoId: $inputs.videoId
+          topLevelComment:
+            snippet:
+              textOriginal: $inputs.commentText
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      threadId: $response.body#/id
+      topLevelCommentId: $response.body#/snippet/topLevelComment/id
+  - stepId: postReply
+    description: >-
+      Reply to the top-level comment created above by inserting a comment whose
+      parentId is the top-level comment id.
+    operationId: youtube.comments.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          parentId: $steps.postThread.outputs.topLevelCommentId
+          textOriginal: $inputs.replyText
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      replyId: $response.body#/id
+  outputs:
+    threadId: $steps.postThread.outputs.threadId
+    topLevelCommentId: $steps.postThread.outputs.topLevelCommentId
+    replyId: $steps.postReply.outputs.replyId

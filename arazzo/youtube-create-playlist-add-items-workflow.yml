@@ -1,0 +1,121 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Create Playlist and Add Items
+  summary: Create a new playlist and insert two videos into it in sequence.
+  description: >-
+    A common curation flow. It creates a new playlist on behalf of the
+    authenticated user, then inserts a first video and a second video into the
+    freshly created playlist using the returned playlist id. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-playlist-add-items
+  summary: Create a playlist and populate it with two videos.
+  description: >-
+    Creates a playlist with the supplied title, description, and privacy status,
+    then adds two videos to it by inserting playlist items that reference the new
+    playlist id.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - title
+    - firstVideoId
+    - secondVideoId
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      title:
+        type: string
+        description: The title for the new playlist.
+      description:
+        type: string
+        description: An optional description for the new playlist.
+        default: ""
+      privacyStatus:
+        type: string
+        description: The privacy status of the new playlist (private, public, or unlisted).
+        default: private
+      firstVideoId:
+        type: string
+        description: The id of the first video to add to the playlist.
+      secondVideoId:
+        type: string
+        description: The id of the second video to add to the playlist.
+  steps:
+  - stepId: createPlaylist
+    description: Create a new playlist with the supplied snippet and status.
+    operationId: youtube.playlists.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet,status
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          title: $inputs.title
+          description: $inputs.description
+        status:
+          privacyStatus: $inputs.privacyStatus
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      playlistId: $response.body#/id
+  - stepId: addFirstItem
+    description: Insert the first video into the newly created playlist.
+    operationId: youtube.playlistItems.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          playlistId: $steps.createPlaylist.outputs.playlistId
+          resourceId:
+            kind: youtube#video
+            videoId: $inputs.firstVideoId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstItemId: $response.body#/id
+  - stepId: addSecondItem
+    description: Insert the second video into the newly created playlist.
+    operationId: youtube.playlistItems.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          playlistId: $steps.createPlaylist.outputs.playlistId
+          resourceId:
+            kind: youtube#video
+            videoId: $inputs.secondVideoId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      secondItemId: $response.body#/id
+  outputs:
+    playlistId: $steps.createPlaylist.outputs.playlistId
+    firstItemId: $steps.addFirstItem.outputs.firstItemId
+    secondItemId: $steps.addSecondItem.outputs.secondItemId

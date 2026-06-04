@@ -1,0 +1,96 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Search Video and List Captions
+  summary: Search for a video, read its details, then list the caption tracks available on it.
+  description: >-
+    An accessibility-oriented discovery flow. It searches for a video, retrieves
+    the full video resource, and then lists the caption tracks associated with
+    that video so available languages and track kinds can be reviewed. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: search-video-captions
+  summary: Find a video and enumerate its caption tracks.
+  description: >-
+    Searches YouTube for a video, resolves the top result to a full video
+    resource, and lists the caption tracks associated with that video.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - query
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      query:
+        type: string
+        description: The query term used to find a video.
+  steps:
+  - stepId: searchVideos
+    description: Search YouTube restricted to video resources and capture the first video id.
+    operationId: youtube.search.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: q
+      in: query
+      value: $inputs.query
+    - name: type
+      in: query
+      value: video
+    - name: maxResults
+      in: query
+      value: 5
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      videoId: $response.body#/items/0/id/videoId
+  - stepId: getVideoDetails
+    description: Retrieve the full video resource, including contentDetails which flags caption availability.
+    operationId: youtube.videos.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet,contentDetails
+    - name: id
+      in: query
+      value: $steps.searchVideos.outputs.videoId
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      title: $response.body#/items/0/snippet/title
+      caption: $response.body#/items/0/contentDetails/caption
+  - stepId: listCaptions
+    description: List the caption tracks associated with the matched video.
+    operationId: youtube.captions.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: videoId
+      in: query
+      value: $steps.searchVideos.outputs.videoId
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      captionTracks: $response.body#/items
+  outputs:
+    videoId: $steps.searchVideos.outputs.videoId
+    title: $steps.getVideoDetails.outputs.title
+    captionTracks: $steps.listCaptions.outputs.captionTracks

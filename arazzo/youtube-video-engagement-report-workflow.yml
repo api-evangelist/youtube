@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Video Engagement Report
+  summary: Pull a video's statistics, its top comment thread, and the replies under that thread's top comment.
+  description: >-
+    Assembles an engagement snapshot for a single video. It reads the video's
+    statistics, lists the comment threads on the video, captures the top-level
+    comment id of the first thread, and lists the replies to that comment. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: video-engagement-report
+  summary: Combine video stats with its top comment thread and replies.
+  description: >-
+    Retrieves a video's statistics, lists its comment threads, and fetches the
+    replies under the first thread's top-level comment.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - videoId
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      videoId:
+        type: string
+        description: The id of the video to report on.
+  steps:
+  - stepId: getVideoStats
+    description: Read the video's snippet and statistics.
+    operationId: youtube.videos.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet,statistics
+    - name: id
+      in: query
+      value: $inputs.videoId
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      viewCount: $response.body#/items/0/statistics/viewCount
+      commentCount: $response.body#/items/0/statistics/commentCount
+  - stepId: listThreads
+    description: List the comment threads on the video and capture the first thread's top-level comment id.
+    operationId: youtube.commentThreads.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: videoId
+      in: query
+      value: $inputs.videoId
+    - name: maxResults
+      in: query
+      value: 20
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      topCommentId: $response.body#/items/0/snippet/topLevelComment/id
+      threadCount: $response.body#/pageInfo/totalResults
+  - stepId: listReplies
+    description: List the replies posted under the first thread's top-level comment.
+    operationId: youtube.comments.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: parentId
+      in: query
+      value: $steps.listThreads.outputs.topCommentId
+    - name: maxResults
+      in: query
+      value: 20
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      replies: $response.body#/items
+  outputs:
+    viewCount: $steps.getVideoStats.outputs.viewCount
+    commentCount: $steps.getVideoStats.outputs.commentCount
+    threadCount: $steps.listThreads.outputs.threadCount
+    replies: $steps.listReplies.outputs.replies

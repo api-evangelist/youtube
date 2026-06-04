@@ -1,0 +1,115 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Search to Video Comment Threads
+  summary: Search for a video, fetch its full details, then list the comment threads on it.
+  description: >-
+    A read-oriented discovery flow across the YouTube Data API. It runs a search
+    restricted to videos, takes the first matching video id, retrieves the full
+    video resource (snippet, statistics, contentDetails), and then lists the
+    comment threads attached to that video. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: search-video-comment-threads
+  summary: Find a video by query and surface its details and comment threads.
+  description: >-
+    Searches YouTube for videos matching a query, resolves the top result to a
+    full video resource, and lists the comment threads for that video.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - query
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      query:
+        type: string
+        description: The free-text query term to search YouTube for.
+      maxResults:
+        type: integer
+        description: Maximum number of comment threads to return for the matched video.
+        default: 20
+  steps:
+  - stepId: searchVideos
+    description: >-
+      Run a search restricted to video resources, ordered by relevance, and
+      capture the id of the first matching video.
+    operationId: youtube.search.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: q
+      in: query
+      value: $inputs.query
+    - name: type
+      in: query
+      value: video
+    - name: order
+      in: query
+      value: relevance
+    - name: maxResults
+      in: query
+      value: 5
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      videoId: $response.body#/items/0/id/videoId
+  - stepId: getVideoDetails
+    description: >-
+      Retrieve the full video resource for the matched id, including snippet,
+      content details, and statistics.
+    operationId: youtube.videos.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet,contentDetails,statistics
+    - name: id
+      in: query
+      value: $steps.searchVideos.outputs.videoId
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      title: $response.body#/items/0/snippet/title
+      viewCount: $response.body#/items/0/statistics/viewCount
+  - stepId: listCommentThreads
+    description: >-
+      List the comment threads attached to the matched video so the discussion
+      can be reviewed alongside the video details.
+    operationId: youtube.commentThreads.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet,replies
+    - name: videoId
+      in: query
+      value: $steps.searchVideos.outputs.videoId
+    - name: maxResults
+      in: query
+      value: $inputs.maxResults
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      threads: $response.body#/items
+      totalResults: $response.body#/pageInfo/totalResults
+  outputs:
+    videoId: $steps.searchVideos.outputs.videoId
+    title: $steps.getVideoDetails.outputs.title
+    viewCount: $steps.getVideoDetails.outputs.viewCount
+    threads: $steps.listCommentThreads.outputs.threads

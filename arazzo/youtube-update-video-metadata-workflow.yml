@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Update Video Metadata
+  summary: Read a video's current snippet, then update its title, description, and category.
+  description: >-
+    A safe edit flow that reads before it writes. It retrieves the current video
+    resource to confirm it exists and to capture its category, then updates the
+    video's snippet with a new title, description, and category id. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: update-video-metadata
+  summary: Fetch a video then patch its snippet metadata.
+  description: >-
+    Reads a video's current snippet and then updates the video resource with a
+    new title, description, and category id.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - videoId
+    - title
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      videoId:
+        type: string
+        description: The id of the video to update.
+      title:
+        type: string
+        description: The new title for the video.
+      description:
+        type: string
+        description: The new description for the video.
+        default: ""
+      categoryId:
+        type: string
+        description: The numeric category id to assign to the video.
+        default: "22"
+  steps:
+  - stepId: getVideo
+    description: Read the video's current snippet to confirm it exists before updating.
+    operationId: youtube.videos.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: id
+      in: query
+      value: $inputs.videoId
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentTitle: $response.body#/items/0/snippet/title
+  - stepId: updateVideo
+    description: Update the video's snippet with the new title, description, and category.
+    operationId: youtube.videos.update
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        id: $inputs.videoId
+        snippet:
+          title: $inputs.title
+          description: $inputs.description
+          categoryId: $inputs.categoryId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updatedTitle: $response.body#/snippet/title
+  outputs:
+    previousTitle: $steps.getVideo.outputs.currentTitle
+    updatedTitle: $steps.updateVideo.outputs.updatedTitle

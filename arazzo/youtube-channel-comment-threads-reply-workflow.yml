@@ -1,0 +1,108 @@
+arazzo: 1.0.1
+info:
+  title: YouTube Channel Comment Threads and Reply
+  summary: Read a channel, list the comment threads on its discussion, and reply to the first thread.
+  description: >-
+    An engagement flow for channel owners. It reads a channel resource, lists the
+    comment threads associated with that channel, captures the top-level comment
+    id of the first thread, and posts a reply to it. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: youtubeDataApi
+  url: ../openapi/youtube-data-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: channel-comment-threads-reply
+  summary: Surface channel comment threads and reply to the first one.
+  description: >-
+    Reads a channel, lists its comment threads, and replies to the first thread's
+    top-level comment.
+  inputs:
+    type: object
+    required:
+    - apiKey
+    - channelId
+    - replyText
+    properties:
+      apiKey:
+        type: string
+        description: The Google API key used to authorize each YouTube Data API request.
+      channelId:
+        type: string
+        description: The id of the channel whose comment threads should be read.
+      replyText:
+        type: string
+        description: The text of the reply to post under the first thread.
+  steps:
+  - stepId: getChannel
+    description: Read the channel resource to confirm it exists.
+    operationId: youtube.channels.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: id
+      in: query
+      value: $inputs.channelId
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      channelTitle: $response.body#/items/0/snippet/title
+  - stepId: listChannelThreads
+    description: List the comment threads associated with the channel and capture the first top-level comment id.
+    operationId: youtube.commentThreads.list
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: channelId
+      in: query
+      value: $inputs.channelId
+    - name: maxResults
+      in: query
+      value: 20
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      topCommentId: $response.body#/items/0/snippet/topLevelComment/id
+      threadCount: $response.body#/pageInfo/totalResults
+    onSuccess:
+    - name: hasThreads
+      type: goto
+      stepId: replyToThread
+      criteria:
+      - context: $response.body
+        condition: $.items.length > 0
+        type: jsonpath
+  - stepId: replyToThread
+    description: Post a reply under the first thread's top-level comment.
+    operationId: youtube.comments.insert
+    parameters:
+    - name: part
+      in: query
+      value: snippet
+    - name: key
+      in: query
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        snippet:
+          parentId: $steps.listChannelThreads.outputs.topCommentId
+          textOriginal: $inputs.replyText
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      replyId: $response.body#/id
+  outputs:
+    channelTitle: $steps.getChannel.outputs.channelTitle
+    threadCount: $steps.listChannelThreads.outputs.threadCount
+    replyId: $steps.replyToThread.outputs.replyId
