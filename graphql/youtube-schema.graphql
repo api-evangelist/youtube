@@ -1,0 +1,1375 @@
+# YouTube GraphQL Schema
+# Derived from the YouTube Data API v3, YouTube Analytics API,
+# YouTube Reporting API, and YouTube Live Streaming API.
+# Source: https://developers.google.com/youtube/v3/docs/
+# GitHub: https://github.com/googleapis
+# YouTube does not expose a native public GraphQL API.
+# This schema is a community-defined type mapping.
+
+scalar DateTime
+scalar URL
+scalar Duration
+scalar JSON
+
+# ---------------------------------------------------------------------------
+# Utility / Shared Types
+# ---------------------------------------------------------------------------
+
+type PageInfo {
+  totalResults: Int!
+  resultsPerPage: Int!
+}
+
+type Thumbnail {
+  url: URL
+  width: Int
+  height: Int
+}
+
+type ThumbnailDetails {
+  default: Thumbnail
+  medium: Thumbnail
+  high: Thumbnail
+  standard: Thumbnail
+  maxres: Thumbnail
+}
+
+type ResourceId {
+  kind: String!
+  videoId: ID
+  channelId: ID
+  playlistId: ID
+}
+
+type Localization {
+  title: String!
+  description: String!
+}
+
+type Tag {
+  value: String!
+}
+
+# ---------------------------------------------------------------------------
+# Video Types
+# ---------------------------------------------------------------------------
+
+type VideoSnippet {
+  publishedAt: DateTime
+  channelId: ID
+  title: String
+  description: String
+  thumbnails: ThumbnailDetails
+  channelTitle: String
+  tags: [String]
+  categoryId: String
+  liveBroadcastContent: String
+  defaultLanguage: String
+  localized: Localization
+  defaultAudioLanguage: String
+}
+
+type VideoStatistics {
+  viewCount: String
+  likeCount: String
+  dislikeCount: String
+  favoriteCount: String
+  commentCount: String
+}
+
+type VideoStatus {
+  uploadStatus: String
+  failureReason: String
+  rejectionReason: String
+  privacyStatus: String
+  publishAt: DateTime
+  license: String
+  embeddable: Boolean
+  publicStatsViewable: Boolean
+  madeForKids: Boolean
+  selfDeclaredMadeForKids: Boolean
+}
+
+type VideoRegionRestriction {
+  allowed: [String]
+  blocked: [String]
+}
+
+type VideoContentDetails {
+  duration: Duration
+  dimension: String
+  definition: String
+  caption: String
+  licensedContent: Boolean
+  regionRestriction: VideoRegionRestriction
+  contentRating: JSON
+  projection: String
+  hasCustomThumbnail: Boolean
+}
+
+type VideoPlayer {
+  embedHtml: String
+  embedHeight: String
+  embedWidth: String
+}
+
+type VideoTopicDetails {
+  topicIds: [String]
+  relevantTopicIds: [String]
+  topicCategories: [URL]
+}
+
+type VideoTagSuggestion {
+  tag: String
+  categoryRestricts: [String]
+}
+
+type VideoSuggestions {
+  processingErrors: [String]
+  processingWarnings: [String]
+  processingHints: [String]
+  tagSuggestions: [VideoTagSuggestion]
+  editorSuggestions: [String]
+}
+
+type GeoPoint {
+  latitude: Float
+  longitude: Float
+  altitude: Float
+}
+
+type VideoRecordingDetails {
+  recordingDate: DateTime
+  location: GeoPoint
+  locationDescription: String
+}
+
+type VideoLocalization {
+  title: String!
+  description: String!
+}
+
+type VideoLocalizations {
+  localizations: JSON
+}
+
+type VideoProcessingProgress {
+  partsTotal: String
+  partsProcessed: String
+  timeLeftMs: String
+}
+
+type VideoProcessingDetails {
+  processingStatus: String
+  processingProgress: VideoProcessingProgress
+  processingFailureReason: String
+  fileDetailsAvailability: String
+  processingIssuesAvailability: String
+  tagSuggestionsAvailability: String
+  editorSuggestionsAvailability: String
+  thumbnailsAvailability: String
+}
+
+type Video {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: VideoSnippet
+  contentDetails: VideoContentDetails
+  status: VideoStatus
+  statistics: VideoStatistics
+  player: VideoPlayer
+  topicDetails: VideoTopicDetails
+  recordingDetails: VideoRecordingDetails
+  suggestions: VideoSuggestions
+  localizations: JSON
+  processingDetails: VideoProcessingDetails
+}
+
+type VideoListResponse {
+  kind: String
+  etag: String
+  nextPageToken: String
+  prevPageToken: String
+  pageInfo: PageInfo
+  items: [Video!]!
+}
+
+type VideoAbuseReport {
+  videoId: ID!
+  reasonId: String!
+  secondaryReasonId: String
+  comments: String
+  language: String
+}
+
+type VideoAbuseReportReason {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: VideoAbuseReportReasonSnippet
+}
+
+type VideoAbuseReportReasonSnippet {
+  label: String
+  secondaryReasons: [VideoAbuseReportSecondaryReason]
+}
+
+type VideoAbuseReportSecondaryReason {
+  id: ID!
+  label: String
+}
+
+# ---------------------------------------------------------------------------
+# Channel Types
+# ---------------------------------------------------------------------------
+
+type ChannelSnippet {
+  title: String
+  description: String
+  customUrl: String
+  publishedAt: DateTime
+  thumbnails: ThumbnailDetails
+  defaultLanguage: String
+  localized: Localization
+  country: String
+}
+
+type ChannelStatistics {
+  viewCount: String
+  commentCount: String
+  subscriberCount: String
+  hiddenSubscriberCount: Boolean
+  videoCount: String
+}
+
+type ChannelStatus {
+  privacyStatus: String
+  isLinked: Boolean
+  longUploadsStatus: String
+  madeForKids: Boolean
+  selfDeclaredMadeForKids: Boolean
+}
+
+type ChannelRelatedPlaylists {
+  likes: ID
+  favorites: ID
+  uploads: ID
+}
+
+type ChannelContentDetails {
+  relatedPlaylists: ChannelRelatedPlaylists
+}
+
+type ChannelSettingsChannel {
+  title: String
+  description: String
+  keywords: String
+  defaultTab: String
+  trackingAnalyticsAccountId: String
+  moderateComments: Boolean
+  showRelatedChannels: Boolean
+  showBrowseView: Boolean
+  featuredChannelsTitle: String
+  featuredChannelsUrls: [String]
+  unsubscribedTrailer: String
+  profileColor: String
+  defaultLanguage: String
+  country: String
+}
+
+type ChannelSettingsWatch {
+  textColor: String
+  backgroundColor: String
+  featuredPlaylistId: ID
+}
+
+type ChannelBrandingSettings {
+  channel: ChannelSettingsChannel
+  watch: ChannelSettingsWatch
+  image: JSON
+  hints: [JSON]
+}
+
+type Channel {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: ChannelSnippet
+  contentDetails: ChannelContentDetails
+  statistics: ChannelStatistics
+  status: ChannelStatus
+  brandingSettings: ChannelBrandingSettings
+  localizations: JSON
+  auditDetails: JSON
+  contentOwnerDetails: JSON
+  topicDetails: JSON
+}
+
+type ChannelListResponse {
+  kind: String
+  etag: String
+  nextPageToken: String
+  prevPageToken: String
+  pageInfo: PageInfo
+  items: [Channel!]!
+}
+
+type ChannelBanner {
+  kind: String
+  etag: String
+  bannerExternalUrl: URL
+}
+
+type ChannelSection {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: ChannelSectionSnippet
+  contentDetails: ChannelSectionContentDetails
+  localizations: JSON
+}
+
+type ChannelSectionSnippet {
+  channelId: ID
+  title: String
+  type: String
+  defaultLanguage: String
+  localized: Localization
+  position: Int
+  style: String
+}
+
+type ChannelSectionContentDetails {
+  playlists: [ID]
+  channels: [ID]
+}
+
+# ---------------------------------------------------------------------------
+# Playlist Types
+# ---------------------------------------------------------------------------
+
+type PlaylistSnippet {
+  publishedAt: DateTime
+  channelId: ID
+  title: String
+  description: String
+  thumbnails: ThumbnailDetails
+  channelTitle: String
+  tags: [String]
+  defaultLanguage: String
+  localized: Localization
+}
+
+type PlaylistStatus {
+  privacyStatus: String
+}
+
+type Playlist {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: PlaylistSnippet
+  status: PlaylistStatus
+  contentDetails: PlaylistContentDetails
+  player: PlaylistPlayer
+  localizations: JSON
+}
+
+type PlaylistContentDetails {
+  itemCount: Int
+}
+
+type PlaylistPlayer {
+  embedHtml: String
+}
+
+type PlaylistListResponse {
+  kind: String
+  etag: String
+  nextPageToken: String
+  prevPageToken: String
+  pageInfo: PageInfo
+  items: [Playlist!]!
+}
+
+type PlaylistItemSnippet {
+  publishedAt: DateTime
+  channelId: ID
+  title: String
+  description: String
+  thumbnails: ThumbnailDetails
+  channelTitle: String
+  videoOwnerChannelTitle: String
+  videoOwnerChannelId: ID
+  playlistId: ID
+  position: Int
+  resourceId: ResourceId
+}
+
+type PlaylistItemContentDetails {
+  videoId: ID
+  startAt: String
+  endAt: String
+  note: String
+  videoPublishedAt: DateTime
+}
+
+type PlaylistItemStatus {
+  privacyStatus: String
+}
+
+type PlaylistItem {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: PlaylistItemSnippet
+  contentDetails: PlaylistItemContentDetails
+  status: PlaylistItemStatus
+}
+
+type PlaylistItemListResponse {
+  kind: String
+  etag: String
+  nextPageToken: String
+  prevPageToken: String
+  pageInfo: PageInfo
+  items: [PlaylistItem!]!
+}
+
+type PlaylistImage {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: PlaylistImageSnippet
+}
+
+type PlaylistImageSnippet {
+  playlistId: ID
+  type: String
+  width: Int
+  height: Int
+}
+
+# ---------------------------------------------------------------------------
+# Search Types
+# ---------------------------------------------------------------------------
+
+type SearchResultId {
+  kind: String
+  videoId: ID
+  channelId: ID
+  playlistId: ID
+}
+
+type SearchResultSnippet {
+  publishedAt: DateTime
+  channelId: ID
+  title: String
+  description: String
+  thumbnails: ThumbnailDetails
+  channelTitle: String
+  liveBroadcastContent: String
+}
+
+type SearchResult {
+  kind: String
+  etag: String
+  id: SearchResultId
+  snippet: SearchResultSnippet
+}
+
+type SearchListResponse {
+  kind: String
+  etag: String
+  nextPageToken: String
+  prevPageToken: String
+  regionCode: String
+  pageInfo: PageInfo
+  items: [SearchResult!]!
+}
+
+# ---------------------------------------------------------------------------
+# Comment Types
+# ---------------------------------------------------------------------------
+
+type CommentSnippet {
+  authorDisplayName: String
+  authorProfileImageUrl: URL
+  authorChannelUrl: URL
+  authorChannelId: ResourceId
+  channelId: ID
+  videoId: ID
+  textDisplay: String
+  textOriginal: String
+  parentId: ID
+  canRate: Boolean
+  viewerRating: String
+  likeCount: Int
+  moderationStatus: String
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+type Comment {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: CommentSnippet
+}
+
+type CommentListResponse {
+  kind: String
+  etag: String
+  nextPageToken: String
+  pageInfo: PageInfo
+  items: [Comment!]!
+}
+
+type CommentThreadSnippet {
+  channelId: ID
+  videoId: ID
+  topLevelComment: Comment
+  canReply: Boolean
+  totalReplyCount: Int
+  isPublic: Boolean
+}
+
+type CommentThreadReplies {
+  comments: [Comment!]
+}
+
+type CommentThread {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: CommentThreadSnippet
+  replies: CommentThreadReplies
+}
+
+type CommentThreadListResponse {
+  kind: String
+  etag: String
+  nextPageToken: String
+  pageInfo: PageInfo
+  items: [CommentThread!]!
+}
+
+# ---------------------------------------------------------------------------
+# Subscription Types
+# ---------------------------------------------------------------------------
+
+type SubscriptionSnippet {
+  publishedAt: DateTime
+  title: String
+  description: String
+  resourceId: ResourceId
+  channelId: ID
+  thumbnails: ThumbnailDetails
+  channelTitle: String
+}
+
+type SubscriptionContentDetails {
+  activityType: String
+  totalItemCount: Int
+  newItemCount: Int
+}
+
+type SubscriberSnippet {
+  title: String
+  description: String
+  channelId: ID
+  thumbnails: ThumbnailDetails
+}
+
+type Subscription {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: SubscriptionSnippet
+  contentDetails: SubscriptionContentDetails
+  subscriberSnippet: SubscriberSnippet
+}
+
+type SubscriptionListResponse {
+  kind: String
+  etag: String
+  nextPageToken: String
+  prevPageToken: String
+  pageInfo: PageInfo
+  items: [Subscription!]!
+}
+
+# ---------------------------------------------------------------------------
+# Caption Types
+# ---------------------------------------------------------------------------
+
+type CaptionSnippet {
+  videoId: ID
+  lastUpdated: DateTime
+  trackKind: String
+  language: String
+  name: String
+  audioTrackType: String
+  isCC: Boolean
+  isLarge: Boolean
+  isEasyReader: Boolean
+  isDraft: Boolean
+  isAutoSynced: Boolean
+  status: String
+}
+
+type Caption {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: CaptionSnippet
+}
+
+# ---------------------------------------------------------------------------
+# Member and Monetization Types
+# ---------------------------------------------------------------------------
+
+type MemberDetails {
+  channelId: ID
+  channelUrl: URL
+  displayName: String
+  profileImageUrl: URL
+}
+
+type MembershipsDetails {
+  highestAccessibleLevel: ID
+  highestAccessibleLevelDisplayName: String
+  membershipsDuration: MembershipsDuration
+}
+
+type MembershipsDuration {
+  memberSince: DateTime
+  memberTotalDurationMonths: Int
+}
+
+type MemberSnippet {
+  creatorChannelId: ID
+  memberDetails: MemberDetails
+  membershipsDetails: MembershipsDetails
+}
+
+type Member {
+  kind: String
+  etag: String
+  snippet: MemberSnippet
+}
+
+type MemberListResponse {
+  kind: String
+  etag: String
+  nextPageToken: String
+  pageInfo: PageInfo
+  items: [Member!]!
+}
+
+type LevelDetails {
+  displayName: String
+}
+
+type MembershipLevelSnippet {
+  creatorChannelId: ID
+  levelDetails: LevelDetails
+}
+
+type MembershipLevel {
+  kind: String
+  etag: String
+  id: ID!
+  snippet: MembershipLevelSnippet
+}
+
+type SuperChatEventSupporterDetails {
+  channelId: ID
+  channelUrl: URL
+  displayName: String
+  profileImageUrl: URL
+}
+
+type SuperChatEventSnippet {
+  channelId: ID
+  displayString: String
+  messageType: Int
+  isSuperStickerEvent: Boolean
+  amountMicros: String
+  currency: String
+  amountDisplayString: String
+  comment: String
+  createdAt: DateTime
+  superStickerMetadata: JSON
+  supporterDetails: SuperChatEventSupporterDetails
+}
+
+type SuperChatEvent {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: SuperChatEventSnippet
+}
+
+# ---------------------------------------------------------------------------
+# Live Streaming Types
+# ---------------------------------------------------------------------------
+
+type LiveBroadcastSnippet {
+  publishedAt: DateTime
+  channelId: ID
+  title: String
+  description: String
+  thumbnails: ThumbnailDetails
+  scheduledStartTime: DateTime
+  scheduledEndTime: DateTime
+  actualStartTime: DateTime
+  actualEndTime: DateTime
+  isDefaultBroadcast: Boolean
+  liveChatId: ID
+}
+
+type LiveBroadcastStatus {
+  lifeCycleStatus: String
+  privacyStatus: String
+  recordingStatus: String
+  liveBroadcastPriority: String
+  madeForKids: Boolean
+  selfDeclaredMadeForKids: Boolean
+}
+
+type LiveBroadcastContentDetails {
+  boundStreamId: ID
+  boundStreamLastUpdateTimeMs: DateTime
+  monitorStream: JSON
+  enableEmbed: Boolean
+  enableDvr: Boolean
+  enableContentEncryption: Boolean
+  startWithSlate: Boolean
+  recordFromStart: Boolean
+  enableClosedCaptions: Boolean
+  closedCaptionsType: String
+  enableLowLatency: Boolean
+  latencyPreference: String
+  projection: String
+  enableAutoStart: Boolean
+  enableAutoStop: Boolean
+}
+
+type LiveBroadcast {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: LiveBroadcastSnippet
+  status: LiveBroadcastStatus
+  contentDetails: LiveBroadcastContentDetails
+  statistics: LiveBroadcastStatistics
+}
+
+type LiveBroadcastStatistics {
+  totalChatCount: String
+}
+
+type LiveBroadcastListResponse {
+  kind: String
+  etag: String
+  nextPageToken: String
+  prevPageToken: String
+  pageInfo: PageInfo
+  items: [LiveBroadcast!]!
+}
+
+type LiveStreamSnippet {
+  channelId: ID
+  title: String
+  description: String
+  publishedAt: DateTime
+  isDefaultStream: Boolean
+}
+
+type IngestionInfo {
+  streamName: String
+  ingestionAddress: URL
+  backupIngestionAddress: URL
+  rtmpsIngestionAddress: URL
+  rtmpsBackupIngestionAddress: URL
+}
+
+type LiveStreamContentDetails {
+  ingestionType: String
+  ingestionInfo: IngestionInfo
+  resolution: String
+  frameRate: String
+  isReusable: Boolean
+}
+
+type LiveStreamStatus {
+  streamStatus: String
+  healthStatus: LiveStreamHealthStatus
+}
+
+type LiveStreamHealthStatus {
+  status: String
+  lastUpdateTimeSeconds: String
+  configurationIssues: [JSON]
+}
+
+type LiveStream {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: LiveStreamSnippet
+  cdn: LiveStreamContentDetails
+  status: LiveStreamStatus
+  contentDetails: JSON
+}
+
+type LiveStreamListResponse {
+  kind: String
+  etag: String
+  nextPageToken: String
+  prevPageToken: String
+  pageInfo: PageInfo
+  items: [LiveStream!]!
+}
+
+type LiveChatMessageSnippet {
+  type: String
+  liveChatId: ID
+  authorChannelId: ID
+  publishedAt: DateTime
+  hasDisplayContent: Boolean
+  displayMessage: String
+  textMessageDetails: LiveChatTextMessageDetails
+  superChatDetails: LiveChatSuperChatDetails
+  superStickerDetails: LiveChatSuperStickerDetails
+  memberMilestoneChatDetails: JSON
+  newSponsorCommentDetails: JSON
+  messageDeletedDetails: JSON
+  userBannedDetails: JSON
+}
+
+type LiveChatTextMessageDetails {
+  messageText: String
+}
+
+type LiveChatSuperChatDetails {
+  amountMicros: String
+  currency: String
+  amountDisplayString: String
+  userComment: String
+  tier: Int
+}
+
+type LiveChatSuperStickerDetails {
+  superStickerMetadata: JSON
+  amountMicros: String
+  currency: String
+  amountDisplayString: String
+  tier: Int
+}
+
+type LiveChatAuthorDetails {
+  channelId: ID
+  channelUrl: URL
+  displayName: String
+  profileImageUrl: URL
+  isVerified: Boolean
+  isChatOwner: Boolean
+  isChatSponsor: Boolean
+  isChatModerator: Boolean
+}
+
+type LiveChatMessage {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: LiveChatMessageSnippet
+  authorDetails: LiveChatAuthorDetails
+}
+
+type LiveChatMessageListResponse {
+  kind: String
+  etag: String
+  nextPageToken: String
+  pollingIntervalMillis: Int
+  offlineAt: DateTime
+  pageInfo: PageInfo
+  items: [LiveChatMessage!]!
+}
+
+type LiveChatBanSnippet {
+  liveChatId: ID
+  type: String
+  banDurationSeconds: String
+  bannedUserDetails: ChannelUserDetails
+}
+
+type ChannelUserDetails {
+  channelId: ID
+  channelUrl: URL
+  displayName: String
+  profileImageUrl: URL
+}
+
+type LiveChatBan {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: LiveChatBanSnippet
+}
+
+type LiveChatModeratorSnippet {
+  liveChatId: ID
+  moderatorDetails: ChannelUserDetails
+}
+
+type LiveChatModerator {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: LiveChatModeratorSnippet
+}
+
+# ---------------------------------------------------------------------------
+# Localization / Region / Category Types
+# ---------------------------------------------------------------------------
+
+type I18nLanguageSnippet {
+  hl: String
+  name: String
+}
+
+type I18nLanguage {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: I18nLanguageSnippet
+}
+
+type I18nRegionSnippet {
+  hl: String
+  name: String
+}
+
+type I18nRegion {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: I18nRegionSnippet
+}
+
+type VideoCategorySnippet {
+  channelId: ID
+  title: String
+  assignable: Boolean
+}
+
+type VideoCategory {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: VideoCategorySnippet
+}
+
+# ---------------------------------------------------------------------------
+# Activity Types
+# ---------------------------------------------------------------------------
+
+type ActivitySnippet {
+  publishedAt: DateTime
+  channelId: ID
+  title: String
+  description: String
+  thumbnails: ThumbnailDetails
+  channelTitle: String
+  type: String
+  groupId: String
+}
+
+type ActivityContentDetails {
+  upload: ActivityUpload
+  like: ActivityLike
+  favorite: ActivityFavorite
+  comment: ActivityComment
+  subscription: ActivitySubscription
+  playlistItem: ActivityPlaylistItem
+  recommendation: ActivityRecommendation
+  social: ActivitySocial
+  channelItem: JSON
+}
+
+type ActivityUpload {
+  videoId: ID
+}
+
+type ActivityLike {
+  resourceId: ResourceId
+}
+
+type ActivityFavorite {
+  resourceId: ResourceId
+}
+
+type ActivityComment {
+  resourceId: ResourceId
+}
+
+type ActivitySubscription {
+  resourceId: ResourceId
+}
+
+type ActivityPlaylistItem {
+  resourceId: ResourceId
+  playlistId: ID
+  playlistItemId: ID
+}
+
+type ActivityRecommendation {
+  resourceId: ResourceId
+  reason: String
+  seedResourceId: ResourceId
+}
+
+type ActivitySocial {
+  type: String
+  resourceId: ResourceId
+  author: String
+  referenceUrl: URL
+  imageUrl: URL
+}
+
+type ActivityResource {
+  id: ID!
+  kind: String
+  etag: String
+  snippet: ActivitySnippet
+  contentDetails: ActivityContentDetails
+}
+
+type ActivityListResponse {
+  kind: String
+  etag: String
+  nextPageToken: String
+  prevPageToken: String
+  pageInfo: PageInfo
+  items: [ActivityResource!]!
+}
+
+# ---------------------------------------------------------------------------
+# Thumbnail Resource
+# ---------------------------------------------------------------------------
+
+type ThumbnailResource {
+  kind: String
+  etag: String
+  items: ThumbnailDetails
+}
+
+# ---------------------------------------------------------------------------
+# Watermark Types
+# ---------------------------------------------------------------------------
+
+type InvideoPosition {
+  type: String
+  cornerPosition: String
+}
+
+type InvideoTiming {
+  type: String
+  offsetMs: String
+  durationMs: String
+}
+
+type Watermark {
+  imageUrl: URL
+  imageBytes: String
+  targetChannelId: ID
+  position: InvideoPosition
+  timing: InvideoTiming
+}
+
+# ---------------------------------------------------------------------------
+# Input Types
+# ---------------------------------------------------------------------------
+
+input VideoSnippetInput {
+  title: String!
+  description: String
+  tags: [String]
+  categoryId: String
+  defaultLanguage: String
+  defaultAudioLanguage: String
+}
+
+input VideoStatusInput {
+  privacyStatus: String
+  publishAt: DateTime
+  license: String
+  embeddable: Boolean
+  publicStatsViewable: Boolean
+  selfDeclaredMadeForKids: Boolean
+}
+
+input PlaylistSnippetInput {
+  title: String!
+  description: String
+  tags: [String]
+  defaultLanguage: String
+}
+
+input PlaylistStatusInput {
+  privacyStatus: String
+}
+
+input PlaylistItemSnippetInput {
+  playlistId: ID!
+  resourceId: ResourceIdInput!
+  position: Int
+}
+
+input ResourceIdInput {
+  kind: String!
+  videoId: ID
+  channelId: ID
+  playlistId: ID
+}
+
+input CommentSnippetInput {
+  videoId: ID
+  parentId: ID
+  textOriginal: String!
+}
+
+input CommentThreadSnippetInput {
+  channelId: ID
+  videoId: ID!
+  topLevelComment: CommentInput!
+}
+
+input CommentInput {
+  snippet: CommentSnippetInput!
+}
+
+input SubscriptionSnippetInput {
+  resourceId: ResourceIdInput!
+}
+
+input CaptionSnippetInput {
+  videoId: ID!
+  language: String!
+  name: String
+  isDraft: Boolean
+}
+
+input LiveBroadcastSnippetInput {
+  title: String!
+  description: String
+  scheduledStartTime: DateTime!
+  scheduledEndTime: DateTime
+}
+
+input LiveBroadcastStatusInput {
+  privacyStatus: String!
+  selfDeclaredMadeForKids: Boolean
+}
+
+input LiveStreamSnippetInput {
+  title: String!
+  description: String
+}
+
+input LiveStreamContentDetailsInput {
+  ingestionType: String!
+  resolution: String
+  frameRate: String
+}
+
+input LiveChatMessageSnippetInput {
+  liveChatId: ID!
+  type: String!
+  textMessageDetails: LiveChatTextMessageDetailsInput
+}
+
+input LiveChatTextMessageDetailsInput {
+  messageText: String!
+}
+
+input LiveChatBanSnippetInput {
+  liveChatId: ID!
+  type: String!
+  bannedUserDetails: ChannelUserDetailsInput!
+  banDurationSeconds: String
+}
+
+input ChannelUserDetailsInput {
+  channelId: ID!
+}
+
+input LiveChatModeratorSnippetInput {
+  liveChatId: ID!
+  moderatorDetails: ChannelUserDetailsInput!
+}
+
+# ---------------------------------------------------------------------------
+# Root Query
+# ---------------------------------------------------------------------------
+
+type Query {
+  # Video queries
+  video(id: ID!, part: [String!]): Video
+  videos(ids: [ID!], chart: String, myRating: String, part: [String!], pageToken: String, maxResults: Int, regionCode: String, videoCategoryId: String): VideoListResponse
+
+  # Channel queries
+  channel(id: ID!, part: [String!]): Channel
+  channels(ids: [ID!], mine: Boolean, part: [String!], pageToken: String, maxResults: Int, categoryId: String): ChannelListResponse
+
+  # Playlist queries
+  playlist(id: ID!, part: [String!]): Playlist
+  playlists(ids: [ID!], channelId: ID, mine: Boolean, part: [String!], pageToken: String, maxResults: Int): PlaylistListResponse
+
+  # Playlist item queries
+  playlistItems(playlistId: ID!, part: [String!], videoId: ID, pageToken: String, maxResults: Int): PlaylistItemListResponse
+
+  # Search queries
+  search(q: String, type: String, channelId: ID, order: String, publishedAfter: DateTime, publishedBefore: DateTime, regionCode: String, videoCategoryId: String, videoType: String, eventType: String, pageToken: String, maxResults: Int, part: [String!]): SearchListResponse
+
+  # Comment queries
+  comment(id: ID!, part: [String!]): Comment
+  comments(id: ID, parentId: ID, part: [String!], pageToken: String, maxResults: Int): CommentListResponse
+
+  # Comment thread queries
+  commentThread(id: ID!, part: [String!]): CommentThread
+  commentThreads(videoId: ID, channelId: ID, id: ID, part: [String!], pageToken: String, maxResults: Int, moderationStatus: String, order: String, searchTerms: String): CommentThreadListResponse
+
+  # Subscription queries
+  subscriptions(mine: Boolean, channelId: ID, forChannelId: ID, part: [String!], pageToken: String, maxResults: Int, order: String): SubscriptionListResponse
+
+  # Caption queries
+  captions(videoId: ID!, part: [String!], id: [ID]): [Caption!]
+
+  # Member queries
+  members(mode: String, part: [String!], pageToken: String, maxResults: Int): MemberListResponse
+
+  # Membership level queries
+  membershipsLevels(part: [String!]): [MembershipLevel!]
+
+  # Live broadcast queries
+  liveBroadcast(id: ID!, part: [String!]): LiveBroadcast
+  liveBroadcasts(id: [ID], broadcastStatus: String, mine: Boolean, part: [String!], pageToken: String, maxResults: Int, broadcastType: String): LiveBroadcastListResponse
+
+  # Live stream queries
+  liveStream(id: ID!, part: [String!]): LiveStream
+  liveStreams(id: [ID], mine: Boolean, part: [String!], pageToken: String, maxResults: Int): LiveStreamListResponse
+
+  # Live chat message queries
+  liveChatMessages(liveChatId: ID!, part: [String!], pageToken: String, maxResults: Int, hl: String): LiveChatMessageListResponse
+
+  # Localization queries
+  i18nLanguages(part: [String!], hl: String): [I18nLanguage!]
+  i18nRegions(part: [String!], hl: String): [I18nRegion!]
+
+  # Category queries
+  videoCategories(regionCode: String, hl: String, id: [ID], part: [String!]): [VideoCategory!]
+
+  # Activity queries
+  activities(mine: Boolean, channelId: ID, part: [String!], pageToken: String, maxResults: Int, publishedBefore: DateTime, publishedAfter: DateTime): ActivityListResponse
+
+  # Abuse report reason queries
+  videoAbuseReportReasons(part: [String!], hl: String): [VideoAbuseReportReason!]
+
+  # Channel section queries
+  channelSections(channelId: ID, id: [ID], mine: Boolean, part: [String!], hl: String): [ChannelSection!]
+}
+
+# ---------------------------------------------------------------------------
+# Root Mutation
+# ---------------------------------------------------------------------------
+
+type Mutation {
+  # Video mutations
+  insertVideo(snippet: VideoSnippetInput!, status: VideoStatusInput): Video
+  updateVideo(id: ID!, snippet: VideoSnippetInput, status: VideoStatusInput): Video
+  deleteVideo(id: ID!): Boolean
+  rateVideo(id: ID!, rating: String!): Boolean
+
+  # Playlist mutations
+  insertPlaylist(snippet: PlaylistSnippetInput!, status: PlaylistStatusInput): Playlist
+  updatePlaylist(id: ID!, snippet: PlaylistSnippetInput, status: PlaylistStatusInput): Playlist
+  deletePlaylist(id: ID!): Boolean
+
+  # Playlist item mutations
+  insertPlaylistItem(snippet: PlaylistItemSnippetInput!): PlaylistItem
+  updatePlaylistItem(id: ID!, snippet: PlaylistItemSnippetInput!): PlaylistItem
+  deletePlaylistItem(id: ID!): Boolean
+
+  # Comment mutations
+  insertComment(snippet: CommentSnippetInput!): Comment
+  updateComment(id: ID!, snippet: CommentSnippetInput!): Comment
+  deleteComment(id: ID!): Boolean
+  markCommentAsSpam(id: ID!): Boolean
+  setCommentModerationStatus(id: ID!, moderationStatus: String!, banAuthor: Boolean): Boolean
+
+  # Comment thread mutations
+  insertCommentThread(snippet: CommentThreadSnippetInput!): CommentThread
+  updateCommentThread(id: ID!, snippet: CommentThreadSnippetInput!): CommentThread
+
+  # Subscription mutations
+  insertSubscription(snippet: SubscriptionSnippetInput!): Subscription
+  deleteSubscription(id: ID!): Boolean
+
+  # Caption mutations
+  uploadCaption(videoId: ID!, snippet: CaptionSnippetInput!): Caption
+  updateCaption(id: ID!, snippet: CaptionSnippetInput!): Caption
+  deleteCaption(id: ID!): Boolean
+
+  # Live broadcast mutations
+  insertLiveBroadcast(snippet: LiveBroadcastSnippetInput!, status: LiveBroadcastStatusInput!): LiveBroadcast
+  updateLiveBroadcast(id: ID!, snippet: LiveBroadcastSnippetInput, status: LiveBroadcastStatusInput): LiveBroadcast
+  transitionLiveBroadcast(id: ID!, broadcastStatus: String!): LiveBroadcast
+  deleteLiveBroadcast(id: ID!): Boolean
+  bindLiveBroadcast(id: ID!, streamId: ID!): LiveBroadcast
+
+  # Live stream mutations
+  insertLiveStream(snippet: LiveStreamSnippetInput!, cdn: LiveStreamContentDetailsInput!): LiveStream
+  updateLiveStream(id: ID!, snippet: LiveStreamSnippetInput, cdn: LiveStreamContentDetailsInput): LiveStream
+  deleteLiveStream(id: ID!): Boolean
+
+  # Live chat message mutations
+  insertLiveChatMessage(snippet: LiveChatMessageSnippetInput!): LiveChatMessage
+  deleteLiveChatMessage(id: ID!): Boolean
+
+  # Live chat ban mutations
+  insertLiveChatBan(snippet: LiveChatBanSnippetInput!): LiveChatBan
+  deleteLiveChatBan(id: ID!): Boolean
+
+  # Live chat moderator mutations
+  insertLiveChatModerator(snippet: LiveChatModeratorSnippetInput!): LiveChatModerator
+  deleteLiveChatModerator(id: ID!): Boolean
+
+  # Thumbnail mutations
+  uploadThumbnail(videoId: ID!, url: URL!): ThumbnailDetails
+
+  # Channel banner mutations
+  uploadChannelBanner(url: URL!): ChannelBanner
+
+  # Watermark mutations
+  setChannelWatermark(channelId: ID!, imageUrl: URL!, position: String, timing: String): Boolean
+  unsetChannelWatermark(channelId: ID!): Boolean
+
+  # Video abuse report
+  reportVideoAbuse(videoId: ID!, reasonId: String!, secondaryReasonId: String, comments: String, language: String): Boolean
+
+  # Channel section mutations
+  insertChannelSection(snippet: ChannelSectionSnippetInput!): ChannelSection
+  updateChannelSection(id: ID!, snippet: ChannelSectionSnippetInput!): ChannelSection
+  deleteChannelSection(id: ID!): Boolean
+}
+
+input ChannelSectionSnippetInput {
+  type: String!
+  title: String
+  position: Int
+  defaultLanguage: String
+}
