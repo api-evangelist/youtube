@@ -5,7 +5,7 @@
       "source": "https://blog.youtube/rss/",
       "feed_url": "https://blog.youtube/rss/",
       "title": "",
-      "saved": 0,
+      "saved": 7,
       "method": "feed"
     },
     {
@@ -16,6 +16,6 @@
       "method": "none"
     }
   ],
-  "post_count": 29,
-  "fetched": "2026-06-01T23:35:02Z"
+  "post_count": 40,
+  "fetched": "2026-06-14T20:42:17Z"
 }

@@ -1,0 +1,2644 @@
+{
+  "info": {
+    "_postman_id": "5a6c03ab-6936-44af-b3d7-d653cb37ad67",
+    "name": "YouTube Analytics API",
+    "description": "The YouTube Analytics API lets you generate custom reports containing YouTube Analytics data for channels and content owners. Reports can be filtered by various dimensions such as date, country, and video, and measured by metrics including views, likes, estimated watch time, and revenue. The API also supports creating and managing groups and group items for organizing analytics data.\n\nContact Support:\n Name: YouTube API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T13:21:03.000Z",
+    "updatedAt": "2026-06-05T13:21:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5a6c03ab-6936-44af-b3d7-d653cb37ad67"
+  },
+  "item": [
+    {
+      "name": "reports",
+      "item": [
+        {
+          "name": "Youtube Query Analytics Reports",
+          "id": "05aed541-fc4c-410b-bbc7-d114ba3dd238",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reports?ids=<string>&startDate=<date>&endDate=<date>&metrics=<string>&dimensions=<string>&filters=<string>&maxResults=<integer>&sort=<string>&startIndex=<integer>&currency=<string>&alt=json",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reports"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Identifies the YouTube channel or content owner for which the report is being retrieved. To request data for a YouTube user, set the parameter value to channel==CHANNEL_ID where CHANNEL_ID specifies the unique YouTube channel ID. To request data for a YouTube CMS content owner, set the parameter value to contentOwner==OWNER_NAME.",
+                  "key": "ids",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The start date for fetching YouTube Analytics data in YYYY-MM-DD format. The API response will include data from this date up to and including the end date.",
+                  "key": "startDate",
+                  "value": "<date>"
+                },
+                {
+                  "description": "(Required) The end date for fetching YouTube Analytics data in YYYY-MM-DD format. The value must be less than or equal to today's date.",
+                  "key": "endDate",
+                  "value": "<date>"
+                },
+                {
+                  "description": "(Required) A comma-separated list of YouTube Analytics metrics, such as views or likes, dislikes. See the Available Reports document or the Metrics document for a list of reports that you can retrieve and the metrics available in each report.",
+                  "key": "metrics",
+                  "value": "<string>"
+                },
+                {
+                  "description": "A comma-separated list of YouTube Analytics dimensions, such as video or country. See the Available Reports document for a list of reports that you can retrieve and the dimensions used for those reports.",
+                  "key": "dimensions",
+                  "value": "<string>"
+                },
+                {
+                  "description": "A list of filters that should be applied when retrieving YouTube Analytics data. The Available Reports document identifies the dimensions that can be used to filter each report.",
+                  "key": "filters",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The maximum number of rows to include in the response. The maximum value is 200.",
+                  "key": "maxResults",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "A comma-separated list of dimensions or metrics that determine the sort order for YouTube Analytics data. By default the sort order is ascending. Prefix with a minus sign (-) to indicate descending order.",
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
+                  "key": "startIndex",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "The currency to which financial metrics should be converted. The default value is USD (US Dollar). Specify the parameter value as an ISO 4217 currency code.",
+                  "key": "currency",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Data format for the response.",
+                  "key": "alt",
+                  "value": "json"
+                }
+              ]
+            },
+            "description": "Retrieves YouTube Analytics data for a channel or content owner. The report provides aggregated statistics for the specified dimensions and metrics over the date range. The ids parameter specifies the channel or content owner for which the report is being retrieved."
+          },
+          "response": [
+            {
+              "id": "30e921f5-8948-4303-b5a8-7db268303b85",
+              "name": "Successful response containing YouTube Analytics data.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports?ids=<string>&startDate=<date>&endDate=<date>&metrics=<string>&dimensions=<string>&filters=<string>&maxResults=<integer>&sort=<string>&startIndex=<integer>&currency=<string>&alt=json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Identifies the YouTube channel or content owner for which the report is being retrieved. To request data for a YouTube user, set the parameter value to channel==CHANNEL_ID where CHANNEL_ID specifies the unique YouTube channel ID. To request data for a YouTube CMS content owner, set the parameter value to contentOwner==OWNER_NAME.",
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The start date for fetching YouTube Analytics data in YYYY-MM-DD format. The API response will include data from this date up to and including the end date.",
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) The end date for fetching YouTube Analytics data in YYYY-MM-DD format. The value must be less than or equal to today's date.",
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) A comma-separated list of YouTube Analytics metrics, such as views or likes, dislikes. See the Available Reports document or the Metrics document for a list of reports that you can retrieve and the metrics available in each report.",
+                      "key": "metrics",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A comma-separated list of YouTube Analytics dimensions, such as video or country. See the Available Reports document for a list of reports that you can retrieve and the dimensions used for those reports.",
+                      "key": "dimensions",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A list of filters that should be applied when retrieving YouTube Analytics data. The Available Reports document identifies the dimensions that can be used to filter each report.",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of rows to include in the response. The maximum value is 200.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "A comma-separated list of dimensions or metrics that determine the sort order for YouTube Analytics data. By default the sort order is ascending. Prefix with a minus sign (-) to indicate descending order.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The currency to which financial metrics should be converted. The default value is USD (US Dollar). Specify the parameter value as an ISO 4217 currency code.",
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Data format for the response.",
+                      "key": "alt",
+                      "value": "json"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"kind\": \"youtubeAnalytics#resultTable\",\n  \"columnHeaders\": [\n    {\n      \"name\": \"<string>\",\n      \"columnType\": \"DIMENSION\",\n      \"dataType\": \"CURRENCY\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"columnType\": \"METRIC\",\n      \"dataType\": \"STRING\"\n    }\n  ],\n  \"rows\": [\n    [\n      {\n        \"description\": \"A value in the row, either a string or number depending on the column type.\"\n      },\n      {\n        \"description\": \"A value in the row, either a string or number depending on the column type.\"\n      }\n    ],\n    [\n      {\n        \"description\": \"A value in the row, either a string or number depending on the column type.\"\n      },\n      {\n        \"description\": \"A value in the row, either a string or number depending on the column type.\"\n      }\n    ]\n  ]\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-30e921f5-8948-4303-b5a8-7db268303b85"
+            },
+            {
+              "id": "66bc1f6d-6b7b-4633-98fc-a6caba0b89fd",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports?ids=<string>&startDate=<date>&endDate=<date>&metrics=<string>&dimensions=<string>&filters=<string>&maxResults=<integer>&sort=<string>&startIndex=<integer>&currency=<string>&alt=json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Identifies the YouTube channel or content owner for which the report is being retrieved. To request data for a YouTube user, set the parameter value to channel==CHANNEL_ID where CHANNEL_ID specifies the unique YouTube channel ID. To request data for a YouTube CMS content owner, set the parameter value to contentOwner==OWNER_NAME.",
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The start date for fetching YouTube Analytics data in YYYY-MM-DD format. The API response will include data from this date up to and including the end date.",
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) The end date for fetching YouTube Analytics data in YYYY-MM-DD format. The value must be less than or equal to today's date.",
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) A comma-separated list of YouTube Analytics metrics, such as views or likes, dislikes. See the Available Reports document or the Metrics document for a list of reports that you can retrieve and the metrics available in each report.",
+                      "key": "metrics",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A comma-separated list of YouTube Analytics dimensions, such as video or country. See the Available Reports document for a list of reports that you can retrieve and the dimensions used for those reports.",
+                      "key": "dimensions",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A list of filters that should be applied when retrieving YouTube Analytics data. The Available Reports document identifies the dimensions that can be used to filter each report.",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of rows to include in the response. The maximum value is 200.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "A comma-separated list of dimensions or metrics that determine the sort order for YouTube Analytics data. By default the sort order is ascending. Prefix with a minus sign (-) to indicate descending order.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The currency to which financial metrics should be converted. The default value is USD (US Dollar). Specify the parameter value as an ISO 4217 currency code.",
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Data format for the response.",
+                      "key": "alt",
+                      "value": "json"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-66bc1f6d-6b7b-4633-98fc-a6caba0b89fd"
+            },
+            {
+              "id": "8e700686-25de-411b-be31-c3a8b797cf50",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports?ids=<string>&startDate=<date>&endDate=<date>&metrics=<string>&dimensions=<string>&filters=<string>&maxResults=<integer>&sort=<string>&startIndex=<integer>&currency=<string>&alt=json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Identifies the YouTube channel or content owner for which the report is being retrieved. To request data for a YouTube user, set the parameter value to channel==CHANNEL_ID where CHANNEL_ID specifies the unique YouTube channel ID. To request data for a YouTube CMS content owner, set the parameter value to contentOwner==OWNER_NAME.",
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The start date for fetching YouTube Analytics data in YYYY-MM-DD format. The API response will include data from this date up to and including the end date.",
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) The end date for fetching YouTube Analytics data in YYYY-MM-DD format. The value must be less than or equal to today's date.",
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) A comma-separated list of YouTube Analytics metrics, such as views or likes, dislikes. See the Available Reports document or the Metrics document for a list of reports that you can retrieve and the metrics available in each report.",
+                      "key": "metrics",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A comma-separated list of YouTube Analytics dimensions, such as video or country. See the Available Reports document for a list of reports that you can retrieve and the dimensions used for those reports.",
+                      "key": "dimensions",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A list of filters that should be applied when retrieving YouTube Analytics data. The Available Reports document identifies the dimensions that can be used to filter each report.",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of rows to include in the response. The maximum value is 200.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "A comma-separated list of dimensions or metrics that determine the sort order for YouTube Analytics data. By default the sort order is ascending. Prefix with a minus sign (-) to indicate descending order.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The currency to which financial metrics should be converted. The default value is USD (US Dollar). Specify the parameter value as an ISO 4217 currency code.",
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Data format for the response.",
+                      "key": "alt",
+                      "value": "json"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-8e700686-25de-411b-be31-c3a8b797cf50"
+            },
+            {
+              "id": "438ed323-64f8-43ac-83b3-f860b0de4dbc",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports?ids=<string>&startDate=<date>&endDate=<date>&metrics=<string>&dimensions=<string>&filters=<string>&maxResults=<integer>&sort=<string>&startIndex=<integer>&currency=<string>&alt=json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Identifies the YouTube channel or content owner for which the report is being retrieved. To request data for a YouTube user, set the parameter value to channel==CHANNEL_ID where CHANNEL_ID specifies the unique YouTube channel ID. To request data for a YouTube CMS content owner, set the parameter value to contentOwner==OWNER_NAME.",
+                      "key": "ids",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The start date for fetching YouTube Analytics data in YYYY-MM-DD format. The API response will include data from this date up to and including the end date.",
+                      "key": "startDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) The end date for fetching YouTube Analytics data in YYYY-MM-DD format. The value must be less than or equal to today's date.",
+                      "key": "endDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) A comma-separated list of YouTube Analytics metrics, such as views or likes, dislikes. See the Available Reports document or the Metrics document for a list of reports that you can retrieve and the metrics available in each report.",
+                      "key": "metrics",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A comma-separated list of YouTube Analytics dimensions, such as video or country. See the Available Reports document for a list of reports that you can retrieve and the dimensions used for those reports.",
+                      "key": "dimensions",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "A list of filters that should be applied when retrieving YouTube Analytics data. The Available Reports document identifies the dimensions that can be used to filter each report.",
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of rows to include in the response. The maximum value is 200.",
+                      "key": "maxResults",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "A comma-separated list of dimensions or metrics that determine the sort order for YouTube Analytics data. By default the sort order is ascending. Prefix with a minus sign (-) to indicate descending order.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
+                      "key": "startIndex",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The currency to which financial metrics should be converted. The default value is USD (US Dollar). Specify the parameter value as an ISO 4217 currency code.",
+                      "key": "currency",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Data format for the response.",
+                      "key": "alt",
+                      "value": "json"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-438ed323-64f8-43ac-83b3-f860b0de4dbc"
+            }
+          ],
+          "createdAt": "2026-06-05T13:21:04.000Z",
+          "updatedAt": "2026-06-05T13:21:04.000Z",
+          "uid": "35240-05aed541-fc4c-410b-bbc7-d114ba3dd238"
+        }
+      ],
+      "id": "ef70eb6e-95bc-424a-89e7-bed51e34e5be",
+      "createdAt": "2026-06-05T13:21:04.000Z",
+      "updatedAt": "2026-06-05T13:21:04.000Z",
+      "uid": "35240-ef70eb6e-95bc-424a-89e7-bed51e34e5be"
+    },
+    {
+      "name": "groups",
+      "item": [
+        {
+          "name": "Youtube List Groups",
+          "id": "fb52cbf3-03ed-4b0f-82b8-38293afab2fd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/groups?id=<string>&mine=<boolean>&pageToken=<string>&onBehalfOfContentOwner=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "groups"
+              ],
+              "query": [
+                {
+                  "description": "Comma-separated list of YouTube group IDs for the resources being retrieved. If this parameter is not specified, the API will return all groups owned by the authenticated user.",
+                  "key": "id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Set this parameter to true to retrieve all groups owned by the authenticated user.",
+                  "key": "mine",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "Identifies a specific page in the result set that should be returned. If specified, the API response should contain only that page.",
+                  "key": "pageToken",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value.",
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a collection of groups that match the API request parameters. You can retrieve all groups that the authenticated user owns, or retrieve one or more groups by their unique IDs."
+          },
+          "response": [
+            {
+              "id": "13e0fc08-882e-4b87-9dfd-780822b606d9",
+              "name": "Successful response containing a list of group resources.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?id=<string>&mine=<boolean>&pageToken=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated list of YouTube group IDs for the resources being retrieved. If this parameter is not specified, the API will return all groups owned by the authenticated user.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set this parameter to true to retrieve all groups owned by the authenticated user.",
+                      "key": "mine",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Identifies a specific page in the result set that should be returned. If specified, the API response should contain only that page.",
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"kind\": \"youtube#groupListResponse\",\n  \"etag\": \"<string>\",\n  \"nextPageToken\": \"<string>\",\n  \"items\": [\n    {\n      \"kind\": \"youtube#group\",\n      \"etag\": \"<string>\",\n      \"id\": \"<string>\",\n      \"snippet\": {\n        \"publishedAt\": \"<dateTime>\",\n        \"title\": \"<string>\"\n      },\n      \"contentDetails\": {\n        \"itemCount\": \"<long>\",\n        \"itemType\": \"youtube#playlist\"\n      }\n    },\n    {\n      \"kind\": \"youtube#group\",\n      \"etag\": \"<string>\",\n      \"id\": \"<string>\",\n      \"snippet\": {\n        \"publishedAt\": \"<dateTime>\",\n        \"title\": \"<string>\"\n      },\n      \"contentDetails\": {\n        \"itemCount\": \"<long>\",\n        \"itemType\": \"youtubePartner#asset\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-13e0fc08-882e-4b87-9dfd-780822b606d9"
+            },
+            {
+              "id": "f8051ec3-23f3-49d8-bfaa-4830fed43d70",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?id=<string>&mine=<boolean>&pageToken=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated list of YouTube group IDs for the resources being retrieved. If this parameter is not specified, the API will return all groups owned by the authenticated user.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set this parameter to true to retrieve all groups owned by the authenticated user.",
+                      "key": "mine",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Identifies a specific page in the result set that should be returned. If specified, the API response should contain only that page.",
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-f8051ec3-23f3-49d8-bfaa-4830fed43d70"
+            },
+            {
+              "id": "a16ca29a-2809-4894-bee2-bec580ee8a22",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?id=<string>&mine=<boolean>&pageToken=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated list of YouTube group IDs for the resources being retrieved. If this parameter is not specified, the API will return all groups owned by the authenticated user.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set this parameter to true to retrieve all groups owned by the authenticated user.",
+                      "key": "mine",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Identifies a specific page in the result set that should be returned. If specified, the API response should contain only that page.",
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-a16ca29a-2809-4894-bee2-bec580ee8a22"
+            },
+            {
+              "id": "e44a06e1-f352-4967-8896-99ea642f58fa",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?id=<string>&mine=<boolean>&pageToken=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "Comma-separated list of YouTube group IDs for the resources being retrieved. If this parameter is not specified, the API will return all groups owned by the authenticated user.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Set this parameter to true to retrieve all groups owned by the authenticated user.",
+                      "key": "mine",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "Identifies a specific page in the result set that should be returned. If specified, the API response should contain only that page.",
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-e44a06e1-f352-4967-8896-99ea642f58fa"
+            }
+          ],
+          "createdAt": "2026-06-05T13:21:04.000Z",
+          "updatedAt": "2026-06-05T13:21:04.000Z",
+          "uid": "35240-fb52cbf3-03ed-4b0f-82b8-38293afab2fd"
+        },
+        {
+          "name": "Youtube Create a Group",
+          "id": "d0648b45-86b9-483e-b3ae-fc51739bcc21",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"publishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": \"<long>\",\n    \"itemType\": \"youtube#video\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/groups?onBehalfOfContentOwner=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "groups"
+              ],
+              "query": [
+                {
+                  "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Creates an Analytics group. The authenticated user must be authorized to create groups. A group must have at least one item before you can run a report for the group."
+          },
+          "response": [
+            {
+              "id": "2956d5db-9d52-4f18-b9c9-f1c3db31c7cb",
+              "name": "Successful response containing the newly created group resource.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"publishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": \"<long>\",\n    \"itemType\": \"youtube#video\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"publishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": \"<long>\",\n    \"itemType\": \"youtube#video\"\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-2956d5db-9d52-4f18-b9c9-f1c3db31c7cb"
+            },
+            {
+              "id": "03958192-21b1-4b9b-827d-4e2c13eb74cd",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"publishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": \"<long>\",\n    \"itemType\": \"youtube#video\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-03958192-21b1-4b9b-827d-4e2c13eb74cd"
+            },
+            {
+              "id": "1303471c-36fc-499e-9e6a-93bfca231ca1",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"publishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": \"<long>\",\n    \"itemType\": \"youtube#video\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-1303471c-36fc-499e-9e6a-93bfca231ca1"
+            },
+            {
+              "id": "3c6afe0e-dd50-45b7-9025-451819ff1bf5",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"publishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": \"<long>\",\n    \"itemType\": \"youtube#video\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-3c6afe0e-dd50-45b7-9025-451819ff1bf5"
+            }
+          ],
+          "createdAt": "2026-06-05T13:21:04.000Z",
+          "updatedAt": "2026-06-05T13:21:04.000Z",
+          "uid": "35240-d0648b45-86b9-483e-b3ae-fc51739bcc21"
+        },
+        {
+          "name": "Youtube Update a Group",
+          "id": "c25df279-8c35-4ca6-814e-0d1c890214d6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"publishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": \"<long>\",\n    \"itemType\": \"youtube#video\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/groups?onBehalfOfContentOwner=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "groups"
+              ],
+              "query": [
+                {
+                  "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Modifies a group. The authenticated user must own the group being updated. Currently, the only property that can be updated is the group's title."
+          },
+          "response": [
+            {
+              "id": "d118aa2f-6d2c-4c15-b3e5-1fe6d93bfcd3",
+              "name": "Successful response containing the updated group resource.",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"publishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": \"<long>\",\n    \"itemType\": \"youtube#video\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"publishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": \"<long>\",\n    \"itemType\": \"youtube#video\"\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-d118aa2f-6d2c-4c15-b3e5-1fe6d93bfcd3"
+            },
+            {
+              "id": "8c4d03e9-f6f5-4213-aa76-89ae11a6be4d",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"publishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": \"<long>\",\n    \"itemType\": \"youtube#video\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-8c4d03e9-f6f5-4213-aa76-89ae11a6be4d"
+            },
+            {
+              "id": "2a460782-2cec-450c-a7fe-cb60919b3fd4",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"publishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": \"<long>\",\n    \"itemType\": \"youtube#video\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-2a460782-2cec-450c-a7fe-cb60919b3fd4"
+            },
+            {
+              "id": "d5890aa7-043a-4964-9de4-d1510b74ec3f",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"publishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": \"<long>\",\n    \"itemType\": \"youtube#video\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groups?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-d5890aa7-043a-4964-9de4-d1510b74ec3f"
+            }
+          ],
+          "createdAt": "2026-06-05T13:21:04.000Z",
+          "updatedAt": "2026-06-05T13:21:04.000Z",
+          "uid": "35240-c25df279-8c35-4ca6-814e-0d1c890214d6"
+        },
+        {
+          "name": "Youtube Delete a Group",
+          "id": "b818b641-6eba-4387-aad7-81029efb4545",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/groups?id=<string>&onBehalfOfContentOwner=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "groups"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The id parameter specifies the YouTube group ID for the group being deleted.",
+                  "key": "id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Deletes a group. The authenticated user must own the group being deleted. Deleting a group does not delete any of the resources contained in the group."
+          },
+          "response": [
+            {
+              "id": "5d38f4a4-2fb6-45ee-9919-6ba0c04dcf3d",
+              "name": "The group was successfully deleted.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?id=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The id parameter specifies the YouTube group ID for the group being deleted.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-5d38f4a4-2fb6-45ee-9919-6ba0c04dcf3d"
+            },
+            {
+              "id": "6c38fce3-b403-4cd6-af8b-46037b791efe",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?id=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The id parameter specifies the YouTube group ID for the group being deleted.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-6c38fce3-b403-4cd6-af8b-46037b791efe"
+            },
+            {
+              "id": "88965dae-0d60-4fe2-9004-6d06bdced8d3",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?id=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The id parameter specifies the YouTube group ID for the group being deleted.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-88965dae-0d60-4fe2-9004-6d06bdced8d3"
+            },
+            {
+              "id": "6bf4d95b-e085-4936-aaf4-e8ada87e1b88",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?id=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The id parameter specifies the YouTube group ID for the group being deleted.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-6bf4d95b-e085-4936-aaf4-e8ada87e1b88"
+            },
+            {
+              "id": "fffa0b44-8376-402b-8b7f-bee5cfb4bf1c",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groups?id=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The id parameter specifies the YouTube group ID for the group being deleted.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-fffa0b44-8376-402b-8b7f-bee5cfb4bf1c"
+            }
+          ],
+          "createdAt": "2026-06-05T13:21:04.000Z",
+          "updatedAt": "2026-06-05T13:21:04.000Z",
+          "uid": "35240-b818b641-6eba-4387-aad7-81029efb4545"
+        }
+      ],
+      "id": "daa24e8c-8160-4bff-a1a3-17706a96cb9b",
+      "createdAt": "2026-06-05T13:21:04.000Z",
+      "updatedAt": "2026-06-05T13:21:04.000Z",
+      "uid": "35240-daa24e8c-8160-4bff-a1a3-17706a96cb9b"
+    },
+    {
+      "name": "groupItems",
+      "item": [
+        {
+          "name": "Youtube List Group Items",
+          "id": "5ba44ee4-baec-4998-b2d6-8960c36b964c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/groupItems?groupId=<string>&onBehalfOfContentOwner=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "groupItems"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The id parameter specifies the unique ID of the group for which you want to retrieve group items.",
+                  "key": "groupId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a collection of group items that match the API request parameters. Retrieves the list of items in a specified Analytics group owned by the authenticated user."
+          },
+          "response": [
+            {
+              "id": "bfcd82f3-bf71-4f64-93c2-14c03283b691",
+              "name": "Successful response containing a list of group item resources.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groupItems?groupId=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groupItems"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The id parameter specifies the unique ID of the group for which you want to retrieve group items.",
+                      "key": "groupId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"kind\": \"youtube#groupItemListResponse\",\n  \"etag\": \"<string>\",\n  \"items\": [\n    {\n      \"kind\": \"youtube#groupItem\",\n      \"etag\": \"<string>\",\n      \"id\": \"<string>\",\n      \"groupId\": \"<string>\",\n      \"resource\": {\n        \"kind\": \"youtubePartner#asset\",\n        \"id\": \"<string>\"\n      }\n    },\n    {\n      \"kind\": \"youtube#groupItem\",\n      \"etag\": \"<string>\",\n      \"id\": \"<string>\",\n      \"groupId\": \"<string>\",\n      \"resource\": {\n        \"kind\": \"youtube#playlist\",\n        \"id\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-bfcd82f3-bf71-4f64-93c2-14c03283b691"
+            },
+            {
+              "id": "466dee46-efdc-4717-b2ef-bdc7db09cc92",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groupItems?groupId=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groupItems"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The id parameter specifies the unique ID of the group for which you want to retrieve group items.",
+                      "key": "groupId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-466dee46-efdc-4717-b2ef-bdc7db09cc92"
+            },
+            {
+              "id": "ee9b9758-e0ef-4210-a927-73db8dd8bbf6",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groupItems?groupId=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groupItems"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The id parameter specifies the unique ID of the group for which you want to retrieve group items.",
+                      "key": "groupId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-ee9b9758-e0ef-4210-a927-73db8dd8bbf6"
+            },
+            {
+              "id": "6146dd80-da4c-4b89-b7c7-d716c930f824",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groupItems?groupId=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groupItems"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The id parameter specifies the unique ID of the group for which you want to retrieve group items.",
+                      "key": "groupId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-6146dd80-da4c-4b89-b7c7-d716c930f824"
+            }
+          ],
+          "createdAt": "2026-06-05T13:21:04.000Z",
+          "updatedAt": "2026-06-05T13:21:04.000Z",
+          "uid": "35240-5ba44ee4-baec-4998-b2d6-8960c36b964c"
+        },
+        {
+          "name": "Youtube Create a Group Item",
+          "id": "0612ce68-c67b-4d89-a76d-df179ed2c8a6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"youtube#groupItem\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"groupId\": \"<string>\",\n  \"resource\": {\n    \"kind\": \"youtube#channel\",\n    \"id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/groupItems?onBehalfOfContentOwner=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "groupItems"
+              ],
+              "query": [
+                {
+                  "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Creates a group item, adding a resource such as a video, channel, or playlist to an Analytics group. The authenticated user must own the group."
+          },
+          "response": [
+            {
+              "id": "87872267-4976-49f2-8a46-f6cfba43ab8e",
+              "name": "Successful response containing the newly created group item resource.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#groupItem\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"groupId\": \"<string>\",\n  \"resource\": {\n    \"kind\": \"youtube#channel\",\n    \"id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groupItems?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groupItems"
+                  ],
+                  "query": [
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"kind\": \"youtube#groupItem\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"groupId\": \"<string>\",\n  \"resource\": {\n    \"kind\": \"youtube#channel\",\n    \"id\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-87872267-4976-49f2-8a46-f6cfba43ab8e"
+            },
+            {
+              "id": "e100c121-db51-4575-a18e-e8728c37f436",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#groupItem\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"groupId\": \"<string>\",\n  \"resource\": {\n    \"kind\": \"youtube#channel\",\n    \"id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groupItems?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groupItems"
+                  ],
+                  "query": [
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-e100c121-db51-4575-a18e-e8728c37f436"
+            },
+            {
+              "id": "bbc92b05-3589-4706-83cf-72b4dd78c9ab",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#groupItem\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"groupId\": \"<string>\",\n  \"resource\": {\n    \"kind\": \"youtube#channel\",\n    \"id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groupItems?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groupItems"
+                  ],
+                  "query": [
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-bbc92b05-3589-4706-83cf-72b4dd78c9ab"
+            },
+            {
+              "id": "9c08b85f-6eee-4f5c-be63-c0ebe2fc7940",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#groupItem\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"groupId\": \"<string>\",\n  \"resource\": {\n    \"kind\": \"youtube#channel\",\n    \"id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/groupItems?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groupItems"
+                  ],
+                  "query": [
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-9c08b85f-6eee-4f5c-be63-c0ebe2fc7940"
+            }
+          ],
+          "createdAt": "2026-06-05T13:21:04.000Z",
+          "updatedAt": "2026-06-05T13:21:04.000Z",
+          "uid": "35240-0612ce68-c67b-4d89-a76d-df179ed2c8a6"
+        },
+        {
+          "name": "Youtube Delete a Group Item",
+          "id": "19859822-d4b6-4659-8754-89b8993dc8b4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/groupItems?id=<string>&onBehalfOfContentOwner=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "groupItems"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The id parameter specifies the YouTube group item ID for the group item being deleted.",
+                  "key": "id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Removes an item from a group. The authenticated user must own the group. Deleting a group item does not delete the underlying resource (video, channel, or playlist)."
+          },
+          "response": [
+            {
+              "id": "f1e517f9-c9dc-4497-8ab7-c47035504998",
+              "name": "The group item was successfully deleted.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groupItems?id=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groupItems"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The id parameter specifies the YouTube group item ID for the group item being deleted.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-f1e517f9-c9dc-4497-8ab7-c47035504998"
+            },
+            {
+              "id": "55e0a6cd-b560-444b-9079-ea2b0f14e1f9",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groupItems?id=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groupItems"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The id parameter specifies the YouTube group item ID for the group item being deleted.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-55e0a6cd-b560-444b-9079-ea2b0f14e1f9"
+            },
+            {
+              "id": "fb47ffa3-1080-4fa1-abea-4ce6d7f6aa3d",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groupItems?id=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groupItems"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The id parameter specifies the YouTube group item ID for the group item being deleted.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-fb47ffa3-1080-4fa1-abea-4ce6d7f6aa3d"
+            },
+            {
+              "id": "d001397d-f23d-4df6-a1f0-ad4fc9b19208",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groupItems?id=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groupItems"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The id parameter specifies the YouTube group item ID for the group item being deleted.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-d001397d-f23d-4df6-a1f0-ad4fc9b19208"
+            },
+            {
+              "id": "27a39988-94d3-4705-ad57-7ccfbc333b04",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/groupItems?id=<string>&onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "groupItems"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The id parameter specifies the YouTube group item ID for the group item being deleted.",
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<integer>\",\n    \"message\": \"<string>\",\n    \"status\": \"<string>\",\n    \"details\": [\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"adipisicing_fc\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"reason\": \"<string>\",\n        \"domain\": \"<string>\",\n        \"metadata\": {\n          \"tempor0\": \"<string>\",\n          \"reprehenderit44\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T13:21:04.000Z",
+              "updatedAt": "2026-06-05T13:21:04.000Z",
+              "uid": "35240-27a39988-94d3-4705-ad57-7ccfbc333b04"
+            }
+          ],
+          "createdAt": "2026-06-05T13:21:04.000Z",
+          "updatedAt": "2026-06-05T13:21:04.000Z",
+          "uid": "35240-19859822-d4b6-4659-8754-89b8993dc8b4"
+        }
+      ],
+      "id": "4355f70c-1ffa-4499-9cd8-2f5e4e24c960",
+      "createdAt": "2026-06-05T13:21:04.000Z",
+      "updatedAt": "2026-06-05T13:21:04.000Z",
+      "uid": "35240-4355f70c-1ffa-4499-9cd8-2f5e4e24c960"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://youtubeanalytics.googleapis.com/v2"
+    }
+  ]
+}

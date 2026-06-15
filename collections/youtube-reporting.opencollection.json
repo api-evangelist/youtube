@@ -1,0 +1,279 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YouTube Reporting API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Reporting Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubereporting.googleapis.com/v1/jobs",
+            "params": [
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The content owner's external ID on which behalf the user is acting on."
+              },
+              {
+                "name": "includeSystemManaged",
+                "value": "true",
+                "type": "query",
+                "description": "If set to true, also returns system-managed reporting jobs."
+              },
+              {
+                "name": "pageToken",
+                "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+                "type": "query",
+                "description": "A token identifying a page of results to return."
+              },
+              {
+                "name": "pageSize",
+                "value": "25",
+                "type": "query",
+                "description": "The maximum number of items to return in the response."
+              }
+            ]
+          },
+          "docs": "Lists all reporting jobs that have been scheduled for the channel or content owner."
+        },
+        {
+          "info": {
+            "name": "Youtube Create Reporting Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://youtubereporting.googleapis.com/v1/jobs",
+            "params": [
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The content owner's external ID on which behalf the user is acting on."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a reporting job. YouTube then begins generating daily reports for the specified report type. Reports are typically available within 24 hours of being generated."
+        },
+        {
+          "info": {
+            "name": "Youtube Get Reporting Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubereporting.googleapis.com/v1/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "abc123def456",
+                "type": "path",
+                "description": "The ID of the job to retrieve."
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The content owner's external ID on which behalf the user is acting on."
+              }
+            ]
+          },
+          "docs": "Gets the metadata for a specific reporting job."
+        },
+        {
+          "info": {
+            "name": "Youtube Delete Reporting Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://youtubereporting.googleapis.com/v1/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "abc123def456",
+                "type": "path",
+                "description": "The ID of the job to delete."
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The content owner's external ID on which behalf the user is acting on."
+              }
+            ]
+          },
+          "docs": "Deletes a reporting job. After deletion, YouTube stops generating reports for this job."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubereporting.googleapis.com/v1/jobs/:jobId/reports",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "abc123def456",
+                "type": "path",
+                "description": "The ID of the job whose reports are being listed."
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The content owner's external ID on which behalf the user is acting on."
+              },
+              {
+                "name": "createdAfter",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "If specified, only reports created after the specified date/time are returned."
+              },
+              {
+                "name": "startTimeAtOrAfter",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "If specified, only reports covering data on or after this date are returned."
+              },
+              {
+                "name": "startTimeBefore",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "If specified, only reports covering data before this date are returned."
+              },
+              {
+                "name": "pageToken",
+                "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+                "type": "query",
+                "description": "A token identifying a page of results to return."
+              },
+              {
+                "name": "pageSize",
+                "value": "25",
+                "type": "query",
+                "description": "The maximum number of items to return in the response."
+              }
+            ]
+          },
+          "docs": "Lists reports created by a specific reporting job. Each report covers a 24-hour period and includes a download URL for retrieving the report data."
+        },
+        {
+          "info": {
+            "name": "Youtube Get Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubereporting.googleapis.com/v1/jobs/:jobId/reports/:reportId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "abc123def456",
+                "type": "path",
+                "description": "The ID of the job that created the report."
+              },
+              {
+                "name": "reportId",
+                "value": "abc123def456",
+                "type": "path",
+                "description": "The ID of the report to retrieve."
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The content owner's external ID on which behalf the user is acting on."
+              }
+            ]
+          },
+          "docs": "Gets the metadata for a specific report including its download URL."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ReportTypes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Report Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubereporting.googleapis.com/v1/reportTypes",
+            "params": [
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The content owner's external ID on which behalf the user is acting on."
+              },
+              {
+                "name": "includeSystemManaged",
+                "value": "true",
+                "type": "query",
+                "description": "If set to true, also returns system-managed report types."
+              },
+              {
+                "name": "pageToken",
+                "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+                "type": "query",
+                "description": "A token identifying a page of results to return."
+              },
+              {
+                "name": "pageSize",
+                "value": "25",
+                "type": "query",
+                "description": "The maximum number of items to return in the response."
+              }
+            ]
+          },
+          "docs": "Lists report types that the channel or content owner can retrieve. Each report type defines the dimensions and metrics available in the generated reports."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,898 @@
+{
+  "info": {
+    "_postman_id": "283fe18c-f00b-4246-8564-f1229cf6a025",
+    "name": "YouTube Reporting API",
+    "description": "The YouTube Reporting API enables scheduling reporting jobs and downloading bulk YouTube Analytics data as CSV datasets. Reports are generated daily and cover 24-hour periods, accessible for 30 to 60 days depending on the report type.\n\nContact Support:\n Name: YouTube API Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T13:21:04.000Z",
+    "updatedAt": "2026-06-05T13:21:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-283fe18c-f00b-4246-8564-f1229cf6a025"
+  },
+  "item": [
+    {
+      "name": "jobs",
+      "item": [
+        {
+          "name": "{jobId}",
+          "item": [
+            {
+              "name": "reports",
+              "item": [
+                {
+                  "name": "{reportId}",
+                  "item": [
+                    {
+                      "name": "Youtube Get Report",
+                      "id": "cda21182-e60d-4b71-9544-55d2af762a7d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:jobId/reports/:reportId?onBehalfOfContentOwner=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":jobId",
+                            "reports",
+                            ":reportId"
+                          ],
+                          "query": [
+                            {
+                              "description": "The content owner's external ID on which behalf the user is acting on.",
+                              "key": "onBehalfOfContentOwner",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "5b9f3722-4839-4f3e-aac3-d2f09c5c7823",
+                              "key": "jobId",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the job that created the report."
+                            },
+                            {
+                              "id": "5ca4360f-f117-47d9-b174-5e01c38cb742",
+                              "key": "reportId",
+                              "value": "<string>",
+                              "description": "(Required) The ID of the report to retrieve."
+                            }
+                          ]
+                        },
+                        "description": "Gets the metadata for a specific report including its download URL."
+                      },
+                      "response": [
+                        {
+                          "id": "81788308-102c-4fda-9e5a-fbada846ccec",
+                          "name": "Successful response",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/jobs/:jobId/reports/:reportId?onBehalfOfContentOwner=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "jobs",
+                                ":jobId",
+                                "reports",
+                                ":reportId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The content owner's external ID on which behalf the user is acting on.",
+                                  "key": "onBehalfOfContentOwner",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "jobId"
+                                },
+                                {
+                                  "key": "reportId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"jobId\": \"<string>\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"createTime\": \"<dateTime>\",\n  \"downloadUrl\": \"<string>\",\n  \"jobExpireTime\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-06-05T13:21:05.000Z",
+                          "updatedAt": "2026-06-05T13:21:05.000Z",
+                          "uid": "35240-81788308-102c-4fda-9e5a-fbada846ccec"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T13:21:05.000Z",
+                      "updatedAt": "2026-06-05T13:21:05.000Z",
+                      "uid": "35240-cda21182-e60d-4b71-9544-55d2af762a7d"
+                    }
+                  ],
+                  "id": "8243ac0d-959f-4b93-9216-6638133a74ad",
+                  "createdAt": "2026-06-05T13:21:05.000Z",
+                  "updatedAt": "2026-06-05T13:21:05.000Z",
+                  "uid": "35240-8243ac0d-959f-4b93-9216-6638133a74ad"
+                },
+                {
+                  "name": "Youtube List Reports",
+                  "id": "d44eee87-2bcf-4bbd-93f4-0e939429359b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobId/reports?onBehalfOfContentOwner=<string>&createdAfter=<dateTime>&startTimeAtOrAfter=<dateTime>&startTimeBefore=<dateTime>&pageToken=<string>&pageSize=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobId",
+                        "reports"
+                      ],
+                      "query": [
+                        {
+                          "description": "The content owner's external ID on which behalf the user is acting on.",
+                          "key": "onBehalfOfContentOwner",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "If specified, only reports created after the specified date/time are returned.",
+                          "key": "createdAfter",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "If specified, only reports covering data on or after this date are returned.",
+                          "key": "startTimeAtOrAfter",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "If specified, only reports covering data before this date are returned.",
+                          "key": "startTimeBefore",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "description": "A token identifying a page of results to return.",
+                          "key": "pageToken",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The maximum number of items to return in the response.",
+                          "key": "pageSize",
+                          "value": "<integer>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "90e1cbf2-71f1-496d-a3fd-a54c3f015c31",
+                          "key": "jobId",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the job whose reports are being listed."
+                        }
+                      ]
+                    },
+                    "description": "Lists reports created by a specific reporting job. Each report covers a 24-hour period and includes a download URL for retrieving the report data."
+                  },
+                  "response": [
+                    {
+                      "id": "4c9db7ad-29d7-4b24-aad7-847805ee1c9e",
+                      "name": "Successful response",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:jobId/reports?onBehalfOfContentOwner=<string>&createdAfter=<dateTime>&startTimeAtOrAfter=<dateTime>&startTimeBefore=<dateTime>&pageToken=<string>&pageSize=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":jobId",
+                            "reports"
+                          ],
+                          "query": [
+                            {
+                              "description": "The content owner's external ID on which behalf the user is acting on.",
+                              "key": "onBehalfOfContentOwner",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "If specified, only reports created after the specified date/time are returned.",
+                              "key": "createdAfter",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "If specified, only reports covering data on or after this date are returned.",
+                              "key": "startTimeAtOrAfter",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "If specified, only reports covering data before this date are returned.",
+                              "key": "startTimeBefore",
+                              "value": "<dateTime>"
+                            },
+                            {
+                              "description": "A token identifying a page of results to return.",
+                              "key": "pageToken",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The maximum number of items to return in the response.",
+                              "key": "pageSize",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"reports\": [\n    {\n      \"id\": \"<string>\",\n      \"jobId\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\",\n      \"createTime\": \"<dateTime>\",\n      \"downloadUrl\": \"<string>\",\n      \"jobExpireTime\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"jobId\": \"<string>\",\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\",\n      \"createTime\": \"<dateTime>\",\n      \"downloadUrl\": \"<string>\",\n      \"jobExpireTime\": \"<dateTime>\"\n    }\n  ],\n  \"nextPageToken\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T13:21:05.000Z",
+                      "updatedAt": "2026-06-05T13:21:05.000Z",
+                      "uid": "35240-4c9db7ad-29d7-4b24-aad7-847805ee1c9e"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T13:21:05.000Z",
+                  "updatedAt": "2026-06-05T13:21:05.000Z",
+                  "uid": "35240-d44eee87-2bcf-4bbd-93f4-0e939429359b"
+                }
+              ],
+              "id": "dfc01155-4bee-4c51-a7f0-9a0ed6f49dd1",
+              "createdAt": "2026-06-05T13:21:05.000Z",
+              "updatedAt": "2026-06-05T13:21:05.000Z",
+              "uid": "35240-dfc01155-4bee-4c51-a7f0-9a0ed6f49dd1"
+            },
+            {
+              "name": "Youtube Get Reporting Job",
+              "id": "da7a3fd3-eda9-4ea0-860f-978346e75682",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/jobs/:jobId?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "query": [
+                    {
+                      "description": "The content owner's external ID on which behalf the user is acting on.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "fe2cd361-5506-4ba7-bf33-cb60a3e6e7ca",
+                      "key": "jobId",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the job to retrieve."
+                    }
+                  ]
+                },
+                "description": "Gets the metadata for a specific reporting job."
+              },
+              "response": [
+                {
+                  "id": "46fc9599-0ef6-43f3-8c8b-8003cd1503b0",
+                  "name": "Successful response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobId?onBehalfOfContentOwner=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobId"
+                      ],
+                      "query": [
+                        {
+                          "description": "The content owner's external ID on which behalf the user is acting on.",
+                          "key": "onBehalfOfContentOwner",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"reportTypeId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"createTime\": \"<dateTime>\",\n  \"expireTime\": \"<dateTime>\",\n  \"systemManaged\": \"<boolean>\"\n}",
+                  "createdAt": "2026-06-05T13:21:05.000Z",
+                  "updatedAt": "2026-06-05T13:21:05.000Z",
+                  "uid": "35240-46fc9599-0ef6-43f3-8c8b-8003cd1503b0"
+                }
+              ],
+              "createdAt": "2026-06-05T13:21:05.000Z",
+              "updatedAt": "2026-06-05T13:21:05.000Z",
+              "uid": "35240-da7a3fd3-eda9-4ea0-860f-978346e75682"
+            },
+            {
+              "name": "Youtube Delete Reporting Job",
+              "id": "9a17d26a-2757-4563-af53-39f780ce1a53",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/jobs/:jobId?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "query": [
+                    {
+                      "description": "The content owner's external ID on which behalf the user is acting on.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "c69c6dc6-863c-4537-8887-5694da772c25",
+                      "key": "jobId",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the job to delete."
+                    }
+                  ]
+                },
+                "description": "Deletes a reporting job. After deletion, YouTube stops generating reports for this job."
+              },
+              "response": [
+                {
+                  "id": "efeec25e-030b-4000-a88a-ccb57292451f",
+                  "name": "Successful deletion with no content",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobId?onBehalfOfContentOwner=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobId"
+                      ],
+                      "query": [
+                        {
+                          "description": "The content owner's external ID on which behalf the user is acting on.",
+                          "key": "onBehalfOfContentOwner",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T13:21:05.000Z",
+                  "updatedAt": "2026-06-05T13:21:05.000Z",
+                  "uid": "35240-efeec25e-030b-4000-a88a-ccb57292451f"
+                }
+              ],
+              "createdAt": "2026-06-05T13:21:05.000Z",
+              "updatedAt": "2026-06-05T13:21:05.000Z",
+              "uid": "35240-9a17d26a-2757-4563-af53-39f780ce1a53"
+            }
+          ],
+          "id": "ea4f65b2-d8be-43df-93b1-c122ce4abb0a",
+          "createdAt": "2026-06-05T13:21:05.000Z",
+          "updatedAt": "2026-06-05T13:21:05.000Z",
+          "uid": "35240-ea4f65b2-d8be-43df-93b1-c122ce4abb0a"
+        },
+        {
+          "name": "Youtube Create Reporting Job",
+          "id": "431d9413-95e3-4a06-8dde-a4f816384ee7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"reportTypeId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"createTime\": \"<dateTime>\",\n  \"expireTime\": \"<dateTime>\",\n  \"systemManaged\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/jobs?onBehalfOfContentOwner=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "jobs"
+              ],
+              "query": [
+                {
+                  "description": "The content owner's external ID on which behalf the user is acting on.",
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Creates a reporting job. YouTube then begins generating daily reports for the specified report type. Reports are typically available within 24 hours of being generated."
+          },
+          "response": [
+            {
+              "id": "14b12913-eedd-4b04-8a8d-115be8b283b3",
+              "name": "Successful response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"reportTypeId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"createTime\": \"<dateTime>\",\n  \"expireTime\": \"<dateTime>\",\n  \"systemManaged\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/jobs?onBehalfOfContentOwner=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "jobs"
+                  ],
+                  "query": [
+                    {
+                      "description": "The content owner's external ID on which behalf the user is acting on.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"reportTypeId\": \"<string>\",\n  \"name\": \"<string>\",\n  \"createTime\": \"<dateTime>\",\n  \"expireTime\": \"<dateTime>\",\n  \"systemManaged\": \"<boolean>\"\n}",
+              "createdAt": "2026-06-05T13:21:05.000Z",
+              "updatedAt": "2026-06-05T13:21:05.000Z",
+              "uid": "35240-14b12913-eedd-4b04-8a8d-115be8b283b3"
+            }
+          ],
+          "createdAt": "2026-06-05T13:21:05.000Z",
+          "updatedAt": "2026-06-05T13:21:05.000Z",
+          "uid": "35240-431d9413-95e3-4a06-8dde-a4f816384ee7"
+        },
+        {
+          "name": "Youtube List Reporting Jobs",
+          "id": "962e843b-811c-407e-afb4-af70e939426e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/jobs?onBehalfOfContentOwner=<string>&includeSystemManaged=<boolean>&pageToken=<string>&pageSize=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "jobs"
+              ],
+              "query": [
+                {
+                  "description": "The content owner's external ID on which behalf the user is acting on.",
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>"
+                },
+                {
+                  "description": "If set to true, also returns system-managed reporting jobs.",
+                  "key": "includeSystemManaged",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "A token identifying a page of results to return.",
+                  "key": "pageToken",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The maximum number of items to return in the response.",
+                  "key": "pageSize",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Lists all reporting jobs that have been scheduled for the channel or content owner."
+          },
+          "response": [
+            {
+              "id": "61d5c65d-55f9-453c-8aec-93350fba3afb",
+              "name": "Successful response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/jobs?onBehalfOfContentOwner=<string>&includeSystemManaged=<boolean>&pageToken=<string>&pageSize=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "jobs"
+                  ],
+                  "query": [
+                    {
+                      "description": "The content owner's external ID on which behalf the user is acting on.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If set to true, also returns system-managed reporting jobs.",
+                      "key": "includeSystemManaged",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "A token identifying a page of results to return.",
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of items to return in the response.",
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"jobs\": [\n    {\n      \"id\": \"<string>\",\n      \"reportTypeId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"createTime\": \"<dateTime>\",\n      \"expireTime\": \"<dateTime>\",\n      \"systemManaged\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"reportTypeId\": \"<string>\",\n      \"name\": \"<string>\",\n      \"createTime\": \"<dateTime>\",\n      \"expireTime\": \"<dateTime>\",\n      \"systemManaged\": \"<boolean>\"\n    }\n  ],\n  \"nextPageToken\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T13:21:05.000Z",
+              "updatedAt": "2026-06-05T13:21:05.000Z",
+              "uid": "35240-61d5c65d-55f9-453c-8aec-93350fba3afb"
+            }
+          ],
+          "createdAt": "2026-06-05T13:21:05.000Z",
+          "updatedAt": "2026-06-05T13:21:05.000Z",
+          "uid": "35240-962e843b-811c-407e-afb4-af70e939426e"
+        }
+      ],
+      "id": "53d14e6e-08d9-4f16-97f9-a6198c11b995",
+      "createdAt": "2026-06-05T13:21:05.000Z",
+      "updatedAt": "2026-06-05T13:21:05.000Z",
+      "uid": "35240-53d14e6e-08d9-4f16-97f9-a6198c11b995"
+    },
+    {
+      "name": "reportTypes",
+      "item": [
+        {
+          "name": "Youtube List Report Types",
+          "id": "f2d178fa-dfb4-40a7-b725-5e4ad99660f6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reportTypes?onBehalfOfContentOwner=<string>&includeSystemManaged=<boolean>&pageToken=<string>&pageSize=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reportTypes"
+              ],
+              "query": [
+                {
+                  "description": "The content owner's external ID on which behalf the user is acting on.",
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>"
+                },
+                {
+                  "description": "If set to true, also returns system-managed report types.",
+                  "key": "includeSystemManaged",
+                  "value": "<boolean>"
+                },
+                {
+                  "description": "A token identifying a page of results to return.",
+                  "key": "pageToken",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The maximum number of items to return in the response.",
+                  "key": "pageSize",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Lists report types that the channel or content owner can retrieve. Each report type defines the dimensions and metrics available in the generated reports."
+          },
+          "response": [
+            {
+              "id": "ce22c737-e2d2-464e-9796-729c6d133ed1",
+              "name": "Successful response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reportTypes?onBehalfOfContentOwner=<string>&includeSystemManaged=<boolean>&pageToken=<string>&pageSize=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reportTypes"
+                  ],
+                  "query": [
+                    {
+                      "description": "The content owner's external ID on which behalf the user is acting on.",
+                      "key": "onBehalfOfContentOwner",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "If set to true, also returns system-managed report types.",
+                      "key": "includeSystemManaged",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "A token identifying a page of results to return.",
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The maximum number of items to return in the response.",
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"reportTypes\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"systemManaged\": \"<boolean>\",\n      \"deprecateTime\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"systemManaged\": \"<boolean>\",\n      \"deprecateTime\": \"<dateTime>\"\n    }\n  ],\n  \"nextPageToken\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T13:21:05.000Z",
+              "updatedAt": "2026-06-05T13:21:05.000Z",
+              "uid": "35240-ce22c737-e2d2-464e-9796-729c6d133ed1"
+            }
+          ],
+          "createdAt": "2026-06-05T13:21:05.000Z",
+          "updatedAt": "2026-06-05T13:21:05.000Z",
+          "uid": "35240-f2d178fa-dfb4-40a7-b725-5e4ad99660f6"
+        }
+      ],
+      "id": "d018db65-2dc6-40a0-af42-fc097bdef53d",
+      "createdAt": "2026-06-05T13:21:05.000Z",
+      "updatedAt": "2026-06-05T13:21:05.000Z",
+      "uid": "35240-d018db65-2dc6-40a0-af42-fc097bdef53d"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly",
+        "type": "string"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token",
+        "type": "string"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://youtubereporting.googleapis.com/v1"
+    }
+  ]
+}

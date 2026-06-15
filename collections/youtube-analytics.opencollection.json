@@ -1,0 +1,306 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YouTube Analytics API",
+    "version": "v2"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube Query Analytics Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/reports",
+            "params": [
+              {
+                "name": "ids",
+                "value": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw",
+                "type": "query",
+                "description": "Identifies the YouTube channel or content owner for which the report is being retrieved. To request data for a YouTube user, set the parameter value to channel==CHANNEL_ID where CHANNEL_ID specifies the unique YouTube channel ID. To request data for a YouTube CMS content owner, set the parameter value to contentOwner==OWNER_NAME."
+              },
+              {
+                "name": "startDate",
+                "value": "2026-01-15",
+                "type": "query",
+                "description": "The start date for fetching YouTube Analytics data in YYYY-MM-DD format. The API response will include data from this date up to and including the end date."
+              },
+              {
+                "name": "endDate",
+                "value": "2026-01-15",
+                "type": "query",
+                "description": "The end date for fetching YouTube Analytics data in YYYY-MM-DD format. The value must be less than or equal to today's date."
+              },
+              {
+                "name": "metrics",
+                "value": "views,estimatedMinutesWatched,likes",
+                "type": "query",
+                "description": "A comma-separated list of YouTube Analytics metrics, such as views or likes, dislikes. See the Available Reports document or the Metrics document for a list of reports that you can retrieve and the metrics available in each report."
+              },
+              {
+                "name": "dimensions",
+                "value": "day",
+                "type": "query",
+                "description": "A comma-separated list of YouTube Analytics dimensions, such as video or country. See the Available Reports document for a list of reports that you can retrieve and the dimensions used for those reports."
+              },
+              {
+                "name": "filters",
+                "value": "example_value",
+                "type": "query",
+                "description": "A list of filters that should be applied when retrieving YouTube Analytics data. The Available Reports document identifies the dimensions that can be used to filter each report."
+              },
+              {
+                "name": "maxResults",
+                "value": "25",
+                "type": "query",
+                "description": "The maximum number of rows to include in the response. The maximum value is 200."
+              },
+              {
+                "name": "sort",
+                "value": "example_value",
+                "type": "query",
+                "description": "A comma-separated list of dimensions or metrics that determine the sort order for YouTube Analytics data. By default the sort order is ascending. Prefix with a minus sign (-) to indicate descending order."
+              },
+              {
+                "name": "startIndex",
+                "value": "10",
+                "type": "query",
+                "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter."
+              },
+              {
+                "name": "currency",
+                "value": "example_value",
+                "type": "query",
+                "description": "The currency to which financial metrics should be converted. The default value is USD (US Dollar). Specify the parameter value as an ISO 4217 currency code."
+              },
+              {
+                "name": "alt",
+                "value": "json",
+                "type": "query",
+                "description": "Data format for the response."
+              }
+            ]
+          },
+          "docs": "Retrieves YouTube Analytics data for a channel or content owner. The report provides aggregated statistics for the specified dimensions and metrics over the date range. The ids parameter specifies the channel or content owner for which the report is being retrieved."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groups",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Comma-separated list of YouTube group IDs for the resources being retrieved. If this parameter is not specified, the API will return all groups owned by the authenticated user."
+              },
+              {
+                "name": "mine",
+                "value": "true",
+                "type": "query",
+                "description": "Set this parameter to true to retrieve all groups owned by the authenticated user."
+              },
+              {
+                "name": "pageToken",
+                "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+                "type": "query",
+                "description": "Identifies a specific page in the result set that should be returned. If specified, the API response should contain only that page."
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value."
+              }
+            ]
+          },
+          "docs": "Returns a collection of groups that match the API request parameters. You can retrieve all groups that the authenticated user owns, or retrieve one or more groups by their unique IDs."
+        },
+        {
+          "info": {
+            "name": "Youtube Create a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groups",
+            "params": [
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an Analytics group. The authenticated user must be authorized to create groups. A group must have at least one item before you can run a report for the group."
+        },
+        {
+          "info": {
+            "name": "Youtube Update a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groups",
+            "params": [
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies a group. The authenticated user must own the group being updated. Currently, the only property that can be updated is the group's title."
+        },
+        {
+          "info": {
+            "name": "Youtube Delete a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groups",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "The id parameter specifies the YouTube group ID for the group being deleted."
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user."
+              }
+            ]
+          },
+          "docs": "Deletes a group. The authenticated user must own the group being deleted. Deleting a group does not delete any of the resources contained in the group."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "GroupItems",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Group Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groupItems",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "500123",
+                "type": "query",
+                "description": "The id parameter specifies the unique ID of the group for which you want to retrieve group items."
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user."
+              }
+            ]
+          },
+          "docs": "Returns a collection of group items that match the API request parameters. Retrieves the list of items in a specified Analytics group owned by the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Youtube Create a Group Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groupItems",
+            "params": [
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a group item, adding a resource such as a video, channel, or playlist to an Analytics group. The authenticated user must own the group."
+        },
+        {
+          "info": {
+            "name": "Youtube Delete a Group Item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groupItems",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "The id parameter specifies the YouTube group item ID for the group item being deleted."
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user."
+              }
+            ]
+          },
+          "docs": "Removes an item from a group. The authenticated user must own the group. Deleting a group item does not delete the underlying resource (video, channel, or playlist)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
