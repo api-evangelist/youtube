@@ -557,83 +557,63 @@ tags:
 common:
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/youtube/overview
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/youtube-channel-comment-threads-reply-workflow.yml
-    name: YouTube Channel Comment Threads and Reply
-    summary: Read a channel, list the comment threads on its discussion, and reply
-      to the first thread.
-  - url: arazzo/youtube-channel-playlists-items-workflow.yml
-    name: YouTube Channel Playlists and Items
-    summary: Resolve a channel, list its playlists, then list the items inside the
-      first playlist.
-  - url: arazzo/youtube-copy-playlist-items-workflow.yml
-    name: YouTube Copy Playlist Items
-    summary: Create a destination playlist, read items from a source playlist, and
-      copy the first two across.
-  - url: arazzo/youtube-create-playlist-add-items-workflow.yml
-    name: YouTube Create Playlist and Add Items
-    summary: Create a new playlist and insert two videos into it in sequence.
-  - url: arazzo/youtube-discover-and-comment-workflow.yml
-    name: YouTube Discover and Comment
-    summary: Search for a video, confirm its details, then post a top-level comment
-      on it.
-  - url: arazzo/youtube-mine-channel-uploads-workflow.yml
-    name: YouTube My Channel Uploads
-    summary: Resolve the authenticated user's uploads playlist, list its items, then
-      batch-fetch video details.
-  - url: arazzo/youtube-moderate-comment-threads-workflow.yml
-    name: YouTube Moderate Comment Threads
-    summary: List held-for-review comment threads on a video and set the top one's
-      moderation status.
-  - url: arazzo/youtube-post-and-moderate-comment-workflow.yml
-    name: YouTube Post and Moderate a Comment Thread
-    summary: Post a top-level comment on a video, then immediately set its moderation
-      status.
-  - url: arazzo/youtube-post-comment-thread-reply-workflow.yml
-    name: YouTube Post Comment Thread and Reply
-    summary: Post a top-level comment on a video and then add a reply to it.
-  - url: arazzo/youtube-search-channel-subscribe-workflow.yml
-    name: YouTube Search Channel and Subscribe
-    summary: Search for a channel, confirm it exists, then subscribe the authenticated
-      user to it.
-  - url: arazzo/youtube-search-playlist-list-items-workflow.yml
-    name: YouTube Search Playlist and List Items
-    summary: Search for a playlist, read its full resource, then list the videos it
-      contains.
-  - url: arazzo/youtube-search-video-captions-workflow.yml
-    name: YouTube Search Video and List Captions
-    summary: Search for a video, read its details, then list the caption tracks available
-      on it.
-  - url: arazzo/youtube-search-video-comment-threads-workflow.yml
-    name: YouTube Search to Video Comment Threads
-    summary: Search for a video, fetch its full details, then list the comment threads
-      on it.
-  - url: arazzo/youtube-subscribe-and-confirm-workflow.yml
-    name: YouTube Subscribe and Confirm
-    summary: Subscribe the authenticated user to a channel, then confirm by listing
-      their subscriptions.
-  - url: arazzo/youtube-trending-to-playlist-workflow.yml
-    name: YouTube Trending Videos to Playlist
-    summary: Pull the most popular videos for a region, create a playlist, and add
-      the top trending video to it.
-  - url: arazzo/youtube-update-video-metadata-workflow.yml
-    name: YouTube Update Video Metadata
-    summary: Read a video's current snippet, then update its title, description, and
-      category.
-  - url: arazzo/youtube-upload-update-caption-workflow.yml
-    name: YouTube Upload and Update a Caption Track
-    summary: Upload a draft caption track for a video, then publish it by updating
-      its draft status.
-  - url: arazzo/youtube-upload-video-add-to-playlist-workflow.yml
-    name: YouTube Upload Video and Add to Playlist
-    summary: Insert a video resource, create a playlist, and add the new video to
-      that playlist.
-  - url: arazzo/youtube-video-engagement-report-workflow.yml
-    name: YouTube Video Engagement Report
-    summary: Pull a video's statistics, its top comment thread, and the replies under
-      that thread's top comment.
+- type: Arazzo
+  url: arazzo/youtube-channel-comment-threads-reply-workflow.yml
+  name: YouTube Channel Comment Threads and Reply
+- type: Arazzo
+  url: arazzo/youtube-channel-playlists-items-workflow.yml
+  name: YouTube Channel Playlists and Items
+- type: Arazzo
+  url: arazzo/youtube-copy-playlist-items-workflow.yml
+  name: YouTube Copy Playlist Items
+- type: Arazzo
+  url: arazzo/youtube-create-playlist-add-items-workflow.yml
+  name: YouTube Create Playlist and Add Items
+- type: Arazzo
+  url: arazzo/youtube-discover-and-comment-workflow.yml
+  name: YouTube Discover and Comment
+- type: Arazzo
+  url: arazzo/youtube-mine-channel-uploads-workflow.yml
+  name: YouTube My Channel Uploads
+- type: Arazzo
+  url: arazzo/youtube-moderate-comment-threads-workflow.yml
+  name: YouTube Moderate Comment Threads
+- type: Arazzo
+  url: arazzo/youtube-post-and-moderate-comment-workflow.yml
+  name: YouTube Post and Moderate a Comment Thread
+- type: Arazzo
+  url: arazzo/youtube-post-comment-thread-reply-workflow.yml
+  name: YouTube Post Comment Thread and Reply
+- type: Arazzo
+  url: arazzo/youtube-search-channel-subscribe-workflow.yml
+  name: YouTube Search Channel and Subscribe
+- type: Arazzo
+  url: arazzo/youtube-search-playlist-list-items-workflow.yml
+  name: YouTube Search Playlist and List Items
+- type: Arazzo
+  url: arazzo/youtube-search-video-captions-workflow.yml
+  name: YouTube Search Video and List Captions
+- type: Arazzo
+  url: arazzo/youtube-search-video-comment-threads-workflow.yml
+  name: YouTube Search to Video Comment Threads
+- type: Arazzo
+  url: arazzo/youtube-subscribe-and-confirm-workflow.yml
+  name: YouTube Subscribe and Confirm
+- type: Arazzo
+  url: arazzo/youtube-trending-to-playlist-workflow.yml
+  name: YouTube Trending Videos to Playlist
+- type: Arazzo
+  url: arazzo/youtube-update-video-metadata-workflow.yml
+  name: YouTube Update Video Metadata
+- type: Arazzo
+  url: arazzo/youtube-upload-update-caption-workflow.yml
+  name: YouTube Upload and Update a Caption Track
+- type: Arazzo
+  url: arazzo/youtube-upload-video-add-to-playlist-workflow.yml
+  name: YouTube Upload Video and Add to Playlist
+- type: Arazzo
+  url: arazzo/youtube-video-engagement-report-workflow.yml
+  name: YouTube Video Engagement Report
 - type: LinkedIn
   url: https://www.linkedin.com/company/youtube
 - url: https://developers.google.com/youtube/v3
@@ -656,7 +636,7 @@ common:
   type: Support
 - url: https://developers.google.com/youtube/v3/libraries
   name: SDK
-  type: SDK
+  type: SDKs
 - url: https://developers.google.com/youtube/v3/guides/authentication
   name: Authentication
   type: Authentication
@@ -692,13 +672,13 @@ common:
   type: StackOverflow
 - url: https://developers.google.com/youtube/registering_an_application
   name: Sign Up
-  type: SignUp
+  type: Signup
 - url: https://developers.google.com/youtube/v3/docs
   name: API Reference
   type: APIReference
 - url: https://developers.google.com/youtube/v3/docs/errors
   name: Errors
-  type: Errors
+  type: ErrorCodes
 - url: https://developers.google.com/youtube/terms/developer-policies
   name: Compliance
   type: Compliance
@@ -728,7 +708,7 @@ common:
   type: CodeExamples
 - url: https://github.com/youtube/youtube-ios-player-helper
   name: iOS Player Helper
-  type: SDK
+  type: SDKs
 - url: json-ld/youtube-context.jsonld
   name: JSON-LD
   type: JSONLD
