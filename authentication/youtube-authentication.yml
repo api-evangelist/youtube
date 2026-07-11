@@ -1,0 +1,37 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/youtube-analytics-openapi-original.yml, openapi/youtube-analytics-openapi.yml,
+  openapi/youtube-data-api-openapi.yml, openapi/youtube-data-openapi-original.yml, openapi/youtube-live-streaming-openapi.yml,
+  openapi/youtube-reporting-openapi.yml
+summary:
+  types:
+  - apiKey
+  - oauth2
+  api_key_in:
+  - query
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://accounts.google.com/o/oauth2/auth
+    tokenUrl: https://oauth2.googleapis.com/token
+    scopes: 4
+  description: OAuth 2.0 authentication for YouTube Analytics API
+  sources:
+  - openapi/youtube-analytics-openapi-original.yml
+  - openapi/youtube-analytics-openapi.yml
+  - openapi/youtube-data-api-openapi.yml
+  - openapi/youtube-data-openapi-original.yml
+  - openapi/youtube-live-streaming-openapi.yml
+  - openapi/youtube-reporting-openapi.yml
+- name: apiKey
+  type: apiKey
+  in: query
+  parameter: key
+  sources:
+  - openapi/youtube-data-api-openapi.yml
+  - openapi/youtube-data-openapi-original.yml
+  - openapi/youtube-live-streaming-openapi.yml

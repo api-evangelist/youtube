@@ -555,6 +555,10 @@ tags:
 - Video
 - Videos
 common:
+- type: VulnerabilityDisclosure
+  url: security/youtube-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/youtube-domain-security.yml
 - type: Authentication
   url: authentication/youtube-authentication.yml
 - type: OAuthScopes
