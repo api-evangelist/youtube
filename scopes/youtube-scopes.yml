@@ -1,0 +1,103 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/youtube-analytics-openapi-original.yml, openapi/youtube-analytics-openapi.yml,
+  openapi/youtube-data-api-openapi.yml, openapi/youtube-data-openapi-original.yml, openapi/youtube-live-streaming-openapi.yml,
+  openapi/youtube-reporting-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/youtube-analytics-openapi-original.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://accounts.google.com/o/oauth2/auth
+    tokenUrl: https://oauth2.googleapis.com/token
+  description: OAuth 2.0 authentication for YouTube Analytics API
+- name: oauth2
+  source: openapi/youtube-analytics-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://accounts.google.com/o/oauth2/auth
+    tokenUrl: https://oauth2.googleapis.com/token
+- name: oauth2
+  source: openapi/youtube-data-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://accounts.google.com/o/oauth2/auth
+    tokenUrl: https://oauth2.googleapis.com/token
+- name: OAuth2
+  source: openapi/youtube-data-openapi-original.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://accounts.google.com/o/oauth2/auth
+    tokenUrl: https://oauth2.googleapis.com/token
+  description: OAuth 2.0 authentication for YouTube Data API
+- name: oauth2
+  source: openapi/youtube-live-streaming-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://accounts.google.com/o/oauth2/auth
+    tokenUrl: https://oauth2.googleapis.com/token
+- name: oauth2
+  source: openapi/youtube-reporting-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://accounts.google.com/o/oauth2/auth
+    tokenUrl: https://oauth2.googleapis.com/token
+scopes:
+- scope: https://www.googleapis.com/auth/youtube
+  description: Manage your YouTube account
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/youtube-analytics-openapi-original.yml
+  - openapi/youtube-analytics-openapi.yml
+  - openapi/youtube-data-api-openapi.yml
+  - openapi/youtube-data-openapi-original.yml
+  - openapi/youtube-live-streaming-openapi.yml
+- scope: https://www.googleapis.com/auth/youtube.force-ssl
+  description: See, edit, and permanently delete your YouTube videos, ratings, comments and
+    captions
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/youtube-data-api-openapi.yml
+  - openapi/youtube-data-openapi-original.yml
+  - openapi/youtube-live-streaming-openapi.yml
+- scope: https://www.googleapis.com/auth/youtube.readonly
+  description: View your YouTube account
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/youtube-analytics-openapi-original.yml
+  - openapi/youtube-analytics-openapi.yml
+  - openapi/youtube-data-api-openapi.yml
+  - openapi/youtube-data-openapi-original.yml
+  - openapi/youtube-live-streaming-openapi.yml
+- scope: https://www.googleapis.com/auth/youtube.upload
+  description: Manage your YouTube videos
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/youtube-data-api-openapi.yml
+  - openapi/youtube-data-openapi-original.yml
+- scope: https://www.googleapis.com/auth/youtubepartner
+  description: View and manage your assets and associated content on YouTube
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/youtube-data-api-openapi.yml
+- scope: https://www.googleapis.com/auth/yt-analytics-monetary.readonly
+  description: View YouTube Analytics monetary reports
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/youtube-analytics-openapi-original.yml
+  - openapi/youtube-analytics-openapi.yml
+  - openapi/youtube-reporting-openapi.yml
+- scope: https://www.googleapis.com/auth/yt-analytics.readonly
+  description: View YouTube Analytics reports
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/youtube-analytics-openapi-original.yml
+  - openapi/youtube-analytics-openapi.yml
+  - openapi/youtube-reporting-openapi.yml

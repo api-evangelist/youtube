@@ -555,6 +555,10 @@ tags:
 - Video
 - Videos
 common:
+- type: Authentication
+  url: authentication/youtube-authentication.yml
+- type: OAuthScopes
+  url: scopes/youtube-scopes.yml
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/youtube/overview
 - type: Arazzo
