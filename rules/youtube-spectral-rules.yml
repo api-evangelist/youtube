@@ -1,15 +1,23 @@
-# =============================================================================
-# YouTube API Spectral Ruleset
-# Generated from analysis of YouTube Data API, Analytics API,
-# Live Streaming API, and Reporting API OpenAPI specifications
-# =============================================================================
-
+# youtube — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 6/6 servers on googleapis.com
+#   - path-params-casing: camel @ 100% (n=15)
+#   - query-params-casing: snake @ 65% (n=359)
+#   - schema-names-casing: pascal @ 100% (n=125)
+#   - schema-properties-casing: snake @ 58% (n=554)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: ErrorResponse
+#   - pagination params observed: ['maxResults', 'pageSize', 'pageToken']
+#   - merge: kept 55 existing, added 3 measured, upgraded 0
+#   - added: query-params-casing, schema-names-casing, error-schema-defined
+extends:
+  - spectral:oas
 rules:
-
-  # ---------------------------------------------------------------------------
-  # INFO / METADATA
-  # ---------------------------------------------------------------------------
-
   info-title-required:
     description: Info title must be present and non-empty
     severity: error
@@ -17,7 +25,6 @@ rules:
     then:
       field: title
       function: truthy
-
   info-title-prefix:
     description: Info title should start with "YouTube"
     severity: warn
@@ -26,7 +33,6 @@ rules:
       function: pattern
       functionOptions:
         match: ^YouTube
-
   info-description-required:
     description: Info description must be present
     severity: error
@@ -34,7 +40,6 @@ rules:
     then:
       field: description
       function: truthy
-
   info-description-min-length:
     description: Info description should be at least 50 characters
     severity: warn
@@ -43,7 +48,6 @@ rules:
       function: length
       functionOptions:
         min: 50
-
   info-version-required:
     description: API version must be specified
     severity: error
@@ -51,7 +55,6 @@ rules:
     then:
       field: version
       function: truthy
-
   info-contact-required:
     description: Contact information should be provided
     severity: warn
@@ -59,7 +62,6 @@ rules:
     then:
       field: contact
       function: truthy
-
   info-terms-of-service:
     description: Terms of service URL should be provided
     severity: info
@@ -67,11 +69,6 @@ rules:
     then:
       field: termsOfService
       function: truthy
-
-  # ---------------------------------------------------------------------------
-  # OPENAPI VERSION
-  # ---------------------------------------------------------------------------
-
   openapi-version:
     description: OpenAPI version should be 3.0.x or 3.1.x
     severity: error
@@ -81,11 +78,6 @@ rules:
       function: pattern
       functionOptions:
         match: ^3\.[01]\.\d+$
-
-  # ---------------------------------------------------------------------------
-  # SERVERS
-  # ---------------------------------------------------------------------------
-
   servers-defined:
     description: At least one server must be defined
     severity: error
@@ -93,7 +85,6 @@ rules:
     then:
       field: servers
       function: truthy
-
   servers-https:
     description: Server URLs must use HTTPS
     severity: error
@@ -102,7 +93,6 @@ rules:
       function: pattern
       functionOptions:
         match: ^https://
-
   servers-description:
     description: Each server should have a description
     severity: warn
@@ -110,7 +100,6 @@ rules:
     then:
       field: description
       function: truthy
-
   servers-googleapis-domain:
     description: Server URLs should use googleapis.com domain
     severity: info
@@ -119,55 +108,42 @@ rules:
       function: pattern
       functionOptions:
         match: googleapis\.com
-
-  # ---------------------------------------------------------------------------
-  # PATHS — NAMING CONVENTIONS
-  # ---------------------------------------------------------------------------
-
   paths-no-trailing-slash:
     description: Paths must not have trailing slashes
     severity: error
     given: $.paths
     then:
-      field: "@key"
+      field: '@key'
       function: pattern
       functionOptions:
         notMatch: .+\/$
-
   paths-no-query-strings:
     description: Paths must not include query strings
     severity: error
     given: $.paths
     then:
-      field: "@key"
+      field: '@key'
       function: pattern
       functionOptions:
         notMatch: \?
-
   paths-camel-case:
     description: YouTube paths use camelCase for resource names
     severity: warn
     given: $.paths
     then:
-      field: "@key"
+      field: '@key'
       function: pattern
       functionOptions:
         match: ^(/[a-z][a-zA-Z0-9]*(\/{[a-zA-Z]+})?)+$
-
   paths-plural-resources:
     description: Resource paths should use plural nouns
     severity: info
     given: $.paths
     then:
-      field: "@key"
+      field: '@key'
       function: pattern
       functionOptions:
         match: ^(/[a-z][a-zA-Z]*s|/[a-z][a-zA-Z]*s/|/[a-z][a-zA-Z]*(Items|Types|Reasons|Languages|Regions|Banners|Sections|Levels|Events))
-
-  # ---------------------------------------------------------------------------
-  # OPERATIONS
-  # ---------------------------------------------------------------------------
-
   operation-operationid-required:
     description: Every operation must have an operationId
     severity: error
@@ -175,16 +151,15 @@ rules:
     then:
       field: operationId
       function: truthy
-
   operation-operationid-format:
-    description: OperationId should follow youtube.resource.action or youtubeAnalytics.resource.action format
+    description: OperationId should follow youtube.resource.action or youtubeAnalytics.resource.action
+      format
     severity: warn
     given: $.paths[*][get,post,put,patch,delete].operationId
     then:
       function: pattern
       functionOptions:
         match: ^(youtube|youtubeAnalytics|youtubeReporting)\.[a-zA-Z]+\.[a-zA-Z]+$
-
   operation-summary-required:
     description: Every operation must have a summary
     severity: error
@@ -192,7 +167,6 @@ rules:
     then:
       field: summary
       function: truthy
-
   operation-summary-prefix:
     description: Operation summaries should start with "Youtube" prefix
     severity: warn
@@ -201,7 +175,6 @@ rules:
       function: pattern
       functionOptions:
         match: ^Youtube
-
   operation-summary-title-case:
     description: Operation summaries should use Title Case
     severity: warn
@@ -209,8 +182,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^[A-Z][a-zA-Z]+(\\s[A-Za-z]+)*$"
-
+        match: ^[A-Z][a-zA-Z]+(\s[A-Za-z]+)*$
   operation-description-required:
     description: Every operation must have a description
     severity: error
@@ -218,7 +190,6 @@ rules:
     then:
       field: description
       function: truthy
-
   operation-tags-required:
     description: Every operation must have at least one tag
     severity: error
@@ -226,7 +197,6 @@ rules:
     then:
       field: tags
       function: truthy
-
   operation-single-tag:
     description: Operations should have exactly one tag
     severity: info
@@ -235,11 +205,6 @@ rules:
       function: length
       functionOptions:
         max: 1
-
-  # ---------------------------------------------------------------------------
-  # TAGS
-  # ---------------------------------------------------------------------------
-
   tags-defined:
     description: Global tags array should be defined
     severity: warn
@@ -247,7 +212,6 @@ rules:
     then:
       field: tags
       function: truthy
-
   tags-description:
     description: Each tag should have a description
     severity: warn
@@ -255,7 +219,6 @@ rules:
     then:
       field: description
       function: truthy
-
   tags-pascal-case:
     description: Tag names should use PascalCase (YouTube convention)
     severity: warn
@@ -264,11 +227,6 @@ rules:
       function: pattern
       functionOptions:
         match: ^[A-Z][a-zA-Z0-9]+$
-
-  # ---------------------------------------------------------------------------
-  # PARAMETERS
-  # ---------------------------------------------------------------------------
-
   parameter-description-required:
     description: Every parameter must have a description
     severity: error
@@ -276,7 +234,6 @@ rules:
     then:
       field: description
       function: truthy
-
   parameter-schema-required:
     description: Every parameter must have a schema
     severity: error
@@ -284,7 +241,6 @@ rules:
     then:
       field: schema
       function: truthy
-
   parameter-camel-case:
     description: Parameter names should use camelCase (YouTube convention)
     severity: warn
@@ -293,7 +249,6 @@ rules:
       function: pattern
       functionOptions:
         match: ^[a-z][a-zA-Z0-9]*$
-
   parameter-example:
     description: Parameters should have example values
     severity: info
@@ -301,7 +256,6 @@ rules:
     then:
       field: example
       function: truthy
-
   parameter-pagination-naming:
     description: Pagination should use pageToken and maxResults (YouTube convention)
     severity: info
@@ -311,11 +265,6 @@ rules:
       function: pattern
       functionOptions:
         match: ^(pageToken|maxResults|pageSize)$
-
-  # ---------------------------------------------------------------------------
-  # REQUEST BODIES
-  # ---------------------------------------------------------------------------
-
   request-body-json:
     description: Request bodies should use application/json content type
     severity: warn
@@ -323,11 +272,6 @@ rules:
     then:
       field: application/json
       function: truthy
-
-  # ---------------------------------------------------------------------------
-  # RESPONSES
-  # ---------------------------------------------------------------------------
-
   response-success-required:
     description: Every operation must have a 2xx success response
     severity: error
@@ -337,10 +281,12 @@ rules:
       functionOptions:
         schema:
           anyOf:
-            - required: ["200"]
-            - required: ["201"]
-            - required: ["204"]
-
+          - required:
+            - '200'
+          - required:
+            - '201'
+          - required:
+            - '204'
   response-description-required:
     description: Every response must have a description
     severity: error
@@ -348,7 +294,6 @@ rules:
     then:
       field: description
       function: truthy
-
   response-json-content:
     description: Success responses should use application/json
     severity: warn
@@ -356,7 +301,6 @@ rules:
     then:
       field: application/json
       function: truthy
-
   response-examples:
     description: Responses should include named examples for Microcks compatibility
     severity: info
@@ -364,11 +308,6 @@ rules:
     then:
       field: examples
       function: truthy
-
-  # ---------------------------------------------------------------------------
-  # SCHEMAS — PROPERTY NAMING
-  # ---------------------------------------------------------------------------
-
   schema-description:
     description: Top-level schemas should have descriptions
     severity: warn
@@ -376,7 +315,6 @@ rules:
     then:
       field: description
       function: truthy
-
   schema-type-required:
     description: Schema properties must define a type
     severity: error
@@ -386,22 +324,25 @@ rules:
       functionOptions:
         schema:
           anyOf:
-            - required: ["type"]
-            - required: ["$ref"]
-            - required: ["allOf"]
-            - required: ["oneOf"]
-            - required: ["anyOf"]
-
+          - required:
+            - type
+          - required:
+            - $ref
+          - required:
+            - allOf
+          - required:
+            - oneOf
+          - required:
+            - anyOf
   schema-property-camel-case:
     description: Schema property names should use camelCase (YouTube convention)
     severity: warn
     given: $.components.schemas[*].properties
     then:
-      field: "@key"
+      field: '@key'
       function: pattern
       functionOptions:
         match: ^[a-z][a-zA-Z0-9]*$
-
   schema-kind-property:
     description: YouTube resource schemas should include a kind property
     severity: info
@@ -409,7 +350,6 @@ rules:
     then:
       field: kind
       function: truthy
-
   schema-etag-property:
     description: YouTube resource schemas should include an etag property
     severity: info
@@ -417,7 +357,6 @@ rules:
     then:
       field: etag
       function: truthy
-
   schema-property-example:
     description: Schema properties should have example values
     severity: info
@@ -427,14 +366,12 @@ rules:
       functionOptions:
         schema:
           anyOf:
-            - required: ["example"]
-            - required: ["$ref"]
-            - required: ["enum"]
-
-  # ---------------------------------------------------------------------------
-  # SECURITY
-  # ---------------------------------------------------------------------------
-
+          - required:
+            - example
+          - required:
+            - $ref
+          - required:
+            - enum
   security-global-defined:
     description: Global security must be defined
     severity: error
@@ -442,7 +379,6 @@ rules:
     then:
       field: security
       function: truthy
-
   security-schemes-defined:
     description: Security schemes must be defined in components
     severity: error
@@ -450,7 +386,6 @@ rules:
     then:
       field: securitySchemes
       function: truthy
-
   security-oauth2-scheme:
     description: YouTube APIs should use OAuth 2.0 authentication
     severity: warn
@@ -458,7 +393,6 @@ rules:
     then:
       field: oauth2
       function: truthy
-
   security-api-key-scheme:
     description: YouTube APIs should support API key authentication for read operations
     severity: info
@@ -466,11 +400,6 @@ rules:
     then:
       field: apiKey
       function: truthy
-
-  # ---------------------------------------------------------------------------
-  # HTTP METHOD CONVENTIONS
-  # ---------------------------------------------------------------------------
-
   http-get-no-body:
     description: GET operations must not have a request body
     severity: error
@@ -478,7 +407,6 @@ rules:
     then:
       field: requestBody
       function: falsy
-
   http-delete-no-body:
     description: DELETE operations must not have a request body
     severity: error
@@ -486,7 +414,6 @@ rules:
     then:
       field: requestBody
       function: falsy
-
   http-post-has-body:
     description: POST operations should have a request body
     severity: warn
@@ -494,7 +421,6 @@ rules:
     then:
       field: requestBody
       function: truthy
-
   http-put-has-body:
     description: PUT operations should have a request body
     severity: warn
@@ -502,11 +428,6 @@ rules:
     then:
       field: requestBody
       function: truthy
-
-  # ---------------------------------------------------------------------------
-  # MICROCKS COMPATIBILITY
-  # ---------------------------------------------------------------------------
-
   microcks-operation-extension:
     description: Operations should have x-microcks-operation for mock server compatibility
     severity: info
@@ -514,18 +435,12 @@ rules:
     then:
       field: x-microcks-operation
       function: truthy
-
-  # ---------------------------------------------------------------------------
-  # GENERAL QUALITY
-  # ---------------------------------------------------------------------------
-
   no-empty-descriptions:
     description: Descriptions must not be empty strings
     severity: error
     given: $..description
     then:
       function: truthy
-
   deprecated-documented:
     description: Deprecated operations should have a description explaining the deprecation
     severity: warn
@@ -533,11 +448,35 @@ rules:
     then:
       field: description
       function: truthy
-
   list-response-items-array:
     description: List responses should contain an items array (YouTube convention)
     severity: info
     given: $.components.schemas[?(@.properties.nextPageToken)].properties
     then:
       field: items
+      function: truthy
+  query-params-casing:
+    description: Query parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: snake
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  error-schema-defined:
+    description: A shared error schema (ErrorResponse) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: ErrorResponse
       function: truthy
