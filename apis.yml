@@ -555,6 +555,8 @@ tags:
 - Video
 - Videos
 common:
+- type: AgenticAccess
+  url: agentic-access/youtube-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/youtube-vulnerability-disclosure.yml
 - type: DomainSecurity
