@@ -1,0 +1,79 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  Derived from the 400/401/403/404/204 responses across openapi/youtube-*-openapi.yml,
+  then enriched from the error reference at
+  https://developers.google.com/youtube/v3/docs/errors
+docs: https://developers.google.com/youtube/v3/docs/errors
+format: google-json
+description: >-
+  YouTube (Google) APIs do not use RFC 9457 application/problem+json. Errors are
+  returned in Google's standard JSON error envelope with a top-level `error`
+  object carrying an integer `code` (HTTP status), a human `message`, and an
+  `errors[]` array where each item has `domain`, `reason` (the machine code),
+  `message`, and optionally `location`/`locationType`.
+envelope:
+  field: error
+  shape: '{ error: { code: <int>, message: <string>, errors: [ { domain, reason, message, location?, locationType? } ] } }'
+problems:
+- status: 400
+  reason: badRequest
+  title: Bad request
+  remediation: One or more request parameters are invalid or a required field is missing; validate parameter names, values, and the `part` list.
+- status: 400
+  reason: invalidValue
+  title: Invalid value
+  remediation: A supplied field or parameter value is not allowed; check enums and formats.
+- status: 400
+  reason: missingRequiredParameter
+  title: Missing required parameter
+  remediation: Provide the required request parameter (for example `part`).
+- status: 400
+  reason: incompatibleParameters
+  title: Incompatible parameters
+  remediation: Two or more mutually exclusive parameters were combined; send only one.
+- status: 401
+  reason: authError
+  title: Invalid credentials
+  remediation: The access token is missing, malformed, or expired; refresh the OAuth 2.0 token.
+- status: 403
+  reason: forbidden
+  title: Forbidden
+  remediation: The authenticated user or key lacks permission for the resource or operation.
+- status: 403
+  reason: insufficientPermissions
+  title: Insufficient permissions
+  remediation: The granted OAuth scopes do not cover this request; request the scope from scopes/youtube-scopes.yml.
+- status: 403
+  reason: quotaExceeded
+  title: Quota exceeded
+  remediation: The daily quota (default 10,000 units) is exhausted; reduce usage or request a quota increase in the Google Cloud console.
+- status: 403
+  reason: rateLimitExceeded
+  title: Rate limit exceeded
+  remediation: Too many requests in a short window; back off and retry with exponential backoff.
+- status: 403
+  reason: youtubeSignupRequired
+  title: YouTube signup required
+  remediation: The Google account has no associated YouTube channel; the user must create a channel.
+- status: 403
+  reason: accountDelegationForbidden
+  title: Account delegation forbidden
+  remediation: The request may not act on behalf of the specified account.
+- status: 404
+  reason: notFound
+  title: Not found
+  remediation: The requested resource (video, channel, playlist, etc.) does not exist or is not visible to the caller.
+- status: 409
+  reason: conflict
+  title: Conflict
+  remediation: The resource already exists or the request conflicts with current state.
+- status: 429
+  reason: tooManyRequests
+  title: Too many requests
+  remediation: Rate limit exceeded at the transport layer; apply exponential backoff.
+- status: 500
+  reason: backendError
+  title: Backend error
+  remediation: Transient server-side error; retry with exponential backoff.
+sources_operations: openapi/youtube-data-api-openapi.yml, openapi/youtube-analytics-openapi.yml, openapi/youtube-live-streaming-openapi.yml, openapi/youtube-reporting-openapi.yml

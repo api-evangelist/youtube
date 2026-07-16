@@ -624,6 +624,36 @@ common:
 - type: Arazzo
   url: arazzo/youtube-video-engagement-report-workflow.yml
   name: YouTube Video Engagement Report
+- type: Packages
+  url: packages/youtube-packages.yml
+- type: WellKnown
+  url: well-known/youtube-well-known.yml
+- type: MCPServer
+  url: mcp/youtube-mcp.yml
+- type: LLMsTxt
+  url: llms/youtube-llms.txt
+- type: Overlay
+  url: overlays/youtube-data-api-overlay.yaml
+- type: Overlay
+  url: overlays/youtube-analytics-overlay.yaml
+- type: Overlay
+  url: overlays/youtube-live-streaming-overlay.yaml
+- type: Overlay
+  url: overlays/youtube-reporting-overlay.yaml
+- type: Conformance
+  url: conformance/youtube-conformance.yml
+- type: ErrorCatalog
+  url: errors/youtube-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/youtube-lifecycle.yml
+- type: ChangeLog
+  url: changelog/youtube-changelog.yml
+- type: Conventions
+  url: conventions/youtube-conventions.yml
+- type: Components
+  url: components/youtube-components.yml
+- type: DataModel
+  url: data-model/youtube-data-model.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/youtube
 - url: https://developers.google.com/youtube/v3
@@ -861,7 +891,7 @@ common:
     description: Embed YouTube videos in Google Docs, Slides, and Sites for collaborative
       content.
 created: '2025-07-29'
-modified: '2026-05-19'
+modified: '2026-06-20'
 description: YouTube APIs provide programmatic access to YouTube data including videos,
   playlists, channels, user interactions, live streaming, analytics, captions, and
   embedded player controls.

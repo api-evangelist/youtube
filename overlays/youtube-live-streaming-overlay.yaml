@@ -1,0 +1,22 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for YouTube Live Streaming API
+  version: 1.0.0
+extends: openapi/youtube-live-streaming-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: youtube
+    x-apievangelist-enriched: '2026-06-20'
+    x-apievangelist-artifacts:
+      authentication: authentication/youtube-authentication.yml
+      scopes: scopes/youtube-scopes.yml
+      errors: errors/youtube-problem-types.yml
+      conventions: conventions/youtube-conventions.yml
+      lifecycle: lifecycle/youtube-lifecycle.yml
+      data-model: data-model/youtube-data-model.yml
+      agentic-access: agentic-access/youtube-agentic-access.yml
+- target: $.info
+  update:
+    x-apievangelist-quota-model: daily-quota-units
+    x-apievangelist-error-format: google-json

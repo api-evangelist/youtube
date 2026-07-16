@@ -1,0 +1,37 @@
+generated: '2026-06-20'
+method: searched
+source: live probes of YouTube/Google API + OAuth hosts
+description: >-
+  Well-known discovery documents probed across the YouTube API hosts and the
+  Google identity host used by the OAuth 2.0 flows declared in the OpenAPI.
+  The YouTube API hosts (www.googleapis.com, youtubeanalytics.googleapis.com,
+  youtubereporting.googleapis.com) expose no /.well-known/ surface; identity
+  discovery lives on accounts.google.com.
+hosts:
+- host: https://accounts.google.com
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: youtube-accounts-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: youtube-accounts-oauth-authorization-server.json
+- host: https://www.googleapis.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://youtubeanalytics.googleapis.com
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://developers.google.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /llms.txt
+    status: 404
+notes: >-
+  A security.txt IS published at the organization apex (https://google.com/.well-known/security.txt,
+  Policy https://g.co/vrp) and is captured in security/youtube-vulnerability-disclosure.yml.

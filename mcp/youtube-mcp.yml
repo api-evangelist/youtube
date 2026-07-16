@@ -1,0 +1,65 @@
+generated: '2026-06-20'
+method: derived
+status: candidate
+source: >-
+  No official YouTube/Google-hosted MCP server was found in the docs, the
+  @modelcontextprotocol npm scope, or public MCP registries as of 2026-06-20.
+  This candidate tool list is derived one-tool-per-operationId from the repo
+  OpenAPI, as a starting point for exposing the YouTube APIs over MCP.
+server:
+  name: youtube
+  transport: http
+  url: null
+tools:
+- name: youtube_videos_list
+  description: List / retrieve YouTube videos by id, chart, or myRating.
+  source_operation: openapi/youtube-data-api-openapi.yml#youtube.videos.list
+- name: youtube_videos_insert
+  description: Upload a new video.
+  source_operation: openapi/youtube-data-api-openapi.yml#youtube.videos.insert
+- name: youtube_videos_update
+  description: Update a video's metadata.
+  source_operation: openapi/youtube-data-api-openapi.yml#youtube.videos.update
+- name: youtube_videos_rate
+  description: Like, dislike, or remove a rating on a video.
+  source_operation: openapi/youtube-data-api-openapi.yml#youtube.videos.rate
+- name: youtube_search_list
+  description: Search videos, channels, and playlists.
+  source_operation: openapi/youtube-data-api-openapi.yml#youtube.search.list
+- name: youtube_channels_list
+  description: Retrieve channel metadata, statistics, and settings.
+  source_operation: openapi/youtube-data-api-openapi.yml#youtube.channels.list
+- name: youtube_playlists_list
+  description: List playlists for a channel or the authenticated user.
+  source_operation: openapi/youtube-data-api-openapi.yml#youtube.playlists.list
+- name: youtube_playlist_items_insert
+  description: Add a video to a playlist.
+  source_operation: openapi/youtube-data-api-openapi.yml#youtube.playlistItems.insert
+- name: youtube_subscriptions_insert
+  description: Subscribe the authenticated user to a channel.
+  source_operation: openapi/youtube-data-api-openapi.yml#youtube.subscriptions.insert
+- name: youtube_comment_threads_list
+  description: List comment threads on a video or channel.
+  source_operation: openapi/youtube-data-api-openapi.yml#youtube.commentThreads.list
+- name: youtube_comments_insert
+  description: Post a comment reply.
+  source_operation: openapi/youtube-data-api-openapi.yml#youtube.comments.insert
+- name: youtube_captions_list
+  description: List caption tracks for a video.
+  source_operation: openapi/youtube-data-api-openapi.yml#youtube.captions.list
+- name: youtube_analytics_reports_query
+  description: Query YouTube Analytics reports by dimensions and metrics.
+  source_operation: openapi/youtube-analytics-openapi.yml#youtubeAnalytics.reports.query
+- name: youtube_reporting_jobs_list
+  description: List YouTube Reporting bulk-report jobs.
+  source_operation: openapi/youtube-reporting-openapi.yml#youtubeReporting.jobs.list
+- name: youtube_live_broadcasts_list
+  description: List live broadcasts.
+  source_operation: openapi/youtube-live-streaming-openapi.yml#youtube.liveBroadcasts.list
+- name: youtube_live_broadcasts_transition
+  description: Transition a broadcast between testing, live, and complete states.
+  source_operation: openapi/youtube-live-streaming-openapi.yml#youtube.liveBroadcasts.transition
+notes: >-
+  Full operation set (64 across the four specs) is enumerable from the OpenAPI;
+  the above is a representative candidate surface. See agentic-access/youtube-agentic-access.yml
+  for per-operation execution-contract classification.

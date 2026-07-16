@@ -1,0 +1,81 @@
+generated: '2026-06-20'
+method: derived
+source: arazzo/*workflow.yml
+count: 19
+workflows:
+- file: youtube-channel-comment-threads-reply-workflow.yml
+  workflowId: channel-comment-threads-reply
+  title: YouTube Channel Comment Threads and Reply
+  summary: Surface channel comment threads and reply to the first one.
+- file: youtube-channel-playlists-items-workflow.yml
+  workflowId: channel-playlists-items
+  title: YouTube Channel Playlists and Items
+  summary: Drill from a channel into its playlists and the items of the first one.
+- file: youtube-copy-playlist-items-workflow.yml
+  workflowId: copy-playlist-items
+  title: YouTube Copy Playlist Items
+  summary: Clone the first two items of a source playlist into a new playlist.
+- file: youtube-create-playlist-add-items-workflow.yml
+  workflowId: create-playlist-add-items
+  title: YouTube Create Playlist and Add Items
+  summary: Create a playlist and populate it with two videos.
+- file: youtube-discover-and-comment-workflow.yml
+  workflowId: discover-and-comment
+  title: YouTube Discover and Comment
+  summary: Find a video by query and post a comment on it.
+- file: youtube-mine-channel-uploads-workflow.yml
+  workflowId: mine-channel-uploads
+  title: YouTube My Channel Uploads
+  summary: List the authenticated user's uploads and inspect the latest video.
+- file: youtube-moderate-comment-threads-workflow.yml
+  workflowId: moderate-comment-threads
+  title: YouTube Moderate Comment Threads
+  summary: Review held comments on a video and moderate the first one.
+- file: youtube-post-and-moderate-comment-workflow.yml
+  workflowId: post-and-moderate-comment
+  title: YouTube Post and Moderate a Comment Thread
+  summary: Create a top-level comment and apply a moderation status to it.
+- file: youtube-post-comment-thread-reply-workflow.yml
+  workflowId: post-comment-thread-reply
+  title: YouTube Post Comment Thread and Reply
+  summary: Create a top-level comment thread, then reply to its top-level comment.
+- file: youtube-search-channel-subscribe-workflow.yml
+  workflowId: search-channel-subscribe
+  title: YouTube Search Channel and Subscribe
+  summary: Find a channel by query and subscribe to it.
+- file: youtube-search-playlist-list-items-workflow.yml
+  workflowId: search-playlist-list-items
+  title: YouTube Search Playlist and List Items
+  summary: Find a playlist by query and enumerate its items.
+- file: youtube-search-video-captions-workflow.yml
+  workflowId: search-video-captions
+  title: YouTube Search Video and List Captions
+  summary: Find a video and enumerate its caption tracks.
+- file: youtube-search-video-comment-threads-workflow.yml
+  workflowId: search-video-comment-threads
+  title: YouTube Search to Video Comment Threads
+  summary: Find a video by query and surface its details and comment threads.
+- file: youtube-subscribe-and-confirm-workflow.yml
+  workflowId: subscribe-and-confirm
+  title: YouTube Subscribe and Confirm
+  summary: Create a subscription and verify it by listing the user's subscriptions.
+- file: youtube-trending-to-playlist-workflow.yml
+  workflowId: trending-to-playlist
+  title: YouTube Trending Videos to Playlist
+  summary: Capture the top trending video and save it into a new playlist.
+- file: youtube-update-video-metadata-workflow.yml
+  workflowId: update-video-metadata
+  title: YouTube Update Video Metadata
+  summary: Fetch a video then patch its snippet metadata.
+- file: youtube-upload-update-caption-workflow.yml
+  workflowId: upload-update-caption
+  title: YouTube Upload and Update a Caption Track
+  summary: Insert a draft caption track and then publish it.
+- file: youtube-upload-video-add-to-playlist-workflow.yml
+  workflowId: upload-video-add-to-playlist
+  title: YouTube Upload Video and Add to Playlist
+  summary: Insert a video, create a playlist, and place the video in it.
+- file: youtube-video-engagement-report-workflow.yml
+  workflowId: video-engagement-report
+  title: YouTube Video Engagement Report
+  summary: Combine video stats with its top comment thread and replies.

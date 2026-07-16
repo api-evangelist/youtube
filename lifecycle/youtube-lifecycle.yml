@@ -1,0 +1,30 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developers.google.com/youtube/v3/revision_history,
+  https://developers.google.com/youtube/terms/deprecation-policy,
+  https://status.cloud.google.com
+description: Versioning, deprecation, SLA, and status posture for the YouTube (Google) APIs.
+versioning:
+  scheme: uri-path
+  current: v3
+  detail: >-
+    YouTube Data API is v3 (path /youtube/v3); Analytics is v2 (/v2); Reporting is
+    v1 (/v1); Content ID/Partner is v1. Version is pinned in the URI path.
+  docs: https://developers.google.com/youtube/v3/getting-started
+deprecation:
+  policy_url: https://developers.google.com/youtube/terms/deprecation-policy
+  announcement: revision history + Google API deprecation policy (typically 1 year notice for API Services)
+  sunset_header: false
+  detail: >-
+    Deprecations and removals are communicated through the revision history and the
+    developer policies; the API does not emit RFC 8594 Sunset/Deprecation headers.
+sla:
+  url: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  uptime_target: null
+  detail: Governed by the YouTube API Services Terms of Service; no numeric public SLA for the free tier.
+status_page: https://status.cloud.google.com
+quota_note: >-
+  Access is metered by a daily quota-unit budget (default 10,000 units/day for the
+  Data API); see rate-limits/youtube-rate-limits.yml.
+deprecated_operations: []

@@ -1,0 +1,40 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from openapi/youtube-*-openapi.yml securitySchemes and response shapes,
+  the OAuth discovery docs in well-known/, and the Google API design conventions.
+description: >-
+  Cross-cutting standards conformance for the YouTube (Google) APIs. Google APIs
+  follow their own AIP design guide rather than JSON:API / OData / RFC 9457.
+standards:
+- id: oauth2
+  conforms: true
+  evidence: OpenAPI securitySchemes declare oauth2 authorizationCode flow (accounts.google.com/o/oauth2/auth, oauth2.googleapis.com/token).
+- id: oidc
+  conforms: true
+  evidence: accounts.google.com publishes /.well-known/openid-configuration (see well-known/youtube-accounts-openid-configuration.json).
+- id: oauth-authorization-server-metadata-rfc8414
+  conforms: true
+  evidence: accounts.google.com publishes /.well-known/oauth-authorization-server.
+- id: api-keys
+  conforms: true
+  evidence: apiKey scheme (key parameter in query) for public read-only data.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Uses Google JSON error envelope (error.code/message/errors[]), not application/problem+json. See errors/youtube-problem-types.yml.
+- id: json-api
+  conforms: false
+- id: odata
+  conforms: false
+- id: pagination-cursor
+  conforms: true
+  evidence: Token-based paging via pageToken request param and nextPageToken/prevPageToken response fields.
+- id: partial-response-fieldmask
+  conforms: true
+  evidence: Google `fields` parameter and required `part` parameter select the response payload.
+- id: rest
+  conforms: true
+  evidence: Resource-oriented JSON over HTTPS following the Google API AIP conventions.
+- id: rfc8594-sunset-deprecation-headers
+  conforms: false
+  evidence: Deprecations are announced via the revision history / dashboards, not Sunset/Deprecation HTTP headers.

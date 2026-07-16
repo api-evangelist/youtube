@@ -1,0 +1,72 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developers.google.com/youtube/v3/libraries and the Google API client
+  library registries. YouTube APIs are consumed through Google's general-purpose,
+  first-party API client libraries (the same libraries used across all Google
+  Discovery-based APIs); YouTube does not publish YouTube-specific SDK packages.
+description: >-
+  Official Google API client libraries that carry the YouTube Data, Analytics,
+  Reporting, and Live Streaming APIs, plus the first-party embed/player JS
+  libraries. Marked official:true only for Google-published packages.
+packages:
+- language: python
+  registry: pypi
+  name: google-api-python-client
+  url: https://pypi.org/project/google-api-python-client/
+  install: pip install google-api-python-client
+  official: true
+  notes: Discovery client; build('youtube','v3', ...), youtubeAnalytics 'v2', youtubereporting 'v1'.
+- language: javascript
+  registry: npm
+  name: googleapis
+  url: https://www.npmjs.com/package/googleapis
+  install: npm install googleapis
+  official: true
+  notes: Node.js client exposing google.youtube('v3'), youtubeAnalytics, youtubereporting.
+- language: php
+  registry: packagist
+  name: google/apiclient
+  url: https://packagist.org/packages/google/apiclient
+  install: composer require google/apiclient
+  official: true
+  notes: Google_Service_YouTube, Google_Service_YouTubeAnalytics, Google_Service_YouTubeReporting.
+- language: ruby
+  registry: rubygems
+  name: google-apis-youtube_v3
+  url: https://rubygems.org/gems/google-apis-youtube_v3
+  install: gem install google-apis-youtube_v3
+  official: true
+  notes: Google Cloud auto-generated per-API gem; siblings youtube_analytics_v2, youtube_partner_v1.
+- language: java
+  registry: maven
+  name: com.google.apis:google-api-services-youtube
+  url: https://central.sonatype.com/artifact/com.google.apis/google-api-services-youtube
+  install: 'implementation("com.google.apis:google-api-services-youtube:v3-rev+")'
+  official: true
+- language: dotnet
+  registry: nuget
+  name: Google.Apis.YouTube.v3
+  url: https://www.nuget.org/packages/Google.Apis.YouTube.v3
+  install: dotnet add package Google.Apis.YouTube.v3
+  official: true
+- language: go
+  registry: pkg.go.dev
+  name: google.golang.org/api/youtube/v3
+  url: https://pkg.go.dev/google.golang.org/api/youtube/v3
+  install: go get google.golang.org/api/youtube/v3
+  official: true
+- language: javascript
+  registry: web
+  name: IFrame Player API
+  url: https://www.youtube.com/iframe_api
+  install: '<script src="https://www.youtube.com/iframe_api"></script>'
+  official: true
+  notes: First-party embeddable player JS; not a registry package. See components/youtube-components.yml.
+- language: swift
+  registry: cocoapods
+  name: youtube-ios-player-helper
+  url: https://github.com/youtube/youtube-ios-player-helper
+  install: pod 'youtube-ios-player-helper'
+  official: true
+  notes: First-party iOS helper wrapping the IFrame Player API (repo youtube/youtube-ios-player-helper).

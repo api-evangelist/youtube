@@ -1,0 +1,42 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developers.google.com/youtube/iframe_api_reference,
+  https://developers.google.com/youtube/player_parameters,
+  https://developers.google.com/youtube/subscribe,
+  https://www.youtube.com/oembed
+description: >-
+  First-party client-side / embeddable UI components published by YouTube for
+  embedding video playback and channel actions in external web pages. Distinct
+  from the server-side API client libraries in packages/youtube-packages.yml.
+families:
+- family: Player
+  components:
+  - name: IFrame Player API
+    kind: embeddable-js-player
+    loader: https://www.youtube.com/iframe_api
+    docs: https://developers.google.com/youtube/iframe_api_reference
+    description: JavaScript-controlled embedded player (queue/play, volume, playback state events) rendered in an iframe.
+  - name: Player parameters
+    kind: embed-configuration
+    docs: https://developers.google.com/youtube/player_parameters
+    description: URL/iframe parameters that configure embedded player behavior (autoplay, controls, start time, captions).
+  - name: youtube-ios-player-helper
+    kind: native-embed-helper
+    loader: 'pod youtube-ios-player-helper'
+    docs: https://github.com/youtube/youtube-ios-player-helper
+    description: First-party iOS wrapper embedding the IFrame Player in a WKWebView-backed view.
+- family: Channel actions
+  components:
+  - name: Subscribe Button
+    kind: embeddable-widget
+    loader: https://apis.google.com/js/platform.js
+    docs: https://developers.google.com/youtube/subscribe
+    description: Configurable embeddable button enabling one-click channel subscription without leaving the host page.
+- family: Embed metadata
+  components:
+  - name: oEmbed endpoint
+    kind: oembed
+    loader: https://www.youtube.com/oembed
+    docs: https://oembed.com/
+    description: Returns embed HTML and metadata (JSON/XML) for a YouTube video URL for use by external embedders.

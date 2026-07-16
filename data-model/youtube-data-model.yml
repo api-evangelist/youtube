@@ -1,0 +1,118 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from openapi/youtube-*-openapi.yml and json-schema/ resource shapes:
+  $ref links and id-reference fields (channelId, videoId, playlistId,
+  resourceId.videoId, parentId) form the relationships.
+docs: https://developers.google.com/youtube/v3/docs
+description: >-
+  Entity-relationship graph for the YouTube Data, Live Streaming, and Analytics
+  resources. IDs are opaque strings; there are no typed id-prefixes.
+entities:
+- name: Channel
+  id_field: id
+  relationships:
+  - has_many: Video
+    via: snippet.channelId
+  - has_many: Playlist
+    via: snippet.channelId
+  - has_many: Subscription
+    via: snippet.channelId
+- name: Video
+  id_field: id
+  relationships:
+  - belongs_to: Channel
+    via: snippet.channelId
+  - belongs_to: VideoCategory
+    via: snippet.categoryId
+  - has_many: Caption
+    via: videoId
+  - has_many: CommentThread
+    via: snippet.videoId
+- name: Playlist
+  id_field: id
+  relationships:
+  - belongs_to: Channel
+    via: snippet.channelId
+  - has_many: PlaylistItem
+    via: playlistId
+- name: PlaylistItem
+  id_field: id
+  relationships:
+  - belongs_to: Playlist
+    via: snippet.playlistId
+  - has_one: Video
+    via: contentDetails.videoId
+- name: Subscription
+  id_field: id
+  relationships:
+  - belongs_to: Channel
+    via: snippet.resourceId.channelId
+- name: CommentThread
+  id_field: id
+  relationships:
+  - belongs_to: Video
+    via: snippet.videoId
+  - belongs_to: Channel
+    via: snippet.channelId
+  - has_one: Comment
+    via: snippet.topLevelComment
+  - has_many: Comment
+    via: replies.comments
+- name: Comment
+  id_field: id
+  relationships:
+  - belongs_to: CommentThread
+    via: snippet.parentId
+  - belongs_to: Channel
+    via: snippet.authorChannelId
+- name: Caption
+  id_field: id
+  relationships:
+  - belongs_to: Video
+    via: snippet.videoId
+- name: VideoCategory
+  id_field: id
+- name: SearchResult
+  id_field: id.videoId | id.channelId | id.playlistId
+  relationships:
+  - has_one: Video
+    via: id.videoId
+  - has_one: Channel
+    via: id.channelId
+  - has_one: Playlist
+    via: id.playlistId
+- name: LiveBroadcast
+  id_field: id
+  relationships:
+  - belongs_to: Channel
+    via: snippet.channelId
+  - has_one: LiveStream
+    via: contentDetails.boundStreamId
+- name: LiveStream
+  id_field: id
+  relationships:
+  - belongs_to: Channel
+    via: snippet.channelId
+- name: LiveChatMessage
+  id_field: id
+  relationships:
+  - belongs_to: LiveBroadcast
+    via: snippet.liveChatId
+- name: Group
+  id_field: id
+  relationships:
+  - has_many: GroupItem
+    via: groupId
+- name: GroupItem
+  id_field: id
+  relationships:
+  - belongs_to: Group
+    via: groupId
+- name: ReportingJob
+  id_field: id
+  relationships:
+  - has_one: ReportType
+    via: reportTypeId
+  - has_many: Report
+    via: jobId

@@ -1,0 +1,50 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  Derived from openapi/youtube-*-openapi.yml plus the Google API design
+  conventions and the YouTube docs (getting-started, authentication, quota_cost).
+description: >-
+  Cross-cutting request/response semantics for the YouTube (Google) APIs, common
+  across the Data, Analytics, Reporting, and Live Streaming services.
+authentication:
+  style: OAuth 2.0 (authorizationCode) for user data; API key (query param `key`) for public read-only data.
+  detail: See authentication/youtube-authentication.yml and scopes/youtube-scopes.yml.
+part_parameter:
+  required: true
+  detail: >-
+    Most read/write operations require a `part` parameter naming the resource
+    sub-objects to return or write (for example snippet,contentDetails,statistics).
+    Quota cost and payload are shaped by the parts requested.
+field_selection:
+  param: fields
+  detail: Google partial-response `fields` parameter filters the response to selected properties.
+pagination:
+  style: token
+  request_params: [pageToken, maxResults]
+  response_fields: [nextPageToken, prevPageToken, pageInfo.totalResults, pageInfo.resultsPerPage]
+  detail: Opaque forward/backward page tokens; no offset paging.
+idempotency:
+  header: null
+  detail: >-
+    No idempotency-key header. Writes are REST verbs (insert=POST, update=PUT,
+    delete=DELETE); id-scoped update/delete are naturally idempotent.
+versioning:
+  style: uri-path
+  detail: Version pinned in the path (v3/v2/v1). See lifecycle/youtube-lifecycle.yml.
+request_tracing:
+  header: null
+  detail: No documented client request-id echo header; errors carry no correlation id in the envelope.
+error_envelope:
+  format: google-json
+  field: error
+  detail: '{ error: { code, message, errors: [ { domain, reason, message } ] } }. See errors/youtube-problem-types.yml.'
+rate_limiting:
+  model: daily-quota-units
+  detail: >-
+    Metered by daily quota units (default 10,000/day for the Data API), not
+    per-second request headers; 403 quotaExceeded / rateLimitExceeded signal
+    exhaustion. See rate-limits/youtube-rate-limits.yml.
+data_formats:
+  request: application/json
+  response: application/json
+  notes: Reporting API delivers bulk report datasets as downloadable CSV.
