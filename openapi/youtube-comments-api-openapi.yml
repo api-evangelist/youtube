@@ -1,0 +1,945 @@
+openapi: 3.1.0
+info:
+  title: YouTube Analytics Analytics Groups Comments API
+  description: 'The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
+
+    Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
+
+    and gain insights into viewer demographics and behavior patterns.
+
+
+    ## Key Features
+
+    - Retrieve channel and video performance metrics
+
+    - Access audience demographics and geographic data
+
+    - Monitor engagement metrics like likes, comments, and shares
+
+    - Track revenue and ad performance data (for monetized content)
+
+    - Generate custom date-range reports
+
+
+    ## Authentication
+
+    All API requests require OAuth 2.0 authentication with appropriate scopes.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Google Developers
+    url: https://developers.google.com/youtube/analytics
+    email: youtube-api-support@google.com
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+    identifier: CC-BY-3.0
+  termsOfService: https://developers.google.com/terms/
+  x-logo:
+    url: https://www.youtube.com/img/desktop/yt_1200.png
+servers:
+- url: https://youtubeanalytics.googleapis.com/v2
+  description: YouTube Analytics API Production Server
+security:
+- OAuth2:
+  - https://www.googleapis.com/auth/yt-analytics.readonly
+tags:
+- name: Comments
+  description: Operations related to individual YouTube comments
+paths:
+  /comments:
+    get:
+      operationId: youtube.comments.list
+      summary: Youtube List Comments
+      description: Returns a list of comments that match the API request parameters. Use the part parameter to specify the comment resource properties to include in the response.
+      tags:
+      - Comments
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - name: id
+        in: query
+        description: Comma-separated list of comment IDs for the resources being retrieved.
+        schema:
+          type: string
+        example: abc123def456
+      - name: parentId
+        in: query
+        description: Identifies the comment thread whose comments are being listed. Required unless the id parameter specifies comment IDs directly.
+        schema:
+          type: string
+        example: '500123'
+      - name: textFormat
+        in: query
+        description: Specifies whether the API should return comments formatted as HTML or plain text.
+        schema:
+          type: string
+          enum:
+          - html
+          - plainText
+        example: html
+      - $ref: '#/components/parameters/maxResults'
+      - $ref: '#/components/parameters/pageToken'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing a list of comment resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentListResponse'
+              examples:
+                YoutubeCommentsList200Example:
+                  summary: Default youtube.comments.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    pageInfo:
+                      totalResults: 42
+                      resultsPerPage: 10
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        textOriginal: example_value
+                        textDisplay: example_value
+                        authorDisplayName: example_value
+                        authorProfileImageUrl: https://www.example.com
+                        authorChannelUrl: https://www.example.com
+                        authorChannelId: {}
+                        likeCount: 42
+                        viewerRating: example_value
+                        publishedAt: '2026-01-15T10:30:00Z'
+                        updatedAt: '2026-01-15T10:30:00Z'
+                        videoId: '500123'
+                        parentId: '500123'
+                        canRate: true
+                        moderationStatus: heldForReview
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: youtube.comments.insert
+      summary: Youtube Create a Comment
+      description: Creates a reply to an existing comment. To add a top-level comment to a video or channel discussion, use the commentThreads.insert method.
+      tags:
+      - Comments
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      requestBody:
+        description: The comment resource to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+            examples:
+              YoutubeCommentsInsertRequestExample:
+                summary: Default youtube.comments.insert request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    textOriginal: example_value
+                    textDisplay: example_value
+                    authorDisplayName: example_value
+                    authorProfileImageUrl: https://www.example.com
+                    authorChannelUrl: https://www.example.com
+                    authorChannelId:
+                      value: example_value
+                    likeCount: 42
+                    viewerRating: example_value
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    updatedAt: '2026-01-15T10:30:00Z'
+                    videoId: '500123'
+                    parentId: '500123'
+                    canRate: true
+                    moderationStatus: heldForReview
+      responses:
+        '200':
+          description: Successful response containing the newly created comment resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+              examples:
+                YoutubeCommentsInsert200Example:
+                  summary: Default youtube.comments.insert 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      textOriginal: example_value
+                      textDisplay: example_value
+                      authorDisplayName: example_value
+                      authorProfileImageUrl: https://www.example.com
+                      authorChannelUrl: https://www.example.com
+                      authorChannelId:
+                        value: example_value
+                      likeCount: 42
+                      viewerRating: example_value
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      updatedAt: '2026-01-15T10:30:00Z'
+                      videoId: '500123'
+                      parentId: '500123'
+                      canRate: true
+                      moderationStatus: heldForReview
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: youtube.comments.update
+      summary: Youtube Update a Comment
+      description: Modifies a comment. The authenticated user must own the comment being updated.
+      tags:
+      - Comments
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      requestBody:
+        description: The comment resource with updated properties.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+            examples:
+              YoutubeCommentsUpdateRequestExample:
+                summary: Default youtube.comments.update request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    textOriginal: example_value
+                    textDisplay: example_value
+                    authorDisplayName: example_value
+                    authorProfileImageUrl: https://www.example.com
+                    authorChannelUrl: https://www.example.com
+                    authorChannelId:
+                      value: example_value
+                    likeCount: 42
+                    viewerRating: example_value
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    updatedAt: '2026-01-15T10:30:00Z'
+                    videoId: '500123'
+                    parentId: '500123'
+                    canRate: true
+                    moderationStatus: heldForReview
+      responses:
+        '200':
+          description: Successful response containing the updated comment resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+              examples:
+                YoutubeCommentsUpdate200Example:
+                  summary: Default youtube.comments.update 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      textOriginal: example_value
+                      textDisplay: example_value
+                      authorDisplayName: example_value
+                      authorProfileImageUrl: https://www.example.com
+                      authorChannelUrl: https://www.example.com
+                      authorChannelId:
+                        value: example_value
+                      likeCount: 42
+                      viewerRating: example_value
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      updatedAt: '2026-01-15T10:30:00Z'
+                      videoId: '500123'
+                      parentId: '500123'
+                      canRate: true
+                      moderationStatus: heldForReview
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: youtube.comments.delete
+      summary: Youtube Delete a Comment
+      description: Deletes a comment. The authenticated user must own the comment or be authorized to delete it.
+      tags:
+      - Comments
+      parameters:
+      - name: id
+        in: query
+        required: true
+        description: The ID of the comment to delete.
+        schema:
+          type: string
+        example: abc123def456
+      - $ref: '#/components/parameters/key'
+      responses:
+        '204':
+          description: The comment was successfully deleted.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /comments/setModerationStatus:
+    post:
+      operationId: youtube.comments.setModerationStatus
+      summary: Youtube Set Comment Moderation Status
+      description: Sets the moderation status of one or more comments. The authenticated user must be authorized to moderate comments for the associated video or channel.
+      tags:
+      - Comments
+      parameters:
+      - name: id
+        in: query
+        required: true
+        description: Comma-separated list of comment IDs to set moderation status for.
+        schema:
+          type: string
+        example: abc123def456
+      - name: moderationStatus
+        in: query
+        required: true
+        description: Identifies the new moderation status. Acceptable values are heldForReview, published, and rejected.
+        schema:
+          type: string
+          enum:
+          - heldForReview
+          - published
+          - rejected
+        example: heldForReview
+      - name: banAuthor
+        in: query
+        description: Set to true to ban the comment author from making future comments on the channel or video.
+        schema:
+          type: boolean
+        example: true
+      - $ref: '#/components/parameters/key'
+      responses:
+        '204':
+          description: The moderation status was successfully updated.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /commentThreads:
+    get:
+      tags:
+      - Comments
+      operationId: listCommentThreads
+      summary: Youtube List Comment Threads
+      description: 'Returns a list of comment threads that match the API request parameters.
+
+        Comment threads contain the top-level comment and all replies to that comment.
+
+        '
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: "{\n  \"dispatcher\": \"FALLBACK\",\n  \"fallback\": \"SuccessfulCommentThreadListExample\"\n}\n"
+      parameters:
+      - $ref: '#/components/parameters/Part'
+      - $ref: '#/components/parameters/VideoIdQuery'
+      - $ref: '#/components/parameters/ChannelIdQuery'
+      - $ref: '#/components/parameters/CommentThreadId'
+      - $ref: '#/components/parameters/CommentOrder'
+      - $ref: '#/components/parameters/MaxResultsDefault'
+      - $ref: '#/components/parameters/PageToken'
+      - $ref: '#/components/parameters/ApiKey'
+      responses:
+        '200':
+          description: Successful comment threads list response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentThreadListResponse'
+              examples:
+                SuccessfulCommentThreadListExample:
+                  $ref: '#/components/examples/SuccessfulCommentThreadListExample'
+        '404':
+          description: Video or channel not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse_2'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+components:
+  parameters:
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
+    CommentThreadId:
+      name: id
+      in: query
+      required: false
+      description: A comma-separated list of comment thread IDs
+      schema:
+        type: string
+        example: UgzYABCdef123xyz456
+    MaxResultsDefault:
+      name: maxResults
+      in: query
+      required: false
+      description: Maximum number of items to return (1-50)
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 5
+        example: 25
+    CommentOrder:
+      name: order
+      in: query
+      required: false
+      description: The method to use for sorting comments
+      schema:
+        type: string
+        enum:
+        - time
+        - relevance
+        default: time
+        example: relevance
+    ApiKey:
+      name: key
+      in: query
+      required: false
+      description: API key for authentication (for read-only operations)
+      schema:
+        type: string
+    VideoIdQuery:
+      name: videoId
+      in: query
+      required: false
+      description: Filter results by video ID
+      schema:
+        type: string
+        example: dQw4w9WgXcQ
+    PageToken:
+      name: pageToken
+      in: query
+      required: false
+      description: Token for retrieving the next page of results
+      schema:
+        type: string
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
+      schema:
+        type: string
+    Part:
+      name: part
+      in: query
+      required: true
+      description: 'The part parameter specifies a comma-separated list of one or more
+
+        resource properties that the API response will include.
+
+        '
+      schema:
+        type: string
+        example: snippet,contentDetails,statistics
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+    maxResults:
+      name: maxResults
+      in: query
+      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 50
+        default: 5
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    ChannelIdQuery:
+      name: channelId
+      in: query
+      required: false
+      description: Filter results by channel ID
+      schema:
+        type: string
+        example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+  schemas:
+    CommentThread:
+      type: object
+      description: A comment thread resource
+      required:
+      - kind
+      - etag
+      - id
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#commentThread
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the comment thread
+          example: UgzYABCdef123xyz456
+        snippet:
+          $ref: '#/components/schemas/CommentThreadSnippet'
+        replies:
+          $ref: '#/components/schemas/CommentThreadReplies'
+    PageInfo_2:
+      type: object
+      description: Pagination information
+      properties:
+        totalResults:
+          type: integer
+          description: Total number of results
+          example: 1000000
+        resultsPerPage:
+          type: integer
+          description: Number of results per page
+          example: 25
+    CommentListResponse:
+      type: object
+      description: A list of comment resources matching the request criteria.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#commentListResponse.
+          default: youtube#commentListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        nextPageToken:
+          type: string
+          description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of comments that match the request criteria.
+          items:
+            $ref: '#/components/schemas/Comment'
+          example: []
+    PageInfo:
+      type: object
+      description: Paging details for a list operation, including information about the total number of resources and the number per page.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results in the result set.
+          example: 42
+        resultsPerPage:
+          type: integer
+          description: The number of results included in the API response.
+          example: 10
+    ErrorResponse:
+      type: object
+      description: A standard error response returned by the YouTube Data API.
+      properties:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            errors:
+              type: array
+              description: A list of individual errors.
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A human-readable description of the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  reason:
+                    type: string
+                    description: The reason for the error.
+          example: example_value
+    ErrorDetails:
+      type: object
+      description: Details about an API error
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid parameter value
+        errors:
+          type: array
+          description: List of specific errors
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    ErrorResponse_2:
+      type: object
+      description: Error response object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetails'
+    CommentThreadListResponse:
+      type: object
+      description: Response containing comment thread resources
+      required:
+      - kind
+      - etag
+      - items
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#commentThreadListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        nextPageToken:
+          type: string
+          description: Token for the next page of results
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo_2'
+        items:
+          type: array
+          description: List of comment threads
+          items:
+            $ref: '#/components/schemas/CommentThread'
+    Comment_2:
+      type: object
+      description: A comment resource
+      properties:
+        kind:
+          type: string
+          example: youtube#comment
+        etag:
+          type: string
+        id:
+          type: string
+          example: UgzYABCdef123xyz456
+        snippet:
+          $ref: '#/components/schemas/CommentSnippet'
+    ErrorItem:
+      type: object
+      description: Individual error detail
+      properties:
+        domain:
+          type: string
+          description: Error domain
+          example: youtube.parameter
+        reason:
+          type: string
+          description: Error reason code
+          example: invalidParameter
+        message:
+          type: string
+          description: Detailed error message
+          example: The parameter 'part' is required
+        locationType:
+          type: string
+          description: Type of location where error occurred
+          example: parameter
+        location:
+          type: string
+          description: Specific location of the error
+          example: part
+    CommentThreadSnippet:
+      type: object
+      description: Basic information about the comment thread
+      properties:
+        channelId:
+          type: string
+          description: ID of the channel associated with the comment
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        videoId:
+          type: string
+          description: ID of the video the comment is for
+          example: dQw4w9WgXcQ
+        topLevelComment:
+          $ref: '#/components/schemas/Comment_2'
+        canReply:
+          type: boolean
+          description: Whether the user can reply
+          example: true
+        totalReplyCount:
+          type: integer
+          description: Total number of replies
+          example: 10
+        isPublic:
+          type: boolean
+          description: Whether the comment thread is public
+          example: true
+    CommentSnippet:
+      type: object
+      description: Basic information about the comment
+      properties:
+        authorDisplayName:
+          type: string
+          description: Display name of the comment author
+          example: John Doe
+        authorProfileImageUrl:
+          type: string
+          description: URL of the author's profile image
+        authorChannelUrl:
+          type: string
+          description: URL of the author's channel
+        authorChannelId:
+          type: object
+          properties:
+            value:
+              type: string
+        textDisplay:
+          type: string
+          description: Display text of the comment
+          example: Great tutorial! Very helpful.
+        textOriginal:
+          type: string
+          description: Original text of the comment
+        publishedAt:
+          type: string
+          format: date-time
+          example: '2024-03-15T12:30:00Z'
+        updatedAt:
+          type: string
+          format: date-time
+        likeCount:
+          type: integer
+          example: 25
+    CommentThreadReplies:
+      type: object
+      description: Replies to the comment thread
+      properties:
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment_2'
+    Comment:
+      type: object
+      description: A comment resource contains information about a single YouTube comment.
+      required:
+      - kind
+      - etag
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#comment.
+          default: youtube#comment
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        id:
+          type: string
+          description: The ID that YouTube uses to uniquely identify the comment.
+          example: abc123def456
+        snippet:
+          type: object
+          description: The snippet object contains basic details about the comment.
+          properties:
+            textOriginal:
+              type: string
+              description: The original text of the comment as it was initially posted.
+            textDisplay:
+              type: string
+              description: The comment text as displayed to users.
+            authorDisplayName:
+              type: string
+              description: The display name of the user who posted the comment.
+            authorProfileImageUrl:
+              type: string
+              description: The URL for the avatar of the user who posted the comment.
+            authorChannelUrl:
+              type: string
+              description: A link to the YouTube channel of the comment's author.
+            authorChannelId:
+              type: object
+              description: An object that encapsulates information about the comment author's YouTube channel.
+              properties:
+                value:
+                  type: string
+                  description: The author's YouTube channel ID.
+            likeCount:
+              type: integer
+              description: The total number of likes that the comment has received.
+            viewerRating:
+              type: string
+              description: The rating the viewer has given to this comment. Note that this property does not currently identify dislike ratings.
+            publishedAt:
+              type: string
+              format: date-time
+              description: The date and time when the comment was originally published.
+            updatedAt:
+              type: string
+              format: date-time
+              description: The date and time when the comment was last updated.
+            videoId:
+              type: string
+              description: The ID of the video the comment refers to.
+            parentId:
+              type: string
+              description: The unique ID of the parent comment.
+            canRate:
+              type: boolean
+              description: Indicates whether the current viewer can rate the comment.
+            moderationStatus:
+              type: string
+              description: The comment's moderation status.
+              enum:
+              - heldForReview
+              - likelySpam
+              - published
+              - rejected
+          example: example_value
+  responses:
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  examples:
+    SuccessfulCommentThreadListExample:
+      summary: Successful comment threads response
+      description: Example response for retrieving comments
+      value:
+        kind: youtube#commentThreadListResponse
+        etag: comments123etag
+        pageInfo:
+          totalResults: 2500
+          resultsPerPage: 20
+        items:
+        - kind: youtube#commentThread
+          etag: thread1etag
+          id: UgzYABCdef123xyz456
+          snippet:
+            channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+            videoId: dQw4w9WgXcQ
+            topLevelComment:
+              kind: youtube#comment
+              etag: comment1etag
+              id: UgzYABCdef123xyz456
+              snippet:
+                authorDisplayName: John Doe
+                authorProfileImageUrl: https://yt3.ggpht.com/user.jpg
+                textDisplay: Great tutorial! Very helpful.
+                textOriginal: Great tutorial! Very helpful.
+                publishedAt: '2024-03-15T12:30:00Z'
+                likeCount: 25
+            canReply: true
+            totalReplyCount: 10
+            isPublic: true
+    NotFoundErrorExample:
+      summary: Not found error
+      description: Example error response when resource is not found
+      value:
+        error:
+          code: 404
+          message: Resource not found
+          errors:
+          - domain: youtube.video
+            reason: videoNotFound
+            message: The video identified by the parameter id could not be found
+            locationType: parameter
+            location: id
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for YouTube Analytics API
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View YouTube Analytics monetary reports
+externalDocs:
+  description: YouTube Analytics API Documentation
+  url: https://developers.google.com/youtube/analytics

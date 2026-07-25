@@ -1,0 +1,239 @@
+openapi: 3.1.0
+info:
+  title: YouTube Analytics Analytics Groups VideoCategories API
+  description: 'The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
+
+    Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
+
+    and gain insights into viewer demographics and behavior patterns.
+
+
+    ## Key Features
+
+    - Retrieve channel and video performance metrics
+
+    - Access audience demographics and geographic data
+
+    - Monitor engagement metrics like likes, comments, and shares
+
+    - Track revenue and ad performance data (for monetized content)
+
+    - Generate custom date-range reports
+
+
+    ## Authentication
+
+    All API requests require OAuth 2.0 authentication with appropriate scopes.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Google Developers
+    url: https://developers.google.com/youtube/analytics
+    email: youtube-api-support@google.com
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+    identifier: CC-BY-3.0
+  termsOfService: https://developers.google.com/terms/
+  x-logo:
+    url: https://www.youtube.com/img/desktop/yt_1200.png
+servers:
+- url: https://youtubeanalytics.googleapis.com/v2
+  description: YouTube Analytics API Production Server
+security:
+- OAuth2:
+  - https://www.googleapis.com/auth/yt-analytics.readonly
+tags:
+- name: VideoCategories
+  description: Operations related to YouTube video categories
+paths:
+  /videoCategories:
+    get:
+      operationId: youtube.videoCategories.list
+      summary: Youtube List Video Categories
+      description: Returns a list of categories that can be associated with YouTube videos. Provide the hl parameter to specify the language for category names and regionCode to filter by region.
+      tags:
+      - VideoCategories
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - name: regionCode
+        in: query
+        description: Instructs the API to return the list of video categories available in the specified country.
+        schema:
+          type: string
+        example: US
+      - name: id
+        in: query
+        description: Comma-separated list of video category IDs to retrieve.
+        schema:
+          type: string
+        example: abc123def456
+      - name: hl
+        in: query
+        description: Specifies the language that will be used for text values in the API response.
+        schema:
+          type: string
+        example: example_value
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing a list of video category resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoCategoryListResponse'
+              examples:
+                YoutubeVideocategoriesList200Example:
+                  summary: Default youtube.videoCategories.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        channelId: '500123'
+                        title: Example Title
+                        assignable: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+  schemas:
+    VideoCategoryListResponse:
+      type: object
+      description: A list of video category resources matching the request criteria.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#videoCategoryListResponse.
+          default: youtube#videoCategoryListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        items:
+          type: array
+          description: A list of video categories that match the request criteria.
+          items:
+            $ref: '#/components/schemas/VideoCategory'
+          example: []
+    ErrorResponse:
+      type: object
+      description: A standard error response returned by the YouTube Data API.
+      properties:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            errors:
+              type: array
+              description: A list of individual errors.
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A human-readable description of the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  reason:
+                    type: string
+                    description: The reason for the error.
+          example: example_value
+    VideoCategory:
+      type: object
+      description: A videoCategory resource identifies a category that has been or could be associated with uploaded videos.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#videoCategory.
+          default: youtube#videoCategory
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        id:
+          type: string
+          description: The ID that YouTube uses to uniquely identify the video category.
+          example: abc123def456
+        snippet:
+          type: object
+          description: The snippet object contains basic details about the video category.
+          properties:
+            channelId:
+              type: string
+              description: The YouTube channel that created the video category.
+            title:
+              type: string
+              description: The video category's title.
+            assignable:
+              type: boolean
+              description: Indicates whether videos can be associated with the category.
+          example: example_value
+  responses:
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for YouTube Analytics API
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View YouTube Analytics monetary reports
+externalDocs:
+  description: YouTube Analytics API Documentation
+  url: https://developers.google.com/youtube/analytics

@@ -1,0 +1,1260 @@
+openapi: 3.1.0
+info:
+  title: YouTube Analytics Analytics Groups Videos API
+  description: 'The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
+
+    Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
+
+    and gain insights into viewer demographics and behavior patterns.
+
+
+    ## Key Features
+
+    - Retrieve channel and video performance metrics
+
+    - Access audience demographics and geographic data
+
+    - Monitor engagement metrics like likes, comments, and shares
+
+    - Track revenue and ad performance data (for monetized content)
+
+    - Generate custom date-range reports
+
+
+    ## Authentication
+
+    All API requests require OAuth 2.0 authentication with appropriate scopes.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Google Developers
+    url: https://developers.google.com/youtube/analytics
+    email: youtube-api-support@google.com
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+    identifier: CC-BY-3.0
+  termsOfService: https://developers.google.com/terms/
+  x-logo:
+    url: https://www.youtube.com/img/desktop/yt_1200.png
+servers:
+- url: https://youtubeanalytics.googleapis.com/v2
+  description: YouTube Analytics API Production Server
+security:
+- OAuth2:
+  - https://www.googleapis.com/auth/yt-analytics.readonly
+tags:
+- name: Videos
+  description: Operations related to YouTube video resources
+paths:
+  /videos:
+    get:
+      operationId: youtube.videos.list
+      summary: Youtube List Videos
+      description: Returns a list of videos that match the API request parameters. Requires the part parameter to specify the video resource properties to include in the response.
+      tags:
+      - Videos
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - name: id
+        in: query
+        description: Comma-separated list of YouTube video IDs for the resources being retrieved.
+        schema:
+          type: string
+        example: abc123def456
+      - name: chart
+        in: query
+        description: Identifies the chart that the API returns chart data for. Acceptable values are mostPopular and videoCategoryId.
+        schema:
+          type: string
+          enum:
+          - mostPopular
+        example: mostPopular
+      - name: myRating
+        in: query
+        description: Set this parameter to like or dislike to instruct the API to return only videos liked or disliked by the authenticated user.
+        schema:
+          type: string
+          enum:
+          - like
+          - dislike
+        example: like
+      - $ref: '#/components/parameters/maxResults'
+      - $ref: '#/components/parameters/pageToken'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing a list of video resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoListResponse'
+              examples:
+                YoutubeVideosList200Example:
+                  summary: Default youtube.videos.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    prevPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    pageInfo:
+                      totalResults: 42
+                      resultsPerPage: 10
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      localizations: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: youtube.videos.insert
+      summary: Youtube Upload or Insert a Video
+      description: Uploads a video to YouTube and optionally sets the video's metadata. This method supports media upload and requires the part parameter to specify the video resource properties to set.
+      tags:
+      - Videos
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      requestBody:
+        description: The video resource to insert.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Video'
+            examples:
+              YoutubeVideosInsertRequestExample:
+                summary: Default youtube.videos.insert request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    channelId: '500123'
+                    title: Example Title
+                    description: A sample description for this resource.
+                    thumbnails: example_value
+                    channelTitle: example_value
+                    tags:
+                    - example_value
+                    categoryId: '500123'
+                    liveBroadcastContent: live
+                    defaultLanguage: en
+                    localized:
+                      title: Example Title
+                      description: A sample description for this resource.
+                  contentDetails:
+                    duration: example_value
+                    dimension: example_value
+                    definition: hd
+                    caption: 'false'
+                    licensedContent: true
+                    contentRating: example_value
+                  status:
+                    uploadStatus: deleted
+                    privacyStatus: private
+                    license: creativeCommon
+                    embeddable: true
+                    publicStatsViewable: true
+                    madeForKids: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+                  statistics:
+                    viewCount: 42
+                    likeCount: 42
+                    dislikeCount: 42
+                    favoriteCount: 42
+                    commentCount: 42
+                  player:
+                    embedHtml: example_value
+                    embedHeight: 42.5
+                    embedWidth: 42.5
+                  localizations: example_value
+      responses:
+        '200':
+          description: Successful response containing the inserted video resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+              examples:
+                YoutubeVideosInsert200Example:
+                  summary: Default youtube.videos.insert 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      channelId: '500123'
+                      title: Example Title
+                      description: A sample description for this resource.
+                      thumbnails: example_value
+                      channelTitle: example_value
+                      tags:
+                      - example_value
+                      categoryId: '500123'
+                      liveBroadcastContent: live
+                      defaultLanguage: en
+                      localized:
+                        title: Example Title
+                        description: A sample description for this resource.
+                    contentDetails:
+                      duration: example_value
+                      dimension: example_value
+                      definition: hd
+                      caption: 'false'
+                      licensedContent: true
+                      contentRating: example_value
+                    status:
+                      uploadStatus: deleted
+                      privacyStatus: private
+                      license: creativeCommon
+                      embeddable: true
+                      publicStatsViewable: true
+                      madeForKids: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+                    statistics:
+                      viewCount: 42
+                      likeCount: 42
+                      dislikeCount: 42
+                      favoriteCount: 42
+                      commentCount: 42
+                    player:
+                      embedHtml: example_value
+                      embedHeight: 42.5
+                      embedWidth: 42.5
+                    localizations: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: youtube.videos.update
+      summary: Youtube Update Video Metadata
+      description: Updates a video's metadata. This method supports patch semantics and requires the part parameter to specify the video resource properties to update.
+      tags:
+      - Videos
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      requestBody:
+        description: The video resource with updated properties.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Video'
+            examples:
+              YoutubeVideosUpdateRequestExample:
+                summary: Default youtube.videos.update request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    channelId: '500123'
+                    title: Example Title
+                    description: A sample description for this resource.
+                    thumbnails: example_value
+                    channelTitle: example_value
+                    tags:
+                    - example_value
+                    categoryId: '500123'
+                    liveBroadcastContent: live
+                    defaultLanguage: en
+                    localized:
+                      title: Example Title
+                      description: A sample description for this resource.
+                  contentDetails:
+                    duration: example_value
+                    dimension: example_value
+                    definition: hd
+                    caption: 'false'
+                    licensedContent: true
+                    contentRating: example_value
+                  status:
+                    uploadStatus: deleted
+                    privacyStatus: private
+                    license: creativeCommon
+                    embeddable: true
+                    publicStatsViewable: true
+                    madeForKids: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+                  statistics:
+                    viewCount: 42
+                    likeCount: 42
+                    dislikeCount: 42
+                    favoriteCount: 42
+                    commentCount: 42
+                  player:
+                    embedHtml: example_value
+                    embedHeight: 42.5
+                    embedWidth: 42.5
+                  localizations: example_value
+      responses:
+        '200':
+          description: Successful response containing the updated video resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+              examples:
+                YoutubeVideosUpdate200Example:
+                  summary: Default youtube.videos.update 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      channelId: '500123'
+                      title: Example Title
+                      description: A sample description for this resource.
+                      thumbnails: example_value
+                      channelTitle: example_value
+                      tags:
+                      - example_value
+                      categoryId: '500123'
+                      liveBroadcastContent: live
+                      defaultLanguage: en
+                      localized:
+                        title: Example Title
+                        description: A sample description for this resource.
+                    contentDetails:
+                      duration: example_value
+                      dimension: example_value
+                      definition: hd
+                      caption: 'false'
+                      licensedContent: true
+                      contentRating: example_value
+                    status:
+                      uploadStatus: deleted
+                      privacyStatus: private
+                      license: creativeCommon
+                      embeddable: true
+                      publicStatsViewable: true
+                      madeForKids: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+                    statistics:
+                      viewCount: 42
+                      likeCount: 42
+                      dislikeCount: 42
+                      favoriteCount: 42
+                      commentCount: 42
+                    player:
+                      embedHtml: example_value
+                      embedHeight: 42.5
+                      embedWidth: 42.5
+                    localizations: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: youtube.videos.delete
+      summary: Youtube Delete a Video
+      description: Deletes a YouTube video. The authenticated user must own the video or be authorized to delete it.
+      tags:
+      - Videos
+      parameters:
+      - name: id
+        in: query
+        required: true
+        description: The ID of the video to delete.
+        schema:
+          type: string
+        example: abc123def456
+      - $ref: '#/components/parameters/key'
+      responses:
+        '204':
+          description: The video was successfully deleted.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /videos/rate:
+    post:
+      operationId: youtube.videos.rate
+      summary: Youtube Rate a Video
+      description: Adds a like or dislike rating to a video or removes a rating from a video. The authenticated user must be authorized to rate videos.
+      tags:
+      - Videos
+      parameters:
+      - name: id
+        in: query
+        required: true
+        description: The ID of the video to rate.
+        schema:
+          type: string
+        example: abc123def456
+      - name: rating
+        in: query
+        required: true
+        description: The rating to record. Valid values are like, dislike, and none.
+        schema:
+          type: string
+          enum:
+          - like
+          - dislike
+          - none
+        example: like
+      - $ref: '#/components/parameters/key'
+      responses:
+        '204':
+          description: The rating was successfully applied or removed.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /videos/{videoId}:
+    put:
+      tags:
+      - Videos
+      operationId: updateVideo
+      summary: Youtube Update Video Metadata
+      description: 'Updates a video''s metadata. This operation requires OAuth 2.0 authentication.
+
+        You can only update videos that belong to the authenticated user''s channel.
+
+        '
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: "{\n  \"dispatcher\": \"FALLBACK\",\n  \"fallback\": \"SuccessfulVideoInsertExample\"\n}\n"
+      parameters:
+      - $ref: '#/components/parameters/VideoIdPath'
+      - $ref: '#/components/parameters/Part'
+      - $ref: '#/components/parameters/AccessToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoUpdateRequest'
+            examples:
+              VideoUpdateRequestExample:
+                $ref: '#/components/examples/VideoUpdateRequestExample'
+      responses:
+        '200':
+          description: Successfully updated video
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video_2'
+              examples:
+                SuccessfulVideoInsertExample:
+                  $ref: '#/components/examples/SuccessfulVideoInsertExample'
+        '404':
+          description: Video not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse_2'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+    delete:
+      tags:
+      - Videos
+      operationId: deleteVideo
+      summary: Youtube Delete Video
+      description: 'Deletes a video. This operation requires OAuth 2.0 authentication.
+
+        You can only delete videos that belong to the authenticated user''s channel.
+
+        '
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: "{\n  \"dispatcher\": \"FALLBACK\",\n  \"fallback\": \"SuccessfulDeleteExample\"\n}\n"
+      parameters:
+      - $ref: '#/components/parameters/VideoIdPath'
+      - $ref: '#/components/parameters/AccessToken'
+      responses:
+        '204':
+          description: Successfully deleted video
+        '404':
+          description: Video not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse_2'
+              examples:
+                NotFoundErrorExample:
+                  $ref: '#/components/examples/NotFoundErrorExample'
+components:
+  schemas:
+    VideoContentDetails:
+      type: object
+      description: Information about the video content, including the length of the video and an indication of whether captions are available.
+      properties:
+        duration:
+          type: string
+          description: The length of the video in ISO 8601 format.
+          example: example_value
+        dimension:
+          type: string
+          description: Indicates whether the video is available in 3D or in 2D.
+          example: example_value
+        definition:
+          type: string
+          description: Indicates whether the video is available in high definition or standard definition.
+          enum:
+          - hd
+          - sd
+          example: hd
+        caption:
+          type: string
+          description: Indicates whether captions are available for the video.
+          enum:
+          - 'false'
+          - 'true'
+          example: 'false'
+        licensedContent:
+          type: boolean
+          description: Indicates whether the video represents licensed content, which means that the content has been claimed by a YouTube content partner.
+          example: true
+        contentRating:
+          type: object
+          description: Specifies the ratings that the video received under various rating schemes.
+          example: example_value
+    ThumbnailDetails:
+      type: object
+      description: Thumbnail images at various resolutions
+      properties:
+        default:
+          $ref: '#/components/schemas/Thumbnail'
+        medium:
+          $ref: '#/components/schemas/Thumbnail'
+        high:
+          $ref: '#/components/schemas/Thumbnail'
+        standard:
+          $ref: '#/components/schemas/Thumbnail'
+        maxres:
+          $ref: '#/components/schemas/Thumbnail'
+    VideoUpdateRequest:
+      type: object
+      description: Request body for updating a video
+      required:
+      - id
+      - snippet
+      properties:
+        id:
+          type: string
+          description: ID of the video to update
+          example: dQw4w9WgXcQ
+        snippet:
+          type: object
+          required:
+          - title
+          - categoryId
+          properties:
+            title:
+              type: string
+              description: Updated title
+              example: Updated Video Title
+            description:
+              type: string
+              description: Updated description
+              example: Updated description...
+            tags:
+              type: array
+              items:
+                type: string
+            categoryId:
+              type: string
+              example: '28'
+    VideoStatistics_2:
+      type: object
+      description: Statistics for the video
+      properties:
+        viewCount:
+          type: string
+          description: Number of views
+          example: '1500000'
+        likeCount:
+          type: string
+          description: Number of likes
+          example: '45000'
+        dislikeCount:
+          type: string
+          description: Number of dislikes (deprecated)
+          example: '500'
+        favoriteCount:
+          type: string
+          description: Number of favorites
+          example: '0'
+        commentCount:
+          type: string
+          description: Number of comments
+          example: '2500'
+    VideoSnippet_2:
+      type: object
+      description: Basic information about the video
+      properties:
+        publishedAt:
+          type: string
+          format: date-time
+          description: When the video was published
+          example: '2024-03-15T10:30:00Z'
+        channelId:
+          type: string
+          description: ID of the channel that owns the video
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        title:
+          type: string
+          description: Title of the video
+          example: 'OpenAPI Tutorial: Building REST APIs'
+        description:
+          type: string
+          description: Description of the video
+          example: Learn how to build REST APIs using OpenAPI specification...
+        thumbnails:
+          $ref: '#/components/schemas/ThumbnailDetails'
+        channelTitle:
+          type: string
+          description: Title of the channel
+          example: Google Developers
+        tags:
+          type: array
+          description: List of keyword tags for the video
+          items:
+            type: string
+          example:
+          - openapi
+          - rest api
+          - tutorial
+        categoryId:
+          type: string
+          description: YouTube video category ID
+          example: '28'
+        defaultLanguage:
+          type: string
+          description: Default language of the video
+          example: en
+    Video:
+      type: object
+      description: A video resource represents a YouTube video.
+      required:
+      - kind
+      - etag
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#video.
+          default: youtube#video
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        id:
+          type: string
+          description: The ID that YouTube uses to uniquely identify the video.
+          example: abc123def456
+        snippet:
+          $ref: '#/components/schemas/VideoSnippet'
+        contentDetails:
+          $ref: '#/components/schemas/VideoContentDetails'
+        status:
+          $ref: '#/components/schemas/VideoStatus'
+        statistics:
+          $ref: '#/components/schemas/VideoStatistics'
+        player:
+          $ref: '#/components/schemas/VideoPlayer'
+        localizations:
+          type: object
+          description: The localizations object contains translations of the video's metadata.
+          additionalProperties:
+            type: object
+            properties:
+              title:
+                type: string
+                description: The localized video title.
+              description:
+                type: string
+                description: The localized video description.
+          example: example_value
+    VideoContentDetails_2:
+      type: object
+      description: Content details for the video
+      properties:
+        duration:
+          type: string
+          description: Duration of the video in ISO 8601 format
+          example: PT15M33S
+        dimension:
+          type: string
+          description: Whether the video is 2D or 3D
+          enum:
+          - 2d
+          - 3d
+          example: 2d
+        definition:
+          type: string
+          description: Whether the video is SD or HD
+          enum:
+          - hd
+          - sd
+          example: hd
+        caption:
+          type: string
+          description: Whether captions are available
+          enum:
+          - 'true'
+          - 'false'
+          example: 'true'
+        licensedContent:
+          type: boolean
+          description: Whether the video is licensed content
+          example: true
+    PageInfo:
+      type: object
+      description: Paging details for a list operation, including information about the total number of resources and the number per page.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results in the result set.
+          example: 42
+        resultsPerPage:
+          type: integer
+          description: The number of results included in the API response.
+          example: 10
+    ErrorResponse:
+      type: object
+      description: A standard error response returned by the YouTube Data API.
+      properties:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            errors:
+              type: array
+              description: A list of individual errors.
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A human-readable description of the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  reason:
+                    type: string
+                    description: The reason for the error.
+          example: example_value
+    VideoPlayer:
+      type: object
+      description: Information used to play the video.
+      properties:
+        embedHtml:
+          type: string
+          description: An iframe tag that embeds a player that will play the video.
+          example: example_value
+        embedHeight:
+          type: number
+          description: The height of the embedded player returned in the player.embedHtml property.
+          example: 42.5
+        embedWidth:
+          type: number
+          description: The width of the embedded player returned in the player.embedHtml property.
+          example: 42.5
+    ErrorDetails:
+      type: object
+      description: Details about an API error
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid parameter value
+        errors:
+          type: array
+          description: List of specific errors
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    ErrorResponse_2:
+      type: object
+      description: Error response object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetails'
+    Video_2:
+      type: object
+      description: A YouTube video resource
+      required:
+      - kind
+      - etag
+      - id
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#video
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the video
+          example: dQw4w9WgXcQ
+        snippet:
+          $ref: '#/components/schemas/VideoSnippet_2'
+        contentDetails:
+          $ref: '#/components/schemas/VideoContentDetails_2'
+        statistics:
+          $ref: '#/components/schemas/VideoStatistics_2'
+        status:
+          $ref: '#/components/schemas/VideoStatus_2'
+    VideoStatus:
+      type: object
+      description: The status of an uploaded video.
+      properties:
+        uploadStatus:
+          type: string
+          description: The status of the uploaded video.
+          enum:
+          - deleted
+          - failed
+          - processed
+          - rejected
+          - uploaded
+          example: deleted
+        privacyStatus:
+          type: string
+          description: The video's privacy status.
+          enum:
+          - private
+          - public
+          - unlisted
+          example: private
+        license:
+          type: string
+          description: The video's license.
+          enum:
+          - creativeCommon
+          - youtube
+          example: creativeCommon
+        embeddable:
+          type: boolean
+          description: Indicates whether the video can be embedded on another website.
+          example: true
+        publicStatsViewable:
+          type: boolean
+          description: Indicates whether the video's extended statistics on the video's watch page are publicly viewable.
+          example: true
+        madeForKids:
+          type: boolean
+          description: Indicates whether the video is designated as child-directed.
+          example: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+    VideoListResponse:
+      type: object
+      description: A list of video resources matching the request criteria.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#videoListResponse.
+          default: youtube#videoListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        nextPageToken:
+          type: string
+          description: The token that can be used as the pageToken parameter to retrieve the next page of results in the result set.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        prevPageToken:
+          type: string
+          description: The token that can be used as the pageToken parameter to retrieve the previous page of results in the result set.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of videos that match the request criteria.
+          items:
+            $ref: '#/components/schemas/Video'
+          example: []
+    VideoStatus_2:
+      type: object
+      description: Status information for the video
+      properties:
+        uploadStatus:
+          type: string
+          description: Upload status of the video
+          enum:
+          - deleted
+          - failed
+          - processed
+          - rejected
+          - uploaded
+          example: processed
+        privacyStatus:
+          type: string
+          description: Privacy status of the video
+          enum:
+          - private
+          - public
+          - unlisted
+          example: public
+        license:
+          type: string
+          description: License of the video
+          enum:
+          - creativeCommon
+          - youtube
+          example: youtube
+        embeddable:
+          type: boolean
+          description: Whether the video can be embedded
+          example: true
+        publicStatsViewable:
+          type: boolean
+          description: Whether statistics are publicly viewable
+          example: true
+    VideoSnippet:
+      type: object
+      description: Basic details about a video, including its title, description, tags, and category.
+      properties:
+        publishedAt:
+          type: string
+          format: date-time
+          description: The date and time when the video was published.
+          example: '2026-01-15T10:30:00Z'
+        channelId:
+          type: string
+          description: The ID of the YouTube channel that published the video.
+          example: '500123'
+        title:
+          type: string
+          description: The video title.
+          example: Example Title
+        description:
+          type: string
+          description: The video description.
+          example: A sample description for this resource.
+        thumbnails:
+          type: object
+          description: A map of thumbnail images associated with the video.
+          additionalProperties:
+            type: object
+            properties:
+              url:
+                type: string
+                description: The URL of the thumbnail image.
+              width:
+                type: integer
+                description: The thumbnail width in pixels.
+              height:
+                type: integer
+                description: The thumbnail height in pixels.
+          example: example_value
+        channelTitle:
+          type: string
+          description: The channel title of the YouTube channel that published the video.
+          example: example_value
+        tags:
+          type: array
+          description: A list of keyword tags associated with the video.
+          items:
+            type: string
+          example: []
+        categoryId:
+          type: string
+          description: The YouTube video category associated with the video.
+          example: '500123'
+        liveBroadcastContent:
+          type: string
+          description: Indicates if the video is an upcoming/active live broadcast.
+          enum:
+          - live
+          - none
+          - upcoming
+          example: live
+        defaultLanguage:
+          type: string
+          description: The language of the text in the video resource's snippet.title and snippet.description properties.
+          example: en
+        localized:
+          type: object
+          description: The snippet.localized object contains either a localized title and description for the video or the title in the default language.
+          properties:
+            title:
+              type: string
+              description: The localized video title.
+            description:
+              type: string
+              description: The localized video description.
+          example: example_value
+    Thumbnail:
+      type: object
+      description: A thumbnail image
+      properties:
+        url:
+          type: string
+          description: URL of the thumbnail image
+          example: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
+        width:
+          type: integer
+          description: Width of the thumbnail
+          example: 120
+        height:
+          type: integer
+          description: Height of the thumbnail
+          example: 90
+    ErrorItem:
+      type: object
+      description: Individual error detail
+      properties:
+        domain:
+          type: string
+          description: Error domain
+          example: youtube.parameter
+        reason:
+          type: string
+          description: Error reason code
+          example: invalidParameter
+        message:
+          type: string
+          description: Detailed error message
+          example: The parameter 'part' is required
+        locationType:
+          type: string
+          description: Type of location where error occurred
+          example: parameter
+        location:
+          type: string
+          description: Specific location of the error
+          example: part
+    VideoStatistics:
+      type: object
+      description: Statistics about the video such as the number of times the video has been viewed or liked.
+      properties:
+        viewCount:
+          type: string
+          description: The number of times the video has been viewed.
+          example: 42
+        likeCount:
+          type: string
+          description: The number of users who have indicated that they liked the video.
+          example: 42
+        dislikeCount:
+          type: string
+          description: The number of users who have indicated that they disliked the video.
+          example: 42
+        favoriteCount:
+          type: string
+          description: The number of users who have added the video to their favorites list.
+          example: 42
+        commentCount:
+          type: string
+          description: The number of comments for the video.
+          example: 42
+  parameters:
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
+    AccessToken:
+      name: access_token
+      in: query
+      required: false
+      description: OAuth 2.0 access token for authentication
+      schema:
+        type: string
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
+      schema:
+        type: string
+    Part:
+      name: part
+      in: query
+      required: true
+      description: 'The part parameter specifies a comma-separated list of one or more
+
+        resource properties that the API response will include.
+
+        '
+      schema:
+        type: string
+        example: snippet,contentDetails,statistics
+    VideoIdPath:
+      name: videoId
+      in: path
+      required: true
+      description: The unique identifier of the video
+      schema:
+        type: string
+        example: dQw4w9WgXcQ
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+    maxResults:
+      name: maxResults
+      in: query
+      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 50
+        default: 5
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  examples:
+    VideoUpdateRequestExample:
+      summary: Video update request
+      description: Example request body for updating video metadata
+      value:
+        id: dQw4w9WgXcQ
+        snippet:
+          title: Updated Video Title
+          description: Updated description...
+          tags:
+          - updated
+          - tags
+          categoryId: '28'
+    NotFoundErrorExample:
+      summary: Not found error
+      description: Example error response when resource is not found
+      value:
+        error:
+          code: 404
+          message: Resource not found
+          errors:
+          - domain: youtube.video
+            reason: videoNotFound
+            message: The video identified by the parameter id could not be found
+            locationType: parameter
+            location: id
+    SuccessfulVideoInsertExample:
+      summary: Successfully uploaded video
+      description: Example response for a newly uploaded video
+      value:
+        kind: youtube#video
+        etag: newvideo123
+        id: NEWvideo456
+        snippet:
+          publishedAt: '2024-03-20T14:00:00Z'
+          channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+          title: My New Video
+          description: This is my new video about...
+          thumbnails:
+            default:
+              url: https://i.ytimg.com/vi/NEWvideo456/default.jpg
+              width: 120
+              height: 90
+          channelTitle: My Channel
+          tags:
+          - tutorial
+          - demo
+          categoryId: '28'
+        status:
+          uploadStatus: processed
+          privacyStatus: public
+          embeddable: true
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for YouTube Analytics API
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View YouTube Analytics monetary reports
+externalDocs:
+  description: YouTube Analytics API Documentation
+  url: https://developers.google.com/youtube/analytics

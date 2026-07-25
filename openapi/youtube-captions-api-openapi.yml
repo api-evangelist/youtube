@@ -1,0 +1,480 @@
+openapi: 3.1.0
+info:
+  title: YouTube Analytics Analytics Groups Captions API
+  description: 'The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
+
+    Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
+
+    and gain insights into viewer demographics and behavior patterns.
+
+
+    ## Key Features
+
+    - Retrieve channel and video performance metrics
+
+    - Access audience demographics and geographic data
+
+    - Monitor engagement metrics like likes, comments, and shares
+
+    - Track revenue and ad performance data (for monetized content)
+
+    - Generate custom date-range reports
+
+
+    ## Authentication
+
+    All API requests require OAuth 2.0 authentication with appropriate scopes.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Google Developers
+    url: https://developers.google.com/youtube/analytics
+    email: youtube-api-support@google.com
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+    identifier: CC-BY-3.0
+  termsOfService: https://developers.google.com/terms/
+  x-logo:
+    url: https://www.youtube.com/img/desktop/yt_1200.png
+servers:
+- url: https://youtubeanalytics.googleapis.com/v2
+  description: YouTube Analytics API Production Server
+security:
+- OAuth2:
+  - https://www.googleapis.com/auth/yt-analytics.readonly
+tags:
+- name: Captions
+  description: Operations related to YouTube video caption tracks
+paths:
+  /captions:
+    get:
+      operationId: youtube.captions.list
+      summary: Youtube List Caption Tracks
+      description: Returns a list of caption tracks that are associated with a specified video. The API response does not contain the actual captions and the captions.download method can be used to retrieve a caption track.
+      tags:
+      - Captions
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - name: videoId
+        in: query
+        required: true
+        description: The ID of the video for which the API should return caption tracks.
+        schema:
+          type: string
+        example: '500123'
+      - name: id
+        in: query
+        description: Comma-separated list of caption track IDs to retrieve.
+        schema:
+          type: string
+        example: abc123def456
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing a list of caption track resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaptionListResponse'
+              examples:
+                YoutubeCaptionsList200Example:
+                  summary: Default youtube.captions.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        videoId: '500123'
+                        lastUpdated: '2026-01-15T10:30:00Z'
+                        trackKind: asr
+                        language: en
+                        name: Example Title
+                        audioTrackType: commentary
+                        isCC: true
+                        isLarge: true
+                        isEasyReader: true
+                        isDraft: true
+                        isAutoSynced: true
+                        status: failed
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: youtube.captions.insert
+      summary: Youtube Upload a Caption Track
+      description: Uploads a caption track. The authenticated user must own the video associated with the caption track. This method supports media upload.
+      tags:
+      - Captions
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      requestBody:
+        description: The caption resource to upload.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Caption'
+            examples:
+              YoutubeCaptionsInsertRequestExample:
+                summary: Default youtube.captions.insert request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    videoId: '500123'
+                    lastUpdated: '2026-01-15T10:30:00Z'
+                    trackKind: asr
+                    language: en
+                    name: Example Title
+                    audioTrackType: commentary
+                    isCC: true
+                    isLarge: true
+                    isEasyReader: true
+                    isDraft: true
+                    isAutoSynced: true
+                    status: failed
+      responses:
+        '200':
+          description: Successful response containing the newly uploaded caption resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Caption'
+              examples:
+                YoutubeCaptionsInsert200Example:
+                  summary: Default youtube.captions.insert 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      videoId: '500123'
+                      lastUpdated: '2026-01-15T10:30:00Z'
+                      trackKind: asr
+                      language: en
+                      name: Example Title
+                      audioTrackType: commentary
+                      isCC: true
+                      isLarge: true
+                      isEasyReader: true
+                      isDraft: true
+                      isAutoSynced: true
+                      status: failed
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: youtube.captions.update
+      summary: Youtube Update a Caption Track
+      description: Updates a caption track. When updating a caption track, you can change the track's draft status, upload a new caption file, or both.
+      tags:
+      - Captions
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      requestBody:
+        description: The caption resource with updated properties.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Caption'
+            examples:
+              YoutubeCaptionsUpdateRequestExample:
+                summary: Default youtube.captions.update request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    videoId: '500123'
+                    lastUpdated: '2026-01-15T10:30:00Z'
+                    trackKind: asr
+                    language: en
+                    name: Example Title
+                    audioTrackType: commentary
+                    isCC: true
+                    isLarge: true
+                    isEasyReader: true
+                    isDraft: true
+                    isAutoSynced: true
+                    status: failed
+      responses:
+        '200':
+          description: Successful response containing the updated caption resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Caption'
+              examples:
+                YoutubeCaptionsUpdate200Example:
+                  summary: Default youtube.captions.update 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      videoId: '500123'
+                      lastUpdated: '2026-01-15T10:30:00Z'
+                      trackKind: asr
+                      language: en
+                      name: Example Title
+                      audioTrackType: commentary
+                      isCC: true
+                      isLarge: true
+                      isEasyReader: true
+                      isDraft: true
+                      isAutoSynced: true
+                      status: failed
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: youtube.captions.delete
+      summary: Youtube Delete a Caption Track
+      description: Deletes a specified caption track. The authenticated user must own the video that the caption track is associated with.
+      tags:
+      - Captions
+      parameters:
+      - name: id
+        in: query
+        required: true
+        description: The ID of the caption track to delete.
+        schema:
+          type: string
+        example: abc123def456
+      - $ref: '#/components/parameters/key'
+      responses:
+        '204':
+          description: The caption track was successfully deleted.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+  schemas:
+    CaptionListResponse:
+      type: object
+      description: A list of caption resources associated with the specified video.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#captionListResponse.
+          default: youtube#captionListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        items:
+          type: array
+          description: A list of captions that match the request criteria.
+          items:
+            $ref: '#/components/schemas/Caption'
+          example: []
+    ErrorResponse:
+      type: object
+      description: A standard error response returned by the YouTube Data API.
+      properties:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            errors:
+              type: array
+              description: A list of individual errors.
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A human-readable description of the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  reason:
+                    type: string
+                    description: The reason for the error.
+          example: example_value
+    Caption:
+      type: object
+      description: A caption resource represents a YouTube caption track. A caption track is associated with exactly one YouTube video.
+      required:
+      - kind
+      - etag
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#caption.
+          default: youtube#caption
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        id:
+          type: string
+          description: The ID that YouTube uses to uniquely identify the caption track.
+          example: abc123def456
+        snippet:
+          type: object
+          description: The snippet object contains basic details about the caption.
+          properties:
+            videoId:
+              type: string
+              description: The ID of the video that the caption track is associated with.
+            lastUpdated:
+              type: string
+              format: date-time
+              description: The date and time when the caption track was last updated.
+            trackKind:
+              type: string
+              description: The caption track's type.
+              enum:
+              - asr
+              - forced
+              - standard
+            language:
+              type: string
+              description: The language of the caption track. The property value is a BCP-47 language tag.
+            name:
+              type: string
+              description: The name of the caption track.
+            audioTrackType:
+              type: string
+              description: The type of audio track associated with the caption track.
+              enum:
+              - commentary
+              - descriptive
+              - primary
+              - unknown
+            isCC:
+              type: boolean
+              description: Indicates whether the track contains closed captions for the deaf and hard of hearing.
+            isLarge:
+              type: boolean
+              description: Indicates whether the caption track uses large text for the vision-impaired.
+            isEasyReader:
+              type: boolean
+              description: Indicates whether caption track is formatted for easy reader.
+            isDraft:
+              type: boolean
+              description: Indicates whether the caption track is a draft.
+            isAutoSynced:
+              type: boolean
+              description: Indicates whether YouTube synchronized the caption track to the audio track in the video.
+            status:
+              type: string
+              description: The caption track's status.
+              enum:
+              - failed
+              - serving
+              - syncing
+          example: example_value
+  responses:
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for YouTube Analytics API
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View YouTube Analytics monetary reports
+externalDocs:
+  description: YouTube Analytics API Documentation
+  url: https://developers.google.com/youtube/analytics

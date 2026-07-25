@@ -1,0 +1,299 @@
+openapi: 3.1.0
+info:
+  title: YouTube Analytics Analytics Groups I18n API
+  description: 'The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
+
+    Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
+
+    and gain insights into viewer demographics and behavior patterns.
+
+
+    ## Key Features
+
+    - Retrieve channel and video performance metrics
+
+    - Access audience demographics and geographic data
+
+    - Monitor engagement metrics like likes, comments, and shares
+
+    - Track revenue and ad performance data (for monetized content)
+
+    - Generate custom date-range reports
+
+
+    ## Authentication
+
+    All API requests require OAuth 2.0 authentication with appropriate scopes.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Google Developers
+    url: https://developers.google.com/youtube/analytics
+    email: youtube-api-support@google.com
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+    identifier: CC-BY-3.0
+  termsOfService: https://developers.google.com/terms/
+  x-logo:
+    url: https://www.youtube.com/img/desktop/yt_1200.png
+servers:
+- url: https://youtubeanalytics.googleapis.com/v2
+  description: YouTube Analytics API Production Server
+security:
+- OAuth2:
+  - https://www.googleapis.com/auth/yt-analytics.readonly
+tags:
+- name: I18n
+  description: Operations related to internationalization resources
+paths:
+  /i18nLanguages:
+    get:
+      operationId: youtube.i18nLanguages.list
+      summary: Youtube List I18n Languages
+      description: Returns a list of application languages that the YouTube website supports. The list includes both the language code and the human-readable name of each supported language.
+      tags:
+      - I18n
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - name: hl
+        in: query
+        description: Specifies the language that should be used for text values in the API response.
+        schema:
+          type: string
+        example: example_value
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing a list of i18n language resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/I18nLanguageListResponse'
+              examples:
+                YoutubeI18nlanguagesList200Example:
+                  summary: Default youtube.i18nLanguages.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        hl: example_value
+                        name: Example Title
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /i18nRegions:
+    get:
+      operationId: youtube.i18nRegions.list
+      summary: Youtube List I18n Regions
+      description: Returns a list of content regions that the YouTube website supports. The list includes region codes and human-readable names used for region-specific content filtering.
+      tags:
+      - I18n
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - name: hl
+        in: query
+        description: Specifies the language that should be used for text values in the API response.
+        schema:
+          type: string
+        example: example_value
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing a list of i18n region resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/I18nRegionListResponse'
+              examples:
+                YoutubeI18nregionsList200Example:
+                  summary: Default youtube.i18nRegions.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        gl: example_value
+                        name: Example Title
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    I18nRegionListResponse:
+      type: object
+      description: A list of i18n region resources supported by the YouTube website.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#i18nRegionListResponse.
+          default: youtube#i18nRegionListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        items:
+          type: array
+          description: A list of regions where YouTube is available.
+          items:
+            type: object
+            properties:
+              kind:
+                type: string
+                description: Identifies the API resource's type. Value is youtube#i18nRegion.
+              etag:
+                type: string
+                description: The Etag of this resource.
+              id:
+                type: string
+                description: The ID uniquely identifying the i18n region.
+              snippet:
+                type: object
+                description: The snippet object contains basic details about the i18n region.
+                properties:
+                  gl:
+                    type: string
+                    description: The region code as a 2-letter ISO country code.
+                  name:
+                    type: string
+                    description: The name of the region.
+          example: []
+    ErrorResponse:
+      type: object
+      description: A standard error response returned by the YouTube Data API.
+      properties:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            errors:
+              type: array
+              description: A list of individual errors.
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A human-readable description of the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  reason:
+                    type: string
+                    description: The reason for the error.
+          example: example_value
+    I18nLanguageListResponse:
+      type: object
+      description: A list of i18n language resources supported by the YouTube website.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#i18nLanguageListResponse.
+          default: youtube#i18nLanguageListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        items:
+          type: array
+          description: A list of supported i18n languages.
+          items:
+            type: object
+            properties:
+              kind:
+                type: string
+                description: Identifies the API resource's type. Value is youtube#i18nLanguage.
+              etag:
+                type: string
+                description: The Etag of this resource.
+              id:
+                type: string
+                description: The ID uniquely identifying the i18n language.
+              snippet:
+                type: object
+                description: The snippet object contains basic details about the i18n language.
+                properties:
+                  hl:
+                    type: string
+                    description: A BCP-47 code that uniquely identifies a language.
+                  name:
+                    type: string
+                    description: The name of the language as it is written in the language itself.
+          example: []
+  parameters:
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+  responses:
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for YouTube Analytics API
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View YouTube Analytics monetary reports
+externalDocs:
+  description: YouTube Analytics API Documentation
+  url: https://developers.google.com/youtube/analytics

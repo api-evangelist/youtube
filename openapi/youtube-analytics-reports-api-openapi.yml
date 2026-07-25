@@ -1,0 +1,439 @@
+openapi: 3.1.0
+info:
+  title: YouTube Analytics Analytics Groups Analytics Reports API
+  description: 'The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
+
+    Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
+
+    and gain insights into viewer demographics and behavior patterns.
+
+
+    ## Key Features
+
+    - Retrieve channel and video performance metrics
+
+    - Access audience demographics and geographic data
+
+    - Monitor engagement metrics like likes, comments, and shares
+
+    - Track revenue and ad performance data (for monetized content)
+
+    - Generate custom date-range reports
+
+
+    ## Authentication
+
+    All API requests require OAuth 2.0 authentication with appropriate scopes.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Google Developers
+    url: https://developers.google.com/youtube/analytics
+    email: youtube-api-support@google.com
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+    identifier: CC-BY-3.0
+  termsOfService: https://developers.google.com/terms/
+  x-logo:
+    url: https://www.youtube.com/img/desktop/yt_1200.png
+servers:
+- url: https://youtubeanalytics.googleapis.com/v2
+  description: YouTube Analytics API Production Server
+security:
+- OAuth2:
+  - https://www.googleapis.com/auth/yt-analytics.readonly
+tags:
+- name: Analytics Reports
+  description: Operations for retrieving YouTube Analytics reports and metrics
+paths:
+  /reports:
+    get:
+      tags:
+      - Analytics Reports
+      operationId: getAnalyticsReports
+      summary: Retrieve YouTube Analytics Reports
+      description: 'Retrieves YouTube Analytics data for a channel or content owner.
+
+        The API response contains a report with the requested dimensions and metrics
+
+        for the specified date range. You can filter results by various dimensions
+
+        such as video, country, or traffic source.
+
+        '
+      x-microcks-operation:
+        delay: 100
+        dispatcher: FALLBACK
+        dispatcherRules: "{\n  \"dispatcher\": \"FALLBACK\",\n  \"fallback\": \"SuccessfulAnalyticsReportExample\"\n}\n"
+      parameters:
+      - $ref: '#/components/parameters/Ids'
+      - $ref: '#/components/parameters/StartDate'
+      - $ref: '#/components/parameters/EndDate'
+      - $ref: '#/components/parameters/Metrics'
+      - $ref: '#/components/parameters/Dimensions'
+      - $ref: '#/components/parameters/Filters'
+      - $ref: '#/components/parameters/Sort'
+      - $ref: '#/components/parameters/MaxResults'
+      - $ref: '#/components/parameters/StartIndex'
+      - $ref: '#/components/parameters/Currency'
+      - $ref: '#/components/parameters/AccessToken'
+      - $ref: '#/components/parameters/PrettyPrint'
+      responses:
+        '200':
+          description: Successful response containing analytics report data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsReportResponse'
+              examples:
+                SuccessfulAnalyticsReportExample:
+                  $ref: '#/components/examples/SuccessfulAnalyticsReportExample'
+        '400':
+          description: Bad request - invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                BadRequestErrorExample:
+                  $ref: '#/components/examples/BadRequestErrorExample'
+        '401':
+          description: Unauthorized - invalid or missing authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                UnauthorizedErrorExample:
+                  $ref: '#/components/examples/UnauthorizedErrorExample'
+        '403':
+          description: Forbidden - insufficient permissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                ForbiddenErrorExample:
+                  $ref: '#/components/examples/ForbiddenErrorExample'
+components:
+  parameters:
+    Currency:
+      name: currency
+      in: query
+      required: false
+      description: Currency code for revenue metrics (ISO 4217)
+      schema:
+        type: string
+        pattern: ^[A-Z]{3}$
+        example: USD
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: 'A comma-separated list of dimensions or metrics to sort by.
+
+        Prefix with - for descending order.
+
+        '
+      schema:
+        type: string
+        example: -views
+    MaxResults:
+      name: maxResults
+      in: query
+      required: false
+      description: Maximum number of rows to include in the response (1-500)
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+        default: 100
+        example: 50
+    Ids:
+      name: ids
+      in: query
+      required: true
+      description: 'Identifies the YouTube channel or content owner for which you are retrieving
+
+        YouTube Analytics data. Use channel==CHANNEL_ID or contentOwner==CONTENT_OWNER_ID.
+
+        '
+      schema:
+        type: string
+        example: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+    AccessToken:
+      name: access_token
+      in: query
+      required: false
+      description: OAuth 2.0 access token for authentication
+      schema:
+        type: string
+    Metrics:
+      name: metrics
+      in: query
+      required: true
+      description: 'A comma-separated list of YouTube Analytics metrics to retrieve.
+
+        Common metrics include views, estimatedMinutesWatched, averageViewDuration, likes, dislikes, comments, shares.
+
+        '
+      schema:
+        type: string
+        example: views,estimatedMinutesWatched,averageViewDuration,likes
+    Dimensions:
+      name: dimensions
+      in: query
+      required: false
+      description: 'A comma-separated list of YouTube Analytics dimensions.
+
+        Common dimensions include video, channel, country, day, month.
+
+        '
+      schema:
+        type: string
+        example: video,day
+    PrettyPrint:
+      name: prettyPrint
+      in: query
+      required: false
+      description: Returns response with indentations and line breaks for readability
+      schema:
+        type: boolean
+        default: true
+    StartDate:
+      name: startDate
+      in: query
+      required: true
+      description: The start date for the data retrieval in YYYY-MM-DD format
+      schema:
+        type: string
+        format: date
+        example: '2024-01-01'
+    Filters:
+      name: filters
+      in: query
+      required: false
+      description: 'A list of filters to apply to the data. Filters use the format dimension==value
+
+        and can be combined with semicolons.
+
+        '
+      schema:
+        type: string
+        example: country==US;video==dQw4w9WgXcQ
+    EndDate:
+      name: endDate
+      in: query
+      required: true
+      description: The end date for the data retrieval in YYYY-MM-DD format
+      schema:
+        type: string
+        format: date
+        example: '2024-01-31'
+    StartIndex:
+      name: startIndex
+      in: query
+      required: false
+      description: Index of the first row to retrieve (1-based)
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+        example: 1
+  examples:
+    UnauthorizedErrorExample:
+      summary: Unauthorized error
+      description: Example error response for authentication failure
+      value:
+        error:
+          code: 401
+          message: Invalid credentials
+          errors:
+          - domain: youtube.analytics
+            reason: authError
+            message: The access token is invalid or expired
+            locationType: header
+            location: Authorization
+    SuccessfulAnalyticsReportExample:
+      summary: Successful analytics report response
+      description: Example response containing video views and engagement metrics
+      value:
+        kind: youtubeAnalytics#resultTable
+        columnHeaders:
+        - name: video
+          columnType: DIMENSION
+          dataType: STRING
+        - name: views
+          columnType: METRIC
+          dataType: INTEGER
+        - name: estimatedMinutesWatched
+          columnType: METRIC
+          dataType: FLOAT
+        - name: averageViewDuration
+          columnType: METRIC
+          dataType: FLOAT
+        - name: likes
+          columnType: METRIC
+          dataType: INTEGER
+        rows:
+        - - dQw4w9WgXcQ
+          - 1500000
+          - 3750000.5
+          - 150.2
+          - 45000
+        - - abc123XYZ789
+          - 500000
+          - 1000000.0
+          - 120.0
+          - 15000
+    ForbiddenErrorExample:
+      summary: Forbidden error
+      description: Example error response for insufficient permissions
+      value:
+        error:
+          code: 403
+          message: Access forbidden
+          errors:
+          - domain: youtube.analytics
+            reason: forbidden
+            message: The authenticated user does not have permission to access this resource
+            locationType: header
+            location: Authorization
+    BadRequestErrorExample:
+      summary: Bad request error
+      description: Example error response for invalid parameters
+      value:
+        error:
+          code: 400
+          message: Invalid parameter value
+          errors:
+          - domain: youtube.analytics
+            reason: invalidParameter
+            message: The parameter 'startDate' has an invalid value
+            locationType: parameter
+            location: startDate
+  schemas:
+    ColumnHeader:
+      type: object
+      description: Defines a column in the analytics report
+      required:
+      - name
+      - columnType
+      - dataType
+      properties:
+        name:
+          type: string
+          description: The name of the dimension or metric
+          example: views
+        columnType:
+          type: string
+          description: Whether the column is a dimension or metric
+          enum:
+          - DIMENSION
+          - METRIC
+          example: METRIC
+        dataType:
+          type: string
+          description: The data type of the column values
+          enum:
+          - STRING
+          - INTEGER
+          - FLOAT
+          example: INTEGER
+    ErrorResponse:
+      type: object
+      description: Error response object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetails'
+    ErrorDetails:
+      type: object
+      description: Details about an API error
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid parameter value
+        errors:
+          type: array
+          description: List of specific errors
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    ErrorItem:
+      type: object
+      description: Individual error detail
+      properties:
+        domain:
+          type: string
+          description: Error domain
+          example: youtube.analytics
+        reason:
+          type: string
+          description: Error reason code
+          example: invalidParameter
+        message:
+          type: string
+          description: Detailed error message
+          example: The parameter 'startDate' has an invalid value
+        locationType:
+          type: string
+          description: Type of location where error occurred
+          example: parameter
+        location:
+          type: string
+          description: Specific location of the error
+          example: startDate
+    AnalyticsReportResponse:
+      type: object
+      description: Response object containing YouTube Analytics report data
+      required:
+      - kind
+      - columnHeaders
+      - rows
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtubeAnalytics#resultTable
+        columnHeaders:
+          type: array
+          description: Column header definitions for the report data
+          items:
+            $ref: '#/components/schemas/ColumnHeader'
+        rows:
+          type: array
+          description: Data rows containing the requested metrics and dimensions
+          items:
+            type: array
+            items:
+              oneOf:
+              - type: string
+              - type: number
+              - type: integer
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for YouTube Analytics API
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View YouTube Analytics monetary reports
+externalDocs:
+  description: YouTube Analytics API Documentation
+  url: https://developers.google.com/youtube/analytics

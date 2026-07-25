@@ -1,0 +1,460 @@
+openapi: 3.1.0
+info:
+  title: YouTube Analytics Analytics Groups Reports API
+  description: 'The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
+
+    Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
+
+    and gain insights into viewer demographics and behavior patterns.
+
+
+    ## Key Features
+
+    - Retrieve channel and video performance metrics
+
+    - Access audience demographics and geographic data
+
+    - Monitor engagement metrics like likes, comments, and shares
+
+    - Track revenue and ad performance data (for monetized content)
+
+    - Generate custom date-range reports
+
+
+    ## Authentication
+
+    All API requests require OAuth 2.0 authentication with appropriate scopes.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Google Developers
+    url: https://developers.google.com/youtube/analytics
+    email: youtube-api-support@google.com
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+    identifier: CC-BY-3.0
+  termsOfService: https://developers.google.com/terms/
+  x-logo:
+    url: https://www.youtube.com/img/desktop/yt_1200.png
+servers:
+- url: https://youtubeanalytics.googleapis.com/v2
+  description: YouTube Analytics API Production Server
+security:
+- OAuth2:
+  - https://www.googleapis.com/auth/yt-analytics.readonly
+tags:
+- name: Reports
+  description: Operations for querying YouTube Analytics report data
+paths:
+  /reports:
+    get:
+      operationId: youtubeAnalytics.reports.query
+      summary: Youtube Query Analytics Reports
+      description: Retrieves YouTube Analytics data for a channel or content owner. The report provides aggregated statistics for the specified dimensions and metrics over the date range. The ids parameter specifies the channel or content owner for which the report is being retrieved.
+      tags:
+      - Reports
+      parameters:
+      - name: ids
+        in: query
+        required: true
+        description: Identifies the YouTube channel or content owner for which the report is being retrieved. To request data for a YouTube user, set the parameter value to channel==CHANNEL_ID where CHANNEL_ID specifies the unique YouTube channel ID. To request data for a YouTube CMS content owner, set the parameter value to contentOwner==OWNER_NAME.
+        schema:
+          type: string
+        example: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+      - name: startDate
+        in: query
+        required: true
+        description: The start date for fetching YouTube Analytics data in YYYY-MM-DD format. The API response will include data from this date up to and including the end date.
+        schema:
+          type: string
+          format: date
+        example: '2026-01-15'
+      - name: endDate
+        in: query
+        required: true
+        description: The end date for fetching YouTube Analytics data in YYYY-MM-DD format. The value must be less than or equal to today's date.
+        schema:
+          type: string
+          format: date
+        example: '2026-01-15'
+      - name: metrics
+        in: query
+        required: true
+        description: A comma-separated list of YouTube Analytics metrics, such as views or likes, dislikes. See the Available Reports document or the Metrics document for a list of reports that you can retrieve and the metrics available in each report.
+        schema:
+          type: string
+        example: views,estimatedMinutesWatched,likes
+      - name: dimensions
+        in: query
+        description: A comma-separated list of YouTube Analytics dimensions, such as video or country. See the Available Reports document for a list of reports that you can retrieve and the dimensions used for those reports.
+        schema:
+          type: string
+        example: day
+      - name: filters
+        in: query
+        description: A list of filters that should be applied when retrieving YouTube Analytics data. The Available Reports document identifies the dimensions that can be used to filter each report.
+        schema:
+          type: string
+        example: example_value
+      - name: maxResults
+        in: query
+        description: The maximum number of rows to include in the response. The maximum value is 200.
+        schema:
+          type: integer
+          maximum: 200
+        example: 25
+      - name: sort
+        in: query
+        description: A comma-separated list of dimensions or metrics that determine the sort order for YouTube Analytics data. By default the sort order is ascending. Prefix with a minus sign (-) to indicate descending order.
+        schema:
+          type: string
+        example: example_value
+      - name: startIndex
+        in: query
+        description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+        schema:
+          type: integer
+          minimum: 1
+        example: 10
+      - name: currency
+        in: query
+        description: The currency to which financial metrics should be converted. The default value is USD (US Dollar). Specify the parameter value as an ISO 4217 currency code.
+        schema:
+          type: string
+        example: example_value
+      - name: alt
+        in: query
+        description: Data format for the response.
+        schema:
+          type: string
+          enum:
+          - json
+        example: json
+      responses:
+        '200':
+          description: Successful response containing YouTube Analytics data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+              examples:
+                YoutubeanalyticsReportsQuery200Example:
+                  summary: Default youtubeAnalytics.reports.query 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    columnHeaders:
+                    - name: Example Title
+                      columnType: DIMENSION
+                      dataType: CURRENCY
+                    rows: []
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /jobs/{jobId}/reports:
+    get:
+      operationId: youtubeReporting.reports.list
+      summary: Youtube List Reports
+      description: Lists reports created by a specific reporting job. Each report covers a 24-hour period and includes a download URL for retrieving the report data.
+      tags:
+      - Reports
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: The ID of the job whose reports are being listed.
+        schema:
+          type: string
+        example: abc123def456
+      - name: onBehalfOfContentOwner
+        in: query
+        description: The content owner's external ID on which behalf the user is acting on.
+        schema:
+          type: string
+        example: example_value
+      - name: createdAfter
+        in: query
+        description: If specified, only reports created after the specified date/time are returned.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: startTimeAtOrAfter
+        in: query
+        description: If specified, only reports covering data on or after this date are returned.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: startTimeBefore
+        in: query
+        description: If specified, only reports covering data before this date are returned.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: pageToken
+        in: query
+        description: A token identifying a page of results to return.
+        schema:
+          type: string
+        example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+      - name: pageSize
+        in: query
+        description: The maximum number of items to return in the response.
+        schema:
+          type: integer
+        example: 25
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReportsResponse'
+              examples:
+                YoutubereportingReportsList200Example:
+                  summary: Default youtubeReporting.reports.list 200 response
+                  x-microcks-default: true
+                  value:
+                    reports:
+                    - id: abc123def456
+                      jobId: abc123def456
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+                      createTime: '2026-01-15T10:30:00Z'
+                      downloadUrl: https://www.example.com
+                      jobExpireTime: '2026-01-15T10:30:00Z'
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /jobs/{jobId}/reports/{reportId}:
+    get:
+      operationId: youtubeReporting.reports.get
+      summary: Youtube Get Report
+      description: Gets the metadata for a specific report including its download URL.
+      tags:
+      - Reports
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: The ID of the job that created the report.
+        schema:
+          type: string
+        example: abc123def456
+      - name: reportId
+        in: path
+        required: true
+        description: The ID of the report to retrieve.
+        schema:
+          type: string
+        example: abc123def456
+      - name: onBehalfOfContentOwner
+        in: query
+        description: The content owner's external ID on which behalf the user is acting on.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+              examples:
+                YoutubereportingReportsGet200Example:
+                  summary: Default youtubeReporting.reports.get 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123def456
+                    jobId: abc123def456
+                    startTime: '2026-01-15T10:30:00Z'
+                    endTime: '2026-01-15T10:30:00Z'
+                    createTime: '2026-01-15T10:30:00Z'
+                    downloadUrl: https://www.example.com
+                    jobExpireTime: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ColumnHeader:
+      type: object
+      description: Describes a single column in an Analytics report response, including its name, type, and data type.
+      properties:
+        name:
+          type: string
+          description: The name of the dimension or metric.
+          example: Example Title
+        columnType:
+          type: string
+          description: The type of the column. Valid values are DIMENSION and METRIC.
+          enum:
+          - DIMENSION
+          - METRIC
+          example: DIMENSION
+        dataType:
+          type: string
+          description: The type of data that the column contains. Valid values are STRING, INTEGER, FLOAT, and CURRENCY.
+          enum:
+          - CURRENCY
+          - FLOAT
+          - INTEGER
+          - STRING
+          example: CURRENCY
+    ErrorResponse:
+      type: object
+      description: A standard error response returned by the YouTube Analytics API.
+      properties:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            status:
+              type: string
+              description: The error status code.
+            details:
+              type: array
+              description: A list of additional error details.
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The type of the error detail.
+                  reason:
+                    type: string
+                    description: The reason code for the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  metadata:
+                    type: object
+                    description: Additional metadata about the error.
+                    additionalProperties:
+                      type: string
+          example: example_value
+    Report:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The server-generated ID of the report.
+          example: abc123def456
+        jobId:
+          type: string
+          description: The ID of the job that created this report.
+          example: abc123def456
+        startTime:
+          type: string
+          format: date-time
+          description: The start of the time period that the report covers.
+          example: '2026-01-15T10:30:00Z'
+        endTime:
+          type: string
+          format: date-time
+          description: The end of the time period that the report covers.
+          example: '2026-01-15T10:30:00Z'
+        createTime:
+          type: string
+          format: date-time
+          description: The date and time when the report was created.
+          example: '2026-01-15T10:30:00Z'
+        downloadUrl:
+          type: string
+          description: The URL from which the report can be downloaded.
+          example: https://www.example.com
+        jobExpireTime:
+          type: string
+          format: date-time
+          description: The date and time when the job creating this report will expire.
+          example: '2026-01-15T10:30:00Z'
+    QueryResponse:
+      type: object
+      description: Response to a successful YouTube Analytics query request containing the requested report data including column headers and rows of data.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtubeAnalytics#resultTable.
+          default: youtubeAnalytics#resultTable
+          example: youtube#video
+        columnHeaders:
+          type: array
+          description: A list of objects that describe the columns in the report table. Each object in the list identifies a query dimension or metric and provides information about the data type of that dimension or metric.
+          items:
+            $ref: '#/components/schemas/ColumnHeader'
+          example: []
+        rows:
+          type: array
+          description: The list contains all rows of the result table. Each item in the list is an array that contains comma-delimited data corresponding to a single row of data. The order of the comma-delimited data fields will match the order of the columns listed in the columnHeaders field.
+          items:
+            type: array
+            description: A single row of data in the report result set.
+            items:
+              description: A value in the row, either a string or number depending on the column type.
+          example: []
+    ListReportsResponse:
+      type: object
+      properties:
+        reports:
+          type: array
+          items:
+            $ref: '#/components/schemas/Report'
+          description: The list of reports.
+          example: []
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+  responses:
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for YouTube Analytics API
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View YouTube Analytics monetary reports
+externalDocs:
+  description: YouTube Analytics API Documentation
+  url: https://developers.google.com/youtube/analytics

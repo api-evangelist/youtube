@@ -1,0 +1,503 @@
+openapi: 3.1.0
+info:
+  title: YouTube Analytics Analytics Groups Channels API
+  description: 'The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
+
+    Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
+
+    and gain insights into viewer demographics and behavior patterns.
+
+
+    ## Key Features
+
+    - Retrieve channel and video performance metrics
+
+    - Access audience demographics and geographic data
+
+    - Monitor engagement metrics like likes, comments, and shares
+
+    - Track revenue and ad performance data (for monetized content)
+
+    - Generate custom date-range reports
+
+
+    ## Authentication
+
+    All API requests require OAuth 2.0 authentication with appropriate scopes.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Google Developers
+    url: https://developers.google.com/youtube/analytics
+    email: youtube-api-support@google.com
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+    identifier: CC-BY-3.0
+  termsOfService: https://developers.google.com/terms/
+  x-logo:
+    url: https://www.youtube.com/img/desktop/yt_1200.png
+servers:
+- url: https://youtubeanalytics.googleapis.com/v2
+  description: YouTube Analytics API Production Server
+security:
+- OAuth2:
+  - https://www.googleapis.com/auth/yt-analytics.readonly
+tags:
+- name: Channels
+  description: Operations related to YouTube channel resources
+paths:
+  /channels:
+    get:
+      operationId: youtube.channels.list
+      summary: Youtube List Channels
+      description: Returns a collection of zero or more channel resources that match the request criteria. Use the part parameter to specify the channel resource properties to include.
+      tags:
+      - Channels
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - name: id
+        in: query
+        description: Comma-separated list of YouTube channel IDs for the resources being retrieved.
+        schema:
+          type: string
+        example: abc123def456
+      - name: mine
+        in: query
+        description: Set this parameter to true to instruct the API to return channels owned by the authenticated user.
+        schema:
+          type: boolean
+        example: true
+      - name: forUsername
+        in: query
+        description: A YouTube username identifying a channel. The API returns the channel associated with that username.
+        schema:
+          type: string
+        example: example_value
+      - $ref: '#/components/parameters/maxResults'
+      - $ref: '#/components/parameters/pageToken'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing a list of channel resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChannelListResponse'
+              examples:
+                YoutubeChannelsList200Example:
+                  summary: Default youtube.channels.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    prevPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    pageInfo:
+                      totalResults: 42
+                      resultsPerPage: 10
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      contentDetails:
+                        relatedPlaylists: {}
+                      brandingSettings:
+                        channel: {}
+                        image: {}
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: youtube.channels.update
+      summary: Youtube Update Channel Metadata
+      description: Updates a channel's metadata. The authenticated user must own the channel being updated. Use the part parameter to specify the channel properties to update.
+      tags:
+      - Channels
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      requestBody:
+        description: The channel resource with updated properties.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Channel'
+            examples:
+              YoutubeChannelsUpdateRequestExample:
+                summary: Default youtube.channels.update request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    title: Example Title
+                    description: A sample description for this resource.
+                    customUrl: https://www.example.com
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    thumbnails: example_value
+                    country: 42
+                    localized:
+                      title: Example Title
+                      description: A sample description for this resource.
+                  statistics:
+                    viewCount: 42
+                    subscriberCount: 42
+                    hiddenSubscriberCount: 42
+                    videoCount: 42
+                  contentDetails:
+                    relatedPlaylists:
+                      uploads: example_value
+                      likes: example_value
+                  brandingSettings:
+                    channel:
+                      title: Example Title
+                      description: A sample description for this resource.
+                      keywords: example_value
+                      defaultLanguage: en
+                    image:
+                      bannerExternalUrl: https://www.example.com
+      responses:
+        '200':
+          description: Successful response containing the updated channel resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+              examples:
+                YoutubeChannelsUpdate200Example:
+                  summary: Default youtube.channels.update 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      title: Example Title
+                      description: A sample description for this resource.
+                      customUrl: https://www.example.com
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      thumbnails: example_value
+                      country: 42
+                      localized:
+                        title: Example Title
+                        description: A sample description for this resource.
+                    statistics:
+                      viewCount: 42
+                      subscriberCount: 42
+                      hiddenSubscriberCount: 42
+                      videoCount: 42
+                    contentDetails:
+                      relatedPlaylists:
+                        uploads: example_value
+                        likes: example_value
+                    brandingSettings:
+                      channel:
+                        title: Example Title
+                        description: A sample description for this resource.
+                        keywords: example_value
+                        defaultLanguage: en
+                      image:
+                        bannerExternalUrl: https://www.example.com
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
+      schema:
+        type: string
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+    maxResults:
+      name: maxResults
+      in: query
+      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 50
+        default: 5
+  schemas:
+    Channel:
+      type: object
+      description: A channel resource represents a YouTube channel.
+      required:
+      - kind
+      - etag
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#channel.
+          default: youtube#channel
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        id:
+          type: string
+          description: The ID that YouTube uses to uniquely identify the channel.
+          example: abc123def456
+        snippet:
+          $ref: '#/components/schemas/ChannelSnippet'
+        statistics:
+          $ref: '#/components/schemas/ChannelStatistics'
+        contentDetails:
+          type: object
+          description: The contentDetails object encapsulates information about the channel's content.
+          properties:
+            relatedPlaylists:
+              type: object
+              description: A map that identifies playlists associated with the channel.
+              properties:
+                uploads:
+                  type: string
+                  description: The ID of the playlist that contains the channel's uploaded videos.
+                likes:
+                  type: string
+                  description: The ID of the playlist that contains the videos that the channel has liked.
+          example: example_value
+        brandingSettings:
+          type: object
+          description: The brandingSettings object encapsulates information about the branding of the channel.
+          properties:
+            channel:
+              type: object
+              description: Branding settings for the channel page.
+              properties:
+                title:
+                  type: string
+                  description: The channel title.
+                description:
+                  type: string
+                  description: The channel description.
+                keywords:
+                  type: string
+                  description: Keywords associated with the channel.
+                defaultLanguage:
+                  type: string
+                  description: The content tab that users should display by default on the channel page.
+            image:
+              type: object
+              description: Branding images associated with the channel page.
+              properties:
+                bannerExternalUrl:
+                  type: string
+                  description: The URL for the banner image shown on the channel page on the YouTube website.
+          example: example_value
+    PageInfo:
+      type: object
+      description: Paging details for a list operation, including information about the total number of resources and the number per page.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results in the result set.
+          example: 42
+        resultsPerPage:
+          type: integer
+          description: The number of results included in the API response.
+          example: 10
+    ChannelStatistics:
+      type: object
+      description: Statistics about a YouTube channel.
+      properties:
+        viewCount:
+          type: string
+          description: The number of times the channel has been viewed.
+          example: 42
+        subscriberCount:
+          type: string
+          description: The number of subscribers that the channel has.
+          example: 42
+        hiddenSubscriberCount:
+          type: boolean
+          description: Indicates whether the channel's subscriber count is publicly visible.
+          example: 42
+        videoCount:
+          type: string
+          description: The number of public videos uploaded to the channel.
+          example: 42
+    ErrorResponse:
+      type: object
+      description: A standard error response returned by the YouTube Data API.
+      properties:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            errors:
+              type: array
+              description: A list of individual errors.
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A human-readable description of the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  reason:
+                    type: string
+                    description: The reason for the error.
+          example: example_value
+    ChannelListResponse:
+      type: object
+      description: A list of channel resources matching the request criteria.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#channelListResponse.
+          default: youtube#channelListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        nextPageToken:
+          type: string
+          description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        prevPageToken:
+          type: string
+          description: The token for the previous page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of channels that match the request criteria.
+          items:
+            $ref: '#/components/schemas/Channel'
+          example: []
+    ChannelSnippet:
+      type: object
+      description: Basic details about a channel, including its title, description, and thumbnails.
+      properties:
+        title:
+          type: string
+          description: The channel title.
+          example: Example Title
+        description:
+          type: string
+          description: The channel description.
+          example: A sample description for this resource.
+        customUrl:
+          type: string
+          description: The channel's custom URL.
+          example: https://www.example.com
+        publishedAt:
+          type: string
+          format: date-time
+          description: The date and time that the channel was created.
+          example: '2026-01-15T10:30:00Z'
+        thumbnails:
+          type: object
+          description: A map of thumbnail images associated with the channel.
+          additionalProperties:
+            type: object
+            properties:
+              url:
+                type: string
+                description: The URL of the thumbnail image.
+              width:
+                type: integer
+                description: The thumbnail width in pixels.
+              height:
+                type: integer
+                description: The thumbnail height in pixels.
+          example: example_value
+        country:
+          type: string
+          description: The country with which the channel is associated.
+          example: 42
+        localized:
+          type: object
+          description: The snippet.localized object contains a localized title and description for the channel.
+          properties:
+            title:
+              type: string
+              description: The localized channel title.
+            description:
+              type: string
+              description: The localized channel description.
+          example: example_value
+  responses:
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for YouTube Analytics API
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View YouTube Analytics monetary reports
+externalDocs:
+  description: YouTube Analytics API Documentation
+  url: https://developers.google.com/youtube/analytics

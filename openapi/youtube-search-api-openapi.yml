@@ -1,0 +1,357 @@
+openapi: 3.1.0
+info:
+  title: YouTube Analytics Analytics Groups Search API
+  description: 'The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
+
+    Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
+
+    and gain insights into viewer demographics and behavior patterns.
+
+
+    ## Key Features
+
+    - Retrieve channel and video performance metrics
+
+    - Access audience demographics and geographic data
+
+    - Monitor engagement metrics like likes, comments, and shares
+
+    - Track revenue and ad performance data (for monetized content)
+
+    - Generate custom date-range reports
+
+
+    ## Authentication
+
+    All API requests require OAuth 2.0 authentication with appropriate scopes.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Google Developers
+    url: https://developers.google.com/youtube/analytics
+    email: youtube-api-support@google.com
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+    identifier: CC-BY-3.0
+  termsOfService: https://developers.google.com/terms/
+  x-logo:
+    url: https://www.youtube.com/img/desktop/yt_1200.png
+servers:
+- url: https://youtubeanalytics.googleapis.com/v2
+  description: YouTube Analytics API Production Server
+security:
+- OAuth2:
+  - https://www.googleapis.com/auth/yt-analytics.readonly
+tags:
+- name: Search
+  description: Operations for searching YouTube content
+paths:
+  /search:
+    get:
+      operationId: youtube.search.list
+      summary: Youtube Search Youtube
+      description: Returns a collection of search results that match the query parameters specified in the API request. By default, a search result set identifies matching video, channel, and playlist resources, but you can also configure queries to only retrieve a specific type of resource.
+      tags:
+      - Search
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - name: q
+        in: query
+        description: The query term to search for.
+        schema:
+          type: string
+        example: youtube api tutorial
+      - name: type
+        in: query
+        description: Restricts a search query to only retrieve a particular type of resource. Acceptable values are channel, playlist, and video.
+        schema:
+          type: string
+        example: video
+      - name: channelId
+        in: query
+        description: Indicates that the API response should only contain resources created by the channel.
+        schema:
+          type: string
+        example: '500123'
+      - name: order
+        in: query
+        description: Specifies the method that will be used to order resources in the API response. Acceptable values are date, rating, relevance, title, videoCount, and viewCount.
+        schema:
+          type: string
+          enum:
+          - date
+          - rating
+          - relevance
+          - title
+          - videoCount
+          - viewCount
+        example: date
+      - name: publishedAfter
+        in: query
+        description: Restricts results to only include resources created at or after the specified time, in RFC 3339 format.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: publishedBefore
+        in: query
+        description: Restricts results to only include resources created before or at the specified time, in RFC 3339 format.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - $ref: '#/components/parameters/maxResults'
+      - $ref: '#/components/parameters/pageToken'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing a list of search result resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchListResponse'
+              examples:
+                YoutubeSearchList200Example:
+                  summary: Default youtube.search.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    prevPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    regionCode: US
+                    pageInfo:
+                      totalResults: 42
+                      resultsPerPage: 10
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id:
+                        kind: youtube#video
+                        videoId: '500123'
+                        channelId: '500123'
+                        playlistId: '500123'
+                      snippet:
+                        publishedAt: '2026-01-15T10:30:00Z'
+                        channelId: '500123'
+                        title: Example Title
+                        description: A sample description for this resource.
+                        thumbnails: example_value
+                        channelTitle: example_value
+                        liveBroadcastContent: example_value
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
+      schema:
+        type: string
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+    maxResults:
+      name: maxResults
+      in: query
+      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 50
+        default: 5
+  schemas:
+    PageInfo:
+      type: object
+      description: Paging details for a list operation, including information about the total number of resources and the number per page.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results in the result set.
+          example: 42
+        resultsPerPage:
+          type: integer
+          description: The number of results included in the API response.
+          example: 10
+    ErrorResponse:
+      type: object
+      description: A standard error response returned by the YouTube Data API.
+      properties:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            errors:
+              type: array
+              description: A list of individual errors.
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A human-readable description of the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  reason:
+                    type: string
+                    description: The reason for the error.
+          example: example_value
+    SearchResult:
+      type: object
+      description: A search result contains information about a YouTube video, channel, or playlist that matches the search query.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#searchResult.
+          default: youtube#searchResult
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        id:
+          type: object
+          description: The id object contains information that can be used to uniquely identify the resource that matches the search request.
+          properties:
+            kind:
+              type: string
+              description: The type of the API resource.
+            videoId:
+              type: string
+              description: If the id.kind property's value is youtube#video, then this property is present.
+            channelId:
+              type: string
+              description: If the id.kind property's value is youtube#channel, then this property is present.
+            playlistId:
+              type: string
+              description: If the id.kind property's value is youtube#playlist, then this property is present.
+          example: abc123def456
+        snippet:
+          type: object
+          description: The snippet object contains basic details about a search result, such as its title or description.
+          properties:
+            publishedAt:
+              type: string
+              format: date-time
+              description: The creation date and time of the resource that the search result identifies.
+            channelId:
+              type: string
+              description: The value that YouTube uses to uniquely identify the channel that published the resource identified by the search result.
+            title:
+              type: string
+              description: The title of the search result.
+            description:
+              type: string
+              description: A description of the search result.
+            thumbnails:
+              type: object
+              description: A map of thumbnail images associated with the search result.
+            channelTitle:
+              type: string
+              description: The title of the channel that published the resource identified by the search result.
+            liveBroadcastContent:
+              type: string
+              description: An indication of whether a video or channel resource has live broadcast content.
+          example: example_value
+    SearchListResponse:
+      type: object
+      description: A list of search results matching the query criteria.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#searchListResponse.
+          default: youtube#searchListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        nextPageToken:
+          type: string
+          description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        prevPageToken:
+          type: string
+          description: The token for the previous page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        regionCode:
+          type: string
+          description: The region code that was used for the search query.
+          example: US
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of results that match the search criteria.
+          items:
+            $ref: '#/components/schemas/SearchResult'
+          example: []
+  responses:
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for YouTube Analytics API
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View YouTube Analytics monetary reports
+externalDocs:
+  description: YouTube Analytics API Documentation
+  url: https://developers.google.com/youtube/analytics

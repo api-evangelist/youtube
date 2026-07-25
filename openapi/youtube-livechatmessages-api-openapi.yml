@@ -1,0 +1,487 @@
+openapi: 3.1.0
+info:
+  title: YouTube Analytics Analytics Groups LiveChatMessages API
+  description: 'The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
+
+    Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
+
+    and gain insights into viewer demographics and behavior patterns.
+
+
+    ## Key Features
+
+    - Retrieve channel and video performance metrics
+
+    - Access audience demographics and geographic data
+
+    - Monitor engagement metrics like likes, comments, and shares
+
+    - Track revenue and ad performance data (for monetized content)
+
+    - Generate custom date-range reports
+
+
+    ## Authentication
+
+    All API requests require OAuth 2.0 authentication with appropriate scopes.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Google Developers
+    url: https://developers.google.com/youtube/analytics
+    email: youtube-api-support@google.com
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+    identifier: CC-BY-3.0
+  termsOfService: https://developers.google.com/terms/
+  x-logo:
+    url: https://www.youtube.com/img/desktop/yt_1200.png
+servers:
+- url: https://youtubeanalytics.googleapis.com/v2
+  description: YouTube Analytics API Production Server
+security:
+- OAuth2:
+  - https://www.googleapis.com/auth/yt-analytics.readonly
+tags:
+- name: LiveChatMessages
+  description: Operations for managing messages in YouTube live chat
+paths:
+  /liveChatMessages:
+    get:
+      operationId: youtube.liveChatMessages.list
+      summary: Youtube List Live Chat Messages
+      description: Lists live chat messages for a specific live broadcast. This method does not support filtering by user. The list is ordered chronologically, starting with the earliest message.
+      tags:
+      - LiveChatMessages
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - name: liveChatId
+        in: query
+        required: true
+        description: The liveChatId parameter specifies the ID of the live chat whose messages will be returned. The live chat ID associated with a broadcast is returned in the liveBroadcast resource's snippet.liveChatId property.
+        schema:
+          type: string
+        example: '500123'
+      - $ref: '#/components/parameters/maxResults'
+      - $ref: '#/components/parameters/pageToken'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      responses:
+        '200':
+          description: Successful response containing a list of live chat message resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveChatMessageListResponse'
+              examples:
+                YoutubeLivechatmessagesList200Example:
+                  summary: Default youtube.liveChatMessages.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+                    pollingIntervalMillis: 10
+                    offlineAt: '2026-01-15T10:30:00Z'
+                    pageInfo:
+                      totalResults: 42
+                      resultsPerPage: 10
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      snippet:
+                        liveChatId: '500123'
+                        type: chatEndedEvent
+                        displayMessage: example_value
+                        authorChannelId: '500123'
+                        publishedAt: '2026-01-15T10:30:00Z'
+                        hasDisplayContent: true
+                        textMessageDetails: {}
+                      authorDetails:
+                        channelId: '500123'
+                        channelUrl: https://www.example.com
+                        displayName: example_value
+                        profileImageUrl: https://www.example.com
+                        isVerified: true
+                        isChatOwner: true
+                        isChatSponsor: true
+                        isChatModerator: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: youtube.liveChatMessages.insert
+      summary: Youtube Send a Live Chat Message
+      description: Adds a message to a live chat. The authenticated user must be authorized to participate in the chat. Some chat types may have restrictions on who can send messages.
+      tags:
+      - LiveChatMessages
+      parameters:
+      - $ref: '#/components/parameters/part'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/key'
+      requestBody:
+        description: The live chat message resource to send.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LiveChatMessage'
+            examples:
+              YoutubeLivechatmessagesInsertRequestExample:
+                summary: Default youtube.liveChatMessages.insert request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  snippet:
+                    liveChatId: '500123'
+                    type: chatEndedEvent
+                    displayMessage: example_value
+                    authorChannelId: '500123'
+                    publishedAt: '2026-01-15T10:30:00Z'
+                    hasDisplayContent: true
+                    textMessageDetails:
+                      messageText: example_value
+                  authorDetails:
+                    channelId: '500123'
+                    channelUrl: https://www.example.com
+                    displayName: example_value
+                    profileImageUrl: https://www.example.com
+                    isVerified: true
+                    isChatOwner: true
+                    isChatSponsor: true
+                    isChatModerator: true
+      responses:
+        '200':
+          description: Successful response containing the newly sent live chat message resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LiveChatMessage'
+              examples:
+                YoutubeLivechatmessagesInsert200Example:
+                  summary: Default youtube.liveChatMessages.insert 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    snippet:
+                      liveChatId: '500123'
+                      type: chatEndedEvent
+                      displayMessage: example_value
+                      authorChannelId: '500123'
+                      publishedAt: '2026-01-15T10:30:00Z'
+                      hasDisplayContent: true
+                      textMessageDetails:
+                        messageText: example_value
+                    authorDetails:
+                      channelId: '500123'
+                      channelUrl: https://www.example.com
+                      displayName: example_value
+                      profileImageUrl: https://www.example.com
+                      isVerified: true
+                      isChatOwner: true
+                      isChatSponsor: true
+                      isChatModerator: true
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: youtube.liveChatMessages.delete
+      summary: Youtube Delete a Live Chat Message
+      description: Deletes a chat message. The authenticated user must be the author of the message or a moderator of the live chat to delete the message.
+      tags:
+      - LiveChatMessages
+      parameters:
+      - name: id
+        in: query
+        required: true
+        description: The ID of the live chat message to delete.
+        schema:
+          type: string
+        example: abc123def456
+      - $ref: '#/components/parameters/key'
+      responses:
+        '204':
+          description: The live chat message was successfully deleted.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    LiveChatMessageListResponse:
+      type: object
+      description: A list of live chat message resources for a given broadcast.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#liveChatMessageListResponse.
+          default: youtube#liveChatMessageListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        nextPageToken:
+          type: string
+          description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        pollingIntervalMillis:
+          type: integer
+          description: The amount of time the client should wait before polling again, in milliseconds.
+          example: 10
+        offlineAt:
+          type: string
+          format: date-time
+          description: The date and time when the underlying stream went offline.
+          example: '2026-01-15T10:30:00Z'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of chat messages that match the request criteria.
+          items:
+            $ref: '#/components/schemas/LiveChatMessage'
+          example: []
+    PageInfo:
+      type: object
+      description: Paging details for a list of live streaming resources.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results in the result set.
+          example: 42
+        resultsPerPage:
+          type: integer
+          description: The number of results included in the API response.
+          example: 10
+    ErrorResponse:
+      type: object
+      description: A standard error response returned by the YouTube Live Streaming API.
+      properties:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            errors:
+              type: array
+              description: A list of individual errors.
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A human-readable description of the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  reason:
+                    type: string
+                    description: The reason for the error.
+          example: example_value
+    LiveChatMessage:
+      type: object
+      description: A liveChatMessage resource represents a chat message in a YouTube live broadcast.
+      required:
+      - kind
+      - etag
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#liveChatMessage.
+          default: youtube#liveChatMessage
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        id:
+          type: string
+          description: The ID that YouTube assigns to uniquely identify the message.
+          example: abc123def456
+        snippet:
+          type: object
+          description: The snippet object contains basic details about the message.
+          properties:
+            liveChatId:
+              type: string
+              description: The ID of the live chat to which this message belongs.
+            type:
+              type: string
+              description: The type of message.
+              enum:
+              - chatEndedEvent
+              - fanFundingEvent
+              - giftMembershipReceivedEvent
+              - memberMilestoneChatEvent
+              - membershipGiftingEvent
+              - messageDeletedEvent
+              - newSponsorEvent
+              - pollClosedEvent
+              - pollEditedEvent
+              - pollOpenedEvent
+              - pollVotedEvent
+              - sponsorOnlyModeEndedEvent
+              - sponsorOnlyModeStartedEvent
+              - superChatEvent
+              - superStickerEvent
+              - textMessageEvent
+              - tombstone
+              - userBannedEvent
+            displayMessage:
+              type: string
+              description: Contains a string that can be displayed to the user. The string is not necessarily the message text itself.
+            authorChannelId:
+              type: string
+              description: The ID of the user that authored this message.
+            publishedAt:
+              type: string
+              format: date-time
+              description: The date and time when the message was orignally published.
+            hasDisplayContent:
+              type: boolean
+              description: Whether the message has display content that should be displayed to users.
+            textMessageDetails:
+              type: object
+              description: Details about the text message. This object is only present if the type is textMessageEvent.
+              properties:
+                messageText:
+                  type: string
+                  description: The user's message.
+          example: example_value
+        authorDetails:
+          type: object
+          description: The authorDetails object contains basic details about the user that posted this message.
+          properties:
+            channelId:
+              type: string
+              description: The YouTube channel ID of the message author.
+            channelUrl:
+              type: string
+              description: The channel URL of the message author.
+            displayName:
+              type: string
+              description: The channel's display name.
+            profileImageUrl:
+              type: string
+              description: The channel's avatar URL.
+            isVerified:
+              type: boolean
+              description: Indicates whether YouTube has verified the authenticity of the channel owner's identity.
+            isChatOwner:
+              type: boolean
+              description: Indicates whether the user is the owner of the live chat.
+            isChatSponsor:
+              type: boolean
+              description: Indicates whether the user is a sponsor of the live chat.
+            isChatModerator:
+              type: boolean
+              description: Indicates whether the user is a moderator of the live chat.
+          example: example_value
+  parameters:
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. The nextPageToken property in the API response identifies other pages that are available.
+      schema:
+        type: string
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+    maxResults:
+      name: maxResults
+      in: query
+      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 50
+        default: 5
+  responses:
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for YouTube Analytics API
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View YouTube Analytics monetary reports
+externalDocs:
+  description: YouTube Analytics API Documentation
+  url: https://developers.google.com/youtube/analytics

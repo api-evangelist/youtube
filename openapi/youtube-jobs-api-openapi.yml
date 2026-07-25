@@ -1,0 +1,288 @@
+openapi: 3.1.0
+info:
+  title: YouTube Analytics Analytics Groups Jobs API
+  description: 'The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
+
+    Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
+
+    and gain insights into viewer demographics and behavior patterns.
+
+
+    ## Key Features
+
+    - Retrieve channel and video performance metrics
+
+    - Access audience demographics and geographic data
+
+    - Monitor engagement metrics like likes, comments, and shares
+
+    - Track revenue and ad performance data (for monetized content)
+
+    - Generate custom date-range reports
+
+
+    ## Authentication
+
+    All API requests require OAuth 2.0 authentication with appropriate scopes.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Google Developers
+    url: https://developers.google.com/youtube/analytics
+    email: youtube-api-support@google.com
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+    identifier: CC-BY-3.0
+  termsOfService: https://developers.google.com/terms/
+  x-logo:
+    url: https://www.youtube.com/img/desktop/yt_1200.png
+servers:
+- url: https://youtubeanalytics.googleapis.com/v2
+  description: YouTube Analytics API Production Server
+security:
+- OAuth2:
+  - https://www.googleapis.com/auth/yt-analytics.readonly
+tags:
+- name: Jobs
+  description: Operations for managing YouTube reporting jobs
+paths:
+  /jobs:
+    post:
+      operationId: youtubeReporting.jobs.create
+      summary: Youtube Create Reporting Job
+      description: Creates a reporting job. YouTube then begins generating daily reports for the specified report type. Reports are typically available within 24 hours of being generated.
+      tags:
+      - Jobs
+      parameters:
+      - name: onBehalfOfContentOwner
+        in: query
+        description: The content owner's external ID on which behalf the user is acting on.
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+            examples:
+              YoutubereportingJobsCreateRequestExample:
+                summary: Default youtubeReporting.jobs.create request
+                x-microcks-default: true
+                value:
+                  id: abc123def456
+                  reportTypeId: '500123'
+                  name: Example Title
+                  createTime: '2026-01-15T10:30:00Z'
+                  expireTime: '2026-01-15T10:30:00Z'
+                  systemManaged: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+              examples:
+                YoutubereportingJobsCreate200Example:
+                  summary: Default youtubeReporting.jobs.create 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123def456
+                    reportTypeId: '500123'
+                    name: Example Title
+                    createTime: '2026-01-15T10:30:00Z'
+                    expireTime: '2026-01-15T10:30:00Z'
+                    systemManaged: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: youtubeReporting.jobs.list
+      summary: Youtube List Reporting Jobs
+      description: Lists all reporting jobs that have been scheduled for the channel or content owner.
+      tags:
+      - Jobs
+      parameters:
+      - name: onBehalfOfContentOwner
+        in: query
+        description: The content owner's external ID on which behalf the user is acting on.
+        schema:
+          type: string
+        example: example_value
+      - name: includeSystemManaged
+        in: query
+        description: If set to true, also returns system-managed reporting jobs.
+        schema:
+          type: boolean
+        example: true
+      - name: pageToken
+        in: query
+        description: A token identifying a page of results to return.
+        schema:
+          type: string
+        example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+      - name: pageSize
+        in: query
+        description: The maximum number of items to return in the response.
+        schema:
+          type: integer
+        example: 25
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListJobsResponse'
+              examples:
+                YoutubereportingJobsList200Example:
+                  summary: Default youtubeReporting.jobs.list 200 response
+                  x-microcks-default: true
+                  value:
+                    jobs:
+                    - id: abc123def456
+                      reportTypeId: '500123'
+                      name: Example Title
+                      createTime: '2026-01-15T10:30:00Z'
+                      expireTime: '2026-01-15T10:30:00Z'
+                      systemManaged: true
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /jobs/{jobId}:
+    get:
+      operationId: youtubeReporting.jobs.get
+      summary: Youtube Get Reporting Job
+      description: Gets the metadata for a specific reporting job.
+      tags:
+      - Jobs
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: The ID of the job to retrieve.
+        schema:
+          type: string
+        example: abc123def456
+      - name: onBehalfOfContentOwner
+        in: query
+        description: The content owner's external ID on which behalf the user is acting on.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+              examples:
+                YoutubereportingJobsGet200Example:
+                  summary: Default youtubeReporting.jobs.get 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123def456
+                    reportTypeId: '500123'
+                    name: Example Title
+                    createTime: '2026-01-15T10:30:00Z'
+                    expireTime: '2026-01-15T10:30:00Z'
+                    systemManaged: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: youtubeReporting.jobs.delete
+      summary: Youtube Delete Reporting Job
+      description: Deletes a reporting job. After deletion, YouTube stops generating reports for this job.
+      tags:
+      - Jobs
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: The ID of the job to delete.
+        schema:
+          type: string
+        example: abc123def456
+      - name: onBehalfOfContentOwner
+        in: query
+        description: The content owner's external ID on which behalf the user is acting on.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: Successful deletion with no content
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Job:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The server-generated ID of the job.
+          readOnly: true
+          example: abc123def456
+        reportTypeId:
+          type: string
+          description: The type of reports that the job creates.
+          example: '500123'
+        name:
+          type: string
+          description: The name of the job. Max length is 100 characters.
+          example: Example Title
+        createTime:
+          type: string
+          format: date-time
+          description: The date and time when the job was created.
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        expireTime:
+          type: string
+          format: date-time
+          description: The date and time when the job will expire.
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        systemManaged:
+          type: boolean
+          description: Whether the job is system-managed.
+          readOnly: true
+          example: true
+    ListJobsResponse:
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+          description: The list of jobs.
+          example: []
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for YouTube Analytics API
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View YouTube Analytics monetary reports
+externalDocs:
+  description: YouTube Analytics API Documentation
+  url: https://developers.google.com/youtube/analytics

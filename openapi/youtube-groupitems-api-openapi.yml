@@ -1,0 +1,333 @@
+openapi: 3.1.0
+info:
+  title: YouTube Analytics Analytics Groups GroupItems API
+  description: 'The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
+
+    Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
+
+    and gain insights into viewer demographics and behavior patterns.
+
+
+    ## Key Features
+
+    - Retrieve channel and video performance metrics
+
+    - Access audience demographics and geographic data
+
+    - Monitor engagement metrics like likes, comments, and shares
+
+    - Track revenue and ad performance data (for monetized content)
+
+    - Generate custom date-range reports
+
+
+    ## Authentication
+
+    All API requests require OAuth 2.0 authentication with appropriate scopes.
+
+    '
+  version: 2.0.0
+  contact:
+    name: Google Developers
+    url: https://developers.google.com/youtube/analytics
+    email: youtube-api-support@google.com
+  license:
+    name: Creative Commons Attribution 3.0
+    url: http://creativecommons.org/licenses/by/3.0/
+    identifier: CC-BY-3.0
+  termsOfService: https://developers.google.com/terms/
+  x-logo:
+    url: https://www.youtube.com/img/desktop/yt_1200.png
+servers:
+- url: https://youtubeanalytics.googleapis.com/v2
+  description: YouTube Analytics API Production Server
+security:
+- OAuth2:
+  - https://www.googleapis.com/auth/yt-analytics.readonly
+tags:
+- name: GroupItems
+  description: Operations for managing items within YouTube Analytics groups
+paths:
+  /groupItems:
+    get:
+      operationId: youtubeAnalytics.groupItems.list
+      summary: Youtube List Group Items
+      description: Returns a collection of group items that match the API request parameters. Retrieves the list of items in a specified Analytics group owned by the authenticated user.
+      tags:
+      - GroupItems
+      parameters:
+      - name: groupId
+        in: query
+        required: true
+        description: The id parameter specifies the unique ID of the group for which you want to retrieve group items.
+        schema:
+          type: string
+        example: '500123'
+      - name: onBehalfOfContentOwner
+        in: query
+        description: The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response containing a list of group item resources.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupItemListResponse'
+              examples:
+                YoutubeanalyticsGroupitemsList200Example:
+                  summary: Default youtubeAnalytics.groupItems.list 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    items:
+                    - kind: youtube#video
+                      etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                      id: abc123def456
+                      groupId: '500123'
+                      resource:
+                        kind: youtube#channel
+                        id: abc123def456
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: youtubeAnalytics.groupItems.insert
+      summary: Youtube Create a Group Item
+      description: Creates a group item, adding a resource such as a video, channel, or playlist to an Analytics group. The authenticated user must own the group.
+      tags:
+      - GroupItems
+      parameters:
+      - name: onBehalfOfContentOwner
+        in: query
+        description: The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        description: The group item resource to create.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupItem'
+            examples:
+              YoutubeanalyticsGroupitemsInsertRequestExample:
+                summary: Default youtubeAnalytics.groupItems.insert request
+                x-microcks-default: true
+                value:
+                  kind: youtube#video
+                  etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                  id: abc123def456
+                  groupId: '500123'
+                  resource:
+                    kind: youtube#channel
+                    id: abc123def456
+      responses:
+        '200':
+          description: Successful response containing the newly created group item resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupItem'
+              examples:
+                YoutubeanalyticsGroupitemsInsert200Example:
+                  summary: Default youtubeAnalytics.groupItems.insert 200 response
+                  x-microcks-default: true
+                  value:
+                    kind: youtube#video
+                    etag: XI7nbFXulYBIpL0ayR_gDh3eu1k
+                    id: abc123def456
+                    groupId: '500123'
+                    resource:
+                      kind: youtube#channel
+                      id: abc123def456
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: youtubeAnalytics.groupItems.delete
+      summary: Youtube Delete a Group Item
+      description: Removes an item from a group. The authenticated user must own the group. Deleting a group item does not delete the underlying resource (video, channel, or playlist).
+      tags:
+      - GroupItems
+      parameters:
+      - name: id
+        in: query
+        required: true
+        description: The id parameter specifies the YouTube group item ID for the group item being deleted.
+        schema:
+          type: string
+        example: abc123def456
+      - name: onBehalfOfContentOwner
+        in: query
+        description: The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: The group item was successfully deleted.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    GroupItemListResponse:
+      type: object
+      description: A list of group item resources in a specified group.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#groupItemListResponse.
+          default: youtube#groupItemListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        items:
+          type: array
+          description: A list of group items that are part of the specified group.
+          items:
+            $ref: '#/components/schemas/GroupItem'
+          example: []
+    ErrorResponse:
+      type: object
+      description: A standard error response returned by the YouTube Analytics API.
+      properties:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            status:
+              type: string
+              description: The error status code.
+            details:
+              type: array
+              description: A list of additional error details.
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: The type of the error detail.
+                  reason:
+                    type: string
+                    description: The reason code for the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  metadata:
+                    type: object
+                    description: Additional metadata about the error.
+                    additionalProperties:
+                      type: string
+          example: example_value
+    GroupItem:
+      type: object
+      description: A groupItem resource identifies a resource, such as a video, channel, or playlist, that is part of a group. A group can contain a maximum of 500 items and only items of the same type (videos, channels, playlists, or assets).
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#groupItem.
+          default: youtube#groupItem
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        id:
+          type: string
+          description: The ID that YouTube uses to uniquely identify the groupItem resource.
+          example: abc123def456
+        groupId:
+          type: string
+          description: The ID that YouTube uses to uniquely identify the group that contains the item.
+          example: '500123'
+        resource:
+          type: object
+          description: The resource object contains information that identifies the item being added to the group.
+          properties:
+            kind:
+              type: string
+              description: Identifies the type of resource being added to the group.
+              enum:
+              - youtube#channel
+              - youtube#playlist
+              - youtube#video
+              - youtubePartner#asset
+            id:
+              type: string
+              description: The channel, video, playlist, or asset ID that YouTube uses to uniquely identify the item being added to the group.
+          example: example_value
+  responses:
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      description: OAuth 2.0 authentication for YouTube Analytics API
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View YouTube Analytics monetary reports
+externalDocs:
+  description: YouTube Analytics API Documentation
+  url: https://developers.google.com/youtube/analytics
