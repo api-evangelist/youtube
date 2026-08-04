@@ -1,0 +1,550 @@
+openapi: 3.0.3
+info:
+  title: YouTube Reporting API
+  description: >-
+    The YouTube Reporting API enables scheduling reporting jobs and downloading
+    bulk YouTube Analytics data as CSV datasets. Reports are generated daily and
+    cover 24-hour periods, accessible for 30 to 60 days depending on the report type.
+  version: v1
+  contact:
+    name: YouTube API Support
+    url: https://developers.google.com/youtube/reporting
+  termsOfService: https://developers.google.com/youtube/terms/api-services-terms-of-service
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://youtubereporting.googleapis.com/v1
+  description: YouTube Reporting API v1 base server
+security:
+- oauth2:
+  - https://www.googleapis.com/auth/yt-analytics.readonly
+tags:
+- name: Jobs
+  description: Operations for managing YouTube reporting jobs
+- name: Reports
+  description: Operations for retrieving generated reports
+- name: ReportTypes
+  description: Operations for listing available report types
+paths:
+  /jobs:
+    post:
+      operationId: youtubeReporting.jobs.create
+      summary: Youtube Create Reporting Job
+      description: >-
+        Creates a reporting job. YouTube then begins generating daily reports for
+        the specified report type. Reports are typically available within 24 hours
+        of being generated.
+      tags:
+      - Jobs
+      parameters:
+      - name: onBehalfOfContentOwner
+        in: query
+        description: >-
+          The content owner's external ID on which behalf the user is acting on.
+        schema:
+          type: string
+        example: example_value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+            examples:
+              YoutubereportingJobsCreateRequestExample:
+                summary: Default youtubeReporting.jobs.create request
+                x-microcks-default: true
+                value:
+                  id: abc123def456
+                  reportTypeId: '500123'
+                  name: Example Title
+                  createTime: '2026-01-15T10:30:00Z'
+                  expireTime: '2026-01-15T10:30:00Z'
+                  systemManaged: true
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+              examples:
+                YoutubereportingJobsCreate200Example:
+                  summary: Default youtubeReporting.jobs.create 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123def456
+                    reportTypeId: '500123'
+                    name: Example Title
+                    createTime: '2026-01-15T10:30:00Z'
+                    expireTime: '2026-01-15T10:30:00Z'
+                    systemManaged: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    get:
+      operationId: youtubeReporting.jobs.list
+      summary: Youtube List Reporting Jobs
+      description: >-
+        Lists all reporting jobs that have been scheduled for the channel or
+        content owner.
+      tags:
+      - Jobs
+      parameters:
+      - name: onBehalfOfContentOwner
+        in: query
+        description: >-
+          The content owner's external ID on which behalf the user is acting on.
+        schema:
+          type: string
+        example: example_value
+      - name: includeSystemManaged
+        in: query
+        description: >-
+          If set to true, also returns system-managed reporting jobs.
+        schema:
+          type: boolean
+        example: true
+      - name: pageToken
+        in: query
+        description: >-
+          A token identifying a page of results to return.
+        schema:
+          type: string
+        example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+      - name: pageSize
+        in: query
+        description: >-
+          The maximum number of items to return in the response.
+        schema:
+          type: integer
+        example: 25
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListJobsResponse'
+              examples:
+                YoutubereportingJobsList200Example:
+                  summary: Default youtubeReporting.jobs.list 200 response
+                  x-microcks-default: true
+                  value:
+                    jobs:
+                    - id: abc123def456
+                      reportTypeId: '500123'
+                      name: Example Title
+                      createTime: '2026-01-15T10:30:00Z'
+                      expireTime: '2026-01-15T10:30:00Z'
+                      systemManaged: true
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /jobs/{jobId}:
+    get:
+      operationId: youtubeReporting.jobs.get
+      summary: Youtube Get Reporting Job
+      description: >-
+        Gets the metadata for a specific reporting job.
+      tags:
+      - Jobs
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: The ID of the job to retrieve.
+        schema:
+          type: string
+        example: abc123def456
+      - name: onBehalfOfContentOwner
+        in: query
+        description: >-
+          The content owner's external ID on which behalf the user is acting on.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+              examples:
+                YoutubereportingJobsGet200Example:
+                  summary: Default youtubeReporting.jobs.get 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123def456
+                    reportTypeId: '500123'
+                    name: Example Title
+                    createTime: '2026-01-15T10:30:00Z'
+                    expireTime: '2026-01-15T10:30:00Z'
+                    systemManaged: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: youtubeReporting.jobs.delete
+      summary: Youtube Delete Reporting Job
+      description: >-
+        Deletes a reporting job. After deletion, YouTube stops generating reports
+        for this job.
+      tags:
+      - Jobs
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: The ID of the job to delete.
+        schema:
+          type: string
+        example: abc123def456
+      - name: onBehalfOfContentOwner
+        in: query
+        description: >-
+          The content owner's external ID on which behalf the user is acting on.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: Successful deletion with no content
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /jobs/{jobId}/reports:
+    get:
+      operationId: youtubeReporting.reports.list
+      summary: Youtube List Reports
+      description: >-
+        Lists reports created by a specific reporting job. Each report covers a
+        24-hour period and includes a download URL for retrieving the report data.
+      tags:
+      - Reports
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: The ID of the job whose reports are being listed.
+        schema:
+          type: string
+        example: abc123def456
+      - name: onBehalfOfContentOwner
+        in: query
+        description: >-
+          The content owner's external ID on which behalf the user is acting on.
+        schema:
+          type: string
+        example: example_value
+      - name: createdAfter
+        in: query
+        description: >-
+          If specified, only reports created after the specified date/time are returned.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: startTimeAtOrAfter
+        in: query
+        description: >-
+          If specified, only reports covering data on or after this date are returned.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: startTimeBefore
+        in: query
+        description: >-
+          If specified, only reports covering data before this date are returned.
+        schema:
+          type: string
+          format: date-time
+        example: '2026-01-15T10:30:00Z'
+      - name: pageToken
+        in: query
+        description: A token identifying a page of results to return.
+        schema:
+          type: string
+        example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+      - name: pageSize
+        in: query
+        description: The maximum number of items to return in the response.
+        schema:
+          type: integer
+        example: 25
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReportsResponse'
+              examples:
+                YoutubereportingReportsList200Example:
+                  summary: Default youtubeReporting.reports.list 200 response
+                  x-microcks-default: true
+                  value:
+                    reports:
+                    - id: abc123def456
+                      jobId: abc123def456
+                      startTime: '2026-01-15T10:30:00Z'
+                      endTime: '2026-01-15T10:30:00Z'
+                      createTime: '2026-01-15T10:30:00Z'
+                      downloadUrl: https://www.example.com
+                      jobExpireTime: '2026-01-15T10:30:00Z'
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /jobs/{jobId}/reports/{reportId}:
+    get:
+      operationId: youtubeReporting.reports.get
+      summary: Youtube Get Report
+      description: >-
+        Gets the metadata for a specific report including its download URL.
+      tags:
+      - Reports
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        description: The ID of the job that created the report.
+        schema:
+          type: string
+        example: abc123def456
+      - name: reportId
+        in: path
+        required: true
+        description: The ID of the report to retrieve.
+        schema:
+          type: string
+        example: abc123def456
+      - name: onBehalfOfContentOwner
+        in: query
+        description: >-
+          The content owner's external ID on which behalf the user is acting on.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+              examples:
+                YoutubereportingReportsGet200Example:
+                  summary: Default youtubeReporting.reports.get 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123def456
+                    jobId: abc123def456
+                    startTime: '2026-01-15T10:30:00Z'
+                    endTime: '2026-01-15T10:30:00Z'
+                    createTime: '2026-01-15T10:30:00Z'
+                    downloadUrl: https://www.example.com
+                    jobExpireTime: '2026-01-15T10:30:00Z'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /reportTypes:
+    get:
+      operationId: youtubeReporting.reportTypes.list
+      summary: Youtube List Report Types
+      description: >-
+        Lists report types that the channel or content owner can retrieve.
+        Each report type defines the dimensions and metrics available in
+        the generated reports.
+      tags:
+      - ReportTypes
+      parameters:
+      - name: onBehalfOfContentOwner
+        in: query
+        description: >-
+          The content owner's external ID on which behalf the user is acting on.
+        schema:
+          type: string
+        example: example_value
+      - name: includeSystemManaged
+        in: query
+        description: >-
+          If set to true, also returns system-managed report types.
+        schema:
+          type: boolean
+        example: true
+      - name: pageToken
+        in: query
+        description: A token identifying a page of results to return.
+        schema:
+          type: string
+        example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+      - name: pageSize
+        in: query
+        description: The maximum number of items to return in the response.
+        schema:
+          type: integer
+        example: 25
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReportTypesResponse'
+              examples:
+                YoutubereportingReporttypesList200Example:
+                  summary: Default youtubeReporting.reportTypes.list 200 response
+                  x-microcks-default: true
+                  value:
+                    reportTypes:
+                    - id: abc123def456
+                      name: Example Title
+                      systemManaged: true
+                      deprecateTime: '2026-01-15T10:30:00Z'
+                    nextPageToken: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports for your YouTube content
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View monetary and non-monetary YouTube Analytics reports
+  schemas:
+    Job:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The server-generated ID of the job.
+          readOnly: true
+          example: abc123def456
+        reportTypeId:
+          type: string
+          description: The type of reports that the job creates.
+          example: '500123'
+        name:
+          type: string
+          description: The name of the job. Max length is 100 characters.
+          example: Example Title
+        createTime:
+          type: string
+          format: date-time
+          description: The date and time when the job was created.
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        expireTime:
+          type: string
+          format: date-time
+          description: The date and time when the job will expire.
+          readOnly: true
+          example: '2026-01-15T10:30:00Z'
+        systemManaged:
+          type: boolean
+          description: Whether the job is system-managed.
+          readOnly: true
+          example: true
+    Report:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The server-generated ID of the report.
+          example: abc123def456
+        jobId:
+          type: string
+          description: The ID of the job that created this report.
+          example: abc123def456
+        startTime:
+          type: string
+          format: date-time
+          description: The start of the time period that the report covers.
+          example: '2026-01-15T10:30:00Z'
+        endTime:
+          type: string
+          format: date-time
+          description: The end of the time period that the report covers.
+          example: '2026-01-15T10:30:00Z'
+        createTime:
+          type: string
+          format: date-time
+          description: The date and time when the report was created.
+          example: '2026-01-15T10:30:00Z'
+        downloadUrl:
+          type: string
+          description: The URL from which the report can be downloaded.
+          example: https://www.example.com
+        jobExpireTime:
+          type: string
+          format: date-time
+          description: The date and time when the job creating this report will expire.
+          example: '2026-01-15T10:30:00Z'
+    ReportType:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the report type.
+          example: abc123def456
+        name:
+          type: string
+          description: The name of the report type.
+          example: Example Title
+        systemManaged:
+          type: boolean
+          description: Whether the report type is system-managed.
+          example: true
+        deprecateTime:
+          type: string
+          format: date-time
+          description: The date and time when the report type was deprecated.
+          example: '2026-01-15T10:30:00Z'
+    ListJobsResponse:
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+          description: The list of jobs.
+          example: []
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+    ListReportsResponse:
+      type: object
+      properties:
+        reports:
+          type: array
+          items:
+            $ref: '#/components/schemas/Report'
+          description: The list of reports.
+          example: []
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+    ListReportTypesResponse:
+      type: object
+      properties:
+        reportTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportType'
+          description: The list of report types.
+          example: []
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
