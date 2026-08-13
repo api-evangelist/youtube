@@ -1,0 +1,45 @@
+# Kin Score artifact — youtube — 2026-08-12T193225
+# The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
+---
+kin_score:
+  slug: youtube
+  schema_version: 0.11.0
+  scored_at: '2026-08-12'
+  run_ts: 2026-08-12T193225
+  composite: 66.7
+  band: exemplar
+  facets:
+    discoverability: 68.5
+    contract_quality: 80.7
+    governance: 80.2
+    operational_transparency: 42.1
+    developer_ergonomics: 65.2
+    commercial_clarity: 57.9
+  agent_readiness:
+    score: 46.8
+    band: agent-ready
+    band_gated_from: agent-native
+    dimensions:
+      spec_presence: true
+      agentic_access: derived
+      mcp_server: derived
+      auth_clarity: true
+      idempotency: false
+      error_semantics: verified
+      openapi_examples: verified
+      rate_limit_signal: documented
+      event_surface_described: false
+      agent_skills: false
+      well_known_catalog: false
+      consent_identity: false
+      agent_card: false
+      dry_run_mode: false
+  provenance:
+    mcp: derived
+    agentic_access: derived
+    conformance: derived
+    contracts:
+      total: 24
+      derived: 0
+      coverage: 0.0
+      callable: 100.0
