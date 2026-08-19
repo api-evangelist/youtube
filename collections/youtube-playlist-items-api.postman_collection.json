@@ -1,0 +1,603 @@
+{
+  "item": [
+    {
+      "id": "f26faa32-c107-4f1b-bf1e-2452b48f7500",
+      "name": "Playlist Items",
+      "description": {
+        "content": "Operations for managing items within playlists",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "73440a6f-cc1b-4419-b3cc-4047f6a6db2c",
+          "name": "Youtube List Playlist Items",
+          "request": {
+            "name": "Youtube List Playlist Items",
+            "description": {
+              "content": "Returns a collection of playlist items that match the API request parameters.\nYou can retrieve all of the playlist items in a specified playlist or\nretrieve specific playlist items by their unique IDs.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "playlistItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "part",
+                  "value": "<string>",
+                  "description": "(Required) The part parameter specifies a comma-separated list of one or more\nresource properties that the API response will include.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "playlistId",
+                  "value": "<string>",
+                  "description": "(Required) The playlist ID to retrieve items for"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "A comma-separated list of playlist item IDs"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxResults",
+                  "value": "5",
+                  "description": "Maximum number of items to return (1-50)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Token for retrieving the next page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key for authentication (for read-only operations)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c41661d-e532-4da5-a464-9687a7481cfc",
+              "name": "Successful playlist items list response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playlistItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "snippet,contentDetails,statistics"
+                    },
+                    {
+                      "key": "playlistId",
+                      "value": "PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf"
+                    },
+                    {
+                      "key": "id",
+                      "value": "UExmF3p7bTU0NXRLaW00c2dOT2tuR3ZOamJ5OWVmZGYuOTI0NzIzRTJENDg3RENNQQ"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "25"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#playlistItemListResponse\",\n  \"etag\": \"items123etag\",\n  \"pageInfo\": {\n    \"totalResults\": 25,\n    \"resultsPerPage\": 5\n  },\n  \"items\": [\n    {\n      \"kind\": \"youtube#playlistItem\",\n      \"etag\": \"item1etag\",\n      \"id\": \"UExmF3p7bTU0NXRLaW00c2dOT2tuR3ZOamJ5OWVmZGYuOTI0NzIzRTJENDg3RUNNQQ\",\n      \"snippet\": {\n        \"publishedAt\": \"2024-03-15T10:30:00Z\",\n        \"channelId\": \"UC_x5XG1OV2P6uZZ5FSM9Ttw\",\n        \"title\": \"OpenAPI Tutorial: Building REST APIs\",\n        \"thumbnails\": {\n          \"default\": {\n            \"url\": \"https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg\",\n            \"width\": 120,\n            \"height\": 90\n          }\n        },\n        \"channelTitle\": \"Google Developers\",\n        \"playlistId\": \"PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf\",\n        \"position\": 0,\n        \"resourceId\": {\n          \"kind\": \"youtube#video\",\n          \"videoId\": \"dQw4w9WgXcQ\"\n        }\n      },\n      \"contentDetails\": {\n        \"videoId\": \"dQw4w9WgXcQ\",\n        \"videoPublishedAt\": \"2024-03-15T10:30:00Z\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9d2785a-ee07-4baf-bba6-f352fec65ee2",
+              "name": "Playlist not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playlistItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "snippet,contentDetails,statistics"
+                    },
+                    {
+                      "key": "playlistId",
+                      "value": "PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf"
+                    },
+                    {
+                      "key": "id",
+                      "value": "UExmF3p7bTU0NXRLaW00c2dOT2tuR3ZOamJ5OWVmZGYuOTI0NzIzRTJENDg3RENNQQ"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "25"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource not found\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.video\",\n        \"reason\": \"videoNotFound\",\n        \"message\": \"The video identified by the parameter id could not be found\",\n        \"locationType\": \"parameter\",\n        \"location\": \"id\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "defc553a-5988-45b0-9894-31e3b5ac9124",
+          "name": "Youtube Add Item to Playlist",
+          "request": {
+            "name": "Youtube Add Item to Playlist",
+            "description": {
+              "content": "Adds a video to a playlist. This operation requires OAuth 2.0 authentication.\nYou can only add items to playlists that belong to the authenticated user's channel.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "playlistItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "part",
+                  "value": "<string>",
+                  "description": "(Required) The part parameter specifies a comma-separated list of one or more\nresource properties that the API response will include.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "OAuth 2.0 access token for authentication"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"snippet\": {\n    \"playlistId\": \"<string>\",\n    \"resourceId\": {\n      \"kind\": \"<string>\",\n      \"videoId\": \"<string>\"\n    },\n    \"position\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "85cd0d97-0637-4042-8973-fcd1a3304802",
+              "name": "Successfully added item to playlist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playlistItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "snippet,contentDetails,statistics"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"snippet\": {\n    \"playlistId\": \"PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf\",\n    \"position\": 0,\n    \"resourceId\": {\n      \"kind\": \"youtube#video\",\n      \"videoId\": \"dQw4w9WgXcQ\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#playlistItem\",\n  \"etag\": \"newitem123\",\n  \"id\": \"NEWitem456\",\n  \"snippet\": {\n    \"publishedAt\": \"2024-03-20T14:00:00Z\",\n    \"channelId\": \"UC_x5XG1OV2P6uZZ5FSM9Ttw\",\n    \"title\": \"Added Video Title\",\n    \"playlistId\": \"PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf\",\n    \"position\": 0,\n    \"resourceId\": {\n      \"kind\": \"youtube#video\",\n      \"videoId\": \"dQw4w9WgXcQ\"\n    }\n  },\n  \"contentDetails\": {\n    \"videoId\": \"dQw4w9WgXcQ\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "decfb519-5367-4881-aef3-7ec73c54527a",
+              "name": "Bad request - invalid playlist item data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playlistItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "snippet,contentDetails,statistics"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"snippet\": {\n    \"playlistId\": \"PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf\",\n    \"position\": 0,\n    \"resourceId\": {\n      \"kind\": \"youtube#video\",\n      \"videoId\": \"dQw4w9WgXcQ\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Invalid parameter value\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.parameter\",\n        \"reason\": \"invalidParameter\",\n        \"message\": \"The parameter 'part' is required\",\n        \"locationType\": \"parameter\",\n        \"location\": \"part\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbbd2c57-4d6f-4455-9d95-dea13f4a52b8",
+          "name": "Youtube Remove Item from Playlist",
+          "request": {
+            "name": "Youtube Remove Item from Playlist",
+            "description": {
+              "content": "Removes an item from a playlist. This operation requires OAuth 2.0 authentication.\nYou can only remove items from playlists that belong to the authenticated user's channel.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "playlistItems",
+                ":playlistItemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "OAuth 2.0 access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "playlistItemId",
+                  "description": "(Required) The unique identifier of the playlist item"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "802874ad-38bd-48e3-95a5-7e987aa0d807",
+              "name": "Successfully removed item from playlist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playlistItems",
+                    ":playlistItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playlistItemId",
+                      "description": "(Required) The unique identifier of the playlist item"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f65f5cf8-7c78-4ee0-9f24-b52246eab9e1",
+              "name": "Playlist item not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "playlistItems",
+                    ":playlistItemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "playlistItemId",
+                      "description": "(Required) The unique identifier of the playlist item"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource not found\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.video\",\n        \"reason\": \"videoNotFound\",\n        \"message\": \"The video identified by the parameter id could not be found\",\n        \"locationType\": \"parameter\",\n        \"location\": \"id\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://youtubeanalytics.googleapis.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "841488a0-cf7e-4c8e-8961-d38526aac413",
+    "name": "YouTube Analytics Analytics Groups Playlist Items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.\nUse this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,\nand gain insights into viewer demographics and behavior patterns.\n\n## Key Features\n- Retrieve channel and video performance metrics\n- Access audience demographics and geographic data\n- Monitor engagement metrics like likes, comments, and shares\n- Track revenue and ad performance data (for monetized content)\n- Generate custom date-range reports\n\n## Authentication\nAll API requests require OAuth 2.0 authentication with appropriate scopes.\n\n\nContact Support:\n Name: Google Developers\n Email: youtube-api-support@google.com",
+      "type": "text/plain"
+    }
+  }
+}

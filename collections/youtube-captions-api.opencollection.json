@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YouTube Analytics Analytics Groups Captions API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Captions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Caption Tracks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/captions",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+              },
+              {
+                "name": "videoId",
+                "value": "500123",
+                "type": "query",
+                "description": "The ID of the video for which the API should return caption tracks."
+              },
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Comma-separated list of caption track IDs to retrieve."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ]
+          },
+          "docs": "Returns a list of caption tracks that are associated with a specified video. The API response does not contain the actual captions and the captions.download method can be used to retrieve a caption track."
+        },
+        {
+          "info": {
+            "name": "Youtube Upload a Caption Track",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://youtubeanalytics.googleapis.com/v2/captions",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uploads a caption track. The authenticated user must own the video associated with the caption track. This method supports media upload."
+        },
+        {
+          "info": {
+            "name": "Youtube Update a Caption Track",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://youtubeanalytics.googleapis.com/v2/captions",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a caption track. When updating a caption track, you can change the track's draft status, upload a new caption file, or both."
+        },
+        {
+          "info": {
+            "name": "Youtube Delete a Caption Track",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://youtubeanalytics.googleapis.com/v2/captions",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "The ID of the caption track to delete."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ]
+          },
+          "docs": "Deletes a specified caption track. The authenticated user must own the video that the caption track is associated with."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

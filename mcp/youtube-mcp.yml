@@ -1,11 +1,9 @@
 generated: '2026-06-20'
 method: derived
 status: candidate
-source: >-
-  No official YouTube/Google-hosted MCP server was found in the docs, the
-  @modelcontextprotocol npm scope, or public MCP registries as of 2026-06-20.
-  This candidate tool list is derived one-tool-per-operationId from the repo
-  OpenAPI, as a starting point for exposing the YouTube APIs over MCP.
+source: No official YouTube/Google-hosted MCP server was found in the docs, the @modelcontextprotocol
+  npm scope, or public MCP registries as of 2026-06-20. This candidate tool list is derived one-tool-per-operationId
+  from the repo OpenAPI, as a starting point for exposing the YouTube APIs over MCP.
 server:
   name: youtube
   transport: http
@@ -59,7 +57,12 @@ tools:
 - name: youtube_live_broadcasts_transition
   description: Transition a broadcast between testing, live, and complete states.
   source_operation: openapi/youtube-live-streaming-openapi.yml#youtube.liveBroadcasts.transition
-notes: >-
-  Full operation set (64 across the four specs) is enumerable from the OpenAPI;
-  the above is a representative candidate surface. See agentic-access/youtube-agentic-access.yml
-  for per-operation execution-contract classification.
+notes: Full operation set (64 across the four specs) is enumerable from the OpenAPI; the above is a representative
+  candidate surface. See agentic-access/youtube-agentic-access.yml for per-operation execution-contract
+  classification.
+deployment:
+  mode: none
+  verified: derived
+  tools: 16
+  checked: '2026-08-12'
+  source: catalog MCP census

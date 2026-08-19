@@ -1,0 +1,1133 @@
+{
+  "item": [
+    {
+      "id": "cb74bde4-759b-4929-b4b7-0283e82ba907",
+      "name": "Analytics Groups",
+      "description": {
+        "content": "Operations for managing analytics group definitions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eeed54be-45fb-447e-8ea0-d73e83c714bd",
+          "name": "Youtube List Analytics Groups",
+          "request": {
+            "name": "Youtube List Analytics Groups",
+            "description": {
+              "content": "Returns a collection of analytics groups that match the API request parameters.\nGroups allow you to aggregate data for multiple channels or videos to analyze\ncombined performance metrics.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "The unique identifier of an analytics group to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>",
+                  "description": "The content owner ID for YouTube content owner operations.\nRequired for content owner authenticated requests.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Token for retrieving the next page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "OAuth 2.0 access token for authentication"
+                },
+                {
+                  "disabled": false,
+                  "key": "prettyPrint",
+                  "value": "true",
+                  "description": "Returns response with indentations and line breaks for readability"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1671c82-0cb0-4a2e-b80c-e8d30fc166d8",
+              "name": "Successful response containing list of analytics groups",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "ABCdef123456"
+                    },
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prettyPrint",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#groupListResponse\",\n  \"etag\": \"abc123def456\",\n  \"items\": [\n    {\n      \"kind\": \"youtube#group\",\n      \"etag\": \"xyz789abc123\",\n      \"id\": \"ABCdef123456\",\n      \"snippet\": {\n        \"title\": \"Top Performing Videos Q1 2024\",\n        \"publishedAt\": \"2024-01-15T10:30:00Z\"\n      },\n      \"contentDetails\": {\n        \"itemCount\": 25,\n        \"itemType\": \"youtube#video\"\n      }\n    },\n    {\n      \"kind\": \"youtube#group\",\n      \"etag\": \"mno456pqr789\",\n      \"id\": \"GHIjkl789012\",\n      \"snippet\": {\n        \"title\": \"Channel Performance Tracking\",\n        \"publishedAt\": \"2024-02-01T14:00:00Z\"\n      },\n      \"contentDetails\": {\n        \"itemCount\": 5,\n        \"itemType\": \"youtube#channel\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9855a7e5-5c86-4b98-a36b-94109800c3cf",
+              "name": "Unauthorized - invalid or missing authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "ABCdef123456"
+                    },
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prettyPrint",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 401,\n    \"message\": \"Invalid credentials\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.analytics\",\n        \"reason\": \"authError\",\n        \"message\": \"The access token is invalid or expired\",\n        \"locationType\": \"header\",\n        \"location\": \"Authorization\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb862cf6-092d-44cf-aa10-32327f954d48",
+          "name": "Youtube Create Analytics Group",
+          "request": {
+            "name": "Youtube Create Analytics Group",
+            "description": {
+              "content": "Creates a new analytics group. Groups enable you to aggregate analytics data\nfor multiple channels or videos, making it easier to analyze combined\nperformance across related content.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>",
+                  "description": "The content owner ID for YouTube content owner operations.\nRequired for content owner authenticated requests.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "OAuth 2.0 access token for authentication"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"snippet\": {\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemType\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e42b4cb6-e2cd-4aa5-80be-6b23a1ac43fe",
+              "name": "Successfully created analytics group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"snippet\": {\n    \"title\": \"My New Analytics Group\"\n  },\n  \"contentDetails\": {\n    \"itemType\": \"youtube#video\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"newgroup123\",\n  \"id\": \"NEWgroup456789\",\n  \"snippet\": {\n    \"title\": \"My New Analytics Group\",\n    \"publishedAt\": \"2024-03-01T09:00:00Z\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": 0,\n    \"itemType\": \"youtube#video\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48d8e741-5df8-43c8-ae2d-4b276aef1387",
+              "name": "Bad request - invalid group data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"snippet\": {\n    \"title\": \"My New Analytics Group\"\n  },\n  \"contentDetails\": {\n    \"itemType\": \"youtube#video\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Invalid parameter value\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.analytics\",\n        \"reason\": \"invalidParameter\",\n        \"message\": \"The parameter 'startDate' has an invalid value\",\n        \"locationType\": \"parameter\",\n        \"location\": \"startDate\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97609c10-ee3c-457c-8efa-420ee9e183ca",
+              "name": "Unauthorized - invalid or missing authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"snippet\": {\n    \"title\": \"My New Analytics Group\"\n  },\n  \"contentDetails\": {\n    \"itemType\": \"youtube#video\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 401,\n    \"message\": \"Invalid credentials\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.analytics\",\n        \"reason\": \"authError\",\n        \"message\": \"The access token is invalid or expired\",\n        \"locationType\": \"header\",\n        \"location\": \"Authorization\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d093a878-9e25-484d-a165-ea26e48dabcd",
+          "name": "Youtube Get Analytics Group",
+          "request": {
+            "name": "Youtube Get Analytics Group",
+            "description": {
+              "content": "Retrieves a specific analytics group by its unique identifier.\nReturns detailed information about the group including its title,\ncontent details, and associated metadata.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups",
+                ":groupId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>",
+                  "description": "The content owner ID for YouTube content owner operations.\nRequired for content owner authenticated requests.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "OAuth 2.0 access token for authentication"
+                },
+                {
+                  "disabled": false,
+                  "key": "prettyPrint",
+                  "value": "true",
+                  "description": "Returns response with indentations and line breaks for readability"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "groupId",
+                  "description": "(Required) The unique identifier of the analytics group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f00bc06c-6efb-4227-a2de-5b475fe2c8b0",
+              "name": "Successful response containing the analytics group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prettyPrint",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The unique identifier of the analytics group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"newgroup123\",\n  \"id\": \"NEWgroup456789\",\n  \"snippet\": {\n    \"title\": \"My New Analytics Group\",\n    \"publishedAt\": \"2024-03-01T09:00:00Z\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": 0,\n    \"itemType\": \"youtube#video\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a986f244-1496-49e2-bb28-071f1356b27c",
+              "name": "Group not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prettyPrint",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The unique identifier of the analytics group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource not found\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.analytics\",\n        \"reason\": \"notFound\",\n        \"message\": \"The specified group was not found\",\n        \"locationType\": \"parameter\",\n        \"location\": \"groupId\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12d404b2-128a-4f7e-9586-e4f84e9b74a0",
+          "name": "Youtube Update Analytics Group",
+          "request": {
+            "name": "Youtube Update Analytics Group",
+            "description": {
+              "content": "Updates an existing analytics group. You can modify the group's title\nand other editable properties. The group ID cannot be changed.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups",
+                ":groupId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>",
+                  "description": "The content owner ID for YouTube content owner operations.\nRequired for content owner authenticated requests.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "OAuth 2.0 access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "groupId",
+                  "description": "(Required) The unique identifier of the analytics group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"title\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b79df70f-3e39-49c8-9a34-8a62ff24b801",
+              "name": "Successfully updated analytics group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The unique identifier of the analytics group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"ABCdef123456\",\n  \"snippet\": {\n    \"title\": \"Updated Analytics Group Name\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"newgroup123\",\n  \"id\": \"NEWgroup456789\",\n  \"snippet\": {\n    \"title\": \"My New Analytics Group\",\n    \"publishedAt\": \"2024-03-01T09:00:00Z\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": 0,\n    \"itemType\": \"youtube#video\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eec42920-cb49-490f-b01c-7387dce61ecc",
+              "name": "Bad request - invalid update data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The unique identifier of the analytics group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"ABCdef123456\",\n  \"snippet\": {\n    \"title\": \"Updated Analytics Group Name\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Invalid parameter value\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.analytics\",\n        \"reason\": \"invalidParameter\",\n        \"message\": \"The parameter 'startDate' has an invalid value\",\n        \"locationType\": \"parameter\",\n        \"location\": \"startDate\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "704bdd56-be74-46fc-aef7-8698b67cbce5",
+              "name": "Group not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The unique identifier of the analytics group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"ABCdef123456\",\n  \"snippet\": {\n    \"title\": \"Updated Analytics Group Name\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource not found\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.analytics\",\n        \"reason\": \"notFound\",\n        \"message\": \"The specified group was not found\",\n        \"locationType\": \"parameter\",\n        \"location\": \"groupId\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8ee2e08-ea2c-4ad0-850a-6b922148fa74",
+          "name": "Youtube Delete Analytics Group",
+          "request": {
+            "name": "Youtube Delete Analytics Group",
+            "description": {
+              "content": "Deletes an analytics group. This action is permanent and cannot be undone.\nAll group items associated with the group will also be removed.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups",
+                ":groupId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>",
+                  "description": "The content owner ID for YouTube content owner operations.\nRequired for content owner authenticated requests.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "OAuth 2.0 access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "groupId",
+                  "description": "(Required) The unique identifier of the analytics group"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "764925f7-7ecc-4ef2-b4ee-1067b92dba27",
+              "name": "Successfully deleted the analytics group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The unique identifier of the analytics group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fe678775-92e0-4781-87aa-365e8c0eaf83",
+              "name": "Group not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups",
+                    ":groupId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "groupId",
+                      "description": "(Required) The unique identifier of the analytics group"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource not found\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.analytics\",\n        \"reason\": \"notFound\",\n        \"message\": \"The specified group was not found\",\n        \"locationType\": \"parameter\",\n        \"location\": \"groupId\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://youtubeanalytics.googleapis.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f21eedbd-fc61-467d-92e2-c9677c2fccdf",
+    "name": "YouTube Analytics Analytics Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.\nUse this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,\nand gain insights into viewer demographics and behavior patterns.\n\n## Key Features\n- Retrieve channel and video performance metrics\n- Access audience demographics and geographic data\n- Monitor engagement metrics like likes, comments, and shares\n- Track revenue and ad performance data (for monetized content)\n- Generate custom date-range reports\n\n## Authentication\nAll API requests require OAuth 2.0 authentication with appropriate scopes.\n\n\nContact Support:\n Name: Google Developers\n Email: youtube-api-support@google.com",
+      "type": "text/plain"
+    }
+  }
+}

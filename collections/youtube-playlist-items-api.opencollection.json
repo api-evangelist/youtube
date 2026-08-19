@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YouTube Analytics Analytics Groups Playlist Items API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Playlist Items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Playlist Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/playlistItems",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "The part parameter specifies a comma-separated list of one or more\nresource properties that the API response will include.\n"
+              },
+              {
+                "name": "playlistId",
+                "value": "",
+                "type": "query",
+                "description": "The playlist ID to retrieve items for"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of playlist item IDs"
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return (1-50)"
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Token for retrieving the next page of results"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication (for read-only operations)"
+              }
+            ]
+          },
+          "docs": "Returns a collection of playlist items that match the API request parameters.\nYou can retrieve all of the playlist items in a specified playlist or\nretrieve specific playlist items by their unique IDs.\n"
+        },
+        {
+          "info": {
+            "name": "Youtube Add Item to Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://youtubeanalytics.googleapis.com/v2/playlistItems",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "The part parameter specifies a comma-separated list of one or more\nresource properties that the API response will include.\n"
+              },
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "OAuth 2.0 access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a video to a playlist. This operation requires OAuth 2.0 authentication.\nYou can only add items to playlists that belong to the authenticated user's channel.\n"
+        },
+        {
+          "info": {
+            "name": "Youtube Remove Item from Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://youtubeanalytics.googleapis.com/v2/playlistItems/:playlistItemId",
+            "params": [
+              {
+                "name": "playlistItemId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the playlist item"
+              },
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "OAuth 2.0 access token for authentication"
+              }
+            ]
+          },
+          "docs": "Removes an item from a playlist. This operation requires OAuth 2.0 authentication.\nYou can only remove items from playlists that belong to the authenticated user's channel.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

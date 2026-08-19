@@ -1,0 +1,1369 @@
+{
+  "item": [
+    {
+      "id": "74829162-f6e2-495b-b62b-41733e4be485",
+      "name": "LiveStreams",
+      "description": {
+        "content": "Operations for managing YouTube live video streams",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "96207b4e-d3ad-4c4b-8252-670e9f3a5c25",
+          "name": "Youtube List Live Streams",
+          "request": {
+            "name": "Youtube List Live Streams",
+            "description": {
+              "content": "Returns a list of video streams that match the API request parameters. You can retrieve streams for the authenticated user or retrieve specific streams by their IDs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "liveStreams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "part",
+                  "value": "<string>",
+                  "description": "(Required) Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Comma-separated list of live stream IDs for the resources being retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "mine",
+                  "value": "<boolean>",
+                  "description": "Set this parameter to true to instruct the API to return only streams owned by the authenticated user."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxResults",
+                  "value": "5",
+                  "description": "The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Identifies a specific page in the result set that should be returned. The nextPageToken property in the API response identifies other pages that are available."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b58de828-33f4-467f-b06c-65c5c9e3f835",
+              "name": "Successful response containing a list of live stream resources.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "mine",
+                      "value": "true"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"nextPageToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9\",\n  \"prevPageToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9\",\n  \"pageInfo\": {\n    \"totalResults\": 42,\n    \"resultsPerPage\": 10\n  },\n  \"items\": [\n    {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"cdn\": {\n        \"ingestionType\": \"dash\",\n        \"ingestionInfo\": {},\n        \"resolution\": \"example_value\",\n        \"frameRate\": \"example_value\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e37731d3-d5e6-47ae-9fc3-8df42a651229",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "mine",
+                      "value": "true"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 1789,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd2025e7-2594-4cc1-830a-ddcacd27676c",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "mine",
+                      "value": "true"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 1789,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78bcb43d-43da-4206-9911-99c9123da15f",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "mine",
+                      "value": "true"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 1789,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b22be46e-a23c-4369-bbac-2a6c059bb7e9",
+          "name": "Youtube Create a Live Stream",
+          "request": {
+            "name": "Youtube Create a Live Stream",
+            "description": {
+              "content": "Creates a video stream. The stream enables you to send your video to YouTube, which can then broadcast the video to your audience. After creating the stream you must bind it to a broadcast.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "liveStreams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "part",
+                  "value": "<string>",
+                  "description": "(Required) Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"youtube#liveStream\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"channelId\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"publishedAt\": \"<dateTime>\",\n    \"isDefaultStream\": \"<boolean>\"\n  },\n  \"cdn\": {\n    \"ingestionType\": \"<string>\",\n    \"ingestionInfo\": {\n      \"streamName\": \"<string>\",\n      \"ingestionAddress\": \"<string>\",\n      \"backupIngestionAddress\": \"<string>\",\n      \"rtmpsIngestionAddress\": \"<string>\",\n      \"backupRtmpsIngestionAddress\": \"<string>\"\n    },\n    \"resolution\": \"<string>\",\n    \"frameRate\": \"<string>\"\n  },\n  \"status\": {\n    \"streamStatus\": \"<string>\",\n    \"healthStatus\": {\n      \"status\": \"<string>\",\n      \"lastUpdateTimeSeconds\": \"<long>\",\n      \"configurationIssues\": [\n        {\n          \"type\": \"<string>\",\n          \"severity\": \"<string>\",\n          \"reason\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"severity\": \"<string>\",\n          \"reason\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"contentDetails\": {\n    \"boundBroadcastId\": \"<string>\",\n    \"isReusable\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d13f2552-fe0f-4c18-9047-349a74ca4a0b",
+              "name": "Successful response containing the newly created live stream resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"isDefaultStream\": true\n  },\n  \"cdn\": {\n    \"ingestionType\": \"dash\",\n    \"ingestionInfo\": {\n      \"streamName\": \"example_value\",\n      \"ingestionAddress\": \"example_value\",\n      \"backupIngestionAddress\": \"example_value\",\n      \"rtmpsIngestionAddress\": \"example_value\",\n      \"backupRtmpsIngestionAddress\": \"example_value\"\n    },\n    \"resolution\": \"example_value\",\n    \"frameRate\": \"example_value\"\n  },\n  \"status\": {\n    \"streamStatus\": \"active\",\n    \"healthStatus\": {\n      \"status\": \"bad\",\n      \"lastUpdateTimeSeconds\": 10,\n      \"configurationIssues\": []\n    }\n  },\n  \"contentDetails\": {\n    \"boundBroadcastId\": \"500123\",\n    \"isReusable\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"isDefaultStream\": true\n  },\n  \"cdn\": {\n    \"ingestionType\": \"dash\",\n    \"ingestionInfo\": {\n      \"streamName\": \"example_value\",\n      \"ingestionAddress\": \"example_value\",\n      \"backupIngestionAddress\": \"example_value\",\n      \"rtmpsIngestionAddress\": \"example_value\",\n      \"backupRtmpsIngestionAddress\": \"example_value\"\n    },\n    \"resolution\": \"example_value\",\n    \"frameRate\": \"example_value\"\n  },\n  \"status\": {\n    \"streamStatus\": \"active\",\n    \"healthStatus\": {\n      \"status\": \"bad\",\n      \"lastUpdateTimeSeconds\": 10,\n      \"configurationIssues\": []\n    }\n  },\n  \"contentDetails\": {\n    \"boundBroadcastId\": \"500123\",\n    \"isReusable\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea369131-12d8-4429-8e71-512f2f67cae2",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"isDefaultStream\": true\n  },\n  \"cdn\": {\n    \"ingestionType\": \"dash\",\n    \"ingestionInfo\": {\n      \"streamName\": \"example_value\",\n      \"ingestionAddress\": \"example_value\",\n      \"backupIngestionAddress\": \"example_value\",\n      \"rtmpsIngestionAddress\": \"example_value\",\n      \"backupRtmpsIngestionAddress\": \"example_value\"\n    },\n    \"resolution\": \"example_value\",\n    \"frameRate\": \"example_value\"\n  },\n  \"status\": {\n    \"streamStatus\": \"active\",\n    \"healthStatus\": {\n      \"status\": \"bad\",\n      \"lastUpdateTimeSeconds\": 10,\n      \"configurationIssues\": []\n    }\n  },\n  \"contentDetails\": {\n    \"boundBroadcastId\": \"500123\",\n    \"isReusable\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7983,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b97d16c6-149f-4be3-80fe-bb885421cdff",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"isDefaultStream\": true\n  },\n  \"cdn\": {\n    \"ingestionType\": \"dash\",\n    \"ingestionInfo\": {\n      \"streamName\": \"example_value\",\n      \"ingestionAddress\": \"example_value\",\n      \"backupIngestionAddress\": \"example_value\",\n      \"rtmpsIngestionAddress\": \"example_value\",\n      \"backupRtmpsIngestionAddress\": \"example_value\"\n    },\n    \"resolution\": \"example_value\",\n    \"frameRate\": \"example_value\"\n  },\n  \"status\": {\n    \"streamStatus\": \"active\",\n    \"healthStatus\": {\n      \"status\": \"bad\",\n      \"lastUpdateTimeSeconds\": 10,\n      \"configurationIssues\": []\n    }\n  },\n  \"contentDetails\": {\n    \"boundBroadcastId\": \"500123\",\n    \"isReusable\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7983,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec696c52-7718-45da-9100-5bff6e4d50c2",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"isDefaultStream\": true\n  },\n  \"cdn\": {\n    \"ingestionType\": \"dash\",\n    \"ingestionInfo\": {\n      \"streamName\": \"example_value\",\n      \"ingestionAddress\": \"example_value\",\n      \"backupIngestionAddress\": \"example_value\",\n      \"rtmpsIngestionAddress\": \"example_value\",\n      \"backupRtmpsIngestionAddress\": \"example_value\"\n    },\n    \"resolution\": \"example_value\",\n    \"frameRate\": \"example_value\"\n  },\n  \"status\": {\n    \"streamStatus\": \"active\",\n    \"healthStatus\": {\n      \"status\": \"bad\",\n      \"lastUpdateTimeSeconds\": 10,\n      \"configurationIssues\": []\n    }\n  },\n  \"contentDetails\": {\n    \"boundBroadcastId\": \"500123\",\n    \"isReusable\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7983,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2894fd10-aefa-4139-8872-9f9eb7900435",
+          "name": "Youtube Update a Live Stream",
+          "request": {
+            "name": "Youtube Update a Live Stream",
+            "description": {
+              "content": "Updates a video stream. If the properties that you want to change cannot be updated, you need to create a new stream with the proper settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "liveStreams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "part",
+                  "value": "<string>",
+                  "description": "(Required) Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"youtube#liveStream\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"channelId\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"publishedAt\": \"<dateTime>\",\n    \"isDefaultStream\": \"<boolean>\"\n  },\n  \"cdn\": {\n    \"ingestionType\": \"<string>\",\n    \"ingestionInfo\": {\n      \"streamName\": \"<string>\",\n      \"ingestionAddress\": \"<string>\",\n      \"backupIngestionAddress\": \"<string>\",\n      \"rtmpsIngestionAddress\": \"<string>\",\n      \"backupRtmpsIngestionAddress\": \"<string>\"\n    },\n    \"resolution\": \"<string>\",\n    \"frameRate\": \"<string>\"\n  },\n  \"status\": {\n    \"streamStatus\": \"<string>\",\n    \"healthStatus\": {\n      \"status\": \"<string>\",\n      \"lastUpdateTimeSeconds\": \"<long>\",\n      \"configurationIssues\": [\n        {\n          \"type\": \"<string>\",\n          \"severity\": \"<string>\",\n          \"reason\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"severity\": \"<string>\",\n          \"reason\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ]\n    }\n  },\n  \"contentDetails\": {\n    \"boundBroadcastId\": \"<string>\",\n    \"isReusable\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7ba7cfec-9274-4bb2-9429-e925af40bcfc",
+              "name": "Successful response containing the updated live stream resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"isDefaultStream\": true\n  },\n  \"cdn\": {\n    \"ingestionType\": \"dash\",\n    \"ingestionInfo\": {\n      \"streamName\": \"example_value\",\n      \"ingestionAddress\": \"example_value\",\n      \"backupIngestionAddress\": \"example_value\",\n      \"rtmpsIngestionAddress\": \"example_value\",\n      \"backupRtmpsIngestionAddress\": \"example_value\"\n    },\n    \"resolution\": \"example_value\",\n    \"frameRate\": \"example_value\"\n  },\n  \"status\": {\n    \"streamStatus\": \"active\",\n    \"healthStatus\": {\n      \"status\": \"bad\",\n      \"lastUpdateTimeSeconds\": 10,\n      \"configurationIssues\": []\n    }\n  },\n  \"contentDetails\": {\n    \"boundBroadcastId\": \"500123\",\n    \"isReusable\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"isDefaultStream\": true\n  },\n  \"cdn\": {\n    \"ingestionType\": \"dash\",\n    \"ingestionInfo\": {\n      \"streamName\": \"example_value\",\n      \"ingestionAddress\": \"example_value\",\n      \"backupIngestionAddress\": \"example_value\",\n      \"rtmpsIngestionAddress\": \"example_value\",\n      \"backupRtmpsIngestionAddress\": \"example_value\"\n    },\n    \"resolution\": \"example_value\",\n    \"frameRate\": \"example_value\"\n  },\n  \"status\": {\n    \"streamStatus\": \"active\",\n    \"healthStatus\": {\n      \"status\": \"bad\",\n      \"lastUpdateTimeSeconds\": 10,\n      \"configurationIssues\": []\n    }\n  },\n  \"contentDetails\": {\n    \"boundBroadcastId\": \"500123\",\n    \"isReusable\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f80a83dc-342b-40f0-868b-196afc00c3de",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"isDefaultStream\": true\n  },\n  \"cdn\": {\n    \"ingestionType\": \"dash\",\n    \"ingestionInfo\": {\n      \"streamName\": \"example_value\",\n      \"ingestionAddress\": \"example_value\",\n      \"backupIngestionAddress\": \"example_value\",\n      \"rtmpsIngestionAddress\": \"example_value\",\n      \"backupRtmpsIngestionAddress\": \"example_value\"\n    },\n    \"resolution\": \"example_value\",\n    \"frameRate\": \"example_value\"\n  },\n  \"status\": {\n    \"streamStatus\": \"active\",\n    \"healthStatus\": {\n      \"status\": \"bad\",\n      \"lastUpdateTimeSeconds\": 10,\n      \"configurationIssues\": []\n    }\n  },\n  \"contentDetails\": {\n    \"boundBroadcastId\": \"500123\",\n    \"isReusable\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7983,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b99a4262-4b3a-45dd-99da-b1b238619a4d",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"isDefaultStream\": true\n  },\n  \"cdn\": {\n    \"ingestionType\": \"dash\",\n    \"ingestionInfo\": {\n      \"streamName\": \"example_value\",\n      \"ingestionAddress\": \"example_value\",\n      \"backupIngestionAddress\": \"example_value\",\n      \"rtmpsIngestionAddress\": \"example_value\",\n      \"backupRtmpsIngestionAddress\": \"example_value\"\n    },\n    \"resolution\": \"example_value\",\n    \"frameRate\": \"example_value\"\n  },\n  \"status\": {\n    \"streamStatus\": \"active\",\n    \"healthStatus\": {\n      \"status\": \"bad\",\n      \"lastUpdateTimeSeconds\": 10,\n      \"configurationIssues\": []\n    }\n  },\n  \"contentDetails\": {\n    \"boundBroadcastId\": \"500123\",\n    \"isReusable\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7983,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75efce15-8959-4628-b446-e4c3d0bffadd",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"isDefaultStream\": true\n  },\n  \"cdn\": {\n    \"ingestionType\": \"dash\",\n    \"ingestionInfo\": {\n      \"streamName\": \"example_value\",\n      \"ingestionAddress\": \"example_value\",\n      \"backupIngestionAddress\": \"example_value\",\n      \"rtmpsIngestionAddress\": \"example_value\",\n      \"backupRtmpsIngestionAddress\": \"example_value\"\n    },\n    \"resolution\": \"example_value\",\n    \"frameRate\": \"example_value\"\n  },\n  \"status\": {\n    \"streamStatus\": \"active\",\n    \"healthStatus\": {\n      \"status\": \"bad\",\n      \"lastUpdateTimeSeconds\": 10,\n      \"configurationIssues\": []\n    }\n  },\n  \"contentDetails\": {\n    \"boundBroadcastId\": \"500123\",\n    \"isReusable\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7983,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee23e5b4-413c-419a-bc20-3621544e5141",
+          "name": "Youtube Delete a Live Stream",
+          "request": {
+            "name": "Youtube Delete a Live Stream",
+            "description": {
+              "content": "Deletes a video stream. The authenticated user must own the stream being deleted. Streams bound to active or scheduled broadcasts cannot be deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "liveStreams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the live stream to delete."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e81f8dcc-bad6-4fc1-a65d-d13c628199bd",
+              "name": "The live stream was successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "929c7344-215c-4e90-b7b0-d14d3a35a7bd",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7983,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1a5ee0f-7fb8-4377-8925-4d519b47b835",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7983,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59470b33-0b16-4a14-9937-c9cd1778eefb",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7983,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b14aca3a-7aae-453d-bfb2-06a767cb6d82",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveStreams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 1789,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://youtubeanalytics.googleapis.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "70c0426f-ed5a-409e-b9b3-c87390044bca",
+    "name": "YouTube Analytics Analytics Groups LiveStreams API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.\nUse this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,\nand gain insights into viewer demographics and behavior patterns.\n\n## Key Features\n- Retrieve channel and video performance metrics\n- Access audience demographics and geographic data\n- Monitor engagement metrics like likes, comments, and shares\n- Track revenue and ad performance data (for monetized content)\n- Generate custom date-range reports\n\n## Authentication\nAll API requests require OAuth 2.0 authentication with appropriate scopes.\n\n\nContact Support:\n Name: Google Developers\n Email: youtube-api-support@google.com",
+      "type": "text/plain"
+    }
+  }
+}

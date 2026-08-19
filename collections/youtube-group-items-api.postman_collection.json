@@ -1,0 +1,589 @@
+{
+  "item": [
+    {
+      "id": "3ed284c8-6039-4085-a2c5-0fd14d85c93e",
+      "name": "Group Items",
+      "description": {
+        "content": "Operations for managing items within analytics groups",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c70f5f71-5eda-4215-beb3-9d1bac1f376b",
+          "name": "Youtube List Group Items",
+          "request": {
+            "name": "Youtube List Group Items",
+            "description": {
+              "content": "Returns a collection of group items that match the API request parameters.\nGroup items represent the individual channels or videos that belong to\nan analytics group.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groupItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "groupId",
+                  "value": "<string>",
+                  "description": "(Required) The group ID to retrieve items for"
+                },
+                {
+                  "disabled": false,
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>",
+                  "description": "The content owner ID for YouTube content owner operations.\nRequired for content owner authenticated requests.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "OAuth 2.0 access token for authentication"
+                },
+                {
+                  "disabled": false,
+                  "key": "prettyPrint",
+                  "value": "true",
+                  "description": "Returns response with indentations and line breaks for readability"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "651e2b43-9699-41c7-b5dd-9851efc84827",
+              "name": "Successful response containing list of group items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groupItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "groupId",
+                      "value": "ABCdef123456"
+                    },
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prettyPrint",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#groupItemListResponse\",\n  \"etag\": \"items123abc\",\n  \"items\": [\n    {\n      \"kind\": \"youtube#groupItem\",\n      \"etag\": \"item1abc\",\n      \"id\": \"ITEMabc123\",\n      \"groupId\": \"ABCdef123456\",\n      \"resource\": {\n        \"kind\": \"youtube#video\",\n        \"id\": \"dQw4w9WgXcQ\"\n      }\n    },\n    {\n      \"kind\": \"youtube#groupItem\",\n      \"etag\": \"item2def\",\n      \"id\": \"ITEMdef456\",\n      \"groupId\": \"ABCdef123456\",\n      \"resource\": {\n        \"kind\": \"youtube#video\",\n        \"id\": \"abc123XYZ789\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d746fa4-edfc-47d0-ac04-118226c1ae04",
+              "name": "Unauthorized - invalid or missing authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groupItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "groupId",
+                      "value": "ABCdef123456"
+                    },
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prettyPrint",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 401,\n    \"message\": \"Invalid credentials\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.analytics\",\n        \"reason\": \"authError\",\n        \"message\": \"The access token is invalid or expired\",\n        \"locationType\": \"header\",\n        \"location\": \"Authorization\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52105499-9cad-4109-85f7-1f7d667384da",
+          "name": "Youtube Add Item to Group",
+          "request": {
+            "name": "Youtube Add Item to Group",
+            "description": {
+              "content": "Adds a channel or video to an analytics group. The item will be included\nin the group's aggregated analytics data going forward.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groupItems"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>",
+                  "description": "The content owner ID for YouTube content owner operations.\nRequired for content owner authenticated requests.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "OAuth 2.0 access token for authentication"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"groupId\": \"<string>\",\n  \"resource\": {\n    \"kind\": \"<string>\",\n    \"id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "889a1ab9-c0c4-4b1d-80eb-1cbfbc80d1ce",
+              "name": "Successfully added item to group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groupItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"groupId\": \"ABCdef123456\",\n  \"resource\": {\n    \"kind\": \"youtube#video\",\n    \"id\": \"dQw4w9WgXcQ\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#groupItem\",\n  \"etag\": \"newitem789\",\n  \"id\": \"NEWitem123456\",\n  \"groupId\": \"ABCdef123456\",\n  \"resource\": {\n    \"kind\": \"youtube#video\",\n    \"id\": \"dQw4w9WgXcQ\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9f99baf-dd60-4d17-92fe-d8031027d331",
+              "name": "Bad request - invalid item data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groupItems"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"groupId\": \"ABCdef123456\",\n  \"resource\": {\n    \"kind\": \"youtube#video\",\n    \"id\": \"dQw4w9WgXcQ\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Invalid parameter value\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.analytics\",\n        \"reason\": \"invalidParameter\",\n        \"message\": \"The parameter 'startDate' has an invalid value\",\n        \"locationType\": \"parameter\",\n        \"location\": \"startDate\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc4cd06d-767f-4cf7-8661-d0d20a3ff1ea",
+          "name": "Youtube Remove Item from Group",
+          "request": {
+            "name": "Youtube Remove Item from Group",
+            "description": {
+              "content": "Removes a channel or video from an analytics group. The item's historical\ndata will no longer be included in the group's aggregated metrics.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groupItems",
+                ":itemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>",
+                  "description": "The content owner ID for YouTube content owner operations.\nRequired for content owner authenticated requests.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "OAuth 2.0 access token for authentication"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "itemId",
+                  "description": "(Required) The unique identifier of the group item"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9caf6ed1-3d80-4520-bd0b-9ff924a5f393",
+              "name": "Successfully removed item from group",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groupItems",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The unique identifier of the group item"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "16cdad8d-6793-47f1-b67b-60ec7ff1204d",
+              "name": "Item not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groupItems",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "ContentOwnerXYZ"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "itemId",
+                      "description": "(Required) The unique identifier of the group item"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"Resource not found\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.analytics\",\n        \"reason\": \"notFound\",\n        \"message\": \"The specified group was not found\",\n        \"locationType\": \"parameter\",\n        \"location\": \"groupId\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://youtubeanalytics.googleapis.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c6983a5e-0082-4800-8cc2-e8b7f405233c",
+    "name": "YouTube Analytics Analytics Groups Group Items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.\nUse this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,\nand gain insights into viewer demographics and behavior patterns.\n\n## Key Features\n- Retrieve channel and video performance metrics\n- Access audience demographics and geographic data\n- Monitor engagement metrics like likes, comments, and shares\n- Track revenue and ad performance data (for monetized content)\n- Generate custom date-range reports\n\n## Authentication\nAll API requests require OAuth 2.0 authentication with appropriate scopes.\n\n\nContact Support:\n Name: Google Developers\n Email: youtube-api-support@google.com",
+      "type": "text/plain"
+    }
+  }
+}

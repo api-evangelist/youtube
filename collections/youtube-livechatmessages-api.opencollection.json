@@ -1,0 +1,139 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YouTube Analytics Analytics Groups LiveChatMessages API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "LiveChatMessages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Live Chat Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/liveChatMessages",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+              },
+              {
+                "name": "liveChatId",
+                "value": "500123",
+                "type": "query",
+                "description": "The liveChatId parameter specifies the ID of the live chat whose messages will be returned. The live chat ID associated with a broadcast is returned in the liveBroadcast resource's snippet.liveChatId property."
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Identifies a specific page in the result set that should be returned. The nextPageToken property in the API response identifies other pages that are available."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ]
+          },
+          "docs": "Lists live chat messages for a specific live broadcast. This method does not support filtering by user. The list is ordered chronologically, starting with the earliest message."
+        },
+        {
+          "info": {
+            "name": "Youtube Send a Live Chat Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://youtubeanalytics.googleapis.com/v2/liveChatMessages",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a message to a live chat. The authenticated user must be authorized to participate in the chat. Some chat types may have restrictions on who can send messages."
+        },
+        {
+          "info": {
+            "name": "Youtube Delete a Live Chat Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://youtubeanalytics.googleapis.com/v2/liveChatMessages",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "The ID of the live chat message to delete."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ]
+          },
+          "docs": "Deletes a chat message. The authenticated user must be the author of the message or a moderator of the live chat to delete the message."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

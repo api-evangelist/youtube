@@ -1,0 +1,1024 @@
+{
+  "item": [
+    {
+      "id": "61919d20-c1d6-4916-8f19-28d333456d45",
+      "name": "LiveChatMessages",
+      "description": {
+        "content": "Operations for managing messages in YouTube live chat",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "40ba610d-c4ba-4465-80a9-05b9ffa413ac",
+          "name": "Youtube List Live Chat Messages",
+          "request": {
+            "name": "Youtube List Live Chat Messages",
+            "description": {
+              "content": "Lists live chat messages for a specific live broadcast. This method does not support filtering by user. The list is ordered chronologically, starting with the earliest message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "liveChatMessages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "part",
+                  "value": "<string>",
+                  "description": "(Required) Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+                },
+                {
+                  "disabled": false,
+                  "key": "liveChatId",
+                  "value": "<string>",
+                  "description": "(Required) The liveChatId parameter specifies the ID of the live chat whose messages will be returned. The live chat ID associated with a broadcast is returned in the liveBroadcast resource's snippet.liveChatId property."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxResults",
+                  "value": "5",
+                  "description": "The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Identifies a specific page in the result set that should be returned. The nextPageToken property in the API response identifies other pages that are available."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "635f0420-1fc8-4b0d-bdcf-0055fe15cee8",
+              "name": "Successful response containing a list of live chat message resources.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveChatMessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "liveChatId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"nextPageToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9\",\n  \"pollingIntervalMillis\": 10,\n  \"offlineAt\": \"2026-01-15T10:30:00Z\",\n  \"pageInfo\": {\n    \"totalResults\": 42,\n    \"resultsPerPage\": 10\n  },\n  \"items\": [\n    {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"snippet\": {\n        \"liveChatId\": \"500123\",\n        \"type\": \"chatEndedEvent\",\n        \"displayMessage\": \"example_value\",\n        \"authorChannelId\": \"500123\",\n        \"publishedAt\": \"2026-01-15T10:30:00Z\",\n        \"hasDisplayContent\": true,\n        \"textMessageDetails\": {}\n      },\n      \"authorDetails\": {\n        \"channelId\": \"500123\",\n        \"channelUrl\": \"https://www.example.com\",\n        \"displayName\": \"example_value\",\n        \"profileImageUrl\": \"https://www.example.com\",\n        \"isVerified\": true,\n        \"isChatOwner\": true,\n        \"isChatSponsor\": true,\n        \"isChatModerator\": true\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cecb119-c617-435f-bdf8-9456fd7d9416",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveChatMessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "liveChatId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 665,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b6f646b-2966-4072-9081-ce64a0255187",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveChatMessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "liveChatId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 665,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fea2f46-88cc-460e-a333-bf71e355d02d",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveChatMessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "liveChatId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 665,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ad10198-4817-48e6-9471-e1dbfc68a3af",
+          "name": "Youtube Send a Live Chat Message",
+          "request": {
+            "name": "Youtube Send a Live Chat Message",
+            "description": {
+              "content": "Adds a message to a live chat. The authenticated user must be authorized to participate in the chat. Some chat types may have restrictions on who can send messages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "liveChatMessages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "part",
+                  "value": "<string>",
+                  "description": "(Required) Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"youtube#liveChatMessage\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"liveChatId\": \"<string>\",\n    \"type\": \"<string>\",\n    \"displayMessage\": \"<string>\",\n    \"authorChannelId\": \"<string>\",\n    \"publishedAt\": \"<dateTime>\",\n    \"hasDisplayContent\": \"<boolean>\",\n    \"textMessageDetails\": {\n      \"messageText\": \"<string>\"\n    }\n  },\n  \"authorDetails\": {\n    \"channelId\": \"<string>\",\n    \"channelUrl\": \"<string>\",\n    \"displayName\": \"<string>\",\n    \"profileImageUrl\": \"<string>\",\n    \"isVerified\": \"<boolean>\",\n    \"isChatOwner\": \"<boolean>\",\n    \"isChatSponsor\": \"<boolean>\",\n    \"isChatModerator\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ea13b96a-3547-497b-abb8-076679a86399",
+              "name": "Successful response containing the newly sent live chat message resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveChatMessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"liveChatId\": \"500123\",\n    \"type\": \"chatEndedEvent\",\n    \"displayMessage\": \"example_value\",\n    \"authorChannelId\": \"500123\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"hasDisplayContent\": true,\n    \"textMessageDetails\": {\n      \"messageText\": \"example_value\"\n    }\n  },\n  \"authorDetails\": {\n    \"channelId\": \"500123\",\n    \"channelUrl\": \"https://www.example.com\",\n    \"displayName\": \"example_value\",\n    \"profileImageUrl\": \"https://www.example.com\",\n    \"isVerified\": true,\n    \"isChatOwner\": true,\n    \"isChatSponsor\": true,\n    \"isChatModerator\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"liveChatId\": \"500123\",\n    \"type\": \"chatEndedEvent\",\n    \"displayMessage\": \"example_value\",\n    \"authorChannelId\": \"500123\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"hasDisplayContent\": true,\n    \"textMessageDetails\": {\n      \"messageText\": \"example_value\"\n    }\n  },\n  \"authorDetails\": {\n    \"channelId\": \"500123\",\n    \"channelUrl\": \"https://www.example.com\",\n    \"displayName\": \"example_value\",\n    \"profileImageUrl\": \"https://www.example.com\",\n    \"isVerified\": true,\n    \"isChatOwner\": true,\n    \"isChatSponsor\": true,\n    \"isChatModerator\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa1e8827-dfd3-43c3-8d37-d52daff1ce16",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveChatMessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"liveChatId\": \"500123\",\n    \"type\": \"chatEndedEvent\",\n    \"displayMessage\": \"example_value\",\n    \"authorChannelId\": \"500123\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"hasDisplayContent\": true,\n    \"textMessageDetails\": {\n      \"messageText\": \"example_value\"\n    }\n  },\n  \"authorDetails\": {\n    \"channelId\": \"500123\",\n    \"channelUrl\": \"https://www.example.com\",\n    \"displayName\": \"example_value\",\n    \"profileImageUrl\": \"https://www.example.com\",\n    \"isVerified\": true,\n    \"isChatOwner\": true,\n    \"isChatSponsor\": true,\n    \"isChatModerator\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 9506,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c59c1614-50f3-4941-a7a5-6556f1be838a",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveChatMessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"liveChatId\": \"500123\",\n    \"type\": \"chatEndedEvent\",\n    \"displayMessage\": \"example_value\",\n    \"authorChannelId\": \"500123\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"hasDisplayContent\": true,\n    \"textMessageDetails\": {\n      \"messageText\": \"example_value\"\n    }\n  },\n  \"authorDetails\": {\n    \"channelId\": \"500123\",\n    \"channelUrl\": \"https://www.example.com\",\n    \"displayName\": \"example_value\",\n    \"profileImageUrl\": \"https://www.example.com\",\n    \"isVerified\": true,\n    \"isChatOwner\": true,\n    \"isChatSponsor\": true,\n    \"isChatModerator\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 9506,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd06eb95-feba-455f-8c6e-e7158a82c7ae",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveChatMessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"liveChatId\": \"500123\",\n    \"type\": \"chatEndedEvent\",\n    \"displayMessage\": \"example_value\",\n    \"authorChannelId\": \"500123\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"hasDisplayContent\": true,\n    \"textMessageDetails\": {\n      \"messageText\": \"example_value\"\n    }\n  },\n  \"authorDetails\": {\n    \"channelId\": \"500123\",\n    \"channelUrl\": \"https://www.example.com\",\n    \"displayName\": \"example_value\",\n    \"profileImageUrl\": \"https://www.example.com\",\n    \"isVerified\": true,\n    \"isChatOwner\": true,\n    \"isChatSponsor\": true,\n    \"isChatModerator\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 9506,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1121427b-c6aa-4375-9d9a-7702b5385a50",
+          "name": "Youtube Delete a Live Chat Message",
+          "request": {
+            "name": "Youtube Delete a Live Chat Message",
+            "description": {
+              "content": "Deletes a chat message. The authenticated user must be the author of the message or a moderator of the live chat to delete the message.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "liveChatMessages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) The ID of the live chat message to delete."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "813ee98c-7422-406d-85a2-6953e8b75be4",
+              "name": "The live chat message was successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveChatMessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b57ce601-4e1c-437e-964b-c81b7a70ff94",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveChatMessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 9506,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "587ed365-67e5-4c0f-8856-9b321742554b",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveChatMessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 9506,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b41cd08-96c8-404b-a9b6-3645389802af",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveChatMessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 9506,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e0a60e9-1647-4017-a0de-0d16beb3f063",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "liveChatMessages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 665,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://youtubeanalytics.googleapis.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2a8850d6-e7d9-4c0b-b7a0-43a90080057e",
+    "name": "YouTube Analytics Analytics Groups LiveChatMessages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.\nUse this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,\nand gain insights into viewer demographics and behavior patterns.\n\n## Key Features\n- Retrieve channel and video performance metrics\n- Access audience demographics and geographic data\n- Monitor engagement metrics like likes, comments, and shares\n- Track revenue and ad performance data (for monetized content)\n- Generate custom date-range reports\n\n## Authentication\nAll API requests require OAuth 2.0 authentication with appropriate scopes.\n\n\nContact Support:\n Name: Google Developers\n Email: youtube-api-support@google.com",
+      "type": "text/plain"
+    }
+  }
+}

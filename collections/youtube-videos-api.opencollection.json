@@ -1,0 +1,277 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YouTube Analytics Analytics Groups Videos API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Videos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Videos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/videos",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+              },
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Comma-separated list of YouTube video IDs for the resources being retrieved."
+              },
+              {
+                "name": "chart",
+                "value": "mostPopular",
+                "type": "query",
+                "description": "Identifies the chart that the API returns chart data for. Acceptable values are mostPopular and videoCategoryId."
+              },
+              {
+                "name": "myRating",
+                "value": "like",
+                "type": "query",
+                "description": "Set this parameter to like or dislike to instruct the API to return only videos liked or disliked by the authenticated user."
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ]
+          },
+          "docs": "Returns a list of videos that match the API request parameters. Requires the part parameter to specify the video resource properties to include in the response."
+        },
+        {
+          "info": {
+            "name": "Youtube Upload or Insert a Video",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://youtubeanalytics.googleapis.com/v2/videos",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uploads a video to YouTube and optionally sets the video's metadata. This method supports media upload and requires the part parameter to specify the video resource properties to set."
+        },
+        {
+          "info": {
+            "name": "Youtube Update Video Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://youtubeanalytics.googleapis.com/v2/videos",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a video's metadata. This method supports patch semantics and requires the part parameter to specify the video resource properties to update."
+        },
+        {
+          "info": {
+            "name": "Youtube Delete a Video",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://youtubeanalytics.googleapis.com/v2/videos",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "The ID of the video to delete."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ]
+          },
+          "docs": "Deletes a YouTube video. The authenticated user must own the video or be authorized to delete it."
+        },
+        {
+          "info": {
+            "name": "Youtube Rate a Video",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://youtubeanalytics.googleapis.com/v2/videos/rate",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "The ID of the video to rate."
+              },
+              {
+                "name": "rating",
+                "value": "like",
+                "type": "query",
+                "description": "The rating to record. Valid values are like, dislike, and none."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ]
+          },
+          "docs": "Adds a like or dislike rating to a video or removes a rating from a video. The authenticated user must be authorized to rate videos."
+        },
+        {
+          "info": {
+            "name": "Youtube Update Video Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://youtubeanalytics.googleapis.com/v2/videos/:videoId",
+            "params": [
+              {
+                "name": "videoId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the video"
+              },
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "The part parameter specifies a comma-separated list of one or more\nresource properties that the API response will include.\n"
+              },
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "OAuth 2.0 access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a video's metadata. This operation requires OAuth 2.0 authentication.\nYou can only update videos that belong to the authenticated user's channel.\n"
+        },
+        {
+          "info": {
+            "name": "Youtube Delete Video",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://youtubeanalytics.googleapis.com/v2/videos/:videoId",
+            "params": [
+              {
+                "name": "videoId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the video"
+              },
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "OAuth 2.0 access token for authentication"
+              }
+            ]
+          },
+          "docs": "Deletes a video. This operation requires OAuth 2.0 authentication.\nYou can only delete videos that belong to the authenticated user's channel.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

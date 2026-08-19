@@ -1,0 +1,1215 @@
+{
+  "item": [
+    {
+      "id": "cddf32bb-aee4-4256-a9ff-b7daeef3abfc",
+      "name": "Groups",
+      "description": {
+        "content": "Operations for managing YouTube Analytics groups",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "442da643-5c97-4d8e-baea-19eb5aeab5b7",
+          "name": "Youtube List Groups",
+          "request": {
+            "name": "Youtube List Groups",
+            "description": {
+              "content": "Returns a collection of groups that match the API request parameters. You can retrieve all groups that the authenticated user owns, or retrieve one or more groups by their unique IDs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Comma-separated list of YouTube group IDs for the resources being retrieved. If this parameter is not specified, the API will return all groups owned by the authenticated user."
+                },
+                {
+                  "disabled": false,
+                  "key": "mine",
+                  "value": "<boolean>",
+                  "description": "Set this parameter to true to retrieve all groups owned by the authenticated user."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Identifies a specific page in the result set that should be returned. If specified, the API response should contain only that page."
+                },
+                {
+                  "disabled": false,
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>",
+                  "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "03032273-aea4-418a-bd44-4de285890bf1",
+              "name": "Successful response containing a list of group resources.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "mine",
+                      "value": "true"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+                    },
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"nextPageToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9\",\n  \"items\": [\n    {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"snippet\": {\n        \"publishedAt\": \"2026-01-15T10:30:00Z\",\n        \"title\": \"Example Title\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ec664f2-542a-475a-ae7c-67341c1d8ae6",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "mine",
+                      "value": "true"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+                    },
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 2232,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12d0bc86-a6a4-4775-85d9-694ad449f6ba",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "mine",
+                      "value": "true"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+                    },
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 2232,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "216b1a21-9421-4284-9adc-22b7eda06191",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "mine",
+                      "value": "true"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+                    },
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 2232,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "24af1909-b6aa-4f32-a70a-764c339fb532",
+          "name": "Youtube Create a Group",
+          "request": {
+            "name": "Youtube Create a Group",
+            "description": {
+              "content": "Creates an Analytics group. The authenticated user must be authorized to create groups. A group must have at least one item before you can run a report for the group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>",
+                  "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"publishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": \"<long>\",\n    \"itemType\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e18e4b93-1fa1-460d-9fec-c48131729e2a",
+              "name": "Successful response containing the newly created group resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"title\": \"Example Title\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": 42,\n    \"itemType\": \"youtube#channel\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"title\": \"Example Title\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": 42,\n    \"itemType\": \"youtube#channel\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66e9896a-f0c7-4570-a084-2ab8b08191f9",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"title\": \"Example Title\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": 42,\n    \"itemType\": \"youtube#channel\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7706,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dffd2ec2-bede-4668-bbac-642f50d7206e",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"title\": \"Example Title\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": 42,\n    \"itemType\": \"youtube#channel\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7706,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7aeca975-a7c8-4785-ac5b-4c0a3db6f561",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"title\": \"Example Title\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": 42,\n    \"itemType\": \"youtube#channel\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7706,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c604fadd-6df3-479e-b6bc-160a5afe318a",
+          "name": "Youtube Update a Group",
+          "request": {
+            "name": "Youtube Update a Group",
+            "description": {
+              "content": "Modifies a group. The authenticated user must own the group being updated. Currently, the only property that can be updated is the group's title.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>",
+                  "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"youtube#group\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"publishedAt\": \"<dateTime>\",\n    \"title\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": \"<long>\",\n    \"itemType\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4566e0fb-2daa-4f59-8c87-db37bbea21cb",
+              "name": "Successful response containing the updated group resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"title\": \"Example Title\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": 42,\n    \"itemType\": \"youtube#channel\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"title\": \"Example Title\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": 42,\n    \"itemType\": \"youtube#channel\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8346062-74cd-4603-8f66-560236d83fc8",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"title\": \"Example Title\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": 42,\n    \"itemType\": \"youtube#channel\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7706,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "465481c2-41ae-4aa6-95f0-7e9e17d09617",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"title\": \"Example Title\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": 42,\n    \"itemType\": \"youtube#channel\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7706,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b6e550b-a20e-436b-bdbb-911308e3f896",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"title\": \"Example Title\"\n  },\n  \"contentDetails\": {\n    \"itemCount\": 42,\n    \"itemType\": \"youtube#channel\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7706,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b78b3016-85a2-47b9-81e2-8a26081465f5",
+          "name": "Youtube Delete a Group",
+          "request": {
+            "name": "Youtube Delete a Group",
+            "description": {
+              "content": "Deletes a group. The authenticated user must own the group being deleted. Deleting a group does not delete any of the resources contained in the group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) The id parameter specifies the YouTube group ID for the group being deleted."
+                },
+                {
+                  "disabled": false,
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>",
+                  "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3ce50256-0ab6-4c86-be31-63f87870e006",
+              "name": "The group was successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "deca2d71-f8a5-418d-815e-ca67d2ff6ca9",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7706,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba86fa25-41a1-4723-a7f4-636dfc79680a",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7706,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3434cfb4-cade-4156-92da-12a1e7faf850",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 7706,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f79e8794-f450-476f-a468-e9634966c103",
+              "name": "The specified resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 2232,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://youtubeanalytics.googleapis.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d536bf84-ac97-4818-846f-f7e19d3d86e8",
+    "name": "YouTube Analytics Analytics Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.\nUse this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,\nand gain insights into viewer demographics and behavior patterns.\n\n## Key Features\n- Retrieve channel and video performance metrics\n- Access audience demographics and geographic data\n- Monitor engagement metrics like likes, comments, and shares\n- Track revenue and ad performance data (for monetized content)\n- Generate custom date-range reports\n\n## Authentication\nAll API requests require OAuth 2.0 authentication with appropriate scopes.\n\n\nContact Support:\n Name: Google Developers\n Email: youtube-api-support@google.com",
+      "type": "text/plain"
+    }
+  }
+}

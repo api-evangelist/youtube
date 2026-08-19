@@ -1,0 +1,284 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YouTube Analytics Analytics Groups Comments API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/comments",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+              },
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Comma-separated list of comment IDs for the resources being retrieved."
+              },
+              {
+                "name": "parentId",
+                "value": "500123",
+                "type": "query",
+                "description": "Identifies the comment thread whose comments are being listed. Required unless the id parameter specifies comment IDs directly."
+              },
+              {
+                "name": "textFormat",
+                "value": "html",
+                "type": "query",
+                "description": "Specifies whether the API should return comments formatted as HTML or plain text."
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ]
+          },
+          "docs": "Returns a list of comments that match the API request parameters. Use the part parameter to specify the comment resource properties to include in the response."
+        },
+        {
+          "info": {
+            "name": "Youtube Create a Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://youtubeanalytics.googleapis.com/v2/comments",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a reply to an existing comment. To add a top-level comment to a video or channel discussion, use the commentThreads.insert method."
+        },
+        {
+          "info": {
+            "name": "Youtube Update a Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://youtubeanalytics.googleapis.com/v2/comments",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies a comment. The authenticated user must own the comment being updated."
+        },
+        {
+          "info": {
+            "name": "Youtube Delete a Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://youtubeanalytics.googleapis.com/v2/comments",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "The ID of the comment to delete."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ]
+          },
+          "docs": "Deletes a comment. The authenticated user must own the comment or be authorized to delete it."
+        },
+        {
+          "info": {
+            "name": "Youtube Set Comment Moderation Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://youtubeanalytics.googleapis.com/v2/comments/setModerationStatus",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Comma-separated list of comment IDs to set moderation status for."
+              },
+              {
+                "name": "moderationStatus",
+                "value": "heldForReview",
+                "type": "query",
+                "description": "Identifies the new moderation status. Acceptable values are heldForReview, published, and rejected."
+              },
+              {
+                "name": "banAuthor",
+                "value": "true",
+                "type": "query",
+                "description": "Set to true to ban the comment author from making future comments on the channel or video."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ]
+          },
+          "docs": "Sets the moderation status of one or more comments. The authenticated user must be authorized to moderate comments for the associated video or channel."
+        },
+        {
+          "info": {
+            "name": "Youtube List Comment Threads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/commentThreads",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "The part parameter specifies a comma-separated list of one or more\nresource properties that the API response will include.\n"
+              },
+              {
+                "name": "videoId",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by video ID"
+              },
+              {
+                "name": "channelId",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by channel ID"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of comment thread IDs"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "The method to use for sorting comments"
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of items to return (1-50)"
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Token for retrieving the next page of results"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication (for read-only operations)"
+              }
+            ]
+          },
+          "docs": "Returns a list of comment threads that match the API request parameters.\nComment threads contain the top-level comment and all replies to that comment.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

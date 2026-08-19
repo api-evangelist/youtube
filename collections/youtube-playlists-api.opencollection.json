@@ -1,0 +1,246 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YouTube Analytics Analytics Groups Playlists API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Playlists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Playlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/playlists",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+              },
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Comma-separated list of YouTube playlist IDs for the resources being retrieved."
+              },
+              {
+                "name": "channelId",
+                "value": "500123",
+                "type": "query",
+                "description": "Indicates that the API response should only contain resources created by the channel."
+              },
+              {
+                "name": "mine",
+                "value": "true",
+                "type": "query",
+                "description": "Set this parameter to true to instruct the API to return playlists owned by the authenticated user."
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive."
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ]
+          },
+          "docs": "Returns a collection of playlists that match the API request parameters. You can retrieve playlists by ID, by channel, or for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Youtube Create a Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://youtubeanalytics.googleapis.com/v2/playlists",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a playlist on behalf of the authenticated user. The user must be authorized to create playlists."
+        },
+        {
+          "info": {
+            "name": "Youtube Update a Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://youtubeanalytics.googleapis.com/v2/playlists",
+            "params": [
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies a playlist. The authenticated user must own the playlist being updated. Use the part parameter to specify the properties being updated."
+        },
+        {
+          "info": {
+            "name": "Youtube Delete a Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://youtubeanalytics.googleapis.com/v2/playlists",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "The ID of the playlist to delete."
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+              }
+            ]
+          },
+          "docs": "Deletes a playlist. The authenticated user must own the playlist or be authorized to delete it."
+        },
+        {
+          "info": {
+            "name": "Youtube Update Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://youtubeanalytics.googleapis.com/v2/playlists/:playlistId",
+            "params": [
+              {
+                "name": "playlistId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the playlist"
+              },
+              {
+                "name": "part",
+                "value": "",
+                "type": "query",
+                "description": "The part parameter specifies a comma-separated list of one or more\nresource properties that the API response will include.\n"
+              },
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "OAuth 2.0 access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a playlist's metadata. This operation requires OAuth 2.0 authentication.\nYou can only update playlists that belong to the authenticated user's channel.\n"
+        },
+        {
+          "info": {
+            "name": "Youtube Delete Playlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://youtubeanalytics.googleapis.com/v2/playlists/:playlistId",
+            "params": [
+              {
+                "name": "playlistId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the playlist"
+              },
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "OAuth 2.0 access token for authentication"
+              }
+            ]
+          },
+          "docs": "Deletes a playlist. This operation requires OAuth 2.0 authentication.\nYou can only delete playlists that belong to the authenticated user's channel.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

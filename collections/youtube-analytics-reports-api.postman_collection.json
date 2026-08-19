@@ -1,0 +1,529 @@
+{
+  "item": [
+    {
+      "id": "406509af-2401-4e6d-82d1-faa0a71c97e6",
+      "name": "Analytics Reports",
+      "description": {
+        "content": "Operations for retrieving YouTube Analytics reports and metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a267a443-521c-4342-ada0-6afc864510ed",
+          "name": "Retrieve YouTube Analytics Reports",
+          "request": {
+            "name": "Retrieve YouTube Analytics Reports",
+            "description": {
+              "content": "Retrieves YouTube Analytics data for a channel or content owner.\nThe API response contains a report with the requested dimensions and metrics\nfor the specified date range. You can filter results by various dimensions\nsuch as video, country, or traffic source.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "(Required) Identifies the YouTube channel or content owner for which you are retrieving\nYouTube Analytics data. Use channel==CHANNEL_ID or contentOwner==CONTENT_OWNER_ID.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "(Required) The start date for the data retrieval in YYYY-MM-DD format"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "(Required) The end date for the data retrieval in YYYY-MM-DD format"
+                },
+                {
+                  "disabled": false,
+                  "key": "metrics",
+                  "value": "<string>",
+                  "description": "(Required) A comma-separated list of YouTube Analytics metrics to retrieve.\nCommon metrics include views, estimatedMinutesWatched, averageViewDuration, likes, dislikes, comments, shares.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "dimensions",
+                  "value": "<string>",
+                  "description": "A comma-separated list of YouTube Analytics dimensions.\nCommon dimensions include video, channel, country, day, month.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "A list of filters to apply to the data. Filters use the format dimension==value\nand can be combined with semicolons.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "A comma-separated list of dimensions or metrics to sort by.\nPrefix with - for descending order.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxResults",
+                  "value": "100",
+                  "description": "Maximum number of rows to include in the response (1-500)"
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "1",
+                  "description": "Index of the first row to retrieve (1-based)"
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "Currency code for revenue metrics (ISO 4217)"
+                },
+                {
+                  "disabled": false,
+                  "key": "access_token",
+                  "value": "<string>",
+                  "description": "OAuth 2.0 access token for authentication"
+                },
+                {
+                  "disabled": false,
+                  "key": "prettyPrint",
+                  "value": "true",
+                  "description": "Returns response with indentations and line breaks for readability"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "81515075-1b92-4c5e-9ef5-60656172e6ff",
+              "name": "Successful response containing analytics report data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "2024-01-01"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2024-01-31"
+                    },
+                    {
+                      "key": "metrics",
+                      "value": "views,estimatedMinutesWatched,averageViewDuration,likes"
+                    },
+                    {
+                      "key": "dimensions",
+                      "value": "video,day"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "country==US;video==dQw4w9WgXcQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "-views"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "50"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prettyPrint",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtubeAnalytics#resultTable\",\n  \"columnHeaders\": [\n    {\n      \"name\": \"video\",\n      \"columnType\": \"DIMENSION\",\n      \"dataType\": \"STRING\"\n    },\n    {\n      \"name\": \"views\",\n      \"columnType\": \"METRIC\",\n      \"dataType\": \"INTEGER\"\n    },\n    {\n      \"name\": \"estimatedMinutesWatched\",\n      \"columnType\": \"METRIC\",\n      \"dataType\": \"FLOAT\"\n    },\n    {\n      \"name\": \"averageViewDuration\",\n      \"columnType\": \"METRIC\",\n      \"dataType\": \"FLOAT\"\n    },\n    {\n      \"name\": \"likes\",\n      \"columnType\": \"METRIC\",\n      \"dataType\": \"INTEGER\"\n    }\n  ],\n  \"rows\": [\n    [\n      \"dQw4w9WgXcQ\",\n      1500000,\n      3750000.5,\n      150.2,\n      45000\n    ],\n    [\n      \"abc123XYZ789\",\n      500000,\n      1000000,\n      120,\n      15000\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4605cc99-c177-4fb6-b532-1dc0036b08fe",
+              "name": "Bad request - invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "2024-01-01"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2024-01-31"
+                    },
+                    {
+                      "key": "metrics",
+                      "value": "views,estimatedMinutesWatched,averageViewDuration,likes"
+                    },
+                    {
+                      "key": "dimensions",
+                      "value": "video,day"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "country==US;video==dQw4w9WgXcQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "-views"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "50"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prettyPrint",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Invalid parameter value\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.analytics\",\n        \"reason\": \"invalidParameter\",\n        \"message\": \"The parameter 'startDate' has an invalid value\",\n        \"locationType\": \"parameter\",\n        \"location\": \"startDate\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f97bc49a-9eac-4120-bcff-192e9c258c5f",
+              "name": "Unauthorized - invalid or missing authentication",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "2024-01-01"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2024-01-31"
+                    },
+                    {
+                      "key": "metrics",
+                      "value": "views,estimatedMinutesWatched,averageViewDuration,likes"
+                    },
+                    {
+                      "key": "dimensions",
+                      "value": "video,day"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "country==US;video==dQw4w9WgXcQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "-views"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "50"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prettyPrint",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 401,\n    \"message\": \"Invalid credentials\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.analytics\",\n        \"reason\": \"authError\",\n        \"message\": \"The access token is invalid or expired\",\n        \"locationType\": \"header\",\n        \"location\": \"Authorization\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a29d8fab-aebf-4a96-b7f7-723d580f0bb8",
+              "name": "Forbidden - insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "2024-01-01"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2024-01-31"
+                    },
+                    {
+                      "key": "metrics",
+                      "value": "views,estimatedMinutesWatched,averageViewDuration,likes"
+                    },
+                    {
+                      "key": "dimensions",
+                      "value": "video,day"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "country==US;video==dQw4w9WgXcQ"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "-views"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "50"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "1"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "USD"
+                    },
+                    {
+                      "key": "access_token",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "prettyPrint",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"Access forbidden\",\n    \"errors\": [\n      {\n        \"domain\": \"youtube.analytics\",\n        \"reason\": \"forbidden\",\n        \"message\": \"The authenticated user does not have permission to access this resource\",\n        \"locationType\": \"header\",\n        \"location\": \"Authorization\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://youtubeanalytics.googleapis.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "37194ca5-b52b-4ca7-9ef7-7b485e3b2719",
+    "name": "YouTube Analytics Analytics Groups Analytics Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.\nUse this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,\nand gain insights into viewer demographics and behavior patterns.\n\n## Key Features\n- Retrieve channel and video performance metrics\n- Access audience demographics and geographic data\n- Monitor engagement metrics like likes, comments, and shares\n- Track revenue and ad performance data (for monetized content)\n- Generate custom date-range reports\n\n## Authentication\nAll API requests require OAuth 2.0 authentication with appropriate scopes.\n\n\nContact Support:\n Name: Google Developers\n Email: youtube-api-support@google.com",
+      "type": "text/plain"
+    }
+  }
+}

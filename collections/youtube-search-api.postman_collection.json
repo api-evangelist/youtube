@@ -1,0 +1,507 @@
+{
+  "item": [
+    {
+      "id": "16c0dad6-edfa-4b91-9f09-f4cf6df1bf90",
+      "name": "Search",
+      "description": {
+        "content": "Operations for searching YouTube content",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f9035d2c-e34c-4398-a4b8-f9dccf02e0e0",
+          "name": "Youtube Search Youtube",
+          "request": {
+            "name": "Youtube Search Youtube",
+            "description": {
+              "content": "Returns a collection of search results that match the query parameters specified in the API request. By default, a search result set identifies matching video, channel, and playlist resources, but you can also configure queries to only retrieve a specific type of resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "part",
+                  "value": "<string>",
+                  "description": "(Required) Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "The query term to search for."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Restricts a search query to only retrieve a particular type of resource. Acceptable values are channel, playlist, and video."
+                },
+                {
+                  "disabled": false,
+                  "key": "channelId",
+                  "value": "<string>",
+                  "description": "Indicates that the API response should only contain resources created by the channel."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Specifies the method that will be used to order resources in the API response. Acceptable values are date, rating, relevance, title, videoCount, and viewCount."
+                },
+                {
+                  "disabled": false,
+                  "key": "publishedAfter",
+                  "value": "<dateTime>",
+                  "description": "Restricts results to only include resources created at or after the specified time, in RFC 3339 format."
+                },
+                {
+                  "disabled": false,
+                  "key": "publishedBefore",
+                  "value": "<dateTime>",
+                  "description": "Restricts results to only include resources created before or at the specified time, in RFC 3339 format."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxResults",
+                  "value": "5",
+                  "description": "The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d609089b-52fc-43a8-9561-2de02e7832f5",
+              "name": "Successful response containing a list of search result resources.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "youtube api tutorial"
+                    },
+                    {
+                      "key": "type",
+                      "value": "video"
+                    },
+                    {
+                      "key": "channelId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "order",
+                      "value": "date"
+                    },
+                    {
+                      "key": "publishedAfter",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "publishedBefore",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"nextPageToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9\",\n  \"prevPageToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9\",\n  \"regionCode\": \"US\",\n  \"pageInfo\": {\n    \"totalResults\": 42,\n    \"resultsPerPage\": 10\n  },\n  \"items\": [\n    {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": {\n        \"kind\": \"youtube#video\",\n        \"videoId\": \"500123\",\n        \"channelId\": \"500123\",\n        \"playlistId\": \"500123\"\n      },\n      \"snippet\": {\n        \"publishedAt\": \"2026-01-15T10:30:00Z\",\n        \"channelId\": \"500123\",\n        \"title\": \"Example Title\",\n        \"description\": \"A sample description for this resource.\",\n        \"thumbnails\": \"example_value\",\n        \"channelTitle\": \"example_value\",\n        \"liveBroadcastContent\": \"example_value\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d17a75b2-4b64-40b6-b2bc-d392c84a21bf",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "youtube api tutorial"
+                    },
+                    {
+                      "key": "type",
+                      "value": "video"
+                    },
+                    {
+                      "key": "channelId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "order",
+                      "value": "date"
+                    },
+                    {
+                      "key": "publishedAfter",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "publishedBefore",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 1804,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0b34327-eae1-445d-9c35-c7c345884365",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "youtube api tutorial"
+                    },
+                    {
+                      "key": "type",
+                      "value": "video"
+                    },
+                    {
+                      "key": "channelId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "order",
+                      "value": "date"
+                    },
+                    {
+                      "key": "publishedAfter",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "publishedBefore",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 1804,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "443be826-1e99-4582-8a01-445d2fd5b0b9",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "youtube api tutorial"
+                    },
+                    {
+                      "key": "type",
+                      "value": "video"
+                    },
+                    {
+                      "key": "channelId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "order",
+                      "value": "date"
+                    },
+                    {
+                      "key": "publishedAfter",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "publishedBefore",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 1804,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://youtubeanalytics.googleapis.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b2d2cf69-bc56-424a-9da3-316c1754f56c",
+    "name": "YouTube Analytics Analytics Groups Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.\nUse this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,\nand gain insights into viewer demographics and behavior patterns.\n\n## Key Features\n- Retrieve channel and video performance metrics\n- Access audience demographics and geographic data\n- Monitor engagement metrics like likes, comments, and shares\n- Track revenue and ad performance data (for monetized content)\n- Generate custom date-range reports\n\n## Authentication\nAll API requests require OAuth 2.0 authentication with appropriate scopes.\n\n\nContact Support:\n Name: Google Developers\n Email: youtube-api-support@google.com",
+      "type": "text/plain"
+    }
+  }
+}

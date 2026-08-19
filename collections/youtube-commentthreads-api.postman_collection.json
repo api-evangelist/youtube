@@ -1,0 +1,1109 @@
+{
+  "item": [
+    {
+      "id": "6ea215df-bc3a-4e3d-b846-192e14561ad0",
+      "name": "CommentThreads",
+      "description": {
+        "content": "Operations related to YouTube comment threads",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bc8f15d9-4f42-4400-bdee-e1eb685501ad",
+          "name": "Youtube List Comment Threads",
+          "request": {
+            "name": "Youtube List Comment Threads",
+            "description": {
+              "content": "Returns a list of comment threads that match the API request parameters. The response includes top-level comments and optionally their replies.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "commentThreads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "part",
+                  "value": "<string>",
+                  "description": "(Required) Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Comma-separated list of comment thread IDs for the resources being retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "videoId",
+                  "value": "<string>",
+                  "description": "Instructs the API to return comment threads for the video with the specified ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "channelId",
+                  "value": "<string>",
+                  "description": "Instructs the API to return comment threads for the channel with the specified ID."
+                },
+                {
+                  "disabled": false,
+                  "key": "moderationStatus",
+                  "value": "<string>",
+                  "description": "Set this parameter to limit the returned comment threads to only those with the specified moderation status."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxResults",
+                  "value": "5",
+                  "description": "The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d8653ad3-8012-4d68-8977-62444162a0b2",
+              "name": "Successful response containing a list of comment thread resources.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commentThreads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "videoId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "channelId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "moderationStatus",
+                      "value": "heldForReview"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"nextPageToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9\",\n  \"pageInfo\": {\n    \"totalResults\": 42,\n    \"resultsPerPage\": 10\n  },\n  \"items\": [\n    {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"snippet\": {\n        \"channelId\": \"500123\",\n        \"videoId\": \"500123\",\n        \"canReply\": true,\n        \"totalReplyCount\": 42,\n        \"isPublic\": true\n      },\n      \"replies\": {\n        \"comments\": {}\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d457c77f-3bba-490d-9cfe-6a5aa59e32ee",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commentThreads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "videoId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "channelId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "moderationStatus",
+                      "value": "heldForReview"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 3586,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8de1b7be-e653-458e-8829-fad1913c8e6b",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commentThreads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "videoId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "channelId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "moderationStatus",
+                      "value": "heldForReview"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 3586,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c543f88-a5e0-4b78-b3db-0cd48dc8d8be",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commentThreads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "videoId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "channelId",
+                      "value": "500123"
+                    },
+                    {
+                      "key": "moderationStatus",
+                      "value": "heldForReview"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 3586,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00c5c24d-2a8b-448a-b7bc-927fcb58fe40",
+          "name": "Youtube Create a Comment Thread",
+          "request": {
+            "name": "Youtube Create a Comment Thread",
+            "description": {
+              "content": "Creates a new top-level comment. To add a reply to an existing comment, use the comments.insert method.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "commentThreads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "part",
+                  "value": "<string>",
+                  "description": "(Required) Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"youtube#commentThread\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"channelId\": \"<string>\",\n    \"videoId\": \"<string>\",\n    \"topLevelComment\": {\n      \"kind\": \"youtube#comment\",\n      \"etag\": \"<string>\",\n      \"id\": \"<string>\",\n      \"snippet\": {\n        \"textOriginal\": \"<string>\",\n        \"textDisplay\": \"<string>\",\n        \"authorDisplayName\": \"<string>\",\n        \"authorProfileImageUrl\": \"<string>\",\n        \"authorChannelUrl\": \"<string>\",\n        \"authorChannelId\": {\n          \"value\": \"<string>\"\n        },\n        \"likeCount\": \"<integer>\",\n        \"viewerRating\": \"<string>\",\n        \"publishedAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"videoId\": \"<string>\",\n        \"parentId\": \"<string>\",\n        \"canRate\": \"<boolean>\",\n        \"moderationStatus\": \"<string>\"\n      }\n    },\n    \"canReply\": \"<boolean>\",\n    \"totalReplyCount\": \"<integer>\",\n    \"isPublic\": \"<boolean>\"\n  },\n  \"replies\": {\n    \"comments\": [\n      {\n        \"kind\": \"youtube#comment\",\n        \"etag\": \"<string>\",\n        \"id\": \"<string>\",\n        \"snippet\": {\n          \"textOriginal\": \"<string>\",\n          \"textDisplay\": \"<string>\",\n          \"authorDisplayName\": \"<string>\",\n          \"authorProfileImageUrl\": \"<string>\",\n          \"authorChannelUrl\": \"<string>\",\n          \"authorChannelId\": {\n            \"value\": \"<string>\"\n          },\n          \"likeCount\": \"<integer>\",\n          \"viewerRating\": \"<string>\",\n          \"publishedAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"videoId\": \"<string>\",\n          \"parentId\": \"<string>\",\n          \"canRate\": \"<boolean>\",\n          \"moderationStatus\": \"<string>\"\n        }\n      },\n      {\n        \"kind\": \"youtube#comment\",\n        \"etag\": \"<string>\",\n        \"id\": \"<string>\",\n        \"snippet\": {\n          \"textOriginal\": \"<string>\",\n          \"textDisplay\": \"<string>\",\n          \"authorDisplayName\": \"<string>\",\n          \"authorProfileImageUrl\": \"<string>\",\n          \"authorChannelUrl\": \"<string>\",\n          \"authorChannelId\": {\n            \"value\": \"<string>\"\n          },\n          \"likeCount\": \"<integer>\",\n          \"viewerRating\": \"<string>\",\n          \"publishedAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"videoId\": \"<string>\",\n          \"parentId\": \"<string>\",\n          \"canRate\": \"<boolean>\",\n          \"moderationStatus\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "08230f9a-6f48-4f6b-ac3c-1790c800f97d",
+              "name": "Successful response containing the newly created comment thread resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commentThreads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"videoId\": \"500123\",\n    \"topLevelComment\": {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"snippet\": {\n        \"textOriginal\": \"example_value\",\n        \"textDisplay\": \"example_value\",\n        \"authorDisplayName\": \"example_value\",\n        \"authorProfileImageUrl\": \"https://www.example.com\",\n        \"authorChannelUrl\": \"https://www.example.com\",\n        \"authorChannelId\": {},\n        \"likeCount\": 42,\n        \"viewerRating\": \"example_value\",\n        \"publishedAt\": \"2026-01-15T10:30:00Z\",\n        \"updatedAt\": \"2026-01-15T10:30:00Z\",\n        \"videoId\": \"500123\",\n        \"parentId\": \"500123\",\n        \"canRate\": true,\n        \"moderationStatus\": \"heldForReview\"\n      }\n    },\n    \"canReply\": true,\n    \"totalReplyCount\": 42,\n    \"isPublic\": true\n  },\n  \"replies\": {\n    \"comments\": [\n      {\n        \"kind\": \"youtube#video\",\n        \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n        \"id\": \"abc123def456\",\n        \"snippet\": {}\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"videoId\": \"500123\",\n    \"topLevelComment\": {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"snippet\": {\n        \"textOriginal\": \"example_value\",\n        \"textDisplay\": \"example_value\",\n        \"authorDisplayName\": \"example_value\",\n        \"authorProfileImageUrl\": \"https://www.example.com\",\n        \"authorChannelUrl\": \"https://www.example.com\",\n        \"authorChannelId\": {},\n        \"likeCount\": 42,\n        \"viewerRating\": \"example_value\",\n        \"publishedAt\": \"2026-01-15T10:30:00Z\",\n        \"updatedAt\": \"2026-01-15T10:30:00Z\",\n        \"videoId\": \"500123\",\n        \"parentId\": \"500123\",\n        \"canRate\": true,\n        \"moderationStatus\": \"heldForReview\"\n      }\n    },\n    \"canReply\": true,\n    \"totalReplyCount\": 42,\n    \"isPublic\": true\n  },\n  \"replies\": {\n    \"comments\": [\n      {\n        \"kind\": \"youtube#video\",\n        \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n        \"id\": \"abc123def456\",\n        \"snippet\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2334014-7b08-4797-9feb-a19c8baf82f9",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commentThreads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"videoId\": \"500123\",\n    \"topLevelComment\": {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"snippet\": {\n        \"textOriginal\": \"example_value\",\n        \"textDisplay\": \"example_value\",\n        \"authorDisplayName\": \"example_value\",\n        \"authorProfileImageUrl\": \"https://www.example.com\",\n        \"authorChannelUrl\": \"https://www.example.com\",\n        \"authorChannelId\": {},\n        \"likeCount\": 42,\n        \"viewerRating\": \"example_value\",\n        \"publishedAt\": \"2026-01-15T10:30:00Z\",\n        \"updatedAt\": \"2026-01-15T10:30:00Z\",\n        \"videoId\": \"500123\",\n        \"parentId\": \"500123\",\n        \"canRate\": true,\n        \"moderationStatus\": \"heldForReview\"\n      }\n    },\n    \"canReply\": true,\n    \"totalReplyCount\": 42,\n    \"isPublic\": true\n  },\n  \"replies\": {\n    \"comments\": [\n      {\n        \"kind\": \"youtube#video\",\n        \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n        \"id\": \"abc123def456\",\n        \"snippet\": {}\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 2855,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d34068f1-1ab7-44b3-82a2-7ce24c3b4681",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commentThreads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"videoId\": \"500123\",\n    \"topLevelComment\": {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"snippet\": {\n        \"textOriginal\": \"example_value\",\n        \"textDisplay\": \"example_value\",\n        \"authorDisplayName\": \"example_value\",\n        \"authorProfileImageUrl\": \"https://www.example.com\",\n        \"authorChannelUrl\": \"https://www.example.com\",\n        \"authorChannelId\": {},\n        \"likeCount\": 42,\n        \"viewerRating\": \"example_value\",\n        \"publishedAt\": \"2026-01-15T10:30:00Z\",\n        \"updatedAt\": \"2026-01-15T10:30:00Z\",\n        \"videoId\": \"500123\",\n        \"parentId\": \"500123\",\n        \"canRate\": true,\n        \"moderationStatus\": \"heldForReview\"\n      }\n    },\n    \"canReply\": true,\n    \"totalReplyCount\": 42,\n    \"isPublic\": true\n  },\n  \"replies\": {\n    \"comments\": [\n      {\n        \"kind\": \"youtube#video\",\n        \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n        \"id\": \"abc123def456\",\n        \"snippet\": {}\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 2855,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25bfd393-4c9b-4787-8f30-64b4a346919b",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commentThreads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"videoId\": \"500123\",\n    \"topLevelComment\": {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"snippet\": {\n        \"textOriginal\": \"example_value\",\n        \"textDisplay\": \"example_value\",\n        \"authorDisplayName\": \"example_value\",\n        \"authorProfileImageUrl\": \"https://www.example.com\",\n        \"authorChannelUrl\": \"https://www.example.com\",\n        \"authorChannelId\": {},\n        \"likeCount\": 42,\n        \"viewerRating\": \"example_value\",\n        \"publishedAt\": \"2026-01-15T10:30:00Z\",\n        \"updatedAt\": \"2026-01-15T10:30:00Z\",\n        \"videoId\": \"500123\",\n        \"parentId\": \"500123\",\n        \"canRate\": true,\n        \"moderationStatus\": \"heldForReview\"\n      }\n    },\n    \"canReply\": true,\n    \"totalReplyCount\": 42,\n    \"isPublic\": true\n  },\n  \"replies\": {\n    \"comments\": [\n      {\n        \"kind\": \"youtube#video\",\n        \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n        \"id\": \"abc123def456\",\n        \"snippet\": {}\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 2855,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0713ee47-9610-483e-a17b-f2b0f595e628",
+          "name": "Youtube Update a Comment Thread",
+          "request": {
+            "name": "Youtube Update a Comment Thread",
+            "description": {
+              "content": "Modifies the top-level comment in a comment thread. The authenticated user must own the comment being updated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "commentThreads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "part",
+                  "value": "<string>",
+                  "description": "(Required) Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"youtube#commentThread\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"channelId\": \"<string>\",\n    \"videoId\": \"<string>\",\n    \"topLevelComment\": {\n      \"kind\": \"youtube#comment\",\n      \"etag\": \"<string>\",\n      \"id\": \"<string>\",\n      \"snippet\": {\n        \"textOriginal\": \"<string>\",\n        \"textDisplay\": \"<string>\",\n        \"authorDisplayName\": \"<string>\",\n        \"authorProfileImageUrl\": \"<string>\",\n        \"authorChannelUrl\": \"<string>\",\n        \"authorChannelId\": {\n          \"value\": \"<string>\"\n        },\n        \"likeCount\": \"<integer>\",\n        \"viewerRating\": \"<string>\",\n        \"publishedAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"videoId\": \"<string>\",\n        \"parentId\": \"<string>\",\n        \"canRate\": \"<boolean>\",\n        \"moderationStatus\": \"<string>\"\n      }\n    },\n    \"canReply\": \"<boolean>\",\n    \"totalReplyCount\": \"<integer>\",\n    \"isPublic\": \"<boolean>\"\n  },\n  \"replies\": {\n    \"comments\": [\n      {\n        \"kind\": \"youtube#comment\",\n        \"etag\": \"<string>\",\n        \"id\": \"<string>\",\n        \"snippet\": {\n          \"textOriginal\": \"<string>\",\n          \"textDisplay\": \"<string>\",\n          \"authorDisplayName\": \"<string>\",\n          \"authorProfileImageUrl\": \"<string>\",\n          \"authorChannelUrl\": \"<string>\",\n          \"authorChannelId\": {\n            \"value\": \"<string>\"\n          },\n          \"likeCount\": \"<integer>\",\n          \"viewerRating\": \"<string>\",\n          \"publishedAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"videoId\": \"<string>\",\n          \"parentId\": \"<string>\",\n          \"canRate\": \"<boolean>\",\n          \"moderationStatus\": \"<string>\"\n        }\n      },\n      {\n        \"kind\": \"youtube#comment\",\n        \"etag\": \"<string>\",\n        \"id\": \"<string>\",\n        \"snippet\": {\n          \"textOriginal\": \"<string>\",\n          \"textDisplay\": \"<string>\",\n          \"authorDisplayName\": \"<string>\",\n          \"authorProfileImageUrl\": \"<string>\",\n          \"authorChannelUrl\": \"<string>\",\n          \"authorChannelId\": {\n            \"value\": \"<string>\"\n          },\n          \"likeCount\": \"<integer>\",\n          \"viewerRating\": \"<string>\",\n          \"publishedAt\": \"<dateTime>\",\n          \"updatedAt\": \"<dateTime>\",\n          \"videoId\": \"<string>\",\n          \"parentId\": \"<string>\",\n          \"canRate\": \"<boolean>\",\n          \"moderationStatus\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "afe918ed-bbe1-437b-83b2-98df81306c1d",
+              "name": "Successful response containing the updated comment thread resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commentThreads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"videoId\": \"500123\",\n    \"topLevelComment\": {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"snippet\": {\n        \"textOriginal\": \"example_value\",\n        \"textDisplay\": \"example_value\",\n        \"authorDisplayName\": \"example_value\",\n        \"authorProfileImageUrl\": \"https://www.example.com\",\n        \"authorChannelUrl\": \"https://www.example.com\",\n        \"authorChannelId\": {},\n        \"likeCount\": 42,\n        \"viewerRating\": \"example_value\",\n        \"publishedAt\": \"2026-01-15T10:30:00Z\",\n        \"updatedAt\": \"2026-01-15T10:30:00Z\",\n        \"videoId\": \"500123\",\n        \"parentId\": \"500123\",\n        \"canRate\": true,\n        \"moderationStatus\": \"heldForReview\"\n      }\n    },\n    \"canReply\": true,\n    \"totalReplyCount\": 42,\n    \"isPublic\": true\n  },\n  \"replies\": {\n    \"comments\": [\n      {\n        \"kind\": \"youtube#video\",\n        \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n        \"id\": \"abc123def456\",\n        \"snippet\": {}\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"videoId\": \"500123\",\n    \"topLevelComment\": {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"snippet\": {\n        \"textOriginal\": \"example_value\",\n        \"textDisplay\": \"example_value\",\n        \"authorDisplayName\": \"example_value\",\n        \"authorProfileImageUrl\": \"https://www.example.com\",\n        \"authorChannelUrl\": \"https://www.example.com\",\n        \"authorChannelId\": {},\n        \"likeCount\": 42,\n        \"viewerRating\": \"example_value\",\n        \"publishedAt\": \"2026-01-15T10:30:00Z\",\n        \"updatedAt\": \"2026-01-15T10:30:00Z\",\n        \"videoId\": \"500123\",\n        \"parentId\": \"500123\",\n        \"canRate\": true,\n        \"moderationStatus\": \"heldForReview\"\n      }\n    },\n    \"canReply\": true,\n    \"totalReplyCount\": 42,\n    \"isPublic\": true\n  },\n  \"replies\": {\n    \"comments\": [\n      {\n        \"kind\": \"youtube#video\",\n        \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n        \"id\": \"abc123def456\",\n        \"snippet\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c33fb4a-fe1b-4b51-8ad0-54fe0cd24800",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commentThreads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"videoId\": \"500123\",\n    \"topLevelComment\": {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"snippet\": {\n        \"textOriginal\": \"example_value\",\n        \"textDisplay\": \"example_value\",\n        \"authorDisplayName\": \"example_value\",\n        \"authorProfileImageUrl\": \"https://www.example.com\",\n        \"authorChannelUrl\": \"https://www.example.com\",\n        \"authorChannelId\": {},\n        \"likeCount\": 42,\n        \"viewerRating\": \"example_value\",\n        \"publishedAt\": \"2026-01-15T10:30:00Z\",\n        \"updatedAt\": \"2026-01-15T10:30:00Z\",\n        \"videoId\": \"500123\",\n        \"parentId\": \"500123\",\n        \"canRate\": true,\n        \"moderationStatus\": \"heldForReview\"\n      }\n    },\n    \"canReply\": true,\n    \"totalReplyCount\": 42,\n    \"isPublic\": true\n  },\n  \"replies\": {\n    \"comments\": [\n      {\n        \"kind\": \"youtube#video\",\n        \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n        \"id\": \"abc123def456\",\n        \"snippet\": {}\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 2855,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be1b74fc-ce96-4c99-8349-2d859743c476",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commentThreads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"videoId\": \"500123\",\n    \"topLevelComment\": {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"snippet\": {\n        \"textOriginal\": \"example_value\",\n        \"textDisplay\": \"example_value\",\n        \"authorDisplayName\": \"example_value\",\n        \"authorProfileImageUrl\": \"https://www.example.com\",\n        \"authorChannelUrl\": \"https://www.example.com\",\n        \"authorChannelId\": {},\n        \"likeCount\": 42,\n        \"viewerRating\": \"example_value\",\n        \"publishedAt\": \"2026-01-15T10:30:00Z\",\n        \"updatedAt\": \"2026-01-15T10:30:00Z\",\n        \"videoId\": \"500123\",\n        \"parentId\": \"500123\",\n        \"canRate\": true,\n        \"moderationStatus\": \"heldForReview\"\n      }\n    },\n    \"canReply\": true,\n    \"totalReplyCount\": 42,\n    \"isPublic\": true\n  },\n  \"replies\": {\n    \"comments\": [\n      {\n        \"kind\": \"youtube#video\",\n        \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n        \"id\": \"abc123def456\",\n        \"snippet\": {}\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 2855,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "800e9839-7dfa-4b9a-a122-5aaa180df765",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "commentThreads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"channelId\": \"500123\",\n    \"videoId\": \"500123\",\n    \"topLevelComment\": {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"snippet\": {\n        \"textOriginal\": \"example_value\",\n        \"textDisplay\": \"example_value\",\n        \"authorDisplayName\": \"example_value\",\n        \"authorProfileImageUrl\": \"https://www.example.com\",\n        \"authorChannelUrl\": \"https://www.example.com\",\n        \"authorChannelId\": {},\n        \"likeCount\": 42,\n        \"viewerRating\": \"example_value\",\n        \"publishedAt\": \"2026-01-15T10:30:00Z\",\n        \"updatedAt\": \"2026-01-15T10:30:00Z\",\n        \"videoId\": \"500123\",\n        \"parentId\": \"500123\",\n        \"canRate\": true,\n        \"moderationStatus\": \"heldForReview\"\n      }\n    },\n    \"canReply\": true,\n    \"totalReplyCount\": 42,\n    \"isPublic\": true\n  },\n  \"replies\": {\n    \"comments\": [\n      {\n        \"kind\": \"youtube#video\",\n        \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n        \"id\": \"abc123def456\",\n        \"snippet\": {}\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 2855,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://youtubeanalytics.googleapis.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "19372815-f0e1-40ce-8122-7fc1315bdab1",
+    "name": "YouTube Analytics Analytics Groups CommentThreads API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.\nUse this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,\nand gain insights into viewer demographics and behavior patterns.\n\n## Key Features\n- Retrieve channel and video performance metrics\n- Access audience demographics and geographic data\n- Monitor engagement metrics like likes, comments, and shares\n- Track revenue and ad performance data (for monetized content)\n- Generate custom date-range reports\n\n## Authentication\nAll API requests require OAuth 2.0 authentication with appropriate scopes.\n\n\nContact Support:\n Name: Google Developers\n Email: youtube-api-support@google.com",
+      "type": "text/plain"
+    }
+  }
+}

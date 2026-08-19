@@ -1,0 +1,793 @@
+{
+  "item": [
+    {
+      "id": "aa716d47-9e9f-4cac-b47e-47a4ecc4098b",
+      "name": "Reports",
+      "description": {
+        "content": "Operations for querying YouTube Analytics report data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eed2cc93-ab83-4895-83fb-5652345d2c9f",
+          "name": "Youtube Query Analytics Reports",
+          "request": {
+            "name": "Youtube Query Analytics Reports",
+            "description": {
+              "content": "Retrieves YouTube Analytics data for a channel or content owner. The report provides aggregated statistics for the specified dimensions and metrics over the date range. The ids parameter specifies the channel or content owner for which the report is being retrieved.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "(Required) Identifies the YouTube channel or content owner for which the report is being retrieved. To request data for a YouTube user, set the parameter value to channel==CHANNEL_ID where CHANNEL_ID specifies the unique YouTube channel ID. To request data for a YouTube CMS content owner, set the parameter value to contentOwner==OWNER_NAME."
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<date>",
+                  "description": "(Required) The start date for fetching YouTube Analytics data in YYYY-MM-DD format. The API response will include data from this date up to and including the end date."
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<date>",
+                  "description": "(Required) The end date for fetching YouTube Analytics data in YYYY-MM-DD format. The value must be less than or equal to today's date."
+                },
+                {
+                  "disabled": false,
+                  "key": "metrics",
+                  "value": "<string>",
+                  "description": "(Required) A comma-separated list of YouTube Analytics metrics, such as views or likes, dislikes. See the Available Reports document or the Metrics document for a list of reports that you can retrieve and the metrics available in each report."
+                },
+                {
+                  "disabled": false,
+                  "key": "dimensions",
+                  "value": "<string>",
+                  "description": "A comma-separated list of YouTube Analytics dimensions, such as video or country. See the Available Reports document for a list of reports that you can retrieve and the dimensions used for those reports."
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "A list of filters that should be applied when retrieving YouTube Analytics data. The Available Reports document identifies the dimensions that can be used to filter each report."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxResults",
+                  "value": "<integer>",
+                  "description": "The maximum number of rows to include in the response. The maximum value is 200."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "A comma-separated list of dimensions or metrics that determine the sort order for YouTube Analytics data. By default the sort order is ascending. Prefix with a minus sign (-) to indicate descending order."
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "<integer>",
+                  "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "currency",
+                  "value": "<string>",
+                  "description": "The currency to which financial metrics should be converted. The default value is USD (US Dollar). Specify the parameter value as an ISO 4217 currency code."
+                },
+                {
+                  "disabled": false,
+                  "key": "alt",
+                  "value": "<string>",
+                  "description": "Data format for the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fe3682f-1af4-4468-8594-e3e3e1926e50",
+              "name": "Successful response containing YouTube Analytics data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "metrics",
+                      "value": "views,estimatedMinutesWatched,likes"
+                    },
+                    {
+                      "key": "dimensions",
+                      "value": "day"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "25"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "10"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "alt",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"columnHeaders\": [\n    {\n      \"name\": \"Example Title\",\n      \"columnType\": \"DIMENSION\",\n      \"dataType\": \"CURRENCY\"\n    }\n  ],\n  \"rows\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ae371c6-c9c9-4d29-a0f6-4871570a7115",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "metrics",
+                      "value": "views,estimatedMinutesWatched,likes"
+                    },
+                    {
+                      "key": "dimensions",
+                      "value": "day"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "25"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "10"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "alt",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 8603,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "132934c8-8f73-45c0-ae5e-0731bec0fd4b",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "metrics",
+                      "value": "views,estimatedMinutesWatched,likes"
+                    },
+                    {
+                      "key": "dimensions",
+                      "value": "day"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "25"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "10"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "alt",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 8603,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63209796-f26a-4ae7-aeba-441c7b06a122",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw"
+                    },
+                    {
+                      "key": "startDate",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "endDate",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "metrics",
+                      "value": "views,estimatedMinutesWatched,likes"
+                    },
+                    {
+                      "key": "dimensions",
+                      "value": "day"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "25"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "10"
+                    },
+                    {
+                      "key": "currency",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "alt",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 8603,\n    \"message\": \"string\",\n    \"status\": \"string\",\n    \"details\": [\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\"\n        }\n      },\n      {\n        \"type\": \"string\",\n        \"reason\": \"string\",\n        \"domain\": \"string\",\n        \"metadata\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "018a296f-df14-48ab-ac1d-8b168c820d9d",
+          "name": "Youtube List Reports",
+          "request": {
+            "name": "Youtube List Reports",
+            "description": {
+              "content": "Lists reports created by a specific reporting job. Each report covers a 24-hour period and includes a download URL for retrieving the report data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs",
+                ":jobId",
+                "reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>",
+                  "description": "The content owner's external ID on which behalf the user is acting on."
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAfter",
+                  "value": "<dateTime>",
+                  "description": "If specified, only reports created after the specified date/time are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "startTimeAtOrAfter",
+                  "value": "<dateTime>",
+                  "description": "If specified, only reports covering data on or after this date are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "startTimeBefore",
+                  "value": "<dateTime>",
+                  "description": "If specified, only reports covering data before this date are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "A token identifying a page of results to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "The maximum number of items to return in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) The ID of the job whose reports are being listed."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4aa37edc-6640-4c34-803f-edcb8391a23d",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":jobId",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "createdAfter",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "startTimeAtOrAfter",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "startTimeBefore",
+                      "value": "2026-01-15T10:30:00Z"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The ID of the job whose reports are being listed."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reports\": [\n    {\n      \"id\": \"abc123def456\",\n      \"jobId\": \"abc123def456\",\n      \"startTime\": \"2026-01-15T10:30:00Z\",\n      \"endTime\": \"2026-01-15T10:30:00Z\",\n      \"createTime\": \"2026-01-15T10:30:00Z\",\n      \"downloadUrl\": \"https://www.example.com\",\n      \"jobExpireTime\": \"2026-01-15T10:30:00Z\"\n    }\n  ],\n  \"nextPageToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aebc0d04-1983-438f-b333-e166e334dc39",
+          "name": "Youtube Get Report",
+          "request": {
+            "name": "Youtube Get Report",
+            "description": {
+              "content": "Gets the metadata for a specific report including its download URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs",
+                ":jobId",
+                "reports",
+                ":reportId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "onBehalfOfContentOwner",
+                  "value": "<string>",
+                  "description": "The content owner's external ID on which behalf the user is acting on."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) The ID of the job that created the report."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reportId",
+                  "description": "(Required) The ID of the report to retrieve."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7752609-aedb-4f93-bc8b-34391c50ccdd",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":jobId",
+                    "reports",
+                    ":reportId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "onBehalfOfContentOwner",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) The ID of the job that created the report."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reportId",
+                      "description": "(Required) The ID of the report to retrieve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123def456\",\n  \"jobId\": \"abc123def456\",\n  \"startTime\": \"2026-01-15T10:30:00Z\",\n  \"endTime\": \"2026-01-15T10:30:00Z\",\n  \"createTime\": \"2026-01-15T10:30:00Z\",\n  \"downloadUrl\": \"https://www.example.com\",\n  \"jobExpireTime\": \"2026-01-15T10:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://youtubeanalytics.googleapis.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5fa19ed5-e47f-4d12-932c-0aa9b034e62f",
+    "name": "YouTube Analytics Analytics Groups Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.\nUse this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,\nand gain insights into viewer demographics and behavior patterns.\n\n## Key Features\n- Retrieve channel and video performance metrics\n- Access audience demographics and geographic data\n- Monitor engagement metrics like likes, comments, and shares\n- Track revenue and ad performance data (for monetized content)\n- Generate custom date-range reports\n\n## Authentication\nAll API requests require OAuth 2.0 authentication with appropriate scopes.\n\n\nContact Support:\n Name: Google Developers\n Email: youtube-api-support@google.com",
+      "type": "text/plain"
+    }
+  }
+}

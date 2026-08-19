@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YouTube Analytics Analytics Groups API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groups",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "Comma-separated list of YouTube group IDs for the resources being retrieved. If this parameter is not specified, the API will return all groups owned by the authenticated user."
+              },
+              {
+                "name": "mine",
+                "value": "true",
+                "type": "query",
+                "description": "Set this parameter to true to retrieve all groups owned by the authenticated user."
+              },
+              {
+                "name": "pageToken",
+                "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+                "type": "query",
+                "description": "Identifies a specific page in the result set that should be returned. If specified, the API response should contain only that page."
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value."
+              }
+            ]
+          },
+          "docs": "Returns a collection of groups that match the API request parameters. You can retrieve all groups that the authenticated user owns, or retrieve one or more groups by their unique IDs."
+        },
+        {
+          "info": {
+            "name": "Youtube Create a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groups",
+            "params": [
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an Analytics group. The authenticated user must be authorized to create groups. A group must have at least one item before you can run a report for the group."
+        },
+        {
+          "info": {
+            "name": "Youtube Update a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groups",
+            "params": [
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies a group. The authenticated user must own the group being updated. Currently, the only property that can be updated is the group's title."
+        },
+        {
+          "info": {
+            "name": "Youtube Delete a Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groups",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123def456",
+                "type": "query",
+                "description": "The id parameter specifies the YouTube group ID for the group being deleted."
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user."
+              }
+            ]
+          },
+          "docs": "Deletes a group. The authenticated user must own the group being deleted. Deleting a group does not delete any of the resources contained in the group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

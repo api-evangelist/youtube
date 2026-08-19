@@ -1,0 +1,140 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YouTube Analytics Analytics Groups Jobs API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Reporting Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/jobs",
+            "params": [
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The content owner's external ID on which behalf the user is acting on."
+              },
+              {
+                "name": "includeSystemManaged",
+                "value": "true",
+                "type": "query",
+                "description": "If set to true, also returns system-managed reporting jobs."
+              },
+              {
+                "name": "pageToken",
+                "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+                "type": "query",
+                "description": "A token identifying a page of results to return."
+              },
+              {
+                "name": "pageSize",
+                "value": "25",
+                "type": "query",
+                "description": "The maximum number of items to return in the response."
+              }
+            ]
+          },
+          "docs": "Lists all reporting jobs that have been scheduled for the channel or content owner."
+        },
+        {
+          "info": {
+            "name": "Youtube Create Reporting Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://youtubeanalytics.googleapis.com/v2/jobs",
+            "params": [
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The content owner's external ID on which behalf the user is acting on."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a reporting job. YouTube then begins generating daily reports for the specified report type. Reports are typically available within 24 hours of being generated."
+        },
+        {
+          "info": {
+            "name": "Youtube Get Reporting Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "abc123def456",
+                "type": "path",
+                "description": "The ID of the job to retrieve."
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The content owner's external ID on which behalf the user is acting on."
+              }
+            ]
+          },
+          "docs": "Gets the metadata for a specific reporting job."
+        },
+        {
+          "info": {
+            "name": "Youtube Delete Reporting Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://youtubeanalytics.googleapis.com/v2/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "abc123def456",
+                "type": "path",
+                "description": "The ID of the job to delete."
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The content owner's external ID on which behalf the user is acting on."
+              }
+            ]
+          },
+          "docs": "Deletes a reporting job. After deletion, YouTube stops generating reports for this job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

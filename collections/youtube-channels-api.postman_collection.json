@@ -1,0 +1,764 @@
+{
+  "item": [
+    {
+      "id": "50295417-12a9-4a91-ba03-85800f5df6b3",
+      "name": "Channels",
+      "description": {
+        "content": "Operations related to YouTube channel resources",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4d9cae58-42ee-49ac-8bbc-b56afdb95002",
+          "name": "Youtube List Channels",
+          "request": {
+            "name": "Youtube List Channels",
+            "description": {
+              "content": "Returns a collection of zero or more channel resources that match the request criteria. Use the part parameter to specify the channel resource properties to include.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "channels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "part",
+                  "value": "<string>",
+                  "description": "(Required) Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "Comma-separated list of YouTube channel IDs for the resources being retrieved."
+                },
+                {
+                  "disabled": false,
+                  "key": "mine",
+                  "value": "<boolean>",
+                  "description": "Set this parameter to true to instruct the API to return channels owned by the authenticated user."
+                },
+                {
+                  "disabled": false,
+                  "key": "forUsername",
+                  "value": "<string>",
+                  "description": "A YouTube username identifying a channel. The API returns the channel associated with that username."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxResults",
+                  "value": "5",
+                  "description": "The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageToken",
+                  "value": "<string>",
+                  "description": "Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "099b4699-874b-4d33-8c87-d48fc327e769",
+              "name": "Successful response containing a list of channel resources.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "mine",
+                      "value": "true"
+                    },
+                    {
+                      "key": "forUsername",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"nextPageToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9\",\n  \"prevPageToken\": \"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9\",\n  \"pageInfo\": {\n    \"totalResults\": 42,\n    \"resultsPerPage\": 10\n  },\n  \"items\": [\n    {\n      \"kind\": \"youtube#video\",\n      \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n      \"id\": \"abc123def456\",\n      \"contentDetails\": {\n        \"relatedPlaylists\": {}\n      },\n      \"brandingSettings\": {\n        \"channel\": {},\n        \"image\": {}\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4037a1e8-e0b3-4199-872f-497fd0d3525b",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "mine",
+                      "value": "true"
+                    },
+                    {
+                      "key": "forUsername",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 4337,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a13c2c38-8b4a-4022-bf01-62974f7ee45c",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "mine",
+                      "value": "true"
+                    },
+                    {
+                      "key": "forUsername",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 4337,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43770ba5-412c-4648-b450-c71b49cf11e3",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "id",
+                      "value": "abc123def456"
+                    },
+                    {
+                      "key": "mine",
+                      "value": "true"
+                    },
+                    {
+                      "key": "forUsername",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "maxResults",
+                      "value": "5"
+                    },
+                    {
+                      "key": "pageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 4337,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0d9d78fe-2303-4a42-93e8-db128a2fe8b4",
+          "name": "Youtube Update Channel Metadata",
+          "request": {
+            "name": "Youtube Update Channel Metadata",
+            "description": {
+              "content": "Updates a channel's metadata. The authenticated user must own the channel being updated. Use the part parameter to specify the channel properties to update.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "channels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "part",
+                  "value": "<string>",
+                  "description": "(Required) Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need."
+                },
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"kind\": \"youtube#channel\",\n  \"etag\": \"<string>\",\n  \"id\": \"<string>\",\n  \"snippet\": {\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"customUrl\": \"<string>\",\n    \"publishedAt\": \"<dateTime>\",\n    \"thumbnails\": {\n      \"key_0\": {\n        \"url\": \"<string>\",\n        \"width\": \"<integer>\",\n        \"height\": \"<integer>\"\n      },\n      \"key_1\": {\n        \"url\": \"<string>\",\n        \"width\": \"<integer>\",\n        \"height\": \"<integer>\"\n      },\n      \"key_2\": {\n        \"url\": \"<string>\",\n        \"width\": \"<integer>\",\n        \"height\": \"<integer>\"\n      }\n    },\n    \"country\": \"<string>\",\n    \"localized\": {\n      \"title\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  },\n  \"statistics\": {\n    \"viewCount\": \"<string>\",\n    \"subscriberCount\": \"<string>\",\n    \"hiddenSubscriberCount\": \"<boolean>\",\n    \"videoCount\": \"<string>\"\n  },\n  \"contentDetails\": {\n    \"relatedPlaylists\": {\n      \"uploads\": \"<string>\",\n      \"likes\": \"<string>\"\n    }\n  },\n  \"brandingSettings\": {\n    \"channel\": {\n      \"title\": \"<string>\",\n      \"description\": \"<string>\",\n      \"keywords\": \"<string>\",\n      \"defaultLanguage\": \"<string>\"\n    },\n    \"image\": {\n      \"bannerExternalUrl\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "383e4c0c-af93-4ecd-aa54-56086f46c134",
+              "name": "Successful response containing the updated channel resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"customUrl\": \"https://www.example.com\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"thumbnails\": \"example_value\",\n    \"country\": 42,\n    \"localized\": {\n      \"title\": \"Example Title\",\n      \"description\": \"A sample description for this resource.\"\n    }\n  },\n  \"statistics\": {\n    \"viewCount\": 42,\n    \"subscriberCount\": 42,\n    \"hiddenSubscriberCount\": 42,\n    \"videoCount\": 42\n  },\n  \"contentDetails\": {\n    \"relatedPlaylists\": {\n      \"uploads\": \"example_value\",\n      \"likes\": \"example_value\"\n    }\n  },\n  \"brandingSettings\": {\n    \"channel\": {\n      \"title\": \"Example Title\",\n      \"description\": \"A sample description for this resource.\",\n      \"keywords\": \"example_value\",\n      \"defaultLanguage\": \"en\"\n    },\n    \"image\": {\n      \"bannerExternalUrl\": \"https://www.example.com\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"customUrl\": \"https://www.example.com\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"thumbnails\": \"example_value\",\n    \"country\": 42,\n    \"localized\": {\n      \"title\": \"Example Title\",\n      \"description\": \"A sample description for this resource.\"\n    }\n  },\n  \"statistics\": {\n    \"viewCount\": 42,\n    \"subscriberCount\": 42,\n    \"hiddenSubscriberCount\": 42,\n    \"videoCount\": 42\n  },\n  \"contentDetails\": {\n    \"relatedPlaylists\": {\n      \"uploads\": \"example_value\",\n      \"likes\": \"example_value\"\n    }\n  },\n  \"brandingSettings\": {\n    \"channel\": {\n      \"title\": \"Example Title\",\n      \"description\": \"A sample description for this resource.\",\n      \"keywords\": \"example_value\",\n      \"defaultLanguage\": \"en\"\n    },\n    \"image\": {\n      \"bannerExternalUrl\": \"https://www.example.com\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d693a92-e73e-4d3c-b461-c2d7c56129ec",
+              "name": "The request was invalid or malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"customUrl\": \"https://www.example.com\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"thumbnails\": \"example_value\",\n    \"country\": 42,\n    \"localized\": {\n      \"title\": \"Example Title\",\n      \"description\": \"A sample description for this resource.\"\n    }\n  },\n  \"statistics\": {\n    \"viewCount\": 42,\n    \"subscriberCount\": 42,\n    \"hiddenSubscriberCount\": 42,\n    \"videoCount\": 42\n  },\n  \"contentDetails\": {\n    \"relatedPlaylists\": {\n      \"uploads\": \"example_value\",\n      \"likes\": \"example_value\"\n    }\n  },\n  \"brandingSettings\": {\n    \"channel\": {\n      \"title\": \"Example Title\",\n      \"description\": \"A sample description for this resource.\",\n      \"keywords\": \"example_value\",\n      \"defaultLanguage\": \"en\"\n    },\n    \"image\": {\n      \"bannerExternalUrl\": \"https://www.example.com\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 3068,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "44a83469-ae12-4447-8ce7-d81fde816dba",
+              "name": "The request was not authenticated or the credentials are invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"customUrl\": \"https://www.example.com\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"thumbnails\": \"example_value\",\n    \"country\": 42,\n    \"localized\": {\n      \"title\": \"Example Title\",\n      \"description\": \"A sample description for this resource.\"\n    }\n  },\n  \"statistics\": {\n    \"viewCount\": 42,\n    \"subscriberCount\": 42,\n    \"hiddenSubscriberCount\": 42,\n    \"videoCount\": 42\n  },\n  \"contentDetails\": {\n    \"relatedPlaylists\": {\n      \"uploads\": \"example_value\",\n      \"likes\": \"example_value\"\n    }\n  },\n  \"brandingSettings\": {\n    \"channel\": {\n      \"title\": \"Example Title\",\n      \"description\": \"A sample description for this resource.\",\n      \"keywords\": \"example_value\",\n      \"defaultLanguage\": \"en\"\n    },\n    \"image\": {\n      \"bannerExternalUrl\": \"https://www.example.com\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 3068,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3919d9ae-f16f-4254-9c07-d32d861b8175",
+              "name": "The request was authenticated but the caller does not have permission to perform the requested operation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "channels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "part",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"kind\": \"youtube#video\",\n  \"etag\": \"XI7nbFXulYBIpL0ayR_gDh3eu1k\",\n  \"id\": \"abc123def456\",\n  \"snippet\": {\n    \"title\": \"Example Title\",\n    \"description\": \"A sample description for this resource.\",\n    \"customUrl\": \"https://www.example.com\",\n    \"publishedAt\": \"2026-01-15T10:30:00Z\",\n    \"thumbnails\": \"example_value\",\n    \"country\": 42,\n    \"localized\": {\n      \"title\": \"Example Title\",\n      \"description\": \"A sample description for this resource.\"\n    }\n  },\n  \"statistics\": {\n    \"viewCount\": 42,\n    \"subscriberCount\": 42,\n    \"hiddenSubscriberCount\": 42,\n    \"videoCount\": 42\n  },\n  \"contentDetails\": {\n    \"relatedPlaylists\": {\n      \"uploads\": \"example_value\",\n      \"likes\": \"example_value\"\n    }\n  },\n  \"brandingSettings\": {\n    \"channel\": {\n      \"title\": \"Example Title\",\n      \"description\": \"A sample description for this resource.\",\n      \"keywords\": \"example_value\",\n      \"defaultLanguage\": \"en\"\n    },\n    \"image\": {\n      \"bannerExternalUrl\": \"https://www.example.com\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": 3068,\n    \"message\": \"string\",\n    \"errors\": [\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      },\n      {\n        \"message\": \"string\",\n        \"domain\": \"string\",\n        \"reason\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://youtubeanalytics.googleapis.com/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "https://www.googleapis.com/auth/youtube https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://oauth2.googleapis.com/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://accounts.google.com/o/oauth2/auth"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "16d33843-137f-479b-b476-0973feaceb93",
+    "name": "YouTube Analytics Analytics Groups Channels API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.\nUse this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,\nand gain insights into viewer demographics and behavior patterns.\n\n## Key Features\n- Retrieve channel and video performance metrics\n- Access audience demographics and geographic data\n- Monitor engagement metrics like likes, comments, and shares\n- Track revenue and ad performance data (for monetized content)\n- Generate custom date-range reports\n\n## Authentication\nAll API requests require OAuth 2.0 authentication with appropriate scopes.\n\n\nContact Support:\n Name: Google Developers\n Email: youtube-api-support@google.com",
+      "type": "text/plain"
+    }
+  }
+}

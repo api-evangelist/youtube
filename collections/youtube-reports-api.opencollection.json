@@ -1,0 +1,195 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YouTube Analytics Analytics Groups Reports API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube Query Analytics Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/reports",
+            "params": [
+              {
+                "name": "ids",
+                "value": "channel==UC_x5XG1OV2P6uZZ5FSM9Ttw",
+                "type": "query",
+                "description": "Identifies the YouTube channel or content owner for which the report is being retrieved. To request data for a YouTube user, set the parameter value to channel==CHANNEL_ID where CHANNEL_ID specifies the unique YouTube channel ID. To request data for a YouTube CMS content owner, set the parameter value to contentOwner==OWNER_NAME."
+              },
+              {
+                "name": "startDate",
+                "value": "2026-01-15",
+                "type": "query",
+                "description": "The start date for fetching YouTube Analytics data in YYYY-MM-DD format. The API response will include data from this date up to and including the end date."
+              },
+              {
+                "name": "endDate",
+                "value": "2026-01-15",
+                "type": "query",
+                "description": "The end date for fetching YouTube Analytics data in YYYY-MM-DD format. The value must be less than or equal to today's date."
+              },
+              {
+                "name": "metrics",
+                "value": "views,estimatedMinutesWatched,likes",
+                "type": "query",
+                "description": "A comma-separated list of YouTube Analytics metrics, such as views or likes, dislikes. See the Available Reports document or the Metrics document for a list of reports that you can retrieve and the metrics available in each report."
+              },
+              {
+                "name": "dimensions",
+                "value": "day",
+                "type": "query",
+                "description": "A comma-separated list of YouTube Analytics dimensions, such as video or country. See the Available Reports document for a list of reports that you can retrieve and the dimensions used for those reports."
+              },
+              {
+                "name": "filters",
+                "value": "example_value",
+                "type": "query",
+                "description": "A list of filters that should be applied when retrieving YouTube Analytics data. The Available Reports document identifies the dimensions that can be used to filter each report."
+              },
+              {
+                "name": "maxResults",
+                "value": "25",
+                "type": "query",
+                "description": "The maximum number of rows to include in the response. The maximum value is 200."
+              },
+              {
+                "name": "sort",
+                "value": "example_value",
+                "type": "query",
+                "description": "A comma-separated list of dimensions or metrics that determine the sort order for YouTube Analytics data. By default the sort order is ascending. Prefix with a minus sign (-) to indicate descending order."
+              },
+              {
+                "name": "startIndex",
+                "value": "10",
+                "type": "query",
+                "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter."
+              },
+              {
+                "name": "currency",
+                "value": "example_value",
+                "type": "query",
+                "description": "The currency to which financial metrics should be converted. The default value is USD (US Dollar). Specify the parameter value as an ISO 4217 currency code."
+              },
+              {
+                "name": "alt",
+                "value": "json",
+                "type": "query",
+                "description": "Data format for the response."
+              }
+            ]
+          },
+          "docs": "Retrieves YouTube Analytics data for a channel or content owner. The report provides aggregated statistics for the specified dimensions and metrics over the date range. The ids parameter specifies the channel or content owner for which the report is being retrieved."
+        },
+        {
+          "info": {
+            "name": "Youtube List Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/jobs/:jobId/reports",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "abc123def456",
+                "type": "path",
+                "description": "The ID of the job whose reports are being listed."
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The content owner's external ID on which behalf the user is acting on."
+              },
+              {
+                "name": "createdAfter",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "If specified, only reports created after the specified date/time are returned."
+              },
+              {
+                "name": "startTimeAtOrAfter",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "If specified, only reports covering data on or after this date are returned."
+              },
+              {
+                "name": "startTimeBefore",
+                "value": "2026-01-15T10:30:00Z",
+                "type": "query",
+                "description": "If specified, only reports covering data before this date are returned."
+              },
+              {
+                "name": "pageToken",
+                "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+                "type": "query",
+                "description": "A token identifying a page of results to return."
+              },
+              {
+                "name": "pageSize",
+                "value": "25",
+                "type": "query",
+                "description": "The maximum number of items to return in the response."
+              }
+            ]
+          },
+          "docs": "Lists reports created by a specific reporting job. Each report covers a 24-hour period and includes a download URL for retrieving the report data."
+        },
+        {
+          "info": {
+            "name": "Youtube Get Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/jobs/:jobId/reports/:reportId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "abc123def456",
+                "type": "path",
+                "description": "The ID of the job that created the report."
+              },
+              {
+                "name": "reportId",
+                "value": "abc123def456",
+                "type": "path",
+                "description": "The ID of the report to retrieve."
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The content owner's external ID on which behalf the user is acting on."
+              }
+            ]
+          },
+          "docs": "Gets the metadata for a specific report including its download URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

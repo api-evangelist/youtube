@@ -1,0 +1,205 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YouTube Analytics Analytics Groups API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Analytics Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groups",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "The unique identifier of an analytics group to retrieve"
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "",
+                "type": "query",
+                "description": "The content owner ID for YouTube content owner operations.\nRequired for content owner authenticated requests.\n"
+              },
+              {
+                "name": "pageToken",
+                "value": "",
+                "type": "query",
+                "description": "Token for retrieving the next page of results"
+              },
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "OAuth 2.0 access token for authentication"
+              },
+              {
+                "name": "prettyPrint",
+                "value": "",
+                "type": "query",
+                "description": "Returns response with indentations and line breaks for readability"
+              }
+            ]
+          },
+          "docs": "Returns a collection of analytics groups that match the API request parameters.\nGroups allow you to aggregate data for multiple channels or videos to analyze\ncombined performance metrics.\n"
+        },
+        {
+          "info": {
+            "name": "Youtube Create Analytics Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groups",
+            "params": [
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "",
+                "type": "query",
+                "description": "The content owner ID for YouTube content owner operations.\nRequired for content owner authenticated requests.\n"
+              },
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "OAuth 2.0 access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new analytics group. Groups enable you to aggregate analytics data\nfor multiple channels or videos, making it easier to analyze combined\nperformance across related content.\n"
+        },
+        {
+          "info": {
+            "name": "Youtube Get Analytics Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the analytics group"
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "",
+                "type": "query",
+                "description": "The content owner ID for YouTube content owner operations.\nRequired for content owner authenticated requests.\n"
+              },
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "OAuth 2.0 access token for authentication"
+              },
+              {
+                "name": "prettyPrint",
+                "value": "",
+                "type": "query",
+                "description": "Returns response with indentations and line breaks for readability"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific analytics group by its unique identifier.\nReturns detailed information about the group including its title,\ncontent details, and associated metadata.\n"
+        },
+        {
+          "info": {
+            "name": "Youtube Update Analytics Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the analytics group"
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "",
+                "type": "query",
+                "description": "The content owner ID for YouTube content owner operations.\nRequired for content owner authenticated requests.\n"
+              },
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "OAuth 2.0 access token for authentication"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing analytics group. You can modify the group's title\nand other editable properties. The group ID cannot be changed.\n"
+        },
+        {
+          "info": {
+            "name": "Youtube Delete Analytics Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://youtubeanalytics.googleapis.com/v2/groups/:groupId",
+            "params": [
+              {
+                "name": "groupId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the analytics group"
+              },
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "",
+                "type": "query",
+                "description": "The content owner ID for YouTube content owner operations.\nRequired for content owner authenticated requests.\n"
+              },
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "OAuth 2.0 access token for authentication"
+              }
+            ]
+          },
+          "docs": "Deletes an analytics group. This action is permanent and cannot be undone.\nAll group items associated with the group will also be removed.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

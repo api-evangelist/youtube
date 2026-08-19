@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YouTube Analytics Analytics Groups Analytics Reports API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Analytics Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve YouTube Analytics Reports",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/reports",
+            "params": [
+              {
+                "name": "ids",
+                "value": "",
+                "type": "query",
+                "description": "Identifies the YouTube channel or content owner for which you are retrieving\nYouTube Analytics data. Use channel==CHANNEL_ID or contentOwner==CONTENT_OWNER_ID.\n"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query",
+                "description": "The start date for the data retrieval in YYYY-MM-DD format"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query",
+                "description": "The end date for the data retrieval in YYYY-MM-DD format"
+              },
+              {
+                "name": "metrics",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of YouTube Analytics metrics to retrieve.\nCommon metrics include views, estimatedMinutesWatched, averageViewDuration, likes, dislikes, comments, shares.\n"
+              },
+              {
+                "name": "dimensions",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of YouTube Analytics dimensions.\nCommon dimensions include video, channel, country, day, month.\n"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "A list of filters to apply to the data. Filters use the format dimension==value\nand can be combined with semicolons.\n"
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "A comma-separated list of dimensions or metrics to sort by.\nPrefix with - for descending order.\n"
+              },
+              {
+                "name": "maxResults",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of rows to include in the response (1-500)"
+              },
+              {
+                "name": "startIndex",
+                "value": "",
+                "type": "query",
+                "description": "Index of the first row to retrieve (1-based)"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query",
+                "description": "Currency code for revenue metrics (ISO 4217)"
+              },
+              {
+                "name": "access_token",
+                "value": "",
+                "type": "query",
+                "description": "OAuth 2.0 access token for authentication"
+              },
+              {
+                "name": "prettyPrint",
+                "value": "",
+                "type": "query",
+                "description": "Returns response with indentations and line breaks for readability"
+              }
+            ]
+          },
+          "docs": "Retrieves YouTube Analytics data for a channel or content owner.\nThe API response contains a report with the requested dimensions and metrics\nfor the specified date range. You can filter results by various dimensions\nsuch as video, country, or traffic source.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

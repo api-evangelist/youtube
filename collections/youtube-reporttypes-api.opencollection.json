@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "YouTube Analytics Analytics Groups ReportTypes API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "accessTokenUrl": "https://oauth2.googleapis.com/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ReportTypes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Youtube List Report Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://youtubeanalytics.googleapis.com/v2/reportTypes",
+            "params": [
+              {
+                "name": "onBehalfOfContentOwner",
+                "value": "example_value",
+                "type": "query",
+                "description": "The content owner's external ID on which behalf the user is acting on."
+              },
+              {
+                "name": "includeSystemManaged",
+                "value": "true",
+                "type": "query",
+                "description": "If set to true, also returns system-managed report types."
+              },
+              {
+                "name": "pageToken",
+                "value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9",
+                "type": "query",
+                "description": "A token identifying a page of results to return."
+              },
+              {
+                "name": "pageSize",
+                "value": "25",
+                "type": "query",
+                "description": "The maximum number of items to return in the response."
+              }
+            ]
+          },
+          "docs": "Lists report types that the channel or content owner can retrieve. Each report type defines the dimensions and metrics available in the generated reports."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
