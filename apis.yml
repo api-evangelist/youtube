@@ -167,6 +167,10 @@ apis:
 - aid: youtube:youtube-playlist-images-api
   name: Youtube Playlist Images API
   tags:
+  - Image
+  - Playlists
+  - Videos
+  tags_raw:
   - Images
   - Playlists
   - Videos
@@ -227,6 +231,8 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
+  - Analytics > Groups
+  tags_raw:
   - Analytics Groups
   properties:
   - type: OpenAPI
@@ -731,6 +737,8 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
+  - Group Items
+  tags_raw:
   - GroupItems
   properties:
   - type: OpenAPI
@@ -803,6 +811,8 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
+  - Group
+  tags_raw:
   - Groups
   properties:
   - type: OpenAPI
@@ -875,6 +885,8 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
+  - i18n
+  tags_raw:
   - I18n
   properties:
   - type: OpenAPI
@@ -947,6 +959,8 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -1235,6 +1249,8 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
+  - Live Streams
+  tags_raw:
   - LiveStreams
   properties:
   - type: OpenAPI
@@ -1307,6 +1323,8 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
+  - PlaylistItems
+  tags_raw:
   - Playlist Items
   properties:
   - type: OpenAPI
@@ -1595,6 +1613,8 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
+  - Report Types
+  tags_raw:
   - ReportTypes
   properties:
   - type: OpenAPI
@@ -1739,6 +1759,8 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
