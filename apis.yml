@@ -1980,6 +1980,9 @@ tags:
 - Video
 - Videos
 common:
+- type: CapabilityMap
+  url: capabilities/youtube-capability-edges.yml
+  name: Youtube Business Capability Map
 - type: AgenticAccess
   url: agentic-access/youtube-agentic-access.yml
 - type: VulnerabilityDisclosure
@@ -2315,6 +2318,18 @@ common:
   - name: Google Workspace
     description: Embed YouTube videos in Google Docs, Slides, and Sites for collaborative
       content.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: self-serve

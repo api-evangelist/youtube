@@ -1,0 +1,26 @@
+slug: youtube
+provider: Youtube
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Reports
+  spec_file: youtube-reports-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.7
+  evidence: GET /reports youtubeAnalytics.reports.query 'Youtube Query Analytics Reports'
+  reason: Operations query analytics reports and retrieve generated report data (QueryResponse, ColumnHeader,
+    ListReportsResponse), which is reporting/analytics delivery. Mapped to Analytics & BI Management;
+    it is channel performance analytics rather than a domain business process, hence moderate confidence.
