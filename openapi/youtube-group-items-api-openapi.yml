@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: YouTube Analytics Analytics Groups Group Items API
+  title: YouTube Analytics Group Items API
   description: 'The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
 
     Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
@@ -166,6 +166,194 @@ paths:
                 NotFoundErrorExample:
                   $ref: '#/components/examples/NotFoundErrorExample'
 components:
+  schemas:
+    ErrorDetails:
+      type: object
+      description: Details about an API error
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid parameter value
+        errors:
+          type: array
+          description: List of specific errors
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    ErrorResponse:
+      type: object
+      description: Error response object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetails'
+    GroupItemCreateRequest:
+      type: object
+      description: Request body for adding an item to a group
+      required:
+      - groupId
+      - resource
+      properties:
+        groupId:
+          type: string
+          description: ID of the group to add the item to
+          example: ABCdef123456
+        resource:
+          type: object
+          required:
+          - kind
+          - id
+          properties:
+            kind:
+              type: string
+              description: Type of resource to add
+              enum:
+              - youtube#channel
+              - youtube#video
+              example: youtube#video
+            id:
+              type: string
+              description: YouTube ID of the channel or video
+              example: dQw4w9WgXcQ
+    GroupItem:
+      type: object
+      description: An item (channel or video) within an analytics group
+      required:
+      - kind
+      - id
+      - groupId
+      - resource
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#groupItem
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the group item
+          example: XYZ789abc123
+        groupId:
+          type: string
+          description: ID of the group this item belongs to
+          example: ABCdef123456
+        resource:
+          $ref: '#/components/schemas/GroupItemResource'
+    GroupItemListResponse:
+      type: object
+      description: Response containing a list of group items
+      required:
+      - kind
+      - items
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#groupItemListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        items:
+          type: array
+          description: List of group items
+          items:
+            $ref: '#/components/schemas/GroupItem'
+    GroupItemResource:
+      type: object
+      description: Resource information for a group item
+      required:
+      - kind
+      - id
+      properties:
+        kind:
+          type: string
+          description: Type of resource
+          enum:
+          - youtube#channel
+          - youtube#video
+          example: youtube#video
+        id:
+          type: string
+          description: YouTube ID of the channel or video
+          example: dQw4w9WgXcQ
+    ErrorItem:
+      type: object
+      description: Individual error detail
+      properties:
+        domain:
+          type: string
+          description: Error domain
+          example: youtube.analytics
+        reason:
+          type: string
+          description: Error reason code
+          example: invalidParameter
+        message:
+          type: string
+          description: Detailed error message
+          example: The parameter 'startDate' has an invalid value
+        locationType:
+          type: string
+          description: Type of location where error occurred
+          example: parameter
+        location:
+          type: string
+          description: Specific location of the error
+          example: startDate
+  parameters:
+    ItemIdPath:
+      name: itemId
+      in: path
+      required: true
+      description: The unique identifier of the group item
+      schema:
+        type: string
+        example: XYZ789abc123
+    PrettyPrint:
+      name: prettyPrint
+      in: query
+      required: false
+      description: Returns response with indentations and line breaks for readability
+      schema:
+        type: boolean
+        default: true
+    GroupIdQuery:
+      name: groupId
+      in: query
+      required: true
+      description: The group ID to retrieve items for
+      schema:
+        type: string
+        example: ABCdef123456
+    AccessToken:
+      name: access_token
+      in: query
+      required: false
+      description: OAuth 2.0 access token for authentication
+      schema:
+        type: string
+    OnBehalfOfContentOwner:
+      name: onBehalfOfContentOwner
+      in: query
+      required: false
+      description: 'The content owner ID for YouTube content owner operations.
+
+        Required for content owner authenticated requests.
+
+        '
+      schema:
+        type: string
+        example: ContentOwnerXYZ
   examples:
     BadRequestErrorExample:
       summary: Bad request error
@@ -180,13 +368,10 @@ components:
             message: The parameter 'startDate' has an invalid value
             locationType: parameter
             location: startDate
-    SuccessfulGroupItemCreateExample:
-      summary: Successfully added item to group
-      description: Example response for a newly added group item
+    GroupItemCreateRequestExample:
+      summary: Add item to group request
+      description: Example request body for adding an item to a group
       value:
-        kind: youtube#groupItem
-        etag: newitem789
-        id: NEWitem123456
         groupId: ABCdef123456
         resource:
           kind: youtube#video
@@ -204,6 +389,17 @@ components:
             message: The specified group was not found
             locationType: parameter
             location: groupId
+    SuccessfulGroupItemCreateExample:
+      summary: Successfully added item to group
+      description: Example response for a newly added group item
+      value:
+        kind: youtube#groupItem
+        etag: newitem789
+        id: NEWitem123456
+        groupId: ABCdef123456
+        resource:
+          kind: youtube#video
+          id: dQw4w9WgXcQ
     UnauthorizedErrorExample:
       summary: Unauthorized error
       description: Example error response for authentication failure
@@ -238,202 +434,6 @@ components:
           resource:
             kind: youtube#video
             id: abc123XYZ789
-    GroupItemCreateRequestExample:
-      summary: Add item to group request
-      description: Example request body for adding an item to a group
-      value:
-        groupId: ABCdef123456
-        resource:
-          kind: youtube#video
-          id: dQw4w9WgXcQ
-  schemas:
-    GroupItemCreateRequest:
-      type: object
-      description: Request body for adding an item to a group
-      required:
-      - groupId
-      - resource
-      properties:
-        groupId:
-          type: string
-          description: ID of the group to add the item to
-          example: ABCdef123456
-        resource:
-          type: object
-          required:
-          - kind
-          - id
-          properties:
-            kind:
-              type: string
-              description: Type of resource to add
-              enum:
-              - youtube#channel
-              - youtube#video
-              example: youtube#video
-            id:
-              type: string
-              description: YouTube ID of the channel or video
-              example: dQw4w9WgXcQ
-    GroupItemListResponse:
-      type: object
-      description: Response containing a list of group items
-      required:
-      - kind
-      - items
-      properties:
-        kind:
-          type: string
-          description: Identifies the API resource type
-          example: youtube#groupItemListResponse
-        etag:
-          type: string
-          description: ETag for caching purposes
-        items:
-          type: array
-          description: List of group items
-          items:
-            $ref: '#/components/schemas/GroupItem'
-    ErrorResponse:
-      type: object
-      description: Error response object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetails'
-    ErrorDetails:
-      type: object
-      description: Details about an API error
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-          example: 400
-        message:
-          type: string
-          description: Human-readable error message
-          example: Invalid parameter value
-        errors:
-          type: array
-          description: List of specific errors
-          items:
-            $ref: '#/components/schemas/ErrorItem'
-    ErrorItem:
-      type: object
-      description: Individual error detail
-      properties:
-        domain:
-          type: string
-          description: Error domain
-          example: youtube.analytics
-        reason:
-          type: string
-          description: Error reason code
-          example: invalidParameter
-        message:
-          type: string
-          description: Detailed error message
-          example: The parameter 'startDate' has an invalid value
-        locationType:
-          type: string
-          description: Type of location where error occurred
-          example: parameter
-        location:
-          type: string
-          description: Specific location of the error
-          example: startDate
-    GroupItem:
-      type: object
-      description: An item (channel or video) within an analytics group
-      required:
-      - kind
-      - id
-      - groupId
-      - resource
-      properties:
-        kind:
-          type: string
-          description: Identifies the API resource type
-          example: youtube#groupItem
-        etag:
-          type: string
-          description: ETag for caching purposes
-        id:
-          type: string
-          description: Unique identifier for the group item
-          example: XYZ789abc123
-        groupId:
-          type: string
-          description: ID of the group this item belongs to
-          example: ABCdef123456
-        resource:
-          $ref: '#/components/schemas/GroupItemResource'
-    GroupItemResource:
-      type: object
-      description: Resource information for a group item
-      required:
-      - kind
-      - id
-      properties:
-        kind:
-          type: string
-          description: Type of resource
-          enum:
-          - youtube#channel
-          - youtube#video
-          example: youtube#video
-        id:
-          type: string
-          description: YouTube ID of the channel or video
-          example: dQw4w9WgXcQ
-  parameters:
-    AccessToken:
-      name: access_token
-      in: query
-      required: false
-      description: OAuth 2.0 access token for authentication
-      schema:
-        type: string
-    OnBehalfOfContentOwner:
-      name: onBehalfOfContentOwner
-      in: query
-      required: false
-      description: 'The content owner ID for YouTube content owner operations.
-
-        Required for content owner authenticated requests.
-
-        '
-      schema:
-        type: string
-        example: ContentOwnerXYZ
-    ItemIdPath:
-      name: itemId
-      in: path
-      required: true
-      description: The unique identifier of the group item
-      schema:
-        type: string
-        example: XYZ789abc123
-    PrettyPrint:
-      name: prettyPrint
-      in: query
-      required: false
-      description: Returns response with indentations and line breaks for readability
-      schema:
-        type: boolean
-        default: true
-    GroupIdQuery:
-      name: groupId
-      in: query
-      required: true
-      description: The group ID to retrieve items for
-      schema:
-        type: string
-        example: ABCdef123456
   securitySchemes:
     OAuth2:
       type: oauth2
