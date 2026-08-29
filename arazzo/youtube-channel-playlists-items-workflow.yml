@@ -10,8 +10,14 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: youtubeDataApi
-  url: ../openapi/youtube-data-api-openapi.yml
+- name: channelsApi
+  url: ../openapi/youtube-channels-api-openapi.yml
+  type: openapi
+- name: playlistitemsApi
+  url: ../openapi/youtube-playlistitems-api-openapi.yml
+  type: openapi
+- name: playlistsApi
+  url: ../openapi/youtube-playlists-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: channel-playlists-items

@@ -9,8 +9,8 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: youtubeDataApi
-  url: ../openapi/youtube-data-api-openapi.yml
+- name: subscriptionsApi
+  url: ../openapi/youtube-subscriptions-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: subscribe-and-confirm

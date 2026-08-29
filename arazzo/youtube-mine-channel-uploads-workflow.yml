@@ -11,8 +11,14 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: youtubeDataApi
-  url: ../openapi/youtube-data-api-openapi.yml
+- name: channelsApi
+  url: ../openapi/youtube-channels-api-openapi.yml
+  type: openapi
+- name: playlistitemsApi
+  url: ../openapi/youtube-playlistitems-api-openapi.yml
+  type: openapi
+- name: videosApi
+  url: ../openapi/youtube-videos-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: mine-channel-uploads

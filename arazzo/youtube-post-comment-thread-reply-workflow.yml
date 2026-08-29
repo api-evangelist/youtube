@@ -10,8 +10,11 @@ info:
     can be read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: youtubeDataApi
-  url: ../openapi/youtube-data-api-openapi.yml
+- name: commentsApi
+  url: ../openapi/youtube-comments-api-openapi.yml
+  type: openapi
+- name: commentthreadsApi
+  url: ../openapi/youtube-commentthreads-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: post-comment-thread-reply

@@ -11,8 +11,14 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: youtubeDataApi
-  url: ../openapi/youtube-data-api-openapi.yml
+- name: commentthreadsApi
+  url: ../openapi/youtube-commentthreads-api-openapi.yml
+  type: openapi
+- name: searchApi
+  url: ../openapi/youtube-search-api-openapi.yml
+  type: openapi
+- name: videosApi
+  url: ../openapi/youtube-videos-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: search-video-comment-threads
