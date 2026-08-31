@@ -231,7 +231,7 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
-  - Analytics > Groups
+  - Analytics Groups
   tags_raw:
   - Analytics Groups
   properties:
@@ -737,7 +737,7 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
-  - Group Items
+  - GroupItems
   tags_raw:
   - GroupItems
   properties:
@@ -885,7 +885,7 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
-  - i18n
+  - I18n
   tags_raw:
   - I18n
   properties:
@@ -1249,7 +1249,7 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
-  - Live Streams
+  - LiveStreams
   tags_raw:
   - LiveStreams
   properties:
@@ -1323,7 +1323,7 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
-  - PlaylistItems
+  - Playlist Items
   tags_raw:
   - Playlist Items
   properties:
@@ -1613,7 +1613,7 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
-  - Report Types
+  - ReportTypes
   tags_raw:
   - ReportTypes
   properties:
