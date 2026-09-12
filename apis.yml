@@ -1980,6 +1980,8 @@ tags:
 - Video
 - Videos
 common:
+- type: Website
+  url: https://www.youtube.com/
 - type: CapabilityMap
   url: capabilities/youtube-capability-edges.yml
   name: Youtube Business Capability Map
@@ -2355,3 +2357,5 @@ maintainers:
   email: kin@apievangelist.com
 specificationVersion: '0.23'
 image: https://www.youtube.com/img/desktop/yt_1200.png
+x-parent: google
+x-relationship: acquisition
