@@ -587,78 +587,6 @@ apis:
     url: https://developers.google.com/youtube/v3/live/code_samples
   - type: Support
     url: https://developers.google.com/youtube/v3/live/support
-- aid: youtube:youtube-commentthreads-api
-  name: Youtube CommentThreads API
-  description: Operations related to YouTube comment threads
-  humanURL: https://developers.google.com/youtube/v3/docs/activities
-  baseURL: https://www.googleapis.com/youtube/v3
-  tags:
-  - CommentThreads
-  properties:
-  - type: OpenAPI
-    url: openapi/youtube-commentthreads-api-openapi.yml
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/activities/list
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/v3/getting-started
-  - type: Authentication
-    url: https://developers.google.com/youtube/v3/guides/authentication
-  - type: GraphQL
-    url: graphql/youtube-graphql.md
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/channels/list
-  - type: JSONSchema
-    url: json-schema/youtube-channel-schema.json
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/comments/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/commentThreads/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/playlists/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/playlistItems/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/search/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/subscriptions/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/videos/list
-  - type: JSONSchema
-    url: json-schema/youtube-video-schema.json
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/captions
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/videoCategories
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/i18nLanguages
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/i18nRegions
-  - type: Documentation
-    url: https://developers.google.com/youtube/analytics
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/reporting/guides/authorization
-  - type: APIReference
-    url: https://developers.google.com/youtube/analytics/reference
-  - type: Authentication
-    url: https://developers.google.com/youtube/reporting/guides/authorization
-  - type: CodeExamples
-    url: https://developers.google.com/youtube/reporting/v1/code_samples
-  - type: Documentation
-    url: https://developers.google.com/youtube/reporting
-  - type: APIReference
-    url: https://developers.google.com/youtube/reporting/v1/reference/rest
-  - type: Documentation
-    url: https://developers.google.com/youtube/reporting/v1/reports
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/v3/live/getting-started
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/live/docs
-  - type: APIReference
-    url: https://developers.google.com/youtube/v3/live/docs
-  - type: CodeExamples
-    url: https://developers.google.com/youtube/v3/live/code_samples
-  - type: Support
-    url: https://developers.google.com/youtube/v3/live/support
 - aid: youtube:youtube-group-items-api
   name: Youtube Group Items API
   description: Operations for managing items within analytics groups
@@ -669,80 +597,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/youtube-group-items-api-openapi.yml
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/activities/list
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/v3/getting-started
-  - type: Authentication
-    url: https://developers.google.com/youtube/v3/guides/authentication
-  - type: GraphQL
-    url: graphql/youtube-graphql.md
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/channels/list
-  - type: JSONSchema
-    url: json-schema/youtube-channel-schema.json
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/comments/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/commentThreads/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/playlists/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/playlistItems/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/search/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/subscriptions/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/videos/list
-  - type: JSONSchema
-    url: json-schema/youtube-video-schema.json
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/captions
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/videoCategories
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/i18nLanguages
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/i18nRegions
-  - type: Documentation
-    url: https://developers.google.com/youtube/analytics
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/reporting/guides/authorization
-  - type: APIReference
-    url: https://developers.google.com/youtube/analytics/reference
-  - type: Authentication
-    url: https://developers.google.com/youtube/reporting/guides/authorization
-  - type: CodeExamples
-    url: https://developers.google.com/youtube/reporting/v1/code_samples
-  - type: Documentation
-    url: https://developers.google.com/youtube/reporting
-  - type: APIReference
-    url: https://developers.google.com/youtube/reporting/v1/reference/rest
-  - type: Documentation
-    url: https://developers.google.com/youtube/reporting/v1/reports
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/v3/live/getting-started
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/live/docs
-  - type: APIReference
-    url: https://developers.google.com/youtube/v3/live/docs
-  - type: CodeExamples
-    url: https://developers.google.com/youtube/v3/live/code_samples
-  - type: Support
-    url: https://developers.google.com/youtube/v3/live/support
-- aid: youtube:youtube-groupitems-api
-  name: Youtube GroupItems API
-  description: Operations for managing items within YouTube Analytics groups
-  humanURL: https://developers.google.com/youtube/v3/docs/activities
-  baseURL: https://www.googleapis.com/youtube/v3
-  tags:
-  - Group Items
-  tags_raw:
-  - GroupItems
-  properties:
-  - type: OpenAPI
-    url: openapi/youtube-groupitems-api-openapi.yml
   - type: Documentation
     url: https://developers.google.com/youtube/v3/docs/activities/list
   - type: GettingStarted
@@ -1243,80 +1097,6 @@ apis:
     url: https://developers.google.com/youtube/v3/live/code_samples
   - type: Support
     url: https://developers.google.com/youtube/v3/live/support
-- aid: youtube:youtube-livestreams-api
-  name: Youtube LiveStreams API
-  description: Operations for managing YouTube live video streams
-  humanURL: https://developers.google.com/youtube/v3/docs/activities
-  baseURL: https://www.googleapis.com/youtube/v3
-  tags:
-  - Live Streams
-  tags_raw:
-  - LiveStreams
-  properties:
-  - type: OpenAPI
-    url: openapi/youtube-livestreams-api-openapi.yml
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/activities/list
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/v3/getting-started
-  - type: Authentication
-    url: https://developers.google.com/youtube/v3/guides/authentication
-  - type: GraphQL
-    url: graphql/youtube-graphql.md
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/channels/list
-  - type: JSONSchema
-    url: json-schema/youtube-channel-schema.json
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/comments/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/commentThreads/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/playlists/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/playlistItems/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/search/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/subscriptions/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/videos/list
-  - type: JSONSchema
-    url: json-schema/youtube-video-schema.json
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/captions
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/videoCategories
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/i18nLanguages
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/i18nRegions
-  - type: Documentation
-    url: https://developers.google.com/youtube/analytics
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/reporting/guides/authorization
-  - type: APIReference
-    url: https://developers.google.com/youtube/analytics/reference
-  - type: Authentication
-    url: https://developers.google.com/youtube/reporting/guides/authorization
-  - type: CodeExamples
-    url: https://developers.google.com/youtube/reporting/v1/code_samples
-  - type: Documentation
-    url: https://developers.google.com/youtube/reporting
-  - type: APIReference
-    url: https://developers.google.com/youtube/reporting/v1/reference/rest
-  - type: Documentation
-    url: https://developers.google.com/youtube/reporting/v1/reports
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/v3/live/getting-started
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/live/docs
-  - type: APIReference
-    url: https://developers.google.com/youtube/v3/live/docs
-  - type: CodeExamples
-    url: https://developers.google.com/youtube/v3/live/code_samples
-  - type: Support
-    url: https://developers.google.com/youtube/v3/live/support
 - aid: youtube:youtube-playlist-items-api
   name: Youtube Playlist Items API
   description: Operations for managing items within playlists
@@ -1329,78 +1109,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/youtube-playlist-items-api-openapi.yml
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/activities/list
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/v3/getting-started
-  - type: Authentication
-    url: https://developers.google.com/youtube/v3/guides/authentication
-  - type: GraphQL
-    url: graphql/youtube-graphql.md
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/channels/list
-  - type: JSONSchema
-    url: json-schema/youtube-channel-schema.json
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/comments/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/commentThreads/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/playlists/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/playlistItems/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/search/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/subscriptions/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/videos/list
-  - type: JSONSchema
-    url: json-schema/youtube-video-schema.json
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/captions
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/videoCategories
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/i18nLanguages
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/i18nRegions
-  - type: Documentation
-    url: https://developers.google.com/youtube/analytics
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/reporting/guides/authorization
-  - type: APIReference
-    url: https://developers.google.com/youtube/analytics/reference
-  - type: Authentication
-    url: https://developers.google.com/youtube/reporting/guides/authorization
-  - type: CodeExamples
-    url: https://developers.google.com/youtube/reporting/v1/code_samples
-  - type: Documentation
-    url: https://developers.google.com/youtube/reporting
-  - type: APIReference
-    url: https://developers.google.com/youtube/reporting/v1/reference/rest
-  - type: Documentation
-    url: https://developers.google.com/youtube/reporting/v1/reports
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/v3/live/getting-started
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/live/docs
-  - type: APIReference
-    url: https://developers.google.com/youtube/v3/live/docs
-  - type: CodeExamples
-    url: https://developers.google.com/youtube/v3/live/code_samples
-  - type: Support
-    url: https://developers.google.com/youtube/v3/live/support
-- aid: youtube:youtube-playlistitems-api
-  name: Youtube PlaylistItems API
-  description: Operations related to items within YouTube playlists
-  humanURL: https://developers.google.com/youtube/v3/docs/activities
-  baseURL: https://www.googleapis.com/youtube/v3
-  tags:
-  - PlaylistItems
-  properties:
-  - type: OpenAPI
-    url: openapi/youtube-playlistitems-api-openapi.yml
   - type: Documentation
     url: https://developers.google.com/youtube/v3/docs/activities/list
   - type: GettingStarted
@@ -1545,80 +1253,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/youtube-reports-api-openapi.yml
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/activities/list
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/v3/getting-started
-  - type: Authentication
-    url: https://developers.google.com/youtube/v3/guides/authentication
-  - type: GraphQL
-    url: graphql/youtube-graphql.md
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/channels/list
-  - type: JSONSchema
-    url: json-schema/youtube-channel-schema.json
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/comments/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/commentThreads/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/playlists/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/playlistItems/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/search/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/subscriptions/list
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/videos/list
-  - type: JSONSchema
-    url: json-schema/youtube-video-schema.json
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/captions
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/videoCategories
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/i18nLanguages
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/docs/i18nRegions
-  - type: Documentation
-    url: https://developers.google.com/youtube/analytics
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/reporting/guides/authorization
-  - type: APIReference
-    url: https://developers.google.com/youtube/analytics/reference
-  - type: Authentication
-    url: https://developers.google.com/youtube/reporting/guides/authorization
-  - type: CodeExamples
-    url: https://developers.google.com/youtube/reporting/v1/code_samples
-  - type: Documentation
-    url: https://developers.google.com/youtube/reporting
-  - type: APIReference
-    url: https://developers.google.com/youtube/reporting/v1/reference/rest
-  - type: Documentation
-    url: https://developers.google.com/youtube/reporting/v1/reports
-  - type: GettingStarted
-    url: https://developers.google.com/youtube/v3/live/getting-started
-  - type: Documentation
-    url: https://developers.google.com/youtube/v3/live/docs
-  - type: APIReference
-    url: https://developers.google.com/youtube/v3/live/docs
-  - type: CodeExamples
-    url: https://developers.google.com/youtube/v3/live/code_samples
-  - type: Support
-    url: https://developers.google.com/youtube/v3/live/support
-- aid: youtube:youtube-reporttypes-api
-  name: Youtube ReportTypes API
-  description: Operations for listing available report types
-  humanURL: https://developers.google.com/youtube/v3/docs/activities
-  baseURL: https://www.googleapis.com/youtube/v3
-  tags:
-  - Report Types
-  tags_raw:
-  - ReportTypes
-  properties:
-  - type: OpenAPI
-    url: openapi/youtube-reporttypes-api-openapi.yml
   - type: Documentation
     url: https://developers.google.com/youtube/v3/docs/activities/list
   - type: GettingStarted
@@ -1909,6 +1543,222 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/youtube-videos-api-openapi.yml
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/activities/list
+  - type: GettingStarted
+    url: https://developers.google.com/youtube/v3/getting-started
+  - type: Authentication
+    url: https://developers.google.com/youtube/v3/guides/authentication
+  - type: GraphQL
+    url: graphql/youtube-graphql.md
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/channels/list
+  - type: JSONSchema
+    url: json-schema/youtube-channel-schema.json
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/comments/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/commentThreads/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/playlists/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/playlistItems/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/search/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/subscriptions/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/videos/list
+  - type: JSONSchema
+    url: json-schema/youtube-video-schema.json
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/captions
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/videoCategories
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/i18nLanguages
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/i18nRegions
+  - type: Documentation
+    url: https://developers.google.com/youtube/analytics
+  - type: GettingStarted
+    url: https://developers.google.com/youtube/reporting/guides/authorization
+  - type: APIReference
+    url: https://developers.google.com/youtube/analytics/reference
+  - type: Authentication
+    url: https://developers.google.com/youtube/reporting/guides/authorization
+  - type: CodeExamples
+    url: https://developers.google.com/youtube/reporting/v1/code_samples
+  - type: Documentation
+    url: https://developers.google.com/youtube/reporting
+  - type: APIReference
+    url: https://developers.google.com/youtube/reporting/v1/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/youtube/reporting/v1/reports
+  - type: GettingStarted
+    url: https://developers.google.com/youtube/v3/live/getting-started
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/live/docs
+  - type: APIReference
+    url: https://developers.google.com/youtube/v3/live/docs
+  - type: CodeExamples
+    url: https://developers.google.com/youtube/v3/live/code_samples
+  - type: Support
+    url: https://developers.google.com/youtube/v3/live/support
+- aid: youtube:youtube-comment-threads-api
+  name: Youtube Comment Threads API
+  description: Operations related to YouTube comment threads
+  humanURL: https://developers.google.com/youtube/v3/docs/channelSections
+  baseURL: https://www.googleapis.com/youtube/v3
+  tags:
+  - Comment Threads
+  properties:
+  - type: OpenAPI
+    url: openapi/youtube-comment-threads-api-openapi.yml
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/activities/list
+  - type: GettingStarted
+    url: https://developers.google.com/youtube/v3/getting-started
+  - type: Authentication
+    url: https://developers.google.com/youtube/v3/guides/authentication
+  - type: GraphQL
+    url: graphql/youtube-graphql.md
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/channels/list
+  - type: JSONSchema
+    url: json-schema/youtube-channel-schema.json
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/comments/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/commentThreads/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/playlists/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/playlistItems/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/search/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/subscriptions/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/videos/list
+  - type: JSONSchema
+    url: json-schema/youtube-video-schema.json
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/captions
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/videoCategories
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/i18nLanguages
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/i18nRegions
+  - type: Documentation
+    url: https://developers.google.com/youtube/analytics
+  - type: GettingStarted
+    url: https://developers.google.com/youtube/reporting/guides/authorization
+  - type: APIReference
+    url: https://developers.google.com/youtube/analytics/reference
+  - type: Authentication
+    url: https://developers.google.com/youtube/reporting/guides/authorization
+  - type: CodeExamples
+    url: https://developers.google.com/youtube/reporting/v1/code_samples
+  - type: Documentation
+    url: https://developers.google.com/youtube/reporting
+  - type: APIReference
+    url: https://developers.google.com/youtube/reporting/v1/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/youtube/reporting/v1/reports
+  - type: GettingStarted
+    url: https://developers.google.com/youtube/v3/live/getting-started
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/live/docs
+  - type: APIReference
+    url: https://developers.google.com/youtube/v3/live/docs
+  - type: CodeExamples
+    url: https://developers.google.com/youtube/v3/live/code_samples
+  - type: Support
+    url: https://developers.google.com/youtube/v3/live/support
+- aid: youtube:youtube-live-streams-api
+  name: Youtube Live Streams API
+  description: Operations for managing YouTube live video streams
+  humanURL: https://developers.google.com/youtube/v3/docs/channelSections
+  baseURL: https://www.googleapis.com/youtube/v3
+  tags:
+  - Live Streams
+  properties:
+  - type: OpenAPI
+    url: openapi/youtube-live-streams-api-openapi.yml
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/activities/list
+  - type: GettingStarted
+    url: https://developers.google.com/youtube/v3/getting-started
+  - type: Authentication
+    url: https://developers.google.com/youtube/v3/guides/authentication
+  - type: GraphQL
+    url: graphql/youtube-graphql.md
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/channels/list
+  - type: JSONSchema
+    url: json-schema/youtube-channel-schema.json
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/comments/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/commentThreads/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/playlists/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/playlistItems/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/search/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/subscriptions/list
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/videos/list
+  - type: JSONSchema
+    url: json-schema/youtube-video-schema.json
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/captions
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/videoCategories
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/i18nLanguages
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/docs/i18nRegions
+  - type: Documentation
+    url: https://developers.google.com/youtube/analytics
+  - type: GettingStarted
+    url: https://developers.google.com/youtube/reporting/guides/authorization
+  - type: APIReference
+    url: https://developers.google.com/youtube/analytics/reference
+  - type: Authentication
+    url: https://developers.google.com/youtube/reporting/guides/authorization
+  - type: CodeExamples
+    url: https://developers.google.com/youtube/reporting/v1/code_samples
+  - type: Documentation
+    url: https://developers.google.com/youtube/reporting
+  - type: APIReference
+    url: https://developers.google.com/youtube/reporting/v1/reference/rest
+  - type: Documentation
+    url: https://developers.google.com/youtube/reporting/v1/reports
+  - type: GettingStarted
+    url: https://developers.google.com/youtube/v3/live/getting-started
+  - type: Documentation
+    url: https://developers.google.com/youtube/v3/live/docs
+  - type: APIReference
+    url: https://developers.google.com/youtube/v3/live/docs
+  - type: CodeExamples
+    url: https://developers.google.com/youtube/v3/live/code_samples
+  - type: Support
+    url: https://developers.google.com/youtube/v3/live/support
+- aid: youtube:youtube-report-types-api
+  name: Youtube Report Types API
+  description: Operations for listing available report types
+  humanURL: https://developers.google.com/youtube/v3/docs/channelSections
+  baseURL: https://www.googleapis.com/youtube/v3
+  tags:
+  - Report Types
+  properties:
+  - type: OpenAPI
+    url: openapi/youtube-report-types-api-openapi.yml
   - type: Documentation
     url: https://developers.google.com/youtube/v3/docs/activities/list
   - type: GettingStarted
