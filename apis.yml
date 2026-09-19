@@ -5,6 +5,9 @@ apis:
   name: Youtube Channel Sections API
   tags:
   - Channels
+  - Video
+  tags_raw:
+  - Channels
   - Videos
   image: https://www.youtube.com/img/desktop/yt_1200.png
   humanURL: https://developers.google.com/youtube/v3/docs/channelSections
@@ -23,6 +26,9 @@ apis:
   name: Youtube Channel Banners API
   tags:
   - Channels
+  - Video
+  tags_raw:
+  - Channels
   - Videos
   image: https://www.youtube.com/img/desktop/yt_1200.png
   humanURL: https://developers.google.com/youtube/v3/docs/channelBanners
@@ -40,6 +46,10 @@ apis:
 - aid: youtube:youtube-members-api
   name: Youtube Members API
   tags:
+  - Members
+  - Monetization
+  - Video
+  tags_raw:
   - Members
   - Monetization
   - Videos
@@ -61,6 +71,10 @@ apis:
   tags:
   - Members
   - Monetization
+  - Video
+  tags_raw:
+  - Members
+  - Monetization
   - Videos
   image: https://www.youtube.com/img/desktop/yt_1200.png
   humanURL: https://developers.google.com/youtube/v3/docs/membershipsLevels
@@ -79,6 +93,9 @@ apis:
   name: Youtube Thumbnails API
   tags:
   - Thumbnails
+  - Video
+  tags_raw:
+  - Thumbnails
   - Videos
   image: https://www.youtube.com/img/desktop/yt_1200.png
   humanURL: https://developers.google.com/youtube/v3/docs/thumbnails
@@ -96,6 +113,9 @@ apis:
 - aid: youtube:youtube-watermarks-api
   name: Youtube Watermarks API
   tags:
+  - Video
+  - Watermarks
+  tags_raw:
   - Videos
   - Watermarks
   image: https://www.youtube.com/img/desktop/yt_1200.png
@@ -114,6 +134,9 @@ apis:
 - aid: youtube:youtube-video-abuse-report-reasons-api
   name: Youtube Video Abuse Report Reasons API
   tags:
+  - Moderation
+  - Video
+  tags_raw:
   - Moderation
   - Videos
   image: https://www.youtube.com/img/desktop/yt_1200.png
@@ -134,6 +157,10 @@ apis:
   tags:
   - Embed
   - Player
+  - Video
+  tags_raw:
+  - Embed
+  - Player
   - Videos
   image: https://www.youtube.com/img/desktop/yt_1200.png
   humanURL: https://developers.google.com/youtube/iframe_api_reference
@@ -152,6 +179,10 @@ apis:
   name: YouTube Subscribe Button
   tags:
   - Embed
+  - Video
+  - Widgets
+  tags_raw:
+  - Embed
   - Videos
   - Widgets
   image: https://www.youtube.com/img/desktop/yt_1200.png
@@ -169,7 +200,7 @@ apis:
   tags:
   - Image
   - Playlists
-  - Videos
+  - Video
   tags_raw:
   - Images
   - Playlists
@@ -195,6 +226,11 @@ apis:
   - Content ID
   - Monetization
   - Rights Management
+  - Video
+  tags_raw:
+  - Content ID
+  - Monetization
+  - Rights Management
   - Videos
   image: https://www.youtube.com/img/desktop/yt_1200.png
   humanURL: https://developers.google.com/youtube/partner
@@ -213,6 +249,10 @@ apis:
 - aid: youtube:youtube-oembed-api
   name: YouTube oEmbed API
   tags:
+  - Embed
+  - oEmbed
+  - Video
+  tags_raw:
   - Embed
   - oEmbed
   - Videos
@@ -1539,6 +1579,8 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/activities
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
+  - Video
+  tags_raw:
   - Videos
   properties:
   - type: OpenAPI
@@ -1611,6 +1653,8 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/channelSections
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
+  - CommentThreads
+  tags_raw:
   - Comment Threads
   properties:
   - type: OpenAPI
@@ -1823,13 +1867,21 @@ apis:
     url: https://developers.google.com/youtube/v3/live/support
 name: Youtube
 tags:
+- Video
+- YouTube
+- Google
+- Media
+- Social
+- Streaming
+tags_raw:
+- Videos
+- YouTube
 - Google
 - Media
 - Social
 - Streaming
 - Video
 - Videos
-- YouTube
 common:
 - type: Website
   url: https://www.youtube.com/
