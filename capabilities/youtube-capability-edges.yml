@@ -11,7 +11,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 4
+edge_count: 5
 edges:
 - tag: Analytics Reports
   spec_file: youtube-analytics-reports-api-openapi.yml
@@ -54,3 +54,14 @@ edges:
     bound to a broadcast''; schema LiveStreamContentDetails'
   reason: Manages the ingest/stream objects that carry live video feeds into the platform for delivery
     — streaming/live delivery operations rather than content production.
+- tag: Reports
+  spec_file: youtube-reports-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.7
+  evidence: GET /reports youtubeAnalytics.reports.query 'Youtube Query Analytics Reports'
+  reason: Operations query analytics reports and retrieve generated report data (QueryResponse, ColumnHeader,
+    ListReportsResponse), which is reporting/analytics delivery. Mapped to Analytics & BI Management;
+    it is channel performance analytics rather than a domain business process, hence moderate confidence.
+  recovered_from: capability-edges-sweep.json
