@@ -44,7 +44,8 @@ edges:
     (snippet, content details, status, thumbnails), which is media asset management. Ambiguous between
     asset ingest and metadata cataloguing, so no L2 asserted.
 - tag: LiveStreams
-  spec_file: youtube-livestreams-api-openapi.yml
+  spec_file: youtube-live-streams-api-openapi.yml
+  reanchored_from: youtube-livestreams-api-openapi.yml
   capability_id: BC-3740.20
   capability_id_l1: BC-3740
   capability_name: OTT & Streaming Delivery
