@@ -6,7 +6,7 @@
     "_original/youtube-data-api-openapi.yml",
     "_original/youtube-data-openapi-original.yml",
     "_original/youtube-live-streaming-openapi.yml",
-    "_original/youtube-reporting-openapi.yml"
+    "_ae-authored/youtube-reporting-openapi.yml"
   ],
   "outputs": [
     "youtube-analytics-groups-api-openapi.yml",
@@ -34,11 +34,13 @@
     "youtube-jobs-api-openapi.yml",
     "youtube-reporttypes-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 3 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
-    "sourced from openapi/_original/ (6 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sourced from openapi/_original/ (5 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "youtube-analytics-openapi-original.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "youtube-analytics-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "youtube-data-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
@@ -52,29 +54,29 @@
     "tag 'Playlists' spans 2 source specs (youtube-data-api-openapi.yml, youtube-data-openapi-original.yml): per-path servers applied",
     "tag 'Search' spans 2 source specs (youtube-data-api-openapi.yml, youtube-data-openapi-original.yml): per-path servers applied",
     "tag 'Subscriptions' spans 2 source specs (youtube-data-api-openapi.yml, youtube-data-openapi-original.yml): per-path servers applied",
-    "tag 'Videos' spans 2 source specs (youtube-data-api-openapi.yml, youtube-data-openapi-original.yml): per-path servers applied"
+    "tag 'Videos' spans 2 source specs (youtube-data-api-openapi.yml, youtube-data-openapi-original.yml): per-path servers applied",
+    "superseded outputs removed: youtube-comment-threads-api-openapi.yml, youtube-live-streams-api-openapi.yml, youtube-report-types-api-openapi.yml",
+    "apis.yml register: written (+5 apis, 36 total)"
   ],
   "skipped": [
     "youtube-analytics-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-analytics-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-captions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-channels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "youtube-comment-threads-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-comments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "youtube-commentthreads-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-group-items-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "youtube-groupitems-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-i18n-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "youtube-live-streams-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-livebroadcasts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-livechatmessages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-livechatmoderators-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "youtube-livestreams-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-playlist-items-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "youtube-playlistitems-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-playlists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "youtube-report-types-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "youtube-reporttypes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-subscriptions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "youtube-videocategories-api-openapi.yml: previously refined output, superseded by openapi/_original/",

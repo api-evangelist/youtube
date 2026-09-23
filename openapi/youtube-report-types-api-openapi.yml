@@ -16,7 +16,7 @@ security:
 - oauth2:
   - https://www.googleapis.com/auth/yt-analytics.readonly
 tags:
-- name: ReportTypes
+- name: Report Types
   description: Operations for listing available report types
 paths:
   /reportTypes:
@@ -25,7 +25,7 @@ paths:
       summary: Youtube List Report Types
       description: Lists report types that the channel or content owner can retrieve. Each report type defines the dimensions and metrics available in the generated reports.
       tags:
-      - ReportTypes
+      - Report Types
       parameters:
       - name: onBehalfOfContentOwner
         in: query

@@ -14,7 +14,7 @@ security:
 - oauth2:
   - https://www.googleapis.com/auth/youtube
 tags:
-- name: LiveStreams
+- name: Live Streams
   description: Operations for managing YouTube live video streams
 paths:
   /liveStreams:
@@ -23,7 +23,7 @@ paths:
       summary: Youtube List Live Streams
       description: Returns a list of video streams that match the API request parameters. You can retrieve streams for the authenticated user or retrieve specific streams by their IDs.
       tags:
-      - LiveStreams
+      - Live Streams
       parameters:
       - $ref: '#/components/parameters/part'
       - name: id
@@ -84,7 +84,7 @@ paths:
       summary: Youtube Create a Live Stream
       description: Creates a video stream. The stream enables you to send your video to YouTube, which can then broadcast the video to your audience. After creating the stream you must bind it to a broadcast.
       tags:
-      - LiveStreams
+      - Live Streams
       parameters:
       - $ref: '#/components/parameters/part'
       - $ref: '#/components/parameters/fields'
@@ -183,7 +183,7 @@ paths:
       summary: Youtube Update a Live Stream
       description: Updates a video stream. If the properties that you want to change cannot be updated, you need to create a new stream with the proper settings.
       tags:
-      - LiveStreams
+      - Live Streams
       parameters:
       - $ref: '#/components/parameters/part'
       - $ref: '#/components/parameters/fields'
@@ -282,7 +282,7 @@ paths:
       summary: Youtube Delete a Live Stream
       description: Deletes a video stream. The authenticated user must own the stream being deleted. Streams bound to active or scheduled broadcasts cannot be deleted.
       tags:
-      - LiveStreams
+      - Live Streams
       parameters:
       - name: id
         in: query
@@ -307,44 +307,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: The request was invalid or malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The specified resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: The request was authenticated but the caller does not have permission to perform the requested operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: The request was not authenticated or the credentials are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    LiveStreamContentDetails:
-      type: object
-      description: Detailed settings for a live stream including the stream key and ingestion settings.
-      properties:
-        boundBroadcastId:
-          type: string
-          description: The ID of the live broadcast to which this stream is bound.
-          example: '500123'
-        isReusable:
-          type: boolean
-          description: Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts.
-          example: true
     LiveStream:
       type: object
       description: A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users.
@@ -463,18 +426,6 @@ components:
           type: boolean
           description: Indicates whether this stream is the default stream.
           example: true
-    PageInfo:
-      type: object
-      description: Paging details for a list of live streaming resources.
-      properties:
-        totalResults:
-          type: integer
-          description: The total number of results in the result set.
-          example: 42
-        resultsPerPage:
-          type: integer
-          description: The number of results included in the API response.
-          example: 10
     LiveStreamStatus:
       type: object
       description: Status information about a live stream including its stream status and health status.
@@ -529,6 +480,18 @@ components:
                     type: string
                     description: The long-form description of the issue and how to resolve it.
           example: example_value
+    PageInfo:
+      type: object
+      description: Paging details for a list of live streaming resources.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results in the result set.
+          example: 42
+        resultsPerPage:
+          type: integer
+          description: The number of results included in the API response.
+          example: 10
     LiveStreamListResponse:
       type: object
       description: A list of live stream resources matching the request criteria.
@@ -558,7 +521,50 @@ components:
           items:
             $ref: '#/components/schemas/LiveStream'
           example: []
+    LiveStreamContentDetails:
+      type: object
+      description: Detailed settings for a live stream including the stream key and ingestion settings.
+      properties:
+        boundBroadcastId:
+          type: string
+          description: The ID of the live broadcast to which this stream is bound.
+          example: '500123'
+        isReusable:
+          type: boolean
+          description: Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts.
+          example: true
+  responses:
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. The nextPageToken property in the API response identifies other pages that are available.
+      schema:
+        type: string
     maxResults:
       name: maxResults
       in: query
@@ -568,16 +574,11 @@ components:
         minimum: 0
         maximum: 50
         default: 5
-    pageToken:
-      name: pageToken
+    part:
+      name: part
       in: query
-      description: Identifies a specific page in the result set that should be returned. The nextPageToken property in the API response identifies other pages that are available.
-      schema:
-        type: string
-    fields:
-      name: fields
-      in: query
-      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
       schema:
         type: string
     key:
@@ -586,11 +587,10 @@ components:
       description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       schema:
         type: string
-    part:
-      name: part
+    fields:
+      name: fields
       in: query
-      required: true
-      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
       schema:
         type: string
   securitySchemes:

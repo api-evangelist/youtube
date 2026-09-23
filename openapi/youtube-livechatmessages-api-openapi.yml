@@ -202,66 +202,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: The request was invalid or malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The specified resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: The request was authenticated but the caller does not have permission to perform the requested operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: The request was not authenticated or the credentials are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    maxResults:
-      name: maxResults
-      in: query
-      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
-      schema:
-        type: integer
-        minimum: 0
-        maximum: 50
-        default: 5
-    pageToken:
-      name: pageToken
-      in: query
-      description: Identifies a specific page in the result set that should be returned. The nextPageToken property in the API response identifies other pages that are available.
-      schema:
-        type: string
-    fields:
-      name: fields
-      in: query
-      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
-      schema:
-        type: string
-    key:
-      name: key
-      in: query
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      schema:
-        type: string
-    part:
-      name: part
-      in: query
-      required: true
-      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
-      schema:
-        type: string
   schemas:
     ErrorResponse:
       type: object
@@ -293,52 +233,6 @@ components:
                     type: string
                     description: The reason for the error.
           example: example_value
-    LiveChatMessageListResponse:
-      type: object
-      description: A list of live chat message resources for a given broadcast.
-      properties:
-        kind:
-          type: string
-          description: Identifies the API resource's type. Value is youtube#liveChatMessageListResponse.
-          default: youtube#liveChatMessageListResponse
-          example: youtube#video
-        etag:
-          type: string
-          description: The Etag of this resource.
-          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
-        nextPageToken:
-          type: string
-          description: The token for the next page of results.
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        pollingIntervalMillis:
-          type: integer
-          description: The amount of time the client should wait before polling again, in milliseconds.
-          example: 10
-        offlineAt:
-          type: string
-          format: date-time
-          description: The date and time when the underlying stream went offline.
-          example: '2026-01-15T10:30:00Z'
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
-        items:
-          type: array
-          description: A list of chat messages that match the request criteria.
-          items:
-            $ref: '#/components/schemas/LiveChatMessage'
-          example: []
-    PageInfo:
-      type: object
-      description: Paging details for a list of live streaming resources.
-      properties:
-        totalResults:
-          type: integer
-          description: The total number of results in the result set.
-          example: 42
-        resultsPerPage:
-          type: integer
-          description: The number of results included in the API response.
-          example: 10
     LiveChatMessage:
       type: object
       description: A liveChatMessage resource represents a chat message in a YouTube live broadcast.
@@ -438,6 +332,112 @@ components:
               type: boolean
               description: Indicates whether the user is a moderator of the live chat.
           example: example_value
+    LiveChatMessageListResponse:
+      type: object
+      description: A list of live chat message resources for a given broadcast.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#liveChatMessageListResponse.
+          default: youtube#liveChatMessageListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        nextPageToken:
+          type: string
+          description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        pollingIntervalMillis:
+          type: integer
+          description: The amount of time the client should wait before polling again, in milliseconds.
+          example: 10
+        offlineAt:
+          type: string
+          format: date-time
+          description: The date and time when the underlying stream went offline.
+          example: '2026-01-15T10:30:00Z'
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of chat messages that match the request criteria.
+          items:
+            $ref: '#/components/schemas/LiveChatMessage'
+          example: []
+    PageInfo:
+      type: object
+      description: Paging details for a list of live streaming resources.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results in the result set.
+          example: 42
+        resultsPerPage:
+          type: integer
+          description: The number of results included in the API response.
+          example: 10
+  responses:
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. The nextPageToken property in the API response identifies other pages that are available.
+      schema:
+        type: string
+    maxResults:
+      name: maxResults
+      in: query
+      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 50
+        default: 5
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

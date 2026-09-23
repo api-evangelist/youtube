@@ -1,31 +1,7 @@
 openapi: 3.2.0
 info:
   title: YouTube Analytics Group Items API
-  description: 'The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
-
-    Use this API to generate custom analytics reports, track video performance metrics, monitor audience engagement,
-
-    and gain insights into viewer demographics and behavior patterns.
-
-
-    ## Key Features
-
-    - Retrieve channel and video performance metrics
-
-    - Access audience demographics and geographic data
-
-    - Monitor engagement metrics like likes, comments, and shares
-
-    - Track revenue and ad performance data (for monetized content)
-
-    - Generate custom date-range reports
-
-
-    ## Authentication
-
-    All API requests require OAuth 2.0 authentication with appropriate scopes.
-
-    '
+  description: The YouTube Analytics API enables you to retrieve YouTube Analytics data for channels and content owners.
   version: 2.0.0
   contact:
     name: Google Developers
@@ -58,9 +34,7 @@ paths:
 
         Group items represent the individual channels or videos that belong to
 
-        an analytics group.
-
-        '
+        an analytics group.'
       x-microcks-operation:
         delay: 100
         dispatcher: FALLBACK
@@ -96,9 +70,7 @@ paths:
       summary: Youtube Add Item to Group
       description: 'Adds a channel or video to an analytics group. The item will be included
 
-        in the group''s aggregated analytics data going forward.
-
-        '
+        in the group''s aggregated analytics data going forward.'
       x-microcks-operation:
         delay: 100
         dispatcher: FALLBACK
@@ -134,6 +106,40 @@ paths:
               examples:
                 BadRequestErrorExample:
                   $ref: '#/components/examples/BadRequestErrorExample'
+    delete:
+      operationId: youtubeAnalytics.groupItems.delete
+      summary: Youtube Delete a Group Item
+      description: Removes an item from a group. The authenticated user must own the group. Deleting a group item does not delete the underlying resource (video, channel, or playlist).
+      tags:
+      - Group Items
+      parameters:
+      - name: id
+        in: query
+        required: true
+        description: The id parameter specifies the YouTube group item ID for the group item being deleted.
+        schema:
+          type: string
+        example: abc123def456
+      - name: onBehalfOfContentOwner
+        in: query
+        description: The onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user.
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '204':
+          description: The group item was successfully deleted.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /groupItems/{itemId}:
     delete:
       tags:
@@ -142,9 +148,7 @@ paths:
       summary: Youtube Remove Item from Group
       description: 'Removes a channel or video from an analytics group. The item''s historical
 
-        data will no longer be included in the group''s aggregated metrics.
-
-        '
+        data will no longer be included in the group''s aggregated metrics.'
       x-microcks-operation:
         delay: 100
         dispatcher: FALLBACK
@@ -166,7 +170,139 @@ paths:
                 NotFoundErrorExample:
                   $ref: '#/components/examples/NotFoundErrorExample'
 components:
+  examples:
+    SuccessfulGroupItemListExample:
+      summary: Successful group items list response
+      description: Example response containing items in an analytics group
+      value:
+        kind: youtube#groupItemListResponse
+        etag: items123abc
+        items:
+        - kind: youtube#groupItem
+          etag: item1abc
+          id: ITEMabc123
+          groupId: ABCdef123456
+          resource:
+            kind: youtube#video
+            id: dQw4w9WgXcQ
+        - kind: youtube#groupItem
+          etag: item2def
+          id: ITEMdef456
+          groupId: ABCdef123456
+          resource:
+            kind: youtube#video
+            id: abc123XYZ789
+    BadRequestErrorExample:
+      summary: Bad request error
+      description: Example error response for invalid parameters
+      value:
+        error:
+          code: 400
+          message: Invalid parameter value
+          errors:
+          - domain: youtube.analytics
+            reason: invalidParameter
+            message: The parameter 'startDate' has an invalid value
+            locationType: parameter
+            location: startDate
+    UnauthorizedErrorExample:
+      summary: Unauthorized error
+      description: Example error response for authentication failure
+      value:
+        error:
+          code: 401
+          message: Invalid credentials
+          errors:
+          - domain: youtube.analytics
+            reason: authError
+            message: The access token is invalid or expired
+            locationType: header
+            location: Authorization
+    NotFoundErrorExample:
+      summary: Not found error
+      description: Example error response when resource is not found
+      value:
+        error:
+          code: 404
+          message: Resource not found
+          errors:
+          - domain: youtube.analytics
+            reason: notFound
+            message: The specified group was not found
+            locationType: parameter
+            location: groupId
+    SuccessfulGroupItemCreateExample:
+      summary: Successfully added item to group
+      description: Example response for a newly added group item
+      value:
+        kind: youtube#groupItem
+        etag: newitem789
+        id: NEWitem123456
+        groupId: ABCdef123456
+        resource:
+          kind: youtube#video
+          id: dQw4w9WgXcQ
+    GroupItemCreateRequestExample:
+      summary: Add item to group request
+      description: Example request body for adding an item to a group
+      value:
+        groupId: ABCdef123456
+        resource:
+          kind: youtube#video
+          id: dQw4w9WgXcQ
+  parameters:
+    PrettyPrint:
+      name: prettyPrint
+      in: query
+      required: false
+      description: Returns response with indentations and line breaks for readability
+      schema:
+        type: boolean
+        default: true
+    ItemIdPath:
+      name: itemId
+      in: path
+      required: true
+      description: The unique identifier of the group item
+      schema:
+        type: string
+        example: XYZ789abc123
+    GroupIdQuery:
+      name: groupId
+      in: query
+      required: true
+      description: The group ID to retrieve items for
+      schema:
+        type: string
+        example: ABCdef123456
+    AccessToken:
+      name: access_token
+      in: query
+      required: false
+      description: OAuth 2.0 access token for authentication
+      schema:
+        type: string
+    OnBehalfOfContentOwner:
+      name: onBehalfOfContentOwner
+      in: query
+      required: false
+      description: 'The content owner ID for YouTube content owner operations.
+
+        Required for content owner authenticated requests.
+
+        '
+      schema:
+        type: string
+        example: ContentOwnerXYZ
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetails'
     ErrorDetails:
       type: object
       description: Details about an API error
@@ -187,14 +323,32 @@ components:
           description: List of specific errors
           items:
             $ref: '#/components/schemas/ErrorItem'
-    ErrorResponse:
+    GroupItem:
       type: object
-      description: Error response object
+      description: An item (channel or video) within an analytics group
       required:
-      - error
+      - kind
+      - id
+      - groupId
+      - resource
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetails'
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#groupItem
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the group item
+          example: XYZ789abc123
+        groupId:
+          type: string
+          description: ID of the group this item belongs to
+          example: ABCdef123456
+        resource:
+          $ref: '#/components/schemas/GroupItemResource'
     GroupItemCreateRequest:
       type: object
       description: Request body for adding an item to a group
@@ -223,32 +377,30 @@ components:
               type: string
               description: YouTube ID of the channel or video
               example: dQw4w9WgXcQ
-    GroupItem:
+    ErrorItem:
       type: object
-      description: An item (channel or video) within an analytics group
-      required:
-      - kind
-      - id
-      - groupId
-      - resource
+      description: Individual error detail
       properties:
-        kind:
+        domain:
           type: string
-          description: Identifies the API resource type
-          example: youtube#groupItem
-        etag:
+          description: Error domain
+          example: youtube.analytics
+        reason:
           type: string
-          description: ETag for caching purposes
-        id:
+          description: Error reason code
+          example: invalidParameter
+        message:
           type: string
-          description: Unique identifier for the group item
-          example: XYZ789abc123
-        groupId:
+          description: Detailed error message
+          example: The parameter 'startDate' has an invalid value
+        locationType:
           type: string
-          description: ID of the group this item belongs to
-          example: ABCdef123456
-        resource:
-          $ref: '#/components/schemas/GroupItemResource'
+          description: Type of location where error occurred
+          example: parameter
+        location:
+          type: string
+          description: Specific location of the error
+          example: startDate
     GroupItemListResponse:
       type: object
       description: Response containing a list of group items
@@ -286,154 +438,6 @@ components:
           type: string
           description: YouTube ID of the channel or video
           example: dQw4w9WgXcQ
-    ErrorItem:
-      type: object
-      description: Individual error detail
-      properties:
-        domain:
-          type: string
-          description: Error domain
-          example: youtube.analytics
-        reason:
-          type: string
-          description: Error reason code
-          example: invalidParameter
-        message:
-          type: string
-          description: Detailed error message
-          example: The parameter 'startDate' has an invalid value
-        locationType:
-          type: string
-          description: Type of location where error occurred
-          example: parameter
-        location:
-          type: string
-          description: Specific location of the error
-          example: startDate
-  parameters:
-    ItemIdPath:
-      name: itemId
-      in: path
-      required: true
-      description: The unique identifier of the group item
-      schema:
-        type: string
-        example: XYZ789abc123
-    PrettyPrint:
-      name: prettyPrint
-      in: query
-      required: false
-      description: Returns response with indentations and line breaks for readability
-      schema:
-        type: boolean
-        default: true
-    GroupIdQuery:
-      name: groupId
-      in: query
-      required: true
-      description: The group ID to retrieve items for
-      schema:
-        type: string
-        example: ABCdef123456
-    AccessToken:
-      name: access_token
-      in: query
-      required: false
-      description: OAuth 2.0 access token for authentication
-      schema:
-        type: string
-    OnBehalfOfContentOwner:
-      name: onBehalfOfContentOwner
-      in: query
-      required: false
-      description: 'The content owner ID for YouTube content owner operations.
-
-        Required for content owner authenticated requests.
-
-        '
-      schema:
-        type: string
-        example: ContentOwnerXYZ
-  examples:
-    BadRequestErrorExample:
-      summary: Bad request error
-      description: Example error response for invalid parameters
-      value:
-        error:
-          code: 400
-          message: Invalid parameter value
-          errors:
-          - domain: youtube.analytics
-            reason: invalidParameter
-            message: The parameter 'startDate' has an invalid value
-            locationType: parameter
-            location: startDate
-    GroupItemCreateRequestExample:
-      summary: Add item to group request
-      description: Example request body for adding an item to a group
-      value:
-        groupId: ABCdef123456
-        resource:
-          kind: youtube#video
-          id: dQw4w9WgXcQ
-    NotFoundErrorExample:
-      summary: Not found error
-      description: Example error response when resource is not found
-      value:
-        error:
-          code: 404
-          message: Resource not found
-          errors:
-          - domain: youtube.analytics
-            reason: notFound
-            message: The specified group was not found
-            locationType: parameter
-            location: groupId
-    SuccessfulGroupItemCreateExample:
-      summary: Successfully added item to group
-      description: Example response for a newly added group item
-      value:
-        kind: youtube#groupItem
-        etag: newitem789
-        id: NEWitem123456
-        groupId: ABCdef123456
-        resource:
-          kind: youtube#video
-          id: dQw4w9WgXcQ
-    UnauthorizedErrorExample:
-      summary: Unauthorized error
-      description: Example error response for authentication failure
-      value:
-        error:
-          code: 401
-          message: Invalid credentials
-          errors:
-          - domain: youtube.analytics
-            reason: authError
-            message: The access token is invalid or expired
-            locationType: header
-            location: Authorization
-    SuccessfulGroupItemListExample:
-      summary: Successful group items list response
-      description: Example response containing items in an analytics group
-      value:
-        kind: youtube#groupItemListResponse
-        etag: items123abc
-        items:
-        - kind: youtube#groupItem
-          etag: item1abc
-          id: ITEMabc123
-          groupId: ABCdef123456
-          resource:
-            kind: youtube#video
-            id: dQw4w9WgXcQ
-        - kind: youtube#groupItem
-          etag: item2def
-          id: ITEMdef456
-          groupId: ABCdef123456
-          resource:
-            kind: youtube#video
-            id: abc123XYZ789
   securitySchemes:
     OAuth2:
       type: oauth2
@@ -447,6 +451,42 @@ components:
             https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
             https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports
             https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View YouTube Analytics monetary reports
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/yt-analytics.readonly: View YouTube Analytics reports for your YouTube content
+            https://www.googleapis.com/auth/yt-analytics-monetary.readonly: View monetary and non-monetary YouTube Analytics reports for your YouTube content
+  responses:
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 externalDocs:
   description: YouTube Analytics API Documentation
   url: https://developers.google.com/youtube/analytics

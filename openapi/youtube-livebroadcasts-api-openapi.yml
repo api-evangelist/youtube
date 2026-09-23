@@ -541,6 +541,80 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    LiveBroadcastStatus:
+      type: object
+      description: Status information about a live broadcast including its privacy status and lifecycle status.
+      properties:
+        lifeCycleStatus:
+          type: string
+          description: The broadcast's status as it relates to the lifecycle of the broadcast.
+          enum:
+          - abandoned
+          - complete
+          - completeStarting
+          - created
+          - live
+          - liveStarting
+          - ready
+          - reclaimed
+          - revoked
+          - testStarting
+          - testing
+          example: abandoned
+        privacyStatus:
+          type: string
+          description: The broadcast's privacy status.
+          enum:
+          - private
+          - public
+          - unlisted
+          example: private
+        recordingStatus:
+          type: string
+          description: The broadcast's recording status.
+          enum:
+          - notRecording
+          - recorded
+          - recording
+          example: notRecording
+        madeForKids:
+          type: boolean
+          description: Indicates whether the broadcast is designated as child-directed.
+          example: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+        selfDeclaredMadeForKids:
+          type: boolean
+          description: Indicates whether the channel owner has designated the broadcast as being made for kids.
+          example: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+    ErrorResponse:
+      type: object
+      description: A standard error response returned by the YouTube Live Streaming API.
+      properties:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            errors:
+              type: array
+              description: A list of individual errors.
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A human-readable description of the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  reason:
+                    type: string
+                    description: The reason for the error.
+          example: example_value
     LiveBroadcastContentDetails:
       type: object
       description: Detailed settings for a live broadcast including stream configuration, DVR settings, and content configuration.
@@ -611,109 +685,6 @@ components:
           type: boolean
           description: Indicates whether the broadcast should automatically stop streaming.
           example: true
-    ErrorResponse:
-      type: object
-      description: A standard error response returned by the YouTube Live Streaming API.
-      properties:
-        error:
-          type: object
-          description: The error details.
-          properties:
-            code:
-              type: integer
-              description: The HTTP status code of the error.
-            message:
-              type: string
-              description: A human-readable description of the error.
-            errors:
-              type: array
-              description: A list of individual errors.
-              items:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    description: A human-readable description of the error.
-                  domain:
-                    type: string
-                    description: The domain in which the error occurred.
-                  reason:
-                    type: string
-                    description: The reason for the error.
-          example: example_value
-    LiveBroadcastListResponse:
-      type: object
-      description: A list of live broadcast resources matching the request criteria.
-      properties:
-        kind:
-          type: string
-          description: Identifies the API resource's type. Value is youtube#liveBroadcastListResponse.
-          default: youtube#liveBroadcastListResponse
-          example: youtube#video
-        etag:
-          type: string
-          description: The Etag of this resource.
-          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
-        nextPageToken:
-          type: string
-          description: The token for the next page of results.
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        prevPageToken:
-          type: string
-          description: The token for the previous page of results.
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
-        items:
-          type: array
-          description: A list of live broadcasts that match the request criteria.
-          items:
-            $ref: '#/components/schemas/LiveBroadcast'
-          example: []
-    LiveBroadcastStatus:
-      type: object
-      description: Status information about a live broadcast including its privacy status and lifecycle status.
-      properties:
-        lifeCycleStatus:
-          type: string
-          description: The broadcast's status as it relates to the lifecycle of the broadcast.
-          enum:
-          - abandoned
-          - complete
-          - completeStarting
-          - created
-          - live
-          - liveStarting
-          - ready
-          - reclaimed
-          - revoked
-          - testStarting
-          - testing
-          example: abandoned
-        privacyStatus:
-          type: string
-          description: The broadcast's privacy status.
-          enum:
-          - private
-          - public
-          - unlisted
-          example: private
-        recordingStatus:
-          type: string
-          description: The broadcast's recording status.
-          enum:
-          - notRecording
-          - recorded
-          - recording
-          example: notRecording
-        madeForKids:
-          type: boolean
-          description: Indicates whether the broadcast is designated as child-directed.
-          example: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
-        selfDeclaredMadeForKids:
-          type: boolean
-          description: Indicates whether the channel owner has designated the broadcast as being made for kids.
-          example: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
     LiveBroadcastSnippet:
       type: object
       description: Basic details about a live broadcast including its title, description, and scheduled start and end times.
@@ -826,15 +797,44 @@ components:
               format: int64
               description: The number of live chat messages currently on the broadcast.
           example: example_value
+    LiveBroadcastListResponse:
+      type: object
+      description: A list of live broadcast resources matching the request criteria.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#liveBroadcastListResponse.
+          default: youtube#liveBroadcastListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        nextPageToken:
+          type: string
+          description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        prevPageToken:
+          type: string
+          description: The token for the previous page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of live broadcasts that match the request criteria.
+          items:
+            $ref: '#/components/schemas/LiveBroadcast'
+          example: []
   responses:
-    NotFound:
-      description: The specified resource was not found.
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request was invalid or malformed.
+    NotFound:
+      description: The specified resource was not found.
       content:
         application/json:
           schema:
@@ -845,13 +845,19 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: The request was not authenticated or the credentials are invalid.
+    BadRequest:
+      description: The request was invalid or malformed.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. The nextPageToken property in the API response identifies other pages that are available.
+      schema:
+        type: string
     maxResults:
       name: maxResults
       in: query
@@ -861,16 +867,11 @@ components:
         minimum: 0
         maximum: 50
         default: 5
-    pageToken:
-      name: pageToken
+    part:
+      name: part
       in: query
-      description: Identifies a specific page in the result set that should be returned. The nextPageToken property in the API response identifies other pages that are available.
-      schema:
-        type: string
-    fields:
-      name: fields
-      in: query
-      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
       schema:
         type: string
     key:
@@ -879,11 +880,10 @@ components:
       description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       schema:
         type: string
-    part:
-      name: part
+    fields:
+      name: fields
       in: query
-      required: true
-      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
       schema:
         type: string
   securitySchemes:

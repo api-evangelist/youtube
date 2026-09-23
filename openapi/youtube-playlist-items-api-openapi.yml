@@ -1,38 +1,7 @@
 openapi: 3.2.0
 info:
   title: YouTube Data Playlist Items API
-  description: 'The YouTube Data API enables you to incorporate YouTube functionality into your applications.
-
-    Use this API to manage YouTube resources such as videos, playlists, channels, and subscriptions.
-
-
-    ## Key Features
-
-    - Search for videos, channels, and playlists
-
-    - Retrieve detailed metadata for YouTube resources
-
-    - Manage playlists and playlist items
-
-    - Access channel information and statistics
-
-    - Retrieve video captions and comments
-
-    - Manage subscriptions and activities
-
-
-    ## Authentication
-
-    Most API requests require OAuth 2.0 authentication. Some read-only operations can use an API key.
-
-
-    ## Rate Limits
-
-    The API uses a quota system. Each request costs quota units based on the operation type.
-
-    Monitor your quota usage in the Google Cloud Console.
-
-    '
+  description: The YouTube Data API enables you to incorporate YouTube functionality into your applications.
   version: 3.0.0
   contact:
     name: Google Developers
@@ -66,9 +35,7 @@ paths:
 
         You can retrieve all of the playlist items in a specified playlist or
 
-        retrieve specific playlist items by their unique IDs.
-
-        '
+        retrieve specific playlist items by their unique IDs.'
       x-microcks-operation:
         delay: 100
         dispatcher: FALLBACK
@@ -106,9 +73,7 @@ paths:
       summary: Youtube Add Item to Playlist
       description: 'Adds a video to a playlist. This operation requires OAuth 2.0 authentication.
 
-        You can only add items to playlists that belong to the authenticated user''s channel.
-
-        '
+        You can only add items to playlists that belong to the authenticated user''s channel.'
       x-microcks-operation:
         delay: 100
         dispatcher: FALLBACK
@@ -144,6 +109,35 @@ paths:
               examples:
                 BadRequestErrorExample:
                   $ref: '#/components/examples/BadRequestErrorExample'
+    delete:
+      operationId: youtube.playlistItems.delete
+      summary: Youtube Remove a Playlist Item
+      description: Deletes a playlist item. The authenticated user must own the playlist or be authorized to remove items from it.
+      tags:
+      - Playlist Items
+      parameters:
+      - name: id
+        in: query
+        required: true
+        description: The ID of the playlist item to delete.
+        schema:
+          type: string
+        example: abc123def456
+      - $ref: '#/components/parameters/key'
+      responses:
+        '204':
+          description: The playlist item was successfully deleted.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /playlistItems/{playlistItemId}:
     delete:
       tags:
@@ -152,9 +146,7 @@ paths:
       summary: Youtube Remove Item from Playlist
       description: 'Removes an item from a playlist. This operation requires OAuth 2.0 authentication.
 
-        You can only remove items from playlists that belong to the authenticated user''s channel.
-
-        '
+        You can only remove items from playlists that belong to the authenticated user''s channel.'
       x-microcks-operation:
         delay: 100
         dispatcher: FALLBACK
@@ -175,143 +167,117 @@ paths:
                 NotFoundErrorExample:
                   $ref: '#/components/examples/NotFoundErrorExample'
 components:
-  schemas:
-    PlaylistItemSnippet:
-      type: object
-      description: Basic information about the playlist item
-      properties:
-        publishedAt:
-          type: string
-          format: date-time
-          description: When the item was added to the playlist
-          example: '2024-03-15T10:30:00Z'
-        channelId:
-          type: string
-          description: ID of the channel that owns the playlist
-          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
-        title:
-          type: string
-          description: Title of the video
-          example: 'OpenAPI Tutorial: Building REST APIs'
-        description:
-          type: string
-          description: Description of the video
-        thumbnails:
-          $ref: '#/components/schemas/ThumbnailDetails'
-        channelTitle:
-          type: string
-          description: Title of the channel
-        playlistId:
-          type: string
-          description: ID of the playlist
-          example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
-        position:
-          type: integer
-          description: Position in the playlist (0-indexed)
-          example: 0
-        resourceId:
-          $ref: '#/components/schemas/ResourceId'
-    ErrorResponse:
-      type: object
-      description: Error response object
-      required:
-      - error
-      properties:
+  examples:
+    NotFoundErrorExample:
+      summary: Not found error
+      description: Example error response when resource is not found
+      value:
         error:
-          $ref: '#/components/schemas/ErrorDetails'
-    ThumbnailDetails:
-      type: object
-      description: Thumbnail images at various resolutions
-      properties:
-        default:
-          $ref: '#/components/schemas/Thumbnail'
-        medium:
-          $ref: '#/components/schemas/Thumbnail'
-        high:
-          $ref: '#/components/schemas/Thumbnail'
-        standard:
-          $ref: '#/components/schemas/Thumbnail'
-        maxres:
-          $ref: '#/components/schemas/Thumbnail'
-    PlaylistItemListResponse:
-      type: object
-      description: Response containing playlist item resources
-      required:
-      - kind
-      - etag
-      - items
-      properties:
-        kind:
-          type: string
-          description: Identifies the API resource type
-          example: youtube#playlistItemListResponse
-        etag:
-          type: string
-          description: ETag for caching purposes
-        nextPageToken:
-          type: string
-          description: Token for the next page of results
+          code: 404
+          message: Resource not found
+          errors:
+          - domain: youtube.video
+            reason: videoNotFound
+            message: The video identified by the parameter id could not be found
+            locationType: parameter
+            location: id
+    SuccessfulPlaylistItemListExample:
+      summary: Successful playlist items response
+      description: Example response for retrieving playlist items
+      value:
+        kind: youtube#playlistItemListResponse
+        etag: items123etag
         pageInfo:
-          $ref: '#/components/schemas/PageInfo'
+          totalResults: 25
+          resultsPerPage: 5
         items:
-          type: array
-          description: List of playlist items
-          items:
-            $ref: '#/components/schemas/PlaylistItem'
-    PlaylistItemContentDetails:
+        - kind: youtube#playlistItem
+          etag: item1etag
+          id: UExmF3p7bTU0NXRLaW00c2dOT2tuR3ZOamJ5OWVmZGYuOTI0NzIzRTJENDg3RUNNQQ
+          snippet:
+            publishedAt: '2024-03-15T10:30:00Z'
+            channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+            title: 'OpenAPI Tutorial: Building REST APIs'
+            thumbnails:
+              default:
+                url: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
+                width: 120
+                height: 90
+            channelTitle: Google Developers
+            playlistId: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+            position: 0
+            resourceId:
+              kind: youtube#video
+              videoId: dQw4w9WgXcQ
+          contentDetails:
+            videoId: dQw4w9WgXcQ
+            videoPublishedAt: '2024-03-15T10:30:00Z'
+    BadRequestErrorExample:
+      summary: Bad request error
+      description: Example error response for invalid parameters
+      value:
+        error:
+          code: 400
+          message: Invalid parameter value
+          errors:
+          - domain: youtube.parameter
+            reason: invalidParameter
+            message: The parameter 'part' is required
+            locationType: parameter
+            location: part
+    SuccessfulPlaylistItemInsertExample:
+      summary: Successfully added item to playlist
+      description: Example response for adding a video to a playlist
+      value:
+        kind: youtube#playlistItem
+        etag: newitem123
+        id: NEWitem456
+        snippet:
+          publishedAt: '2024-03-20T14:00:00Z'
+          channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+          title: Added Video Title
+          playlistId: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+          position: 0
+          resourceId:
+            kind: youtube#video
+            videoId: dQw4w9WgXcQ
+        contentDetails:
+          videoId: dQw4w9WgXcQ
+    PlaylistItemInsertRequestExample:
+      summary: Add item to playlist request
+      description: Example request body for adding a video to a playlist
+      value:
+        snippet:
+          playlistId: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+          position: 0
+          resourceId:
+            kind: youtube#video
+            videoId: dQw4w9WgXcQ
+  schemas:
+    ErrorItem:
       type: object
-      description: Content details for the playlist item
+      description: Individual error detail
       properties:
-        videoId:
+        domain:
           type: string
-          description: ID of the video
-          example: dQw4w9WgXcQ
-        videoPublishedAt:
+          description: Error domain
+          example: youtube.parameter
+        reason:
           type: string
-          format: date-time
-          description: When the video was published
-    Thumbnail:
-      type: object
-      description: A thumbnail image
-      properties:
-        url:
+          description: Error reason code
+          example: invalidParameter
+        message:
           type: string
-          description: URL of the thumbnail image
-          example: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
-        width:
-          type: integer
-          description: Width of the thumbnail
-          example: 120
-        height:
-          type: integer
-          description: Height of the thumbnail
-          example: 90
-    ResourceId:
-      type: object
-      description: Identifies the resource in the search result
-      required:
-      - kind
-      properties:
-        kind:
+          description: Detailed error message
+          example: The parameter 'part' is required
+        locationType:
           type: string
-          description: Type of resource
-          enum:
-          - youtube#video
-          - youtube#channel
-          - youtube#playlist
-          example: youtube#video
-        videoId:
+          description: Type of location where error occurred
+          example: parameter
+        location:
           type: string
-          description: Video ID if the result is a video
-          example: dQw4w9WgXcQ
-        channelId:
-          type: string
-          description: Channel ID if the result is a channel
-          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
-        playlistId:
-          type: string
-          description: Playlist ID if the result is a playlist
-          example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+          description: Specific location of the error
+          example: part
     PlaylistItem:
       type: object
       description: A playlist item resource
@@ -355,6 +321,132 @@ components:
           description: List of specific errors
           items:
             $ref: '#/components/schemas/ErrorItem'
+    PlaylistItemListResponse:
+      type: object
+      description: Response containing playlist item resources
+      required:
+      - kind
+      - etag
+      - items
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#playlistItemListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        nextPageToken:
+          type: string
+          description: Token for the next page of results
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: List of playlist items
+          items:
+            $ref: '#/components/schemas/PlaylistItem'
+    ResourceId:
+      type: object
+      description: Identifies the resource in the search result
+      required:
+      - kind
+      properties:
+        kind:
+          type: string
+          description: Type of resource
+          enum:
+          - youtube#video
+          - youtube#channel
+          - youtube#playlist
+          example: youtube#video
+        videoId:
+          type: string
+          description: Video ID if the result is a video
+          example: dQw4w9WgXcQ
+        channelId:
+          type: string
+          description: Channel ID if the result is a channel
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        playlistId:
+          type: string
+          description: Playlist ID if the result is a playlist
+          example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+    PlaylistItemContentDetails:
+      type: object
+      description: Content details for the playlist item
+      properties:
+        videoId:
+          type: string
+          description: ID of the video
+          example: dQw4w9WgXcQ
+        videoPublishedAt:
+          type: string
+          format: date-time
+          description: When the video was published
+    PageInfo:
+      type: object
+      description: Pagination information
+      properties:
+        totalResults:
+          type: integer
+          description: Total number of results
+          example: 1000000
+        resultsPerPage:
+          type: integer
+          description: Number of results per page
+          example: 25
+    Thumbnail:
+      type: object
+      description: A thumbnail image
+      properties:
+        url:
+          type: string
+          description: URL of the thumbnail image
+          example: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
+        width:
+          type: integer
+          description: Width of the thumbnail
+          example: 120
+        height:
+          type: integer
+          description: Height of the thumbnail
+          example: 90
+    PlaylistItemSnippet:
+      type: object
+      description: Basic information about the playlist item
+      properties:
+        publishedAt:
+          type: string
+          format: date-time
+          description: When the item was added to the playlist
+          example: '2024-03-15T10:30:00Z'
+        channelId:
+          type: string
+          description: ID of the channel that owns the playlist
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        title:
+          type: string
+          description: Title of the video
+          example: 'OpenAPI Tutorial: Building REST APIs'
+        description:
+          type: string
+          description: Description of the video
+        thumbnails:
+          $ref: '#/components/schemas/ThumbnailDetails'
+        channelTitle:
+          type: string
+          description: Title of the channel
+        playlistId:
+          type: string
+          description: ID of the playlist
+          example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
+        position:
+          type: integer
+          description: Position in the playlist (0-indexed)
+          example: 0
+        resourceId:
+          $ref: '#/components/schemas/ResourceId'
     PlaylistItemInsertRequest:
       type: object
       description: Request body for adding an item to a playlist
@@ -387,43 +479,52 @@ components:
                 videoId:
                   type: string
                   example: dQw4w9WgXcQ
-    PageInfo:
+    ErrorResponse:
       type: object
-      description: Pagination information
+      description: Error response object
+      required:
+      - error
       properties:
-        totalResults:
-          type: integer
-          description: Total number of results
-          example: 1000000
-        resultsPerPage:
-          type: integer
-          description: Number of results per page
-          example: 25
-    ErrorItem:
+        error:
+          $ref: '#/components/schemas/ErrorDetails'
+    ThumbnailDetails:
       type: object
-      description: Individual error detail
+      description: Thumbnail images at various resolutions
       properties:
-        domain:
-          type: string
-          description: Error domain
-          example: youtube.parameter
-        reason:
-          type: string
-          description: Error reason code
-          example: invalidParameter
-        message:
-          type: string
-          description: Detailed error message
-          example: The parameter 'part' is required
-        locationType:
-          type: string
-          description: Type of location where error occurred
-          example: parameter
-        location:
-          type: string
-          description: Specific location of the error
-          example: part
+        default:
+          $ref: '#/components/schemas/Thumbnail'
+        medium:
+          $ref: '#/components/schemas/Thumbnail'
+        high:
+          $ref: '#/components/schemas/Thumbnail'
+        standard:
+          $ref: '#/components/schemas/Thumbnail'
+        maxres:
+          $ref: '#/components/schemas/Thumbnail'
   parameters:
+    PlaylistItemIdPath:
+      name: playlistItemId
+      in: path
+      required: true
+      description: The unique identifier of the playlist item
+      schema:
+        type: string
+        example: UExmF3p7bTU0NXRLaW00c2dOT2tuR3ZOamJ5OWVmZGYuOTI0NzIzRTJENDg3RUNNQQ
+    ApiKey:
+      name: key
+      in: query
+      required: false
+      description: API key for authentication (for read-only operations)
+      schema:
+        type: string
+    PlaylistIdQuery:
+      name: playlistId
+      in: query
+      required: true
+      description: The playlist ID to retrieve items for
+      schema:
+        type: string
+        example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
     Part:
       name: part
       in: query
@@ -436,20 +537,14 @@ components:
       schema:
         type: string
         example: snippet,contentDetails,statistics
-    ApiKey:
-      name: key
+    PlaylistItemId:
+      name: id
       in: query
       required: false
-      description: API key for authentication (for read-only operations)
+      description: A comma-separated list of playlist item IDs
       schema:
         type: string
-    PageToken:
-      name: pageToken
-      in: query
-      required: false
-      description: Token for retrieving the next page of results
-      schema:
-        type: string
+        example: UExmF3p7bTU0NXRLaW00c2dOT2tuR3ZOamJ5OWVmZGYuOTI0NzIzRTJENDg3RENNQQ
     MaxResultsDefault:
       name: maxResults
       in: query
@@ -461,22 +556,13 @@ components:
         maximum: 50
         default: 5
         example: 25
-    PlaylistItemIdPath:
-      name: playlistItemId
-      in: path
-      required: true
-      description: The unique identifier of the playlist item
-      schema:
-        type: string
-        example: UExmF3p7bTU0NXRLaW00c2dOT2tuR3ZOamJ5OWVmZGYuOTI0NzIzRTJENDg3RUNNQQ
-    PlaylistIdQuery:
-      name: playlistId
+    PageToken:
+      name: pageToken
       in: query
-      required: true
-      description: The playlist ID to retrieve items for
+      required: false
+      description: Token for retrieving the next page of results
       schema:
         type: string
-        example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
     AccessToken:
       name: access_token
       in: query
@@ -484,100 +570,40 @@ components:
       description: OAuth 2.0 access token for authentication
       schema:
         type: string
-    PlaylistItemId:
-      name: id
+    pageToken:
+      name: pageToken
       in: query
-      required: false
-      description: A comma-separated list of playlist item IDs
+      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
       schema:
         type: string
-        example: UExmF3p7bTU0NXRLaW00c2dOT2tuR3ZOamJ5OWVmZGYuOTI0NzIzRTJENDg3RENNQQ
-  examples:
-    BadRequestErrorExample:
-      summary: Bad request error
-      description: Example error response for invalid parameters
-      value:
-        error:
-          code: 400
-          message: Invalid parameter value
-          errors:
-          - domain: youtube.parameter
-            reason: invalidParameter
-            message: The parameter 'part' is required
-            locationType: parameter
-            location: part
-    SuccessfulPlaylistItemInsertExample:
-      summary: Successfully added item to playlist
-      description: Example response for adding a video to a playlist
-      value:
-        kind: youtube#playlistItem
-        etag: newitem123
-        id: NEWitem456
-        snippet:
-          publishedAt: '2024-03-20T14:00:00Z'
-          channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
-          title: Added Video Title
-          playlistId: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
-          position: 0
-          resourceId:
-            kind: youtube#video
-            videoId: dQw4w9WgXcQ
-        contentDetails:
-          videoId: dQw4w9WgXcQ
-    SuccessfulPlaylistItemListExample:
-      summary: Successful playlist items response
-      description: Example response for retrieving playlist items
-      value:
-        kind: youtube#playlistItemListResponse
-        etag: items123etag
-        pageInfo:
-          totalResults: 25
-          resultsPerPage: 5
-        items:
-        - kind: youtube#playlistItem
-          etag: item1etag
-          id: UExmF3p7bTU0NXRLaW00c2dOT2tuR3ZOamJ5OWVmZGYuOTI0NzIzRTJENDg3RUNNQQ
-          snippet:
-            publishedAt: '2024-03-15T10:30:00Z'
-            channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
-            title: 'OpenAPI Tutorial: Building REST APIs'
-            thumbnails:
-              default:
-                url: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
-                width: 120
-                height: 90
-            channelTitle: Google Developers
-            playlistId: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
-            position: 0
-            resourceId:
-              kind: youtube#video
-              videoId: dQw4w9WgXcQ
-          contentDetails:
-            videoId: dQw4w9WgXcQ
-            videoPublishedAt: '2024-03-15T10:30:00Z'
-    PlaylistItemInsertRequestExample:
-      summary: Add item to playlist request
-      description: Example request body for adding a video to a playlist
-      value:
-        snippet:
-          playlistId: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
-          position: 0
-          resourceId:
-            kind: youtube#video
-            videoId: dQw4w9WgXcQ
-    NotFoundErrorExample:
-      summary: Not found error
-      description: Example error response when resource is not found
-      value:
-        error:
-          code: 404
-          message: Resource not found
-          errors:
-          - domain: youtube.video
-            reason: videoNotFound
-            message: The video identified by the parameter id could not be found
-            locationType: parameter
-            location: id
+    maxResults:
+      name: maxResults
+      in: query
+      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 50
+        default: 5
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
   securitySchemes:
     OAuth2:
       type: oauth2
@@ -596,6 +622,47 @@ components:
       description: API key for read-only operations
       name: key
       in: query
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            https://www.googleapis.com/auth/youtube: Manage your YouTube account
+            https://www.googleapis.com/auth/youtube.readonly: View your YouTube account
+            https://www.googleapis.com/auth/youtube.upload: Manage your YouTube videos
+            https://www.googleapis.com/auth/youtube.force-ssl: See, edit, and permanently delete your YouTube videos, ratings, comments and captions
+            https://www.googleapis.com/auth/youtubepartner: View and manage your assets and associated content on YouTube
+    apiKey:
+      type: apiKey
+      in: query
+      name: key
+  responses:
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
 externalDocs:
   description: YouTube Data API Documentation
   url: https://developers.google.com/youtube/v3

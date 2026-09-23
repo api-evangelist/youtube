@@ -195,19 +195,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ListJobsResponse:
-      type: object
-      properties:
-        jobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/Job'
-          description: The list of jobs.
-          example: []
-        nextPageToken:
-          type: string
-          description: A token to retrieve the next page of results.
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
     Job:
       type: object
       properties:
@@ -241,6 +228,19 @@ components:
           description: Whether the job is system-managed.
           readOnly: true
           example: true
+    ListJobsResponse:
+      type: object
+      properties:
+        jobs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Job'
+          description: The list of jobs.
+          example: []
+        nextPageToken:
+          type: string
+          description: A token to retrieve the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
   securitySchemes:
     oauth2:
       type: oauth2

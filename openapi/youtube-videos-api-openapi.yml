@@ -441,9 +441,7 @@ paths:
       summary: Youtube Update Video Metadata
       description: 'Updates a video''s metadata. This operation requires OAuth 2.0 authentication.
 
-        You can only update videos that belong to the authenticated user''s channel.
-
-        '
+        You can only update videos that belong to the authenticated user''s channel.'
       x-microcks-operation:
         delay: 100
         dispatcher: FALLBACK
@@ -491,9 +489,7 @@ paths:
       summary: Youtube Delete Video
       description: 'Deletes a video. This operation requires OAuth 2.0 authentication.
 
-        You can only delete videos that belong to the authenticated user''s channel.
-
-        '
+        You can only delete videos that belong to the authenticated user''s channel.'
       x-microcks-operation:
         delay: 100
         dispatcher: FALLBACK
@@ -521,90 +517,7 @@ paths:
     - url: https://www.googleapis.com/youtube/v3
       description: YouTube Data API Production Server
 components:
-  responses:
-    BadRequest:
-      description: The request was invalid or malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The specified resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: The request was authenticated but the caller does not have permission to perform the requested operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: The request was not authenticated or the credentials are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    VideoPlayer:
-      type: object
-      description: Information used to play the video.
-      properties:
-        embedHtml:
-          type: string
-          description: An iframe tag that embeds a player that will play the video.
-          example: example_value
-        embedHeight:
-          type: number
-          description: The height of the embedded player returned in the player.embedHtml property.
-          example: 42.5
-        embedWidth:
-          type: number
-          description: The width of the embedded player returned in the player.embedHtml property.
-          example: 42.5
-    ErrorResponse:
-      type: object
-      description: A standard error response returned by the YouTube Data API.
-      properties:
-        error:
-          type: object
-          description: The error details.
-          properties:
-            code:
-              type: integer
-              description: The HTTP status code of the error.
-            message:
-              type: string
-              description: A human-readable description of the error.
-            errors:
-              type: array
-              description: A list of individual errors.
-              items:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    description: A human-readable description of the error.
-                  domain:
-                    type: string
-                    description: The domain in which the error occurred.
-                  reason:
-                    type: string
-                    description: The reason for the error.
-          example: example_value
-    PageInfo:
-      type: object
-      description: Paging details for a list operation, including information about the total number of resources and the number per page.
-      properties:
-        totalResults:
-          type: integer
-          description: The total number of results in the result set.
-          example: 42
-        resultsPerPage:
-          type: integer
-          description: The number of results included in the API response.
-          example: 10
     Video:
       type: object
       description: A video resource represents a YouTube video.
@@ -648,35 +561,52 @@ components:
                 type: string
                 description: The localized video description.
           example: example_value
-    VideoListResponse:
+    ErrorResponse:
       type: object
-      description: A list of video resources matching the request criteria.
+      description: A standard error response returned by the YouTube Data API.
       properties:
-        kind:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            errors:
+              type: array
+              description: A list of individual errors.
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A human-readable description of the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  reason:
+                    type: string
+                    description: The reason for the error.
+          example: example_value
+    VideoPlayer:
+      type: object
+      description: Information used to play the video.
+      properties:
+        embedHtml:
           type: string
-          description: Identifies the API resource's type. Value is youtube#videoListResponse.
-          default: youtube#videoListResponse
-          example: youtube#video
-        etag:
-          type: string
-          description: The Etag of this resource.
-          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
-        nextPageToken:
-          type: string
-          description: The token that can be used as the pageToken parameter to retrieve the next page of results in the result set.
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        prevPageToken:
-          type: string
-          description: The token that can be used as the pageToken parameter to retrieve the previous page of results in the result set.
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
-        items:
-          type: array
-          description: A list of videos that match the request criteria.
-          items:
-            $ref: '#/components/schemas/Video'
-          example: []
+          description: An iframe tag that embeds a player that will play the video.
+          example: example_value
+        embedHeight:
+          type: number
+          description: The height of the embedded player returned in the player.embedHtml property.
+          example: 42.5
+        embedWidth:
+          type: number
+          description: The width of the embedded player returned in the player.embedHtml property.
+          example: 42.5
     VideoSnippet:
       type: object
       description: Basic details about a video, including its title, description, tags, and category.
@@ -751,40 +681,71 @@ components:
               type: string
               description: The localized video description.
           example: example_value
-    VideoContentDetails:
+    VideoListResponse:
       type: object
-      description: Information about the video content, including the length of the video and an indication of whether captions are available.
+      description: A list of video resources matching the request criteria.
       properties:
-        duration:
+        kind:
           type: string
-          description: The length of the video in ISO 8601 format.
-          example: example_value
-        dimension:
+          description: Identifies the API resource's type. Value is youtube#videoListResponse.
+          default: youtube#videoListResponse
+          example: youtube#video
+        etag:
           type: string
-          description: Indicates whether the video is available in 3D or in 2D.
-          example: example_value
-        definition:
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        nextPageToken:
           type: string
-          description: Indicates whether the video is available in high definition or standard definition.
-          enum:
-          - hd
-          - sd
-          example: hd
-        caption:
+          description: The token that can be used as the pageToken parameter to retrieve the next page of results in the result set.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        prevPageToken:
           type: string
-          description: Indicates whether captions are available for the video.
-          enum:
-          - 'false'
-          - 'true'
-          example: 'false'
-        licensedContent:
-          type: boolean
-          description: Indicates whether the video represents licensed content, which means that the content has been claimed by a YouTube content partner.
-          example: true
-        contentRating:
-          type: object
-          description: Specifies the ratings that the video received under various rating schemes.
-          example: example_value
+          description: The token that can be used as the pageToken parameter to retrieve the previous page of results in the result set.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of videos that match the request criteria.
+          items:
+            $ref: '#/components/schemas/Video'
+          example: []
+    VideoStatistics:
+      type: object
+      description: Statistics about the video such as the number of times the video has been viewed or liked.
+      properties:
+        viewCount:
+          type: string
+          description: The number of times the video has been viewed.
+          example: 42
+        likeCount:
+          type: string
+          description: The number of users who have indicated that they liked the video.
+          example: 42
+        dislikeCount:
+          type: string
+          description: The number of users who have indicated that they disliked the video.
+          example: 42
+        favoriteCount:
+          type: string
+          description: The number of users who have added the video to their favorites list.
+          example: 42
+        commentCount:
+          type: string
+          description: The number of comments for the video.
+          example: 42
+    PageInfo:
+      type: object
+      description: Paging details for a list operation, including information about the total number of resources and the number per page.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results in the result set.
+          example: 42
+        resultsPerPage:
+          type: integer
+          description: The number of results included in the API response.
+          example: 10
     VideoStatus:
       type: object
       description: The status of an uploaded video.
@@ -826,96 +787,179 @@ components:
           type: boolean
           description: Indicates whether the video is designated as child-directed.
           example: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
-    VideoStatistics:
+    VideoContentDetails:
       type: object
-      description: Statistics about the video such as the number of times the video has been viewed or liked.
+      description: Information about the video content, including the length of the video and an indication of whether captions are available.
+      properties:
+        duration:
+          type: string
+          description: The length of the video in ISO 8601 format.
+          example: example_value
+        dimension:
+          type: string
+          description: Indicates whether the video is available in 3D or in 2D.
+          example: example_value
+        definition:
+          type: string
+          description: Indicates whether the video is available in high definition or standard definition.
+          enum:
+          - hd
+          - sd
+          example: hd
+        caption:
+          type: string
+          description: Indicates whether captions are available for the video.
+          enum:
+          - 'false'
+          - 'true'
+          example: 'false'
+        licensedContent:
+          type: boolean
+          description: Indicates whether the video represents licensed content, which means that the content has been claimed by a YouTube content partner.
+          example: true
+        contentRating:
+          type: object
+          description: Specifies the ratings that the video received under various rating schemes.
+          example: example_value
+    ErrorItem:
+      type: object
+      description: Individual error detail
+      properties:
+        domain:
+          type: string
+          description: Error domain
+          example: youtube.parameter
+        reason:
+          type: string
+          description: Error reason code
+          example: invalidParameter
+        message:
+          type: string
+          description: Detailed error message
+          example: The parameter 'part' is required
+        locationType:
+          type: string
+          description: Type of location where error occurred
+          example: parameter
+        location:
+          type: string
+          description: Specific location of the error
+          example: part
+    VideoStatistics_2:
+      type: object
+      description: Statistics for the video
       properties:
         viewCount:
           type: string
-          description: The number of times the video has been viewed.
-          example: 42
+          description: Number of views
+          example: '1500000'
         likeCount:
           type: string
-          description: The number of users who have indicated that they liked the video.
-          example: 42
+          description: Number of likes
+          example: '45000'
         dislikeCount:
           type: string
-          description: The number of users who have indicated that they disliked the video.
-          example: 42
+          description: Number of dislikes (deprecated)
+          example: '500'
         favoriteCount:
           type: string
-          description: The number of users who have added the video to their favorites list.
-          example: 42
+          description: Number of favorites
+          example: '0'
         commentCount:
           type: string
-          description: The number of comments for the video.
-          example: 42
-    ErrorResponse_2:
+          description: Number of comments
+          example: '2500'
+    ErrorDetails:
       type: object
-      description: Error response object
+      description: Details about an API error
       required:
-      - error
+      - code
+      - message
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetails'
-    ThumbnailDetails:
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid parameter value
+        errors:
+          type: array
+          description: List of specific errors
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    Video_2:
       type: object
-      description: Thumbnail images at various resolutions
-      properties:
-        default:
-          $ref: '#/components/schemas/Thumbnail'
-        medium:
-          $ref: '#/components/schemas/Thumbnail'
-        high:
-          $ref: '#/components/schemas/Thumbnail'
-        standard:
-          $ref: '#/components/schemas/Thumbnail'
-        maxres:
-          $ref: '#/components/schemas/Thumbnail'
-    VideoListResponse_2:
-      type: object
-      description: Response containing video resources
+      description: A YouTube video resource
       required:
       - kind
       - etag
-      - items
+      - id
       properties:
         kind:
           type: string
           description: Identifies the API resource type
-          example: youtube#videoListResponse
+          example: youtube#video
         etag:
           type: string
           description: ETag for caching purposes
-        nextPageToken:
+        id:
           type: string
-          description: Token for the next page of results
-        prevPageToken:
-          type: string
-          description: Token for the previous page of results
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo_2'
-        items:
-          type: array
-          description: List of videos
-          items:
-            $ref: '#/components/schemas/Video_2'
-    Thumbnail:
+          description: Unique identifier for the video
+          example: dQw4w9WgXcQ
+        snippet:
+          $ref: '#/components/schemas/VideoSnippet_2'
+        contentDetails:
+          $ref: '#/components/schemas/VideoContentDetails_2'
+        statistics:
+          $ref: '#/components/schemas/VideoStatistics_2'
+        status:
+          $ref: '#/components/schemas/VideoStatus_2'
+    VideoSnippet_2:
       type: object
-      description: A thumbnail image
+      description: Basic information about the video
       properties:
-        url:
+        publishedAt:
           type: string
-          description: URL of the thumbnail image
-          example: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
-        width:
-          type: integer
-          description: Width of the thumbnail
-          example: 120
-        height:
-          type: integer
-          description: Height of the thumbnail
-          example: 90
+          format: date-time
+          description: When the video was published
+          example: '2024-03-15T10:30:00Z'
+        channelId:
+          type: string
+          description: ID of the channel that owns the video
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        title:
+          type: string
+          description: Title of the video
+          example: 'OpenAPI Tutorial: Building REST APIs'
+        description:
+          type: string
+          description: Description of the video
+          example: Learn how to build REST APIs using OpenAPI specification...
+        thumbnails:
+          $ref: '#/components/schemas/ThumbnailDetails'
+        channelTitle:
+          type: string
+          description: Title of the channel
+          example: Google Developers
+        tags:
+          type: array
+          description: List of keyword tags for the video
+          items:
+            type: string
+          example:
+          - openapi
+          - rest api
+          - tutorial
+        categoryId:
+          type: string
+          description: YouTube video category ID
+          example: '28'
+        defaultLanguage:
+          type: string
+          description: Default language of the video
+          example: en
     VideoInsertRequest:
       type: object
       description: Request body for uploading a video
@@ -971,50 +1015,149 @@ components:
               - creativeCommon
               - youtube
               example: youtube
-    VideoSnippet_2:
+    VideoListResponse_2:
       type: object
-      description: Basic information about the video
+      description: Response containing video resources
+      required:
+      - kind
+      - etag
+      - items
       properties:
-        publishedAt:
+        kind:
           type: string
-          format: date-time
-          description: When the video was published
-          example: '2024-03-15T10:30:00Z'
-        channelId:
+          description: Identifies the API resource type
+          example: youtube#videoListResponse
+        etag:
           type: string
-          description: ID of the channel that owns the video
-          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
-        title:
+          description: ETag for caching purposes
+        nextPageToken:
           type: string
-          description: Title of the video
-          example: 'OpenAPI Tutorial: Building REST APIs'
-        description:
+          description: Token for the next page of results
+        prevPageToken:
           type: string
-          description: Description of the video
-          example: Learn how to build REST APIs using OpenAPI specification...
-        thumbnails:
-          $ref: '#/components/schemas/ThumbnailDetails'
-        channelTitle:
-          type: string
-          description: Title of the channel
-          example: Google Developers
-        tags:
+          description: Token for the previous page of results
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo_2'
+        items:
           type: array
-          description: List of keyword tags for the video
+          description: List of videos
           items:
-            type: string
-          example:
-          - openapi
-          - rest api
-          - tutorial
-        categoryId:
+            $ref: '#/components/schemas/Video_2'
+    PageInfo_2:
+      type: object
+      description: Pagination information
+      properties:
+        totalResults:
+          type: integer
+          description: Total number of results
+          example: 1000000
+        resultsPerPage:
+          type: integer
+          description: Number of results per page
+          example: 25
+    Thumbnail:
+      type: object
+      description: A thumbnail image
+      properties:
+        url:
           type: string
-          description: YouTube video category ID
-          example: '28'
-        defaultLanguage:
+          description: URL of the thumbnail image
+          example: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
+        width:
+          type: integer
+          description: Width of the thumbnail
+          example: 120
+        height:
+          type: integer
+          description: Height of the thumbnail
+          example: 90
+    VideoContentDetails_2:
+      type: object
+      description: Content details for the video
+      properties:
+        duration:
           type: string
-          description: Default language of the video
-          example: en
+          description: Duration of the video in ISO 8601 format
+          example: PT15M33S
+        dimension:
+          type: string
+          description: Whether the video is 2D or 3D
+          enum:
+          - 2d
+          - 3d
+          example: 2d
+        definition:
+          type: string
+          description: Whether the video is SD or HD
+          enum:
+          - hd
+          - sd
+          example: hd
+        caption:
+          type: string
+          description: Whether captions are available
+          enum:
+          - 'true'
+          - 'false'
+          example: 'true'
+        licensedContent:
+          type: boolean
+          description: Whether the video is licensed content
+          example: true
+    ErrorResponse_2:
+      type: object
+      description: Error response object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetails'
+    ThumbnailDetails:
+      type: object
+      description: Thumbnail images at various resolutions
+      properties:
+        default:
+          $ref: '#/components/schemas/Thumbnail'
+        medium:
+          $ref: '#/components/schemas/Thumbnail'
+        high:
+          $ref: '#/components/schemas/Thumbnail'
+        standard:
+          $ref: '#/components/schemas/Thumbnail'
+        maxres:
+          $ref: '#/components/schemas/Thumbnail'
+    VideoUpdateRequest:
+      type: object
+      description: Request body for updating a video
+      required:
+      - id
+      - snippet
+      properties:
+        id:
+          type: string
+          description: ID of the video to update
+          example: dQw4w9WgXcQ
+        snippet:
+          type: object
+          required:
+          - title
+          - categoryId
+          properties:
+            title:
+              type: string
+              description: Updated title
+              example: Updated Video Title
+            description:
+              type: string
+              description: Updated description
+              example: Updated description...
+            tags:
+              type: array
+              items:
+                type: string
+            categoryId:
+              type: string
+              example: '28'
     VideoStatus_2:
       type: object
       description: Status information for the video
@@ -1052,179 +1195,38 @@ components:
           type: boolean
           description: Whether statistics are publicly viewable
           example: true
-    ErrorDetails:
-      type: object
-      description: Details about an API error
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-          example: 400
-        message:
-          type: string
-          description: Human-readable error message
-          example: Invalid parameter value
-        errors:
-          type: array
-          description: List of specific errors
-          items:
-            $ref: '#/components/schemas/ErrorItem'
-    Video_2:
-      type: object
-      description: A YouTube video resource
-      required:
-      - kind
-      - etag
-      - id
-      properties:
-        kind:
-          type: string
-          description: Identifies the API resource type
-          example: youtube#video
-        etag:
-          type: string
-          description: ETag for caching purposes
-        id:
-          type: string
-          description: Unique identifier for the video
-          example: dQw4w9WgXcQ
-        snippet:
-          $ref: '#/components/schemas/VideoSnippet_2'
-        contentDetails:
-          $ref: '#/components/schemas/VideoContentDetails_2'
-        statistics:
-          $ref: '#/components/schemas/VideoStatistics_2'
-        status:
-          $ref: '#/components/schemas/VideoStatus_2'
-    VideoUpdateRequest:
-      type: object
-      description: Request body for updating a video
-      required:
-      - id
-      - snippet
-      properties:
-        id:
-          type: string
-          description: ID of the video to update
-          example: dQw4w9WgXcQ
-        snippet:
-          type: object
-          required:
-          - title
-          - categoryId
-          properties:
-            title:
-              type: string
-              description: Updated title
-              example: Updated Video Title
-            description:
-              type: string
-              description: Updated description
-              example: Updated description...
-            tags:
-              type: array
-              items:
-                type: string
-            categoryId:
-              type: string
-              example: '28'
-    VideoStatistics_2:
-      type: object
-      description: Statistics for the video
-      properties:
-        viewCount:
-          type: string
-          description: Number of views
-          example: '1500000'
-        likeCount:
-          type: string
-          description: Number of likes
-          example: '45000'
-        dislikeCount:
-          type: string
-          description: Number of dislikes (deprecated)
-          example: '500'
-        favoriteCount:
-          type: string
-          description: Number of favorites
-          example: '0'
-        commentCount:
-          type: string
-          description: Number of comments
-          example: '2500'
-    PageInfo_2:
-      type: object
-      description: Pagination information
-      properties:
-        totalResults:
-          type: integer
-          description: Total number of results
-          example: 1000000
-        resultsPerPage:
-          type: integer
-          description: Number of results per page
-          example: 25
-    ErrorItem:
-      type: object
-      description: Individual error detail
-      properties:
-        domain:
-          type: string
-          description: Error domain
-          example: youtube.parameter
-        reason:
-          type: string
-          description: Error reason code
-          example: invalidParameter
-        message:
-          type: string
-          description: Detailed error message
-          example: The parameter 'part' is required
-        locationType:
-          type: string
-          description: Type of location where error occurred
-          example: parameter
-        location:
-          type: string
-          description: Specific location of the error
-          example: part
-    VideoContentDetails_2:
-      type: object
-      description: Content details for the video
-      properties:
-        duration:
-          type: string
-          description: Duration of the video in ISO 8601 format
-          example: PT15M33S
-        dimension:
-          type: string
-          description: Whether the video is 2D or 3D
-          enum:
-          - 2d
-          - 3d
-          example: 2d
-        definition:
-          type: string
-          description: Whether the video is SD or HD
-          enum:
-          - hd
-          - sd
-          example: hd
-        caption:
-          type: string
-          description: Whether captions are available
-          enum:
-          - 'true'
-          - 'false'
-          example: 'true'
-        licensedContent:
-          type: boolean
-          description: Whether the video is licensed content
-          example: true
+  responses:
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
+      schema:
+        type: string
     maxResults:
       name: maxResults
       in: query
@@ -1234,16 +1236,11 @@ components:
         minimum: 0
         maximum: 50
         default: 5
-    pageToken:
-      name: pageToken
+    part:
+      name: part
       in: query
-      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
-      schema:
-        type: string
-    fields:
-      name: fields
-      in: query
-      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
       schema:
         type: string
     key:
@@ -1252,23 +1249,35 @@ components:
       description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       schema:
         type: string
-    part:
-      name: part
+    fields:
+      name: fields
       in: query
-      required: true
-      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
       schema:
         type: string
-    Chart:
-      name: chart
+    VideoId:
+      name: id
       in: query
       required: false
-      description: Identifies the chart to retrieve
+      description: A comma-separated list of video IDs to retrieve
       schema:
         type: string
-        enum:
-        - mostPopular
-        example: mostPopular
+        example: dQw4w9WgXcQ,abc123XYZ789
+    ApiKey:
+      name: key
+      in: query
+      required: false
+      description: API key for authentication (for read-only operations)
+      schema:
+        type: string
+    VideoCategoryId:
+      name: videoCategoryId
+      in: query
+      required: false
+      description: Filter chart results by video category
+      schema:
+        type: string
+        example: '10'
     Part:
       name: part
       in: query
@@ -1281,40 +1290,6 @@ components:
       schema:
         type: string
         example: snippet,contentDetails,statistics
-    ApiKey:
-      name: key
-      in: query
-      required: false
-      description: API key for authentication (for read-only operations)
-      schema:
-        type: string
-    PageToken:
-      name: pageToken
-      in: query
-      required: false
-      description: Token for retrieving the next page of results
-      schema:
-        type: string
-    MaxResultsDefault:
-      name: maxResults
-      in: query
-      required: false
-      description: Maximum number of items to return (1-50)
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 50
-        default: 5
-        example: 25
-    NotifySubscribers:
-      name: notifySubscribers
-      in: query
-      required: false
-      description: Whether subscribers should be notified about the video upload
-      schema:
-        type: boolean
-        default: true
-        example: true
     VideoIdPath:
       name: videoId
       in: path
@@ -1332,6 +1307,24 @@ components:
         type: string
         pattern: ^[A-Z]{2}$
         example: US
+    MaxResultsDefault:
+      name: maxResults
+      in: query
+      required: false
+      description: Maximum number of items to return (1-50)
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 5
+        example: 25
+    PageToken:
+      name: pageToken
+      in: query
+      required: false
+      description: Token for retrieving the next page of results
+      schema:
+        type: string
     AccessToken:
       name: access_token
       in: query
@@ -1339,74 +1332,26 @@ components:
       description: OAuth 2.0 access token for authentication
       schema:
         type: string
-    VideoId:
-      name: id
+    NotifySubscribers:
+      name: notifySubscribers
       in: query
       required: false
-      description: A comma-separated list of video IDs to retrieve
+      description: Whether subscribers should be notified about the video upload
       schema:
-        type: string
-        example: dQw4w9WgXcQ,abc123XYZ789
-    VideoCategoryId:
-      name: videoCategoryId
+        type: boolean
+        default: true
+        example: true
+    Chart:
+      name: chart
       in: query
       required: false
-      description: Filter chart results by video category
+      description: Identifies the chart to retrieve
       schema:
         type: string
-        example: '10'
+        enum:
+        - mostPopular
+        example: mostPopular
   examples:
-    BadRequestErrorExample:
-      summary: Bad request error
-      description: Example error response for invalid parameters
-      value:
-        error:
-          code: 400
-          message: Invalid parameter value
-          errors:
-          - domain: youtube.parameter
-            reason: invalidParameter
-            message: The parameter 'part' is required
-            locationType: parameter
-            location: part
-    SuccessfulVideoInsertExample:
-      summary: Successfully uploaded video
-      description: Example response for a newly uploaded video
-      value:
-        kind: youtube#video
-        etag: newvideo123
-        id: NEWvideo456
-        snippet:
-          publishedAt: '2024-03-20T14:00:00Z'
-          channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
-          title: My New Video
-          description: This is my new video about...
-          thumbnails:
-            default:
-              url: https://i.ytimg.com/vi/NEWvideo456/default.jpg
-              width: 120
-              height: 90
-          channelTitle: My Channel
-          tags:
-          - tutorial
-          - demo
-          categoryId: '28'
-        status:
-          uploadStatus: processed
-          privacyStatus: public
-          embeddable: true
-    VideoUpdateRequestExample:
-      summary: Video update request
-      description: Example request body for updating video metadata
-      value:
-        id: dQw4w9WgXcQ
-        snippet:
-          title: Updated Video Title
-          description: Updated description...
-          tags:
-          - updated
-          - tags
-          categoryId: '28'
     SuccessfulVideoListExample:
       summary: Successful video list response
       description: Example response for retrieving video details
@@ -1479,6 +1424,57 @@ components:
           privacyStatus: public
           embeddable: true
           license: youtube
+    BadRequestErrorExample:
+      summary: Bad request error
+      description: Example error response for invalid parameters
+      value:
+        error:
+          code: 400
+          message: Invalid parameter value
+          errors:
+          - domain: youtube.parameter
+            reason: invalidParameter
+            message: The parameter 'part' is required
+            locationType: parameter
+            location: part
+    SuccessfulVideoInsertExample:
+      summary: Successfully uploaded video
+      description: Example response for a newly uploaded video
+      value:
+        kind: youtube#video
+        etag: newvideo123
+        id: NEWvideo456
+        snippet:
+          publishedAt: '2024-03-20T14:00:00Z'
+          channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
+          title: My New Video
+          description: This is my new video about...
+          thumbnails:
+            default:
+              url: https://i.ytimg.com/vi/NEWvideo456/default.jpg
+              width: 120
+              height: 90
+          channelTitle: My Channel
+          tags:
+          - tutorial
+          - demo
+          categoryId: '28'
+        status:
+          uploadStatus: processed
+          privacyStatus: public
+          embeddable: true
+    VideoUpdateRequestExample:
+      summary: Video update request
+      description: Example request body for updating video metadata
+      value:
+        id: dQw4w9WgXcQ
+        snippet:
+          title: Updated Video Title
+          description: Updated description...
+          tags:
+          - updated
+          - tags
+          categoryId: '28'
     UnauthorizedErrorExample:
       summary: Unauthorized error
       description: Example error response for authentication failure

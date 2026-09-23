@@ -15,7 +15,7 @@ security:
   - https://www.googleapis.com/auth/youtube
 - apiKey: []
 tags:
-- name: CommentThreads
+- name: Comment Threads
   description: Operations related to YouTube comment threads
 paths:
   /commentThreads:
@@ -24,7 +24,7 @@ paths:
       summary: Youtube List Comment Threads
       description: Returns a list of comment threads that match the API request parameters. The response includes top-level comments and optionally their replies.
       tags:
-      - CommentThreads
+      - Comment Threads
       parameters:
       - $ref: '#/components/parameters/part'
       - name: id
@@ -103,7 +103,7 @@ paths:
       summary: Youtube Create a Comment Thread
       description: Creates a new top-level comment. To add a reply to an existing comment, use the comments.insert method.
       tags:
-      - CommentThreads
+      - Comment Threads
       parameters:
       - $ref: '#/components/parameters/part'
       - $ref: '#/components/parameters/fields'
@@ -214,7 +214,7 @@ paths:
       summary: Youtube Update a Comment Thread
       description: Modifies the top-level comment in a comment thread. The authenticated user must own the comment being updated.
       tags:
-      - CommentThreads
+      - Comment Threads
       parameters:
       - $ref: '#/components/parameters/part'
       - $ref: '#/components/parameters/fields'
@@ -321,104 +321,32 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    BadRequest:
-      description: The request was invalid or malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: The request was authenticated but the caller does not have permission to perform the requested operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: The request was not authenticated or the credentials are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    Comment:
+    CommentThreadListResponse:
       type: object
-      description: A comment resource contains information about a single YouTube comment.
-      required:
-      - kind
-      - etag
+      description: A list of comment thread resources matching the request criteria.
       properties:
         kind:
           type: string
-          description: Identifies the API resource's type. Value is youtube#comment.
-          default: youtube#comment
+          description: Identifies the API resource's type. Value is youtube#commentThreadListResponse.
+          default: youtube#commentThreadListResponse
           example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
           example: XI7nbFXulYBIpL0ayR_gDh3eu1k
-        id:
+        nextPageToken:
           type: string
-          description: The ID that YouTube uses to uniquely identify the comment.
-          example: abc123def456
-        snippet:
-          type: object
-          description: The snippet object contains basic details about the comment.
-          properties:
-            textOriginal:
-              type: string
-              description: The original text of the comment as it was initially posted.
-            textDisplay:
-              type: string
-              description: The comment text as displayed to users.
-            authorDisplayName:
-              type: string
-              description: The display name of the user who posted the comment.
-            authorProfileImageUrl:
-              type: string
-              description: The URL for the avatar of the user who posted the comment.
-            authorChannelUrl:
-              type: string
-              description: A link to the YouTube channel of the comment's author.
-            authorChannelId:
-              type: object
-              description: An object that encapsulates information about the comment author's YouTube channel.
-              properties:
-                value:
-                  type: string
-                  description: The author's YouTube channel ID.
-            likeCount:
-              type: integer
-              description: The total number of likes that the comment has received.
-            viewerRating:
-              type: string
-              description: The rating the viewer has given to this comment. Note that this property does not currently identify dislike ratings.
-            publishedAt:
-              type: string
-              format: date-time
-              description: The date and time when the comment was originally published.
-            updatedAt:
-              type: string
-              format: date-time
-              description: The date and time when the comment was last updated.
-            videoId:
-              type: string
-              description: The ID of the video the comment refers to.
-            parentId:
-              type: string
-              description: The unique ID of the parent comment.
-            canRate:
-              type: boolean
-              description: Indicates whether the current viewer can rate the comment.
-            moderationStatus:
-              type: string
-              description: The comment's moderation status.
-              enum:
-              - heldForReview
-              - likelySpam
-              - published
-              - rejected
-          example: example_value
+          description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of comment threads that match the request criteria.
+          items:
+            $ref: '#/components/schemas/CommentThread'
+          example: []
     ErrorResponse:
       type: object
       description: A standard error response returned by the YouTube Data API.
@@ -513,32 +441,110 @@ components:
               items:
                 $ref: '#/components/schemas/Comment'
           example: example_value
-    CommentThreadListResponse:
+    Comment:
       type: object
-      description: A list of comment thread resources matching the request criteria.
+      description: A comment resource contains information about a single YouTube comment.
+      required:
+      - kind
+      - etag
       properties:
         kind:
           type: string
-          description: Identifies the API resource's type. Value is youtube#commentThreadListResponse.
-          default: youtube#commentThreadListResponse
+          description: Identifies the API resource's type. Value is youtube#comment.
+          default: youtube#comment
           example: youtube#video
         etag:
           type: string
           description: The Etag of this resource.
           example: XI7nbFXulYBIpL0ayR_gDh3eu1k
-        nextPageToken:
+        id:
           type: string
-          description: The token for the next page of results.
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
-        items:
-          type: array
-          description: A list of comment threads that match the request criteria.
-          items:
-            $ref: '#/components/schemas/CommentThread'
-          example: []
+          description: The ID that YouTube uses to uniquely identify the comment.
+          example: abc123def456
+        snippet:
+          type: object
+          description: The snippet object contains basic details about the comment.
+          properties:
+            textOriginal:
+              type: string
+              description: The original text of the comment as it was initially posted.
+            textDisplay:
+              type: string
+              description: The comment text as displayed to users.
+            authorDisplayName:
+              type: string
+              description: The display name of the user who posted the comment.
+            authorProfileImageUrl:
+              type: string
+              description: The URL for the avatar of the user who posted the comment.
+            authorChannelUrl:
+              type: string
+              description: A link to the YouTube channel of the comment's author.
+            authorChannelId:
+              type: object
+              description: An object that encapsulates information about the comment author's YouTube channel.
+              properties:
+                value:
+                  type: string
+                  description: The author's YouTube channel ID.
+            likeCount:
+              type: integer
+              description: The total number of likes that the comment has received.
+            viewerRating:
+              type: string
+              description: The rating the viewer has given to this comment. Note that this property does not currently identify dislike ratings.
+            publishedAt:
+              type: string
+              format: date-time
+              description: The date and time when the comment was originally published.
+            updatedAt:
+              type: string
+              format: date-time
+              description: The date and time when the comment was last updated.
+            videoId:
+              type: string
+              description: The ID of the video the comment refers to.
+            parentId:
+              type: string
+              description: The unique ID of the parent comment.
+            canRate:
+              type: boolean
+              description: Indicates whether the current viewer can rate the comment.
+            moderationStatus:
+              type: string
+              description: The comment's moderation status.
+              enum:
+              - heldForReview
+              - likelySpam
+              - published
+              - rejected
+          example: example_value
+  responses:
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
+      schema:
+        type: string
     maxResults:
       name: maxResults
       in: query
@@ -548,16 +554,11 @@ components:
         minimum: 0
         maximum: 50
         default: 5
-    pageToken:
-      name: pageToken
+    part:
+      name: part
       in: query
-      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
-      schema:
-        type: string
-    fields:
-      name: fields
-      in: query
-      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
       schema:
         type: string
     key:
@@ -566,11 +567,10 @@ components:
       description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       schema:
         type: string
-    part:
-      name: part
+    fields:
+      name: fields
       in: query
-      required: true
-      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
       schema:
         type: string
   securitySchemes:
