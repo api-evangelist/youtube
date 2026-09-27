@@ -77,6 +77,26 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
   schemas:
     VideoCategory:
       type: object
@@ -158,35 +178,15 @@ components:
           items:
             $ref: '#/components/schemas/VideoCategory'
           example: []
-  parameters:
-    part:
-      name: part
-      in: query
-      required: true
-      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
-      schema:
-        type: string
-    key:
-      name: key
-      in: query
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      schema:
-        type: string
-    fields:
-      name: fields
-      in: query
-      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
-      schema:
-        type: string
   responses:
-    Forbidden:
-      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+    BadRequest:
+      description: The request was invalid or malformed.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request was invalid or malformed.
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
       content:
         application/json:
           schema:

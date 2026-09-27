@@ -308,6 +308,77 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    LiveStreamContentDetails:
+      type: object
+      description: Detailed settings for a live stream including the stream key and ingestion settings.
+      properties:
+        boundBroadcastId:
+          type: string
+          description: The ID of the live broadcast to which this stream is bound.
+          example: '500123'
+        isReusable:
+          type: boolean
+          description: Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts.
+          example: true
+    LiveStreamListResponse:
+      type: object
+      description: A list of live stream resources matching the request criteria.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#liveStreamListResponse.
+          default: youtube#liveStreamListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        nextPageToken:
+          type: string
+          description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        prevPageToken:
+          type: string
+          description: The token for the previous page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of live streams that match the request criteria.
+          items:
+            $ref: '#/components/schemas/LiveStream'
+          example: []
+    ErrorResponse:
+      type: object
+      description: A standard error response returned by the YouTube Live Streaming API.
+      properties:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            errors:
+              type: array
+              description: A list of individual errors.
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A human-readable description of the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  reason:
+                    type: string
+                    description: The reason for the error.
+          example: example_value
     LiveStream:
       type: object
       description: A liveStream resource contains information about the video stream that you are transmitting to YouTube. The stream provides the content that will be broadcast to YouTube users.
@@ -371,36 +442,6 @@ components:
           $ref: '#/components/schemas/LiveStreamStatus'
         contentDetails:
           $ref: '#/components/schemas/LiveStreamContentDetails'
-    ErrorResponse:
-      type: object
-      description: A standard error response returned by the YouTube Live Streaming API.
-      properties:
-        error:
-          type: object
-          description: The error details.
-          properties:
-            code:
-              type: integer
-              description: The HTTP status code of the error.
-            message:
-              type: string
-              description: A human-readable description of the error.
-            errors:
-              type: array
-              description: A list of individual errors.
-              items:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    description: A human-readable description of the error.
-                  domain:
-                    type: string
-                    description: The domain in which the error occurred.
-                  reason:
-                    type: string
-                    description: The reason for the error.
-          example: example_value
     LiveStreamSnippet:
       type: object
       description: Basic details about a live stream including its title, description, and channel association.
@@ -426,6 +467,18 @@ components:
           type: boolean
           description: Indicates whether this stream is the default stream.
           example: true
+    PageInfo:
+      type: object
+      description: Paging details for a list of live streaming resources.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results in the result set.
+          example: 42
+        resultsPerPage:
+          type: integer
+          description: The number of results included in the API response.
+          example: 10
     LiveStreamStatus:
       type: object
       description: Status information about a live stream including its stream status and health status.
@@ -480,62 +533,9 @@ components:
                     type: string
                     description: The long-form description of the issue and how to resolve it.
           example: example_value
-    PageInfo:
-      type: object
-      description: Paging details for a list of live streaming resources.
-      properties:
-        totalResults:
-          type: integer
-          description: The total number of results in the result set.
-          example: 42
-        resultsPerPage:
-          type: integer
-          description: The number of results included in the API response.
-          example: 10
-    LiveStreamListResponse:
-      type: object
-      description: A list of live stream resources matching the request criteria.
-      properties:
-        kind:
-          type: string
-          description: Identifies the API resource's type. Value is youtube#liveStreamListResponse.
-          default: youtube#liveStreamListResponse
-          example: youtube#video
-        etag:
-          type: string
-          description: The Etag of this resource.
-          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
-        nextPageToken:
-          type: string
-          description: The token for the next page of results.
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        prevPageToken:
-          type: string
-          description: The token for the previous page of results.
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
-        items:
-          type: array
-          description: A list of live streams that match the request criteria.
-          items:
-            $ref: '#/components/schemas/LiveStream'
-          example: []
-    LiveStreamContentDetails:
-      type: object
-      description: Detailed settings for a live stream including the stream key and ingestion settings.
-      properties:
-        boundBroadcastId:
-          type: string
-          description: The ID of the live broadcast to which this stream is bound.
-          example: '500123'
-        isReusable:
-          type: boolean
-          description: Indicates whether the stream is reusable, which means that it can be bound to multiple broadcasts.
-          example: true
   responses:
-    Unauthorized:
-      description: The request was not authenticated or the credentials are invalid.
+    BadRequest:
+      description: The request was invalid or malformed.
       content:
         application/json:
           schema:
@@ -552,19 +552,13 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request was invalid or malformed.
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    pageToken:
-      name: pageToken
-      in: query
-      description: Identifies a specific page in the result set that should be returned. The nextPageToken property in the API response identifies other pages that are available.
-      schema:
-        type: string
     maxResults:
       name: maxResults
       in: query
@@ -574,17 +568,23 @@ components:
         minimum: 0
         maximum: 50
         default: 5
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. The nextPageToken property in the API response identifies other pages that are available.
+      schema:
+        type: string
     part:
       name: part
       in: query
       required: true
       description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
-      schema:
-        type: string
-    key:
-      name: key
-      in: query
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       schema:
         type: string
     fields:

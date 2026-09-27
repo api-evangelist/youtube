@@ -229,6 +229,148 @@ paths:
     - url: https://www.googleapis.com/youtube/v3
       description: YouTube Data API Production Server
 components:
+  responses:
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    maxResults:
+      name: maxResults
+      in: query
+      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 50
+        default: 5
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
+      schema:
+        type: string
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
+    MaxResultsDefault:
+      name: maxResults
+      in: query
+      required: false
+      description: Maximum number of items to return (1-50)
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 5
+        example: 25
+    Part:
+      name: part
+      in: query
+      required: true
+      description: 'The part parameter specifies a comma-separated list of one or more
+
+        resource properties that the API response will include.
+
+        '
+      schema:
+        type: string
+        example: snippet,contentDetails,statistics
+    PageToken:
+      name: pageToken
+      in: query
+      required: false
+      description: Token for retrieving the next page of results
+      schema:
+        type: string
+    SubscriptionOrder:
+      name: order
+      in: query
+      required: false
+      description: The method to use for sorting subscription results
+      schema:
+        type: string
+        enum:
+        - alphabetical
+        - relevance
+        - unread
+        default: relevance
+        example: alphabetical
+    Mine:
+      name: mine
+      in: query
+      required: false
+      description: Return resources owned by the authenticated user
+      schema:
+        type: boolean
+        example: true
+    SubscriptionIdPath:
+      name: subscriptionId
+      in: path
+      required: true
+      description: The unique identifier of the subscription
+      schema:
+        type: string
+        example: SUBScription123abc
+    ChannelIdQuery:
+      name: channelId
+      in: query
+      required: false
+      description: Filter results by channel ID
+      schema:
+        type: string
+        example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+    AccessToken:
+      name: access_token
+      in: query
+      required: false
+      description: OAuth 2.0 access token for authentication
+      schema:
+        type: string
+    ForChannelId:
+      name: forChannelId
+      in: query
+      required: false
+      description: Filter subscriptions to the specified channel
+      schema:
+        type: string
+        example: UC_x5XG1OV2P6uZZ5FSM9Ttw
   schemas:
     ErrorResponse:
       type: object
@@ -260,6 +402,47 @@ components:
                     type: string
                     description: The reason for the error.
           example: example_value
+    SubscriptionListResponse:
+      type: object
+      description: A list of subscription resources matching the request criteria.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#subscriptionListResponse.
+          default: youtube#subscriptionListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        nextPageToken:
+          type: string
+          description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        prevPageToken:
+          type: string
+          description: The token for the previous page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of subscriptions that match the request criteria.
+          items:
+            $ref: '#/components/schemas/Subscription'
+          example: []
+    PageInfo:
+      type: object
+      description: Paging details for a list operation, including information about the total number of resources and the number per page.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results in the result set.
+          example: 42
+        resultsPerPage:
+          type: integer
+          description: The number of results included in the API response.
+          example: 10
     Subscription:
       type: object
       description: A subscription resource contains information about a YouTube user's subscription to a channel.
@@ -311,71 +494,83 @@ components:
               type: object
               description: A map of thumbnail images associated with the subscription.
           example: example_value
-    PageInfo:
+    PageInfo_2:
       type: object
-      description: Paging details for a list operation, including information about the total number of resources and the number per page.
+      description: Pagination information
       properties:
         totalResults:
           type: integer
-          description: The total number of results in the result set.
-          example: 42
+          description: Total number of results
+          example: 1000000
         resultsPerPage:
           type: integer
-          description: The number of results included in the API response.
-          example: 10
-    SubscriptionListResponse:
+          description: Number of results per page
+          example: 25
+    ThumbnailDetails:
       type: object
-      description: A list of subscription resources matching the request criteria.
+      description: Thumbnail images at various resolutions
       properties:
-        kind:
-          type: string
-          description: Identifies the API resource's type. Value is youtube#subscriptionListResponse.
-          default: youtube#subscriptionListResponse
-          example: youtube#video
-        etag:
-          type: string
-          description: The Etag of this resource.
-          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
-        nextPageToken:
-          type: string
-          description: The token for the next page of results.
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        prevPageToken:
-          type: string
-          description: The token for the previous page of results.
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
-        items:
-          type: array
-          description: A list of subscriptions that match the request criteria.
-          items:
-            $ref: '#/components/schemas/Subscription'
-          example: []
-    SubscriptionInsertRequest:
+        default:
+          $ref: '#/components/schemas/Thumbnail'
+        medium:
+          $ref: '#/components/schemas/Thumbnail'
+        high:
+          $ref: '#/components/schemas/Thumbnail'
+        standard:
+          $ref: '#/components/schemas/Thumbnail'
+        maxres:
+          $ref: '#/components/schemas/Thumbnail'
+    Thumbnail:
       type: object
-      description: Request body for creating a subscription
-      required:
-      - snippet
+      description: A thumbnail image
       properties:
-        snippet:
-          type: object
-          required:
-          - resourceId
-          properties:
-            resourceId:
-              type: object
-              required:
-              - kind
-              - channelId
-              properties:
-                kind:
-                  type: string
-                  example: youtube#channel
-                channelId:
-                  type: string
-                  description: ID of the channel to subscribe to
-                  example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        url:
+          type: string
+          description: URL of the thumbnail image
+          example: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
+        width:
+          type: integer
+          description: Width of the thumbnail
+          example: 120
+        height:
+          type: integer
+          description: Height of the thumbnail
+          example: 90
+    SubscriptionSnippet:
+      type: object
+      description: Basic information about the subscription
+      properties:
+        publishedAt:
+          type: string
+          format: date-time
+          description: When the subscription was created
+          example: '2024-01-15T10:30:00Z'
+        title:
+          type: string
+          description: Title of the subscribed channel
+          example: Google Developers
+        description:
+          type: string
+          description: Description of the subscribed channel
+        resourceId:
+          $ref: '#/components/schemas/ResourceId'
+        channelId:
+          type: string
+          description: ID of the subscriber's channel
+        thumbnails:
+          $ref: '#/components/schemas/ThumbnailDetails'
+    SubscriptionContentDetails:
+      type: object
+      description: Content details for the subscription
+      properties:
+        totalItemCount:
+          type: integer
+          description: Total number of videos on the channel
+          example: 500
+        newItemCount:
+          type: integer
+          description: Number of new videos since last visit
+          example: 5
     ErrorItem:
       type: object
       description: Individual error detail
@@ -400,49 +595,78 @@ components:
           type: string
           description: Specific location of the error
           example: part
-    ErrorDetails:
+    SubscriptionListResponse_2:
       type: object
-      description: Details about an API error
+      description: Response containing subscription resources
       required:
-      - code
-      - message
+      - kind
+      - etag
+      - items
       properties:
-        code:
-          type: integer
-          description: HTTP status code
-          example: 400
-        message:
+        kind:
           type: string
-          description: Human-readable error message
-          example: Invalid parameter value
-        errors:
+          description: Identifies the API resource type
+          example: youtube#subscriptionListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        nextPageToken:
+          type: string
+          description: Token for the next page of results
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo_2'
+        items:
           type: array
-          description: List of specific errors
+          description: List of subscriptions
           items:
-            $ref: '#/components/schemas/ErrorItem'
-    SubscriptionSnippet:
+            $ref: '#/components/schemas/Subscription_2'
+    Subscription_2:
       type: object
-      description: Basic information about the subscription
+      description: A subscription resource
+      required:
+      - kind
+      - etag
+      - id
       properties:
-        publishedAt:
+        kind:
           type: string
-          format: date-time
-          description: When the subscription was created
-          example: '2024-01-15T10:30:00Z'
-        title:
+          description: Identifies the API resource type
+          example: youtube#subscription
+        etag:
           type: string
-          description: Title of the subscribed channel
-          example: Google Developers
-        description:
+          description: ETag for caching purposes
+        id:
           type: string
-          description: Description of the subscribed channel
-        resourceId:
-          $ref: '#/components/schemas/ResourceId'
-        channelId:
-          type: string
-          description: ID of the subscriber's channel
-        thumbnails:
-          $ref: '#/components/schemas/ThumbnailDetails'
+          description: Unique identifier for the subscription
+          example: SUBScription123abc
+        snippet:
+          $ref: '#/components/schemas/SubscriptionSnippet'
+        contentDetails:
+          $ref: '#/components/schemas/SubscriptionContentDetails'
+    SubscriptionInsertRequest:
+      type: object
+      description: Request body for creating a subscription
+      required:
+      - snippet
+      properties:
+        snippet:
+          type: object
+          required:
+          - resourceId
+          properties:
+            resourceId:
+              type: object
+              required:
+              - kind
+              - channelId
+              properties:
+                kind:
+                  type: string
+                  example: youtube#channel
+                channelId:
+                  type: string
+                  description: ID of the channel to subscribe to
+                  example: UC_x5XG1OV2P6uZZ5FSM9Ttw
     ResourceId:
       type: object
       description: Identifies the resource in the search result
@@ -469,71 +693,26 @@ components:
           type: string
           description: Playlist ID if the result is a playlist
           example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
-    SubscriptionListResponse_2:
+    ErrorDetails:
       type: object
-      description: Response containing subscription resources
+      description: Details about an API error
       required:
-      - kind
-      - etag
-      - items
+      - code
+      - message
       properties:
-        kind:
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        message:
           type: string
-          description: Identifies the API resource type
-          example: youtube#subscriptionListResponse
-        etag:
-          type: string
-          description: ETag for caching purposes
-        nextPageToken:
-          type: string
-          description: Token for the next page of results
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo_2'
-        items:
+          description: Human-readable error message
+          example: Invalid parameter value
+        errors:
           type: array
-          description: List of subscriptions
+          description: List of specific errors
           items:
-            $ref: '#/components/schemas/Subscription_2'
-    SubscriptionContentDetails:
-      type: object
-      description: Content details for the subscription
-      properties:
-        totalItemCount:
-          type: integer
-          description: Total number of videos on the channel
-          example: 500
-        newItemCount:
-          type: integer
-          description: Number of new videos since last visit
-          example: 5
-    PageInfo_2:
-      type: object
-      description: Pagination information
-      properties:
-        totalResults:
-          type: integer
-          description: Total number of results
-          example: 1000000
-        resultsPerPage:
-          type: integer
-          description: Number of results per page
-          example: 25
-    Thumbnail:
-      type: object
-      description: A thumbnail image
-      properties:
-        url:
-          type: string
-          description: URL of the thumbnail image
-          example: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
-        width:
-          type: integer
-          description: Width of the thumbnail
-          example: 120
-        height:
-          type: integer
-          description: Height of the thumbnail
-          example: 90
+            $ref: '#/components/schemas/ErrorItem'
     ErrorResponse_2:
       type: object
       description: Error response object
@@ -542,199 +721,7 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetails'
-    ThumbnailDetails:
-      type: object
-      description: Thumbnail images at various resolutions
-      properties:
-        default:
-          $ref: '#/components/schemas/Thumbnail'
-        medium:
-          $ref: '#/components/schemas/Thumbnail'
-        high:
-          $ref: '#/components/schemas/Thumbnail'
-        standard:
-          $ref: '#/components/schemas/Thumbnail'
-        maxres:
-          $ref: '#/components/schemas/Thumbnail'
-    Subscription_2:
-      type: object
-      description: A subscription resource
-      required:
-      - kind
-      - etag
-      - id
-      properties:
-        kind:
-          type: string
-          description: Identifies the API resource type
-          example: youtube#subscription
-        etag:
-          type: string
-          description: ETag for caching purposes
-        id:
-          type: string
-          description: Unique identifier for the subscription
-          example: SUBScription123abc
-        snippet:
-          $ref: '#/components/schemas/SubscriptionSnippet'
-        contentDetails:
-          $ref: '#/components/schemas/SubscriptionContentDetails'
-  responses:
-    Unauthorized:
-      description: The request was not authenticated or the credentials are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The specified resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request was invalid or malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: The request was authenticated but the caller does not have permission to perform the requested operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    pageToken:
-      name: pageToken
-      in: query
-      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
-      schema:
-        type: string
-    maxResults:
-      name: maxResults
-      in: query
-      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
-      schema:
-        type: integer
-        minimum: 0
-        maximum: 50
-        default: 5
-    part:
-      name: part
-      in: query
-      required: true
-      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
-      schema:
-        type: string
-    key:
-      name: key
-      in: query
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      schema:
-        type: string
-    fields:
-      name: fields
-      in: query
-      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
-      schema:
-        type: string
-    Mine:
-      name: mine
-      in: query
-      required: false
-      description: Return resources owned by the authenticated user
-      schema:
-        type: boolean
-        example: true
-    SubscriptionIdPath:
-      name: subscriptionId
-      in: path
-      required: true
-      description: The unique identifier of the subscription
-      schema:
-        type: string
-        example: SUBScription123abc
-    SubscriptionOrder:
-      name: order
-      in: query
-      required: false
-      description: The method to use for sorting subscription results
-      schema:
-        type: string
-        enum:
-        - alphabetical
-        - relevance
-        - unread
-        default: relevance
-        example: alphabetical
-    Part:
-      name: part
-      in: query
-      required: true
-      description: 'The part parameter specifies a comma-separated list of one or more
-
-        resource properties that the API response will include.
-
-        '
-      schema:
-        type: string
-        example: snippet,contentDetails,statistics
-    ForChannelId:
-      name: forChannelId
-      in: query
-      required: false
-      description: Filter subscriptions to the specified channel
-      schema:
-        type: string
-        example: UC_x5XG1OV2P6uZZ5FSM9Ttw
-    MaxResultsDefault:
-      name: maxResults
-      in: query
-      required: false
-      description: Maximum number of items to return (1-50)
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 50
-        default: 5
-        example: 25
-    PageToken:
-      name: pageToken
-      in: query
-      required: false
-      description: Token for retrieving the next page of results
-      schema:
-        type: string
-    AccessToken:
-      name: access_token
-      in: query
-      required: false
-      description: OAuth 2.0 access token for authentication
-      schema:
-        type: string
-    ChannelIdQuery:
-      name: channelId
-      in: query
-      required: false
-      description: Filter results by channel ID
-      schema:
-        type: string
-        example: UC_x5XG1OV2P6uZZ5FSM9Ttw
   examples:
-    NotFoundErrorExample:
-      summary: Not found error
-      description: Example error response when resource is not found
-      value:
-        error:
-          code: 404
-          message: Resource not found
-          errors:
-          - domain: youtube.video
-            reason: videoNotFound
-            message: The video identified by the parameter id could not be found
-            locationType: parameter
-            location: id
     BadRequestErrorExample:
       summary: Bad request error
       description: Example error response for invalid parameters
@@ -782,6 +769,27 @@ components:
         contentDetails:
           totalItemCount: 500
           newItemCount: 0
+    NotFoundErrorExample:
+      summary: Not found error
+      description: Example error response when resource is not found
+      value:
+        error:
+          code: 404
+          message: Resource not found
+          errors:
+          - domain: youtube.video
+            reason: videoNotFound
+            message: The video identified by the parameter id could not be found
+            locationType: parameter
+            location: id
+    SubscriptionInsertRequestExample:
+      summary: Subscription creation request
+      description: Example request body for subscribing to a channel
+      value:
+        snippet:
+          resourceId:
+            kind: youtube#channel
+            channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
     SuccessfulSubscriptionListExample:
       summary: Successful subscription list response
       description: Example response for retrieving subscriptions
@@ -810,14 +818,6 @@ components:
           contentDetails:
             totalItemCount: 500
             newItemCount: 5
-    SubscriptionInsertRequestExample:
-      summary: Subscription creation request
-      description: Example request body for subscribing to a channel
-      value:
-        snippet:
-          resourceId:
-            kind: youtube#channel
-            channelId: UC_x5XG1OV2P6uZZ5FSM9Ttw
   securitySchemes:
     oauth2:
       type: oauth2
