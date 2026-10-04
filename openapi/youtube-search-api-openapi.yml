@@ -123,82 +123,150 @@ paths:
     - url: https://www.googleapis.com/youtube/v3
       description: YouTube Data API v3 base server
 components:
+  parameters:
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
+      schema:
+        type: string
+    maxResults:
+      name: maxResults
+      in: query
+      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 50
+        default: 5
+    ChannelId:
+      name: channelId
+      in: query
+      required: false
+      description: Filter results to only include resources from this channel
+      schema:
+        type: string
+        example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+    PublishedAfter:
+      name: publishedAfter
+      in: query
+      required: false
+      description: Filter results to only include resources created after this date
+      schema:
+        type: string
+        format: date-time
+        example: '2024-01-01T00:00:00Z'
+    Order:
+      name: order
+      in: query
+      required: false
+      description: The method to use for sorting search results
+      schema:
+        type: string
+        enum:
+        - date
+        - rating
+        - relevance
+        - title
+        - videoCount
+        - viewCount
+        default: relevance
+        example: viewCount
+    MaxResultsSearch:
+      name: maxResults
+      in: query
+      required: false
+      description: Maximum number of items to return (0-50)
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 50
+        default: 25
+        example: 10
+    PublishedBefore:
+      name: publishedBefore
+      in: query
+      required: false
+      description: Filter results to only include resources created before this date
+      schema:
+        type: string
+        format: date-time
+        example: '2024-12-31T23:59:59Z'
+    SearchQuery:
+      name: q
+      in: query
+      required: false
+      description: The search query term to search for
+      schema:
+        type: string
+        example: openapi tutorial
+    PageToken:
+      name: pageToken
+      in: query
+      required: false
+      description: Token for retrieving the next page of results
+      schema:
+        type: string
+    RegionCode:
+      name: regionCode
+      in: query
+      required: false
+      description: ISO 3166-1 alpha-2 country code for regional filtering
+      schema:
+        type: string
+        pattern: ^[A-Z]{2}$
+        example: US
+    SearchType:
+      name: type
+      in: query
+      required: false
+      description: Restricts a search to a particular type of resource
+      schema:
+        type: string
+        enum:
+        - video
+        - channel
+        - playlist
+        example: video
+    Part:
+      name: part
+      in: query
+      required: true
+      description: 'The part parameter specifies a comma-separated list of one or more
+
+        resource properties that the API response will include.
+
+        '
+      schema:
+        type: string
+        example: snippet,contentDetails,statistics
+    ApiKey:
+      name: key
+      in: query
+      required: false
+      description: API key for authentication (for read-only operations)
+      schema:
+        type: string
   schemas:
-    PageInfo:
-      type: object
-      description: Paging details for a list operation, including information about the total number of resources and the number per page.
-      properties:
-        totalResults:
-          type: integer
-          description: The total number of results in the result set.
-          example: 42
-        resultsPerPage:
-          type: integer
-          description: The number of results included in the API response.
-          example: 10
-    SearchListResponse:
-      type: object
-      description: A list of search results matching the query criteria.
-      properties:
-        kind:
-          type: string
-          description: Identifies the API resource's type. Value is youtube#searchListResponse.
-          default: youtube#searchListResponse
-          example: youtube#video
-        etag:
-          type: string
-          description: The Etag of this resource.
-          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
-        nextPageToken:
-          type: string
-          description: The token for the next page of results.
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        prevPageToken:
-          type: string
-          description: The token for the previous page of results.
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        regionCode:
-          type: string
-          description: The region code that was used for the search query.
-          example: US
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
-        items:
-          type: array
-          description: A list of results that match the search criteria.
-          items:
-            $ref: '#/components/schemas/SearchResult'
-          example: []
-    ErrorResponse:
-      type: object
-      description: A standard error response returned by the YouTube Data API.
-      properties:
-        error:
-          type: object
-          description: The error details.
-          properties:
-            code:
-              type: integer
-              description: The HTTP status code of the error.
-            message:
-              type: string
-              description: A human-readable description of the error.
-            errors:
-              type: array
-              description: A list of individual errors.
-              items:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    description: A human-readable description of the error.
-                  domain:
-                    type: string
-                    description: The domain in which the error occurred.
-                  reason:
-                    type: string
-                    description: The reason for the error.
-          example: example_value
     SearchResult:
       type: object
       description: A search result contains information about a YouTube video, channel, or playlist that matches the search query.
@@ -256,30 +324,81 @@ components:
               type: string
               description: An indication of whether a video or channel resource has live broadcast content.
           example: example_value
-    ErrorItem:
+    ErrorResponse:
       type: object
-      description: Individual error detail
+      description: A standard error response returned by the YouTube Data API.
       properties:
-        domain:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            errors:
+              type: array
+              description: A list of individual errors.
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A human-readable description of the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  reason:
+                    type: string
+                    description: The reason for the error.
+          example: example_value
+    SearchListResponse:
+      type: object
+      description: A list of search results matching the query criteria.
+      properties:
+        kind:
           type: string
-          description: Error domain
-          example: youtube.parameter
-        reason:
+          description: Identifies the API resource's type. Value is youtube#searchListResponse.
+          default: youtube#searchListResponse
+          example: youtube#video
+        etag:
           type: string
-          description: Error reason code
-          example: invalidParameter
-        message:
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        nextPageToken:
           type: string
-          description: Detailed error message
-          example: The parameter 'part' is required
-        locationType:
+          description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        prevPageToken:
           type: string
-          description: Type of location where error occurred
-          example: parameter
-        location:
+          description: The token for the previous page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        regionCode:
           type: string
-          description: Specific location of the error
-          example: part
+          description: The region code that was used for the search query.
+          example: US
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of results that match the search criteria.
+          items:
+            $ref: '#/components/schemas/SearchResult'
+          example: []
+    PageInfo:
+      type: object
+      description: Paging details for a list operation, including information about the total number of resources and the number per page.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results in the result set.
+          example: 42
+        resultsPerPage:
+          type: integer
+          description: The number of results included in the API response.
+          example: 10
     ErrorResponse_2:
       type: object
       description: Error response object
@@ -288,18 +407,6 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetails'
-    PageInfo_2:
-      type: object
-      description: Pagination information
-      properties:
-        totalResults:
-          type: integer
-          description: Total number of results
-          example: 1000000
-        resultsPerPage:
-          type: integer
-          description: Number of results per page
-          example: 25
     ErrorDetails:
       type: object
       description: Details about an API error
@@ -320,6 +427,63 @@ components:
           description: List of specific errors
           items:
             $ref: '#/components/schemas/ErrorItem'
+    PageInfo_2:
+      type: object
+      description: Pagination information
+      properties:
+        totalResults:
+          type: integer
+          description: Total number of results
+          example: 1000000
+        resultsPerPage:
+          type: integer
+          description: Number of results per page
+          example: 25
+    SearchResult_2:
+      type: object
+      description: A single search result
+      required:
+      - kind
+      - etag
+      - id
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#searchResult
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          $ref: '#/components/schemas/ResourceId'
+        snippet:
+          $ref: '#/components/schemas/SearchResultSnippet'
+    ResourceId:
+      type: object
+      description: Identifies the resource in the search result
+      required:
+      - kind
+      properties:
+        kind:
+          type: string
+          description: Type of resource
+          enum:
+          - youtube#video
+          - youtube#channel
+          - youtube#playlist
+          example: youtube#video
+        videoId:
+          type: string
+          description: Video ID if the result is a video
+          example: dQw4w9WgXcQ
+        channelId:
+          type: string
+          description: Channel ID if the result is a channel
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        playlistId:
+          type: string
+          description: Playlist ID if the result is a playlist
+          example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
     SearchResultSnippet:
       type: object
       description: Basic information about the search result
@@ -347,51 +511,20 @@ components:
           type: string
           description: Title of the channel
           example: Google Developers
-    ResourceId:
+    ThumbnailDetails:
       type: object
-      description: Identifies the resource in the search result
-      required:
-      - kind
+      description: Thumbnail images at various resolutions
       properties:
-        kind:
-          type: string
-          description: Type of resource
-          enum:
-          - youtube#video
-          - youtube#channel
-          - youtube#playlist
-          example: youtube#video
-        videoId:
-          type: string
-          description: Video ID if the result is a video
-          example: dQw4w9WgXcQ
-        channelId:
-          type: string
-          description: Channel ID if the result is a channel
-          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
-        playlistId:
-          type: string
-          description: Playlist ID if the result is a playlist
-          example: PLrAXtmErZgOeiKm4sgNOknGvNjby9efdf
-    SearchResult_2:
-      type: object
-      description: A single search result
-      required:
-      - kind
-      - etag
-      - id
-      properties:
-        kind:
-          type: string
-          description: Identifies the API resource type
-          example: youtube#searchResult
-        etag:
-          type: string
-          description: ETag for caching purposes
-        id:
-          $ref: '#/components/schemas/ResourceId'
-        snippet:
-          $ref: '#/components/schemas/SearchResultSnippet'
+        default:
+          $ref: '#/components/schemas/Thumbnail'
+        medium:
+          $ref: '#/components/schemas/Thumbnail'
+        high:
+          $ref: '#/components/schemas/Thumbnail'
+        standard:
+          $ref: '#/components/schemas/Thumbnail'
+        maxres:
+          $ref: '#/components/schemas/Thumbnail'
     SearchListResponse_2:
       type: object
       description: Response containing search results
@@ -423,20 +556,6 @@ components:
           description: List of search results
           items:
             $ref: '#/components/schemas/SearchResult_2'
-    ThumbnailDetails:
-      type: object
-      description: Thumbnail images at various resolutions
-      properties:
-        default:
-          $ref: '#/components/schemas/Thumbnail'
-        medium:
-          $ref: '#/components/schemas/Thumbnail'
-        high:
-          $ref: '#/components/schemas/Thumbnail'
-        standard:
-          $ref: '#/components/schemas/Thumbnail'
-        maxres:
-          $ref: '#/components/schemas/Thumbnail'
     Thumbnail:
       type: object
       description: A thumbnail image
@@ -453,150 +572,37 @@ components:
           type: integer
           description: Height of the thumbnail
           example: 90
-  parameters:
-    part:
-      name: part
-      in: query
-      required: true
-      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
-      schema:
-        type: string
-    pageToken:
-      name: pageToken
-      in: query
-      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
-      schema:
-        type: string
-    maxResults:
-      name: maxResults
-      in: query
-      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
-      schema:
-        type: integer
-        minimum: 0
-        maximum: 50
-        default: 5
-    key:
-      name: key
-      in: query
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      schema:
-        type: string
-    fields:
-      name: fields
-      in: query
-      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
-      schema:
-        type: string
-    Part:
-      name: part
-      in: query
-      required: true
-      description: 'The part parameter specifies a comma-separated list of one or more
-
-        resource properties that the API response will include.
-
-        '
-      schema:
-        type: string
-        example: snippet,contentDetails,statistics
-    RegionCode:
-      name: regionCode
-      in: query
-      required: false
-      description: ISO 3166-1 alpha-2 country code for regional filtering
-      schema:
-        type: string
-        pattern: ^[A-Z]{2}$
-        example: US
-    SearchQuery:
-      name: q
-      in: query
-      required: false
-      description: The search query term to search for
-      schema:
-        type: string
-        example: openapi tutorial
-    ChannelId:
-      name: channelId
-      in: query
-      required: false
-      description: Filter results to only include resources from this channel
-      schema:
-        type: string
-        example: UC_x5XG1OV2P6uZZ5FSM9Ttw
-    PublishedBefore:
-      name: publishedBefore
-      in: query
-      required: false
-      description: Filter results to only include resources created before this date
-      schema:
-        type: string
-        format: date-time
-        example: '2024-12-31T23:59:59Z'
-    PageToken:
-      name: pageToken
-      in: query
-      required: false
-      description: Token for retrieving the next page of results
-      schema:
-        type: string
-    PublishedAfter:
-      name: publishedAfter
-      in: query
-      required: false
-      description: Filter results to only include resources created after this date
-      schema:
-        type: string
-        format: date-time
-        example: '2024-01-01T00:00:00Z'
-    Order:
-      name: order
-      in: query
-      required: false
-      description: The method to use for sorting search results
-      schema:
-        type: string
-        enum:
-        - date
-        - rating
-        - relevance
-        - title
-        - videoCount
-        - viewCount
-        default: relevance
-        example: viewCount
-    MaxResultsSearch:
-      name: maxResults
-      in: query
-      required: false
-      description: Maximum number of items to return (0-50)
-      schema:
-        type: integer
-        minimum: 0
-        maximum: 50
-        default: 25
-        example: 10
-    ApiKey:
-      name: key
-      in: query
-      required: false
-      description: API key for authentication (for read-only operations)
-      schema:
-        type: string
-    SearchType:
-      name: type
-      in: query
-      required: false
-      description: Restricts a search to a particular type of resource
-      schema:
-        type: string
-        enum:
-        - video
-        - channel
-        - playlist
-        example: video
+    ErrorItem:
+      type: object
+      description: Individual error detail
+      properties:
+        domain:
+          type: string
+          description: Error domain
+          example: youtube.parameter
+        reason:
+          type: string
+          description: Error reason code
+          example: invalidParameter
+        message:
+          type: string
+          description: Detailed error message
+          example: The parameter 'part' is required
+        locationType:
+          type: string
+          description: Type of location where error occurred
+          example: parameter
+        location:
+          type: string
+          description: Specific location of the error
+          example: part
   responses:
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     BadRequest:
       description: The request was invalid or malformed.
       content:
@@ -609,26 +615,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: The request was authenticated but the caller does not have permission to perform the requested operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   examples:
-    BadRequestErrorExample:
-      summary: Bad request error
-      description: Example error response for invalid parameters
-      value:
-        error:
-          code: 400
-          message: Invalid parameter value
-          errors:
-          - domain: youtube.parameter
-            reason: invalidParameter
-            message: The parameter 'part' is required
-            locationType: parameter
-            location: part
     SuccessfulSearchExample:
       summary: Successful search results
       description: Example response for a video search query
@@ -670,6 +657,19 @@ components:
             message: The request cannot be completed because you have exceeded your quota
             locationType: global
             location: ''
+    BadRequestErrorExample:
+      summary: Bad request error
+      description: Example error response for invalid parameters
+      value:
+        error:
+          code: 400
+          message: Invalid parameter value
+          errors:
+          - domain: youtube.parameter
+            reason: invalidParameter
+            message: The parameter 'part' is required
+            locationType: parameter
+            location: part
   securitySchemes:
     oauth2:
       type: oauth2

@@ -403,19 +403,140 @@ paths:
     - url: https://www.googleapis.com/youtube/v3
       description: YouTube Data API Production Server
 components:
+  parameters:
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
+      schema:
+        type: string
+    maxResults:
+      name: maxResults
+      in: query
+      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 50
+        default: 5
+    CommentOrder:
+      name: order
+      in: query
+      required: false
+      description: The method to use for sorting comments
+      schema:
+        type: string
+        enum:
+        - time
+        - relevance
+        default: time
+        example: relevance
+    ChannelIdQuery:
+      name: channelId
+      in: query
+      required: false
+      description: Filter results by channel ID
+      schema:
+        type: string
+        example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+    MaxResultsDefault:
+      name: maxResults
+      in: query
+      required: false
+      description: Maximum number of items to return (1-50)
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 5
+        example: 25
+    CommentThreadId:
+      name: id
+      in: query
+      required: false
+      description: A comma-separated list of comment thread IDs
+      schema:
+        type: string
+        example: UgzYABCdef123xyz456
+    PageToken:
+      name: pageToken
+      in: query
+      required: false
+      description: Token for retrieving the next page of results
+      schema:
+        type: string
+    Part:
+      name: part
+      in: query
+      required: true
+      description: 'The part parameter specifies a comma-separated list of one or more
+
+        resource properties that the API response will include.
+
+        '
+      schema:
+        type: string
+        example: snippet,contentDetails,statistics
+    ApiKey:
+      name: key
+      in: query
+      required: false
+      description: API key for authentication (for read-only operations)
+      schema:
+        type: string
+    VideoIdQuery:
+      name: videoId
+      in: query
+      required: false
+      description: Filter results by video ID
+      schema:
+        type: string
+        example: dQw4w9WgXcQ
+  responses:
+    Forbidden:
+      description: The request was authenticated but the caller does not have permission to perform the requested operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was invalid or malformed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: The request was not authenticated or the credentials are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    PageInfo:
-      type: object
-      description: Paging details for a list operation, including information about the total number of resources and the number per page.
-      properties:
-        totalResults:
-          type: integer
-          description: The total number of results in the result set.
-          example: 42
-        resultsPerPage:
-          type: integer
-          description: The number of results included in the API response.
-          example: 10
     ErrorResponse:
       type: object
       description: A standard error response returned by the YouTube Data API.
@@ -446,6 +567,43 @@ components:
                     type: string
                     description: The reason for the error.
           example: example_value
+    PageInfo:
+      type: object
+      description: Paging details for a list operation, including information about the total number of resources and the number per page.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results in the result set.
+          example: 42
+        resultsPerPage:
+          type: integer
+          description: The number of results included in the API response.
+          example: 10
+    CommentListResponse:
+      type: object
+      description: A list of comment resources matching the request criteria.
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource's type. Value is youtube#commentListResponse.
+          default: youtube#commentListResponse
+          example: youtube#video
+        etag:
+          type: string
+          description: The Etag of this resource.
+          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
+        nextPageToken:
+          type: string
+          description: The token for the next page of results.
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
+        pageInfo:
+          $ref: '#/components/schemas/PageInfo'
+        items:
+          type: array
+          description: A list of comments that match the request criteria.
+          items:
+            $ref: '#/components/schemas/Comment'
+          example: []
     Comment:
       type: object
       description: A comment resource contains information about a single YouTube comment.
@@ -524,55 +682,117 @@ components:
               - published
               - rejected
           example: example_value
-    CommentListResponse:
+    ErrorResponse_2:
       type: object
-      description: A list of comment resources matching the request criteria.
+      description: Error response object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetails'
+    ErrorDetails:
+      type: object
+      description: Details about an API error
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid parameter value
+        errors:
+          type: array
+          description: List of specific errors
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    PageInfo_2:
+      type: object
+      description: Pagination information
+      properties:
+        totalResults:
+          type: integer
+          description: Total number of results
+          example: 1000000
+        resultsPerPage:
+          type: integer
+          description: Number of results per page
+          example: 25
+    Comment_2:
+      type: object
+      description: A comment resource
       properties:
         kind:
           type: string
-          description: Identifies the API resource's type. Value is youtube#commentListResponse.
-          default: youtube#commentListResponse
-          example: youtube#video
+          example: youtube#comment
         etag:
           type: string
-          description: The Etag of this resource.
-          example: XI7nbFXulYBIpL0ayR_gDh3eu1k
-        nextPageToken:
+        id:
           type: string
-          description: The token for the next page of results.
-          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9
-        pageInfo:
-          $ref: '#/components/schemas/PageInfo'
-        items:
-          type: array
-          description: A list of comments that match the request criteria.
-          items:
-            $ref: '#/components/schemas/Comment'
-          example: []
-    ErrorItem:
+          example: UgzYABCdef123xyz456
+        snippet:
+          $ref: '#/components/schemas/CommentSnippet'
+    CommentThread:
       type: object
-      description: Individual error detail
+      description: A comment thread resource
+      required:
+      - kind
+      - etag
+      - id
       properties:
-        domain:
+        kind:
           type: string
-          description: Error domain
-          example: youtube.parameter
-        reason:
+          description: Identifies the API resource type
+          example: youtube#commentThread
+        etag:
           type: string
-          description: Error reason code
-          example: invalidParameter
-        message:
+          description: ETag for caching purposes
+        id:
           type: string
-          description: Detailed error message
-          example: The parameter 'part' is required
-        locationType:
+          description: Unique identifier for the comment thread
+          example: UgzYABCdef123xyz456
+        snippet:
+          $ref: '#/components/schemas/CommentThreadSnippet'
+        replies:
+          $ref: '#/components/schemas/CommentThreadReplies'
+    CommentThreadSnippet:
+      type: object
+      description: Basic information about the comment thread
+      properties:
+        channelId:
           type: string
-          description: Type of location where error occurred
-          example: parameter
-        location:
+          description: ID of the channel associated with the comment
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        videoId:
           type: string
-          description: Specific location of the error
-          example: part
+          description: ID of the video the comment is for
+          example: dQw4w9WgXcQ
+        topLevelComment:
+          $ref: '#/components/schemas/Comment_2'
+        canReply:
+          type: boolean
+          description: Whether the user can reply
+          example: true
+        totalReplyCount:
+          type: integer
+          description: Total number of replies
+          example: 10
+        isPublic:
+          type: boolean
+          description: Whether the comment thread is public
+          example: true
+    CommentThreadReplies:
+      type: object
+      description: Replies to the comment thread
+      properties:
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment_2'
     CommentSnippet:
       type: object
       description: Basic information about the comment
@@ -609,72 +829,6 @@ components:
         likeCount:
           type: integer
           example: 25
-    CommentThreadSnippet:
-      type: object
-      description: Basic information about the comment thread
-      properties:
-        channelId:
-          type: string
-          description: ID of the channel associated with the comment
-          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
-        videoId:
-          type: string
-          description: ID of the video the comment is for
-          example: dQw4w9WgXcQ
-        topLevelComment:
-          $ref: '#/components/schemas/Comment_2'
-        canReply:
-          type: boolean
-          description: Whether the user can reply
-          example: true
-        totalReplyCount:
-          type: integer
-          description: Total number of replies
-          example: 10
-        isPublic:
-          type: boolean
-          description: Whether the comment thread is public
-          example: true
-    ErrorResponse_2:
-      type: object
-      description: Error response object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetails'
-    PageInfo_2:
-      type: object
-      description: Pagination information
-      properties:
-        totalResults:
-          type: integer
-          description: Total number of results
-          example: 1000000
-        resultsPerPage:
-          type: integer
-          description: Number of results per page
-          example: 25
-    ErrorDetails:
-      type: object
-      description: Details about an API error
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-          example: 400
-        message:
-          type: string
-          description: Human-readable error message
-          example: Invalid parameter value
-        errors:
-          type: array
-          description: List of specific errors
-          items:
-            $ref: '#/components/schemas/ErrorItem'
     CommentThreadListResponse:
       type: object
       description: Response containing comment thread resources
@@ -700,185 +854,44 @@ components:
           description: List of comment threads
           items:
             $ref: '#/components/schemas/CommentThread'
-    Comment_2:
+    ErrorItem:
       type: object
-      description: A comment resource
+      description: Individual error detail
       properties:
-        kind:
+        domain:
           type: string
-          example: youtube#comment
-        etag:
+          description: Error domain
+          example: youtube.parameter
+        reason:
           type: string
-        id:
+          description: Error reason code
+          example: invalidParameter
+        message:
           type: string
-          example: UgzYABCdef123xyz456
-        snippet:
-          $ref: '#/components/schemas/CommentSnippet'
-    CommentThreadReplies:
-      type: object
-      description: Replies to the comment thread
-      properties:
-        comments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Comment_2'
-    CommentThread:
-      type: object
-      description: A comment thread resource
-      required:
-      - kind
-      - etag
-      - id
-      properties:
-        kind:
+          description: Detailed error message
+          example: The parameter 'part' is required
+        locationType:
           type: string
-          description: Identifies the API resource type
-          example: youtube#commentThread
-        etag:
+          description: Type of location where error occurred
+          example: parameter
+        location:
           type: string
-          description: ETag for caching purposes
-        id:
-          type: string
-          description: Unique identifier for the comment thread
-          example: UgzYABCdef123xyz456
-        snippet:
-          $ref: '#/components/schemas/CommentThreadSnippet'
-        replies:
-          $ref: '#/components/schemas/CommentThreadReplies'
-  responses:
-    NotFound:
-      description: The specified resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: The request was authenticated but the caller does not have permission to perform the requested operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request was invalid or malformed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: The request was not authenticated or the credentials are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    pageToken:
-      name: pageToken
-      in: query
-      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
-      schema:
-        type: string
-    maxResults:
-      name: maxResults
-      in: query
-      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
-      schema:
-        type: integer
-        minimum: 0
-        maximum: 50
-        default: 5
-    part:
-      name: part
-      in: query
-      required: true
-      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
-      schema:
-        type: string
-    key:
-      name: key
-      in: query
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      schema:
-        type: string
-    fields:
-      name: fields
-      in: query
-      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
-      schema:
-        type: string
-    MaxResultsDefault:
-      name: maxResults
-      in: query
-      required: false
-      description: Maximum number of items to return (1-50)
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 50
-        default: 5
-        example: 25
-    Part:
-      name: part
-      in: query
-      required: true
-      description: 'The part parameter specifies a comma-separated list of one or more
-
-        resource properties that the API response will include.
-
-        '
-      schema:
-        type: string
-        example: snippet,contentDetails,statistics
-    ChannelIdQuery:
-      name: channelId
-      in: query
-      required: false
-      description: Filter results by channel ID
-      schema:
-        type: string
-        example: UC_x5XG1OV2P6uZZ5FSM9Ttw
-    CommentOrder:
-      name: order
-      in: query
-      required: false
-      description: The method to use for sorting comments
-      schema:
-        type: string
-        enum:
-        - time
-        - relevance
-        default: time
-        example: relevance
-    CommentThreadId:
-      name: id
-      in: query
-      required: false
-      description: A comma-separated list of comment thread IDs
-      schema:
-        type: string
-        example: UgzYABCdef123xyz456
-    PageToken:
-      name: pageToken
-      in: query
-      required: false
-      description: Token for retrieving the next page of results
-      schema:
-        type: string
-    ApiKey:
-      name: key
-      in: query
-      required: false
-      description: API key for authentication (for read-only operations)
-      schema:
-        type: string
-    VideoIdQuery:
-      name: videoId
-      in: query
-      required: false
-      description: Filter results by video ID
-      schema:
-        type: string
-        example: dQw4w9WgXcQ
+          description: Specific location of the error
+          example: part
   examples:
+    NotFoundErrorExample:
+      summary: Not found error
+      description: Example error response when resource is not found
+      value:
+        error:
+          code: 404
+          message: Resource not found
+          errors:
+          - domain: youtube.video
+            reason: videoNotFound
+            message: The video identified by the parameter id could not be found
+            locationType: parameter
+            location: id
     SuccessfulCommentThreadListExample:
       summary: Successful comment threads response
       description: Example response for retrieving comments
@@ -909,19 +922,6 @@ components:
             canReply: true
             totalReplyCount: 10
             isPublic: true
-    NotFoundErrorExample:
-      summary: Not found error
-      description: Example error response when resource is not found
-      value:
-        error:
-          code: 404
-          message: Resource not found
-          errors:
-          - domain: youtube.video
-            reason: videoNotFound
-            message: The video identified by the parameter id could not be found
-            locationType: parameter
-            location: id
   securitySchemes:
     oauth2:
       type: oauth2

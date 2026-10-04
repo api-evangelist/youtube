@@ -93,30 +93,6 @@ paths:
                   $ref: '#/components/examples/ForbiddenErrorExample'
 components:
   schemas:
-    ErrorItem:
-      type: object
-      description: Individual error detail
-      properties:
-        domain:
-          type: string
-          description: Error domain
-          example: youtube.analytics
-        reason:
-          type: string
-          description: Error reason code
-          example: invalidParameter
-        message:
-          type: string
-          description: Detailed error message
-          example: The parameter 'startDate' has an invalid value
-        locationType:
-          type: string
-          description: Type of location where error occurred
-          example: parameter
-        location:
-          type: string
-          description: Specific location of the error
-          example: startDate
     ErrorResponse:
       type: object
       description: Error response object
@@ -172,6 +148,30 @@ components:
               - type: string
               - type: number
               - type: integer
+    ErrorItem:
+      type: object
+      description: Individual error detail
+      properties:
+        domain:
+          type: string
+          description: Error domain
+          example: youtube.analytics
+        reason:
+          type: string
+          description: Error reason code
+          example: invalidParameter
+        message:
+          type: string
+          description: Detailed error message
+          example: The parameter 'startDate' has an invalid value
+        locationType:
+          type: string
+          description: Type of location where error occurred
+          example: parameter
+        location:
+          type: string
+          description: Specific location of the error
+          example: startDate
     ColumnHeader:
       type: object
       description: Defines a column in the analytics report
@@ -199,157 +199,7 @@ components:
           - INTEGER
           - FLOAT
           example: INTEGER
-  parameters:
-    Filters:
-      name: filters
-      in: query
-      required: false
-      description: 'A list of filters to apply to the data. Filters use the format dimension==value
-
-        and can be combined with semicolons.
-
-        '
-      schema:
-        type: string
-        example: country==US;video==dQw4w9WgXcQ
-    AccessToken:
-      name: access_token
-      in: query
-      required: false
-      description: OAuth 2.0 access token for authentication
-      schema:
-        type: string
-    MaxResults:
-      name: maxResults
-      in: query
-      required: false
-      description: Maximum number of rows to include in the response (1-500)
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 500
-        default: 100
-        example: 50
-    Sort:
-      name: sort
-      in: query
-      required: false
-      description: 'A comma-separated list of dimensions or metrics to sort by.
-
-        Prefix with - for descending order.
-
-        '
-      schema:
-        type: string
-        example: -views
-    StartDate:
-      name: startDate
-      in: query
-      required: true
-      description: The start date for the data retrieval in YYYY-MM-DD format
-      schema:
-        type: string
-        format: date
-        example: '2024-01-01'
-    Currency:
-      name: currency
-      in: query
-      required: false
-      description: Currency code for revenue metrics (ISO 4217)
-      schema:
-        type: string
-        pattern: ^[A-Z]{3}$
-        example: USD
-    EndDate:
-      name: endDate
-      in: query
-      required: true
-      description: The end date for the data retrieval in YYYY-MM-DD format
-      schema:
-        type: string
-        format: date
-        example: '2024-01-31'
-    PrettyPrint:
-      name: prettyPrint
-      in: query
-      required: false
-      description: Returns response with indentations and line breaks for readability
-      schema:
-        type: boolean
-        default: true
-    Ids:
-      name: ids
-      in: query
-      required: true
-      description: 'Identifies the YouTube channel or content owner for which you are retrieving
-
-        YouTube Analytics data. Use channel==CHANNEL_ID or contentOwner==CONTENT_OWNER_ID.
-
-        '
-      schema:
-        type: string
-        example: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
-    Metrics:
-      name: metrics
-      in: query
-      required: true
-      description: 'A comma-separated list of YouTube Analytics metrics to retrieve.
-
-        Common metrics include views, estimatedMinutesWatched, averageViewDuration, likes, dislikes, comments, shares.
-
-        '
-      schema:
-        type: string
-        example: views,estimatedMinutesWatched,averageViewDuration,likes
-    Dimensions:
-      name: dimensions
-      in: query
-      required: false
-      description: 'A comma-separated list of YouTube Analytics dimensions.
-
-        Common dimensions include video, channel, country, day, month.
-
-        '
-      schema:
-        type: string
-        example: video,day
-    StartIndex:
-      name: startIndex
-      in: query
-      required: false
-      description: Index of the first row to retrieve (1-based)
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-        example: 1
   examples:
-    BadRequestErrorExample:
-      summary: Bad request error
-      description: Example error response for invalid parameters
-      value:
-        error:
-          code: 400
-          message: Invalid parameter value
-          errors:
-          - domain: youtube.analytics
-            reason: invalidParameter
-            message: The parameter 'startDate' has an invalid value
-            locationType: parameter
-            location: startDate
-    UnauthorizedErrorExample:
-      summary: Unauthorized error
-      description: Example error response for authentication failure
-      value:
-        error:
-          code: 401
-          message: Invalid credentials
-          errors:
-          - domain: youtube.analytics
-            reason: authError
-            message: The access token is invalid or expired
-            locationType: header
-            location: Authorization
     SuccessfulAnalyticsReportExample:
       summary: Successful analytics report response
       description: Example response containing video views and engagement metrics
@@ -382,6 +232,32 @@ components:
           - 1000000.0
           - 120.0
           - 15000
+    UnauthorizedErrorExample:
+      summary: Unauthorized error
+      description: Example error response for authentication failure
+      value:
+        error:
+          code: 401
+          message: Invalid credentials
+          errors:
+          - domain: youtube.analytics
+            reason: authError
+            message: The access token is invalid or expired
+            locationType: header
+            location: Authorization
+    BadRequestErrorExample:
+      summary: Bad request error
+      description: Example error response for invalid parameters
+      value:
+        error:
+          code: 400
+          message: Invalid parameter value
+          errors:
+          - domain: youtube.analytics
+            reason: invalidParameter
+            message: The parameter 'startDate' has an invalid value
+            locationType: parameter
+            location: startDate
     ForbiddenErrorExample:
       summary: Forbidden error
       description: Example error response for insufficient permissions
@@ -395,6 +271,130 @@ components:
             message: The authenticated user does not have permission to access this resource
             locationType: header
             location: Authorization
+  parameters:
+    StartDate:
+      name: startDate
+      in: query
+      required: true
+      description: The start date for the data retrieval in YYYY-MM-DD format
+      schema:
+        type: string
+        format: date
+        example: '2024-01-01'
+    EndDate:
+      name: endDate
+      in: query
+      required: true
+      description: The end date for the data retrieval in YYYY-MM-DD format
+      schema:
+        type: string
+        format: date
+        example: '2024-01-31'
+    MaxResults:
+      name: maxResults
+      in: query
+      required: false
+      description: Maximum number of rows to include in the response (1-500)
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+        default: 100
+        example: 50
+    AccessToken:
+      name: access_token
+      in: query
+      required: false
+      description: OAuth 2.0 access token for authentication
+      schema:
+        type: string
+    Metrics:
+      name: metrics
+      in: query
+      required: true
+      description: 'A comma-separated list of YouTube Analytics metrics to retrieve.
+
+        Common metrics include views, estimatedMinutesWatched, averageViewDuration, likes, dislikes, comments, shares.
+
+        '
+      schema:
+        type: string
+        example: views,estimatedMinutesWatched,averageViewDuration,likes
+    PrettyPrint:
+      name: prettyPrint
+      in: query
+      required: false
+      description: Returns response with indentations and line breaks for readability
+      schema:
+        type: boolean
+        default: true
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: 'A comma-separated list of dimensions or metrics to sort by.
+
+        Prefix with - for descending order.
+
+        '
+      schema:
+        type: string
+        example: -views
+    StartIndex:
+      name: startIndex
+      in: query
+      required: false
+      description: Index of the first row to retrieve (1-based)
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+        example: 1
+    Dimensions:
+      name: dimensions
+      in: query
+      required: false
+      description: 'A comma-separated list of YouTube Analytics dimensions.
+
+        Common dimensions include video, channel, country, day, month.
+
+        '
+      schema:
+        type: string
+        example: video,day
+    Currency:
+      name: currency
+      in: query
+      required: false
+      description: Currency code for revenue metrics (ISO 4217)
+      schema:
+        type: string
+        pattern: ^[A-Z]{3}$
+        example: USD
+    Ids:
+      name: ids
+      in: query
+      required: true
+      description: 'Identifies the YouTube channel or content owner for which you are retrieving
+
+        YouTube Analytics data. Use channel==CHANNEL_ID or contentOwner==CONTENT_OWNER_ID.
+
+        '
+      schema:
+        type: string
+        example: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+    Filters:
+      name: filters
+      in: query
+      required: false
+      description: 'A list of filters to apply to the data. Filters use the format dimension==value
+
+        and can be combined with semicolons.
+
+        '
+      schema:
+        type: string
+        example: country==US;video==dQw4w9WgXcQ
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -239,31 +239,100 @@ paths:
                 NotFoundErrorExample:
                   $ref: '#/components/examples/NotFoundErrorExample'
 components:
+  examples:
+    SuccessfulGroupCreateExample:
+      summary: Successfully created group
+      description: Example response for a newly created analytics group
+      value:
+        kind: youtube#group
+        etag: newgroup123
+        id: NEWgroup456789
+        snippet:
+          title: My New Analytics Group
+          publishedAt: '2024-03-01T09:00:00Z'
+        contentDetails:
+          itemCount: 0
+          itemType: youtube#video
+    GroupCreateRequestExample:
+      summary: Group creation request
+      description: Example request body for creating a new analytics group
+      value:
+        snippet:
+          title: My New Analytics Group
+        contentDetails:
+          itemType: youtube#video
+    GroupUpdateRequestExample:
+      summary: Group update request
+      description: Example request body for updating an analytics group
+      value:
+        id: ABCdef123456
+        snippet:
+          title: Updated Analytics Group Name
+    UnauthorizedErrorExample:
+      summary: Unauthorized error
+      description: Example error response for authentication failure
+      value:
+        error:
+          code: 401
+          message: Invalid credentials
+          errors:
+          - domain: youtube.analytics
+            reason: authError
+            message: The access token is invalid or expired
+            locationType: header
+            location: Authorization
+    NotFoundErrorExample:
+      summary: Not found error
+      description: Example error response when resource is not found
+      value:
+        error:
+          code: 404
+          message: Resource not found
+          errors:
+          - domain: youtube.analytics
+            reason: notFound
+            message: The specified group was not found
+            locationType: parameter
+            location: groupId
+    SuccessfulGroupListExample:
+      summary: Successful group list response
+      description: Example response containing analytics groups
+      value:
+        kind: youtube#groupListResponse
+        etag: abc123def456
+        items:
+        - kind: youtube#group
+          etag: xyz789abc123
+          id: ABCdef123456
+          snippet:
+            title: Top Performing Videos Q1 2024
+            publishedAt: '2024-01-15T10:30:00Z'
+          contentDetails:
+            itemCount: 25
+            itemType: youtube#video
+        - kind: youtube#group
+          etag: mno456pqr789
+          id: GHIjkl789012
+          snippet:
+            title: Channel Performance Tracking
+            publishedAt: '2024-02-01T14:00:00Z'
+          contentDetails:
+            itemCount: 5
+            itemType: youtube#channel
+    BadRequestErrorExample:
+      summary: Bad request error
+      description: Example error response for invalid parameters
+      value:
+        error:
+          code: 400
+          message: Invalid parameter value
+          errors:
+          - domain: youtube.analytics
+            reason: invalidParameter
+            message: The parameter 'startDate' has an invalid value
+            locationType: parameter
+            location: startDate
   schemas:
-    ErrorItem:
-      type: object
-      description: Individual error detail
-      properties:
-        domain:
-          type: string
-          description: Error domain
-          example: youtube.analytics
-        reason:
-          type: string
-          description: Error reason code
-          example: invalidParameter
-        message:
-          type: string
-          description: Detailed error message
-          example: The parameter 'startDate' has an invalid value
-        locationType:
-          type: string
-          description: Type of location where error occurred
-          example: parameter
-        location:
-          type: string
-          description: Specific location of the error
-          example: startDate
     ErrorResponse:
       type: object
       description: Error response object
@@ -272,44 +341,88 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetails'
-    GroupContentDetails:
+    GroupListResponse:
       type: object
-      description: Content details for an analytics group
+      description: Response containing a list of analytics groups
       required:
-      - itemCount
-      - itemType
+      - kind
+      - items
       properties:
-        itemCount:
-          type: integer
-          description: Number of items in the group
-          example: 25
-        itemType:
+        kind:
           type: string
-          description: Type of items in the group
-          enum:
-          - youtube#channel
-          - youtube#video
-          example: youtube#video
-    GroupUpdateRequest:
+          description: Identifies the API resource type
+          example: youtube#groupListResponse
+        etag:
+          type: string
+          description: ETag for caching purposes
+        items:
+          type: array
+          description: List of analytics groups
+          items:
+            $ref: '#/components/schemas/Group'
+        nextPageToken:
+          type: string
+          description: Token to retrieve the next page of results
+    ErrorDetails:
       type: object
-      description: Request body for updating an analytics group
+      description: Details about an API error
       required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid parameter value
+        errors:
+          type: array
+          description: List of specific errors
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+    GroupSnippet:
+      type: object
+      description: Basic information about an analytics group
+      required:
+      - title
+      - publishedAt
+      properties:
+        title:
+          type: string
+          description: The title of the group
+          example: Top Performing Videos Q1 2024
+        publishedAt:
+          type: string
+          format: date-time
+          description: When the group was created
+          example: '2024-01-15T10:30:00Z'
+    Group:
+      type: object
+      description: An analytics group for aggregating channel or video data
+      required:
+      - kind
       - id
       - snippet
+      - contentDetails
       properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#group
+        etag:
+          type: string
+          description: ETag for caching purposes
         id:
           type: string
-          description: The ID of the group to update
+          description: Unique identifier for the group
           example: ABCdef123456
         snippet:
-          type: object
-          required:
-          - title
-          properties:
-            title:
-              type: string
-              description: The updated title for the group
-              example: Updated Analytics Group Name
+          $ref: '#/components/schemas/GroupSnippet'
+        contentDetails:
+          $ref: '#/components/schemas/GroupContentDetails'
     GroupCreateRequest:
       type: object
       description: Request body for creating a new analytics group
@@ -338,89 +451,77 @@ components:
               - youtube#channel
               - youtube#video
               example: youtube#video
-    ErrorDetails:
+    GroupUpdateRequest:
       type: object
-      description: Details about an API error
+      description: Request body for updating an analytics group
       required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-          example: 400
-        message:
-          type: string
-          description: Human-readable error message
-          example: Invalid parameter value
-        errors:
-          type: array
-          description: List of specific errors
-          items:
-            $ref: '#/components/schemas/ErrorItem'
-    Group:
-      type: object
-      description: An analytics group for aggregating channel or video data
-      required:
-      - kind
       - id
       - snippet
-      - contentDetails
       properties:
-        kind:
-          type: string
-          description: Identifies the API resource type
-          example: youtube#group
-        etag:
-          type: string
-          description: ETag for caching purposes
         id:
           type: string
-          description: Unique identifier for the group
+          description: The ID of the group to update
           example: ABCdef123456
         snippet:
-          $ref: '#/components/schemas/GroupSnippet'
-        contentDetails:
-          $ref: '#/components/schemas/GroupContentDetails'
-    GroupListResponse:
+          type: object
+          required:
+          - title
+          properties:
+            title:
+              type: string
+              description: The updated title for the group
+              example: Updated Analytics Group Name
+    ErrorItem:
       type: object
-      description: Response containing a list of analytics groups
-      required:
-      - kind
-      - items
+      description: Individual error detail
       properties:
-        kind:
+        domain:
           type: string
-          description: Identifies the API resource type
-          example: youtube#groupListResponse
-        etag:
+          description: Error domain
+          example: youtube.analytics
+        reason:
           type: string
-          description: ETag for caching purposes
-        items:
-          type: array
-          description: List of analytics groups
-          items:
-            $ref: '#/components/schemas/Group'
-        nextPageToken:
+          description: Error reason code
+          example: invalidParameter
+        message:
           type: string
-          description: Token to retrieve the next page of results
-    GroupSnippet:
+          description: Detailed error message
+          example: The parameter 'startDate' has an invalid value
+        locationType:
+          type: string
+          description: Type of location where error occurred
+          example: parameter
+        location:
+          type: string
+          description: Specific location of the error
+          example: startDate
+    GroupContentDetails:
       type: object
-      description: Basic information about an analytics group
+      description: Content details for an analytics group
       required:
-      - title
-      - publishedAt
+      - itemCount
+      - itemType
       properties:
-        title:
+        itemCount:
+          type: integer
+          description: Number of items in the group
+          example: 25
+        itemType:
           type: string
-          description: The title of the group
-          example: Top Performing Videos Q1 2024
-        publishedAt:
-          type: string
-          format: date-time
-          description: When the group was created
-          example: '2024-01-15T10:30:00Z'
+          description: Type of items in the group
+          enum:
+          - youtube#channel
+          - youtube#video
+          example: youtube#video
   parameters:
+    GroupIdPath:
+      name: groupId
+      in: path
+      required: true
+      description: The unique identifier of the analytics group
+      schema:
+        type: string
+        example: ABCdef123456
     AccessToken:
       name: access_token
       in: query
@@ -443,14 +544,6 @@ components:
       description: Token for retrieving the next page of results
       schema:
         type: string
-    GroupIdPath:
-      name: groupId
-      in: path
-      required: true
-      description: The unique identifier of the analytics group
-      schema:
-        type: string
-        example: ABCdef123456
     PrettyPrint:
       name: prettyPrint
       in: query
@@ -471,99 +564,6 @@ components:
       schema:
         type: string
         example: ContentOwnerXYZ
-  examples:
-    BadRequestErrorExample:
-      summary: Bad request error
-      description: Example error response for invalid parameters
-      value:
-        error:
-          code: 400
-          message: Invalid parameter value
-          errors:
-          - domain: youtube.analytics
-            reason: invalidParameter
-            message: The parameter 'startDate' has an invalid value
-            locationType: parameter
-            location: startDate
-    GroupCreateRequestExample:
-      summary: Group creation request
-      description: Example request body for creating a new analytics group
-      value:
-        snippet:
-          title: My New Analytics Group
-        contentDetails:
-          itemType: youtube#video
-    UnauthorizedErrorExample:
-      summary: Unauthorized error
-      description: Example error response for authentication failure
-      value:
-        error:
-          code: 401
-          message: Invalid credentials
-          errors:
-          - domain: youtube.analytics
-            reason: authError
-            message: The access token is invalid or expired
-            locationType: header
-            location: Authorization
-    GroupUpdateRequestExample:
-      summary: Group update request
-      description: Example request body for updating an analytics group
-      value:
-        id: ABCdef123456
-        snippet:
-          title: Updated Analytics Group Name
-    SuccessfulGroupCreateExample:
-      summary: Successfully created group
-      description: Example response for a newly created analytics group
-      value:
-        kind: youtube#group
-        etag: newgroup123
-        id: NEWgroup456789
-        snippet:
-          title: My New Analytics Group
-          publishedAt: '2024-03-01T09:00:00Z'
-        contentDetails:
-          itemCount: 0
-          itemType: youtube#video
-    SuccessfulGroupListExample:
-      summary: Successful group list response
-      description: Example response containing analytics groups
-      value:
-        kind: youtube#groupListResponse
-        etag: abc123def456
-        items:
-        - kind: youtube#group
-          etag: xyz789abc123
-          id: ABCdef123456
-          snippet:
-            title: Top Performing Videos Q1 2024
-            publishedAt: '2024-01-15T10:30:00Z'
-          contentDetails:
-            itemCount: 25
-            itemType: youtube#video
-        - kind: youtube#group
-          etag: mno456pqr789
-          id: GHIjkl789012
-          snippet:
-            title: Channel Performance Tracking
-            publishedAt: '2024-02-01T14:00:00Z'
-          contentDetails:
-            itemCount: 5
-            itemType: youtube#channel
-    NotFoundErrorExample:
-      summary: Not found error
-      description: Example error response when resource is not found
-      value:
-        error:
-          code: 404
-          message: Resource not found
-          errors:
-          - domain: youtube.analytics
-            reason: notFound
-            message: The specified group was not found
-            locationType: parameter
-            location: groupId
   securitySchemes:
     OAuth2:
       type: oauth2
