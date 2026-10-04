@@ -1653,6 +1653,8 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/channelSections
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
+  - CommentThreads
+  tags_raw:
   - Comment Threads
   properties:
   - type: OpenAPI
@@ -1871,6 +1873,7 @@ tags:
 - Media
 - Social
 - Streaming
+- Live Streaming
 tags_raw:
 - Videos
 - YouTube
@@ -1880,6 +1883,7 @@ tags_raw:
 - Streaming
 - Video
 - Videos
+- Live Streaming
 common:
 - type: Website
   url: https://www.youtube.com/
