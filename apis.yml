@@ -1872,6 +1872,9 @@ tags:
 - Social
 - Streaming
 - Live Streaming
+- Channels
+- Playlists
+- Search
 tags_raw:
 - Videos
 - YouTube
@@ -1882,6 +1885,9 @@ tags_raw:
 - Video
 - Videos
 - Live Streaming
+- Channels
+- Playlists
+- Search
 common:
 - type: Website
   url: https://www.youtube.com/
@@ -2224,6 +2230,10 @@ common:
   - name: Google Workspace
     description: Embed YouTube videos in Google Docs, Slides, and Sites for collaborative
       content.
+- type: Portal
+  url: https://developers.google.com/youtube
+- url: https://blog.youtube/rss/
+  type: Blog
 deliveryModel:
   model: saas
   license_evidence:
