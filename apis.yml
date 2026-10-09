@@ -1889,6 +1889,8 @@ tags_raw:
 - Playlists
 - Search
 common:
+- type: FinOps
+  url: finops/youtube-finops.yml
 - type: Website
   url: https://www.youtube.com/
 - type: CapabilityMap
