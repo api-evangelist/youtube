@@ -170,51 +170,33 @@ paths:
                 NotFoundErrorExample:
                   $ref: '#/components/examples/NotFoundErrorExample'
 components:
-  parameters:
-    ItemIdPath:
-      name: itemId
-      in: path
-      required: true
-      description: The unique identifier of the group item
-      schema:
-        type: string
-        example: XYZ789abc123
-    AccessToken:
-      name: access_token
-      in: query
-      required: false
-      description: OAuth 2.0 access token for authentication
-      schema:
-        type: string
-    PrettyPrint:
-      name: prettyPrint
-      in: query
-      required: false
-      description: Returns response with indentations and line breaks for readability
-      schema:
-        type: boolean
-        default: true
-    GroupIdQuery:
-      name: groupId
-      in: query
-      required: true
-      description: The group ID to retrieve items for
-      schema:
-        type: string
-        example: ABCdef123456
-    OnBehalfOfContentOwner:
-      name: onBehalfOfContentOwner
-      in: query
-      required: false
-      description: 'The content owner ID for YouTube content owner operations.
-
-        Required for content owner authenticated requests.
-
-        '
-      schema:
-        type: string
-        example: ContentOwnerXYZ
   schemas:
+    GroupItem:
+      type: object
+      description: An item (channel or video) within an analytics group
+      required:
+      - kind
+      - id
+      - groupId
+      - resource
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#groupItem
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the group item
+          example: XYZ789abc123
+        groupId:
+          type: string
+          description: ID of the group this item belongs to
+          example: ABCdef123456
+        resource:
+          $ref: '#/components/schemas/GroupItemResource'
     GroupItemListResponse:
       type: object
       description: Response containing a list of group items
@@ -234,6 +216,14 @@ components:
           description: List of group items
           items:
             $ref: '#/components/schemas/GroupItem'
+    ErrorResponse:
+      type: object
+      description: Error response object
+      required:
+      - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetails'
     GroupItemCreateRequest:
       type: object
       description: Request body for adding an item to a group
@@ -262,6 +252,44 @@ components:
               type: string
               description: YouTube ID of the channel or video
               example: dQw4w9WgXcQ
+    GroupItemResource:
+      type: object
+      description: Resource information for a group item
+      required:
+      - kind
+      - id
+      properties:
+        kind:
+          type: string
+          description: Type of resource
+          enum:
+          - youtube#channel
+          - youtube#video
+          example: youtube#video
+        id:
+          type: string
+          description: YouTube ID of the channel or video
+          example: dQw4w9WgXcQ
+    ErrorDetails:
+      type: object
+      description: Details about an API error
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          description: HTTP status code
+          example: 400
+        message:
+          type: string
+          description: Human-readable error message
+          example: Invalid parameter value
+        errors:
+          type: array
+          description: List of specific errors
+          items:
+            $ref: '#/components/schemas/ErrorItem'
     ErrorItem:
       type: object
       description: Individual error detail
@@ -286,92 +314,26 @@ components:
           type: string
           description: Specific location of the error
           example: startDate
-    GroupItemResource:
-      type: object
-      description: Resource information for a group item
-      required:
-      - kind
-      - id
-      properties:
-        kind:
-          type: string
-          description: Type of resource
-          enum:
-          - youtube#channel
-          - youtube#video
-          example: youtube#video
-        id:
-          type: string
-          description: YouTube ID of the channel or video
-          example: dQw4w9WgXcQ
-    GroupItem:
-      type: object
-      description: An item (channel or video) within an analytics group
-      required:
-      - kind
-      - id
-      - groupId
-      - resource
-      properties:
-        kind:
-          type: string
-          description: Identifies the API resource type
-          example: youtube#groupItem
-        etag:
-          type: string
-          description: ETag for caching purposes
-        id:
-          type: string
-          description: Unique identifier for the group item
-          example: XYZ789abc123
-        groupId:
-          type: string
-          description: ID of the group this item belongs to
-          example: ABCdef123456
-        resource:
-          $ref: '#/components/schemas/GroupItemResource'
-    ErrorResponse:
-      type: object
-      description: Error response object
-      required:
-      - error
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetails'
-    ErrorDetails:
-      type: object
-      description: Details about an API error
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          description: HTTP status code
-          example: 400
-        message:
-          type: string
-          description: Human-readable error message
-          example: Invalid parameter value
-        errors:
-          type: array
-          description: List of specific errors
-          items:
-            $ref: '#/components/schemas/ErrorItem'
   examples:
-    NotFoundErrorExample:
-      summary: Not found error
-      description: Example error response when resource is not found
+    GroupItemCreateRequestExample:
+      summary: Add item to group request
+      description: Example request body for adding an item to a group
       value:
-        error:
-          code: 404
-          message: Resource not found
-          errors:
-          - domain: youtube.analytics
-            reason: notFound
-            message: The specified group was not found
-            locationType: parameter
-            location: groupId
+        groupId: ABCdef123456
+        resource:
+          kind: youtube#video
+          id: dQw4w9WgXcQ
+    SuccessfulGroupItemCreateExample:
+      summary: Successfully added item to group
+      description: Example response for a newly added group item
+      value:
+        kind: youtube#groupItem
+        etag: newitem789
+        id: NEWitem123456
+        groupId: ABCdef123456
+        resource:
+          kind: youtube#video
+          id: dQw4w9WgXcQ
     BadRequestErrorExample:
       summary: Bad request error
       description: Example error response for invalid parameters
@@ -385,17 +347,19 @@ components:
             message: The parameter 'startDate' has an invalid value
             locationType: parameter
             location: startDate
-    SuccessfulGroupItemCreateExample:
-      summary: Successfully added item to group
-      description: Example response for a newly added group item
+    NotFoundErrorExample:
+      summary: Not found error
+      description: Example error response when resource is not found
       value:
-        kind: youtube#groupItem
-        etag: newitem789
-        id: NEWitem123456
-        groupId: ABCdef123456
-        resource:
-          kind: youtube#video
-          id: dQw4w9WgXcQ
+        error:
+          code: 404
+          message: Resource not found
+          errors:
+          - domain: youtube.analytics
+            reason: notFound
+            message: The specified group was not found
+            locationType: parameter
+            location: groupId
     SuccessfulGroupItemListExample:
       summary: Successful group items list response
       description: Example response containing items in an analytics group
@@ -430,14 +394,50 @@ components:
             message: The access token is invalid or expired
             locationType: header
             location: Authorization
-    GroupItemCreateRequestExample:
-      summary: Add item to group request
-      description: Example request body for adding an item to a group
-      value:
-        groupId: ABCdef123456
-        resource:
-          kind: youtube#video
-          id: dQw4w9WgXcQ
+  parameters:
+    PrettyPrint:
+      name: prettyPrint
+      in: query
+      required: false
+      description: Returns response with indentations and line breaks for readability
+      schema:
+        type: boolean
+        default: true
+    OnBehalfOfContentOwner:
+      name: onBehalfOfContentOwner
+      in: query
+      required: false
+      description: 'The content owner ID for YouTube content owner operations.
+
+        Required for content owner authenticated requests.
+
+        '
+      schema:
+        type: string
+        example: ContentOwnerXYZ
+    GroupIdQuery:
+      name: groupId
+      in: query
+      required: true
+      description: The group ID to retrieve items for
+      schema:
+        type: string
+        example: ABCdef123456
+    ItemIdPath:
+      name: itemId
+      in: path
+      required: true
+      description: The unique identifier of the group item
+      schema:
+        type: string
+        example: XYZ789abc123
+    AccessToken:
+      name: access_token
+      in: query
+      required: false
+      description: OAuth 2.0 access token for authentication
+      schema:
+        type: string
   securitySchemes:
     OAuth2:
       type: oauth2

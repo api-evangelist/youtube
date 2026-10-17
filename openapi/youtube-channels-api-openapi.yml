@@ -195,103 +195,69 @@ paths:
     - url: https://www.googleapis.com/youtube/v3
       description: YouTube Data API v3 base server
 components:
-  parameters:
-    part:
-      name: part
-      in: query
-      required: true
-      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
-      schema:
-        type: string
-    fields:
-      name: fields
-      in: query
-      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
-      schema:
-        type: string
-    key:
-      name: key
-      in: query
-      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
-      schema:
-        type: string
-    pageToken:
-      name: pageToken
-      in: query
-      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
-      schema:
-        type: string
-    maxResults:
-      name: maxResults
-      in: query
-      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
-      schema:
-        type: integer
-        minimum: 0
-        maximum: 50
-        default: 5
-    ChannelIdQuery:
-      name: channelId
-      in: query
-      required: false
-      description: Filter results by channel ID
-      schema:
-        type: string
-        example: UC_x5XG1OV2P6uZZ5FSM9Ttw
-    MaxResultsDefault:
-      name: maxResults
-      in: query
-      required: false
-      description: Maximum number of items to return (1-50)
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 50
-        default: 5
-        example: 25
-    ForUsername:
-      name: forUsername
-      in: query
-      required: false
-      description: Retrieve channel by username
-      schema:
-        type: string
-        example: GoogleDevelopers
-    Mine:
-      name: mine
-      in: query
-      required: false
-      description: Return resources owned by the authenticated user
-      schema:
-        type: boolean
-        example: true
-    PageToken:
-      name: pageToken
-      in: query
-      required: false
-      description: Token for retrieving the next page of results
-      schema:
-        type: string
-    Part:
-      name: part
-      in: query
-      required: true
-      description: 'The part parameter specifies a comma-separated list of one or more
-
-        resource properties that the API response will include.
-
-        '
-      schema:
-        type: string
-        example: snippet,contentDetails,statistics
-    ApiKey:
-      name: key
-      in: query
-      required: false
-      description: API key for authentication (for read-only operations)
-      schema:
-        type: string
   schemas:
+    PageInfo:
+      type: object
+      description: Paging details for a list operation, including information about the total number of resources and the number per page.
+      properties:
+        totalResults:
+          type: integer
+          description: The total number of results in the result set.
+          example: 42
+        resultsPerPage:
+          type: integer
+          description: The number of results included in the API response.
+          example: 10
+    ChannelStatistics:
+      type: object
+      description: Statistics about a YouTube channel.
+      properties:
+        viewCount:
+          type: string
+          description: The number of times the channel has been viewed.
+          example: 42
+        subscriberCount:
+          type: string
+          description: The number of subscribers that the channel has.
+          example: 42
+        hiddenSubscriberCount:
+          type: boolean
+          description: Indicates whether the channel's subscriber count is publicly visible.
+          example: 42
+        videoCount:
+          type: string
+          description: The number of public videos uploaded to the channel.
+          example: 42
+    ErrorResponse:
+      type: object
+      description: A standard error response returned by the YouTube Data API.
+      properties:
+        error:
+          type: object
+          description: The error details.
+          properties:
+            code:
+              type: integer
+              description: The HTTP status code of the error.
+            message:
+              type: string
+              description: A human-readable description of the error.
+            errors:
+              type: array
+              description: A list of individual errors.
+              items:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: A human-readable description of the error.
+                  domain:
+                    type: string
+                    description: The domain in which the error occurred.
+                  reason:
+                    type: string
+                    description: The reason for the error.
+          example: example_value
     Channel:
       type: object
       description: A channel resource represents a YouTube channel.
@@ -411,36 +377,6 @@ components:
               type: string
               description: The localized channel description.
           example: example_value
-    ErrorResponse:
-      type: object
-      description: A standard error response returned by the YouTube Data API.
-      properties:
-        error:
-          type: object
-          description: The error details.
-          properties:
-            code:
-              type: integer
-              description: The HTTP status code of the error.
-            message:
-              type: string
-              description: A human-readable description of the error.
-            errors:
-              type: array
-              description: A list of individual errors.
-              items:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    description: A human-readable description of the error.
-                  domain:
-                    type: string
-                    description: The domain in which the error occurred.
-                  reason:
-                    type: string
-                    description: The reason for the error.
-          example: example_value
     ChannelListResponse:
       type: object
       description: A list of channel resources matching the request criteria.
@@ -470,38 +406,6 @@ components:
           items:
             $ref: '#/components/schemas/Channel'
           example: []
-    PageInfo:
-      type: object
-      description: Paging details for a list operation, including information about the total number of resources and the number per page.
-      properties:
-        totalResults:
-          type: integer
-          description: The total number of results in the result set.
-          example: 42
-        resultsPerPage:
-          type: integer
-          description: The number of results included in the API response.
-          example: 10
-    ChannelStatistics:
-      type: object
-      description: Statistics about a YouTube channel.
-      properties:
-        viewCount:
-          type: string
-          description: The number of times the channel has been viewed.
-          example: 42
-        subscriberCount:
-          type: string
-          description: The number of subscribers that the channel has.
-          example: 42
-        hiddenSubscriberCount:
-          type: boolean
-          description: Indicates whether the channel's subscriber count is publicly visible.
-          example: 42
-        videoCount:
-          type: string
-          description: The number of public videos uploaded to the channel.
-          example: 42
     ChannelSnippet_2:
       type: object
       description: Basic information about the channel
@@ -529,6 +433,85 @@ components:
           type: string
           description: Country associated with the channel
           example: US
+    Thumbnail:
+      type: object
+      description: A thumbnail image
+      properties:
+        url:
+          type: string
+          description: URL of the thumbnail image
+          example: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
+        width:
+          type: integer
+          description: Width of the thumbnail
+          example: 120
+        height:
+          type: integer
+          description: Height of the thumbnail
+          example: 90
+    ChannelStatistics_2:
+      type: object
+      description: Statistics for the channel
+      properties:
+        viewCount:
+          type: string
+          description: Total channel views
+          example: '500000000'
+        subscriberCount:
+          type: string
+          description: Number of subscribers
+          example: '3000000'
+        hiddenSubscriberCount:
+          type: boolean
+          description: Whether subscriber count is hidden
+          example: false
+        videoCount:
+          type: string
+          description: Number of public videos
+          example: '5000'
+    ThumbnailDetails:
+      type: object
+      description: Thumbnail images at various resolutions
+      properties:
+        default:
+          $ref: '#/components/schemas/Thumbnail'
+        medium:
+          $ref: '#/components/schemas/Thumbnail'
+        high:
+          $ref: '#/components/schemas/Thumbnail'
+        standard:
+          $ref: '#/components/schemas/Thumbnail'
+        maxres:
+          $ref: '#/components/schemas/Thumbnail'
+    ChannelContentDetails:
+      type: object
+      description: Content details for the channel
+      properties:
+        relatedPlaylists:
+          type: object
+          properties:
+            likes:
+              type: string
+              description: Playlist ID for liked videos
+            favorites:
+              type: string
+              description: Playlist ID for favorited videos
+            uploads:
+              type: string
+              description: Playlist ID for uploaded videos
+              example: UU_x5XG1OV2P6uZZ5FSM9Ttw
+    PageInfo_2:
+      type: object
+      description: Pagination information
+      properties:
+        totalResults:
+          type: integer
+          description: Total number of results
+          example: 1000000
+        resultsPerPage:
+          type: integer
+          description: Number of results per page
+          example: 25
     ErrorResponse_2:
       type: object
       description: Error response object
@@ -537,6 +520,31 @@ components:
       properties:
         error:
           $ref: '#/components/schemas/ErrorDetails'
+    Channel_2:
+      type: object
+      description: A YouTube channel resource
+      required:
+      - kind
+      - etag
+      - id
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtube#channel
+        etag:
+          type: string
+          description: ETag for caching purposes
+        id:
+          type: string
+          description: Unique identifier for the channel
+          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+        snippet:
+          $ref: '#/components/schemas/ChannelSnippet_2'
+        contentDetails:
+          $ref: '#/components/schemas/ChannelContentDetails'
+        statistics:
+          $ref: '#/components/schemas/ChannelStatistics_2'
     ChannelListResponse_2:
       type: object
       description: Response containing channel resources
@@ -582,110 +590,6 @@ components:
           description: List of specific errors
           items:
             $ref: '#/components/schemas/ErrorItem'
-    PageInfo_2:
-      type: object
-      description: Pagination information
-      properties:
-        totalResults:
-          type: integer
-          description: Total number of results
-          example: 1000000
-        resultsPerPage:
-          type: integer
-          description: Number of results per page
-          example: 25
-    ChannelStatistics_2:
-      type: object
-      description: Statistics for the channel
-      properties:
-        viewCount:
-          type: string
-          description: Total channel views
-          example: '500000000'
-        subscriberCount:
-          type: string
-          description: Number of subscribers
-          example: '3000000'
-        hiddenSubscriberCount:
-          type: boolean
-          description: Whether subscriber count is hidden
-          example: false
-        videoCount:
-          type: string
-          description: Number of public videos
-          example: '5000'
-    ChannelContentDetails:
-      type: object
-      description: Content details for the channel
-      properties:
-        relatedPlaylists:
-          type: object
-          properties:
-            likes:
-              type: string
-              description: Playlist ID for liked videos
-            favorites:
-              type: string
-              description: Playlist ID for favorited videos
-            uploads:
-              type: string
-              description: Playlist ID for uploaded videos
-              example: UU_x5XG1OV2P6uZZ5FSM9Ttw
-    ThumbnailDetails:
-      type: object
-      description: Thumbnail images at various resolutions
-      properties:
-        default:
-          $ref: '#/components/schemas/Thumbnail'
-        medium:
-          $ref: '#/components/schemas/Thumbnail'
-        high:
-          $ref: '#/components/schemas/Thumbnail'
-        standard:
-          $ref: '#/components/schemas/Thumbnail'
-        maxres:
-          $ref: '#/components/schemas/Thumbnail'
-    Thumbnail:
-      type: object
-      description: A thumbnail image
-      properties:
-        url:
-          type: string
-          description: URL of the thumbnail image
-          example: https://i.ytimg.com/vi/dQw4w9WgXcQ/default.jpg
-        width:
-          type: integer
-          description: Width of the thumbnail
-          example: 120
-        height:
-          type: integer
-          description: Height of the thumbnail
-          example: 90
-    Channel_2:
-      type: object
-      description: A YouTube channel resource
-      required:
-      - kind
-      - etag
-      - id
-      properties:
-        kind:
-          type: string
-          description: Identifies the API resource type
-          example: youtube#channel
-        etag:
-          type: string
-          description: ETag for caching purposes
-        id:
-          type: string
-          description: Unique identifier for the channel
-          example: UC_x5XG1OV2P6uZZ5FSM9Ttw
-        snippet:
-          $ref: '#/components/schemas/ChannelSnippet_2'
-        contentDetails:
-          $ref: '#/components/schemas/ChannelContentDetails'
-        statistics:
-          $ref: '#/components/schemas/ChannelStatistics_2'
     ErrorItem:
       type: object
       description: Individual error detail
@@ -710,6 +614,102 @@ components:
           type: string
           description: Specific location of the error
           example: part
+  parameters:
+    maxResults:
+      name: maxResults
+      in: query
+      description: The maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive.
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 50
+        default: 5
+    key:
+      name: key
+      in: query
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
+      schema:
+        type: string
+    fields:
+      name: fields
+      in: query
+      description: Selector specifying which fields to include in a partial response. Use this parameter to reduce bandwidth usage by selecting only the fields you need.
+      schema:
+        type: string
+    pageToken:
+      name: pageToken
+      in: query
+      description: Identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages available.
+      schema:
+        type: string
+    part:
+      name: part
+      in: query
+      required: true
+      description: Specifies a comma-separated list of one or more resource properties that the API response will include. The part parameter value must include the id property.
+      schema:
+        type: string
+    ChannelIdQuery:
+      name: channelId
+      in: query
+      required: false
+      description: Filter results by channel ID
+      schema:
+        type: string
+        example: UC_x5XG1OV2P6uZZ5FSM9Ttw
+    PageToken:
+      name: pageToken
+      in: query
+      required: false
+      description: Token for retrieving the next page of results
+      schema:
+        type: string
+    ApiKey:
+      name: key
+      in: query
+      required: false
+      description: API key for authentication (for read-only operations)
+      schema:
+        type: string
+    MaxResultsDefault:
+      name: maxResults
+      in: query
+      required: false
+      description: Maximum number of items to return (1-50)
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 5
+        example: 25
+    ForUsername:
+      name: forUsername
+      in: query
+      required: false
+      description: Retrieve channel by username
+      schema:
+        type: string
+        example: GoogleDevelopers
+    Mine:
+      name: mine
+      in: query
+      required: false
+      description: Return resources owned by the authenticated user
+      schema:
+        type: boolean
+        example: true
+    Part:
+      name: part
+      in: query
+      required: true
+      description: 'The part parameter specifies a comma-separated list of one or more
+
+        resource properties that the API response will include.
+
+        '
+      schema:
+        type: string
+        example: snippet,contentDetails,statistics
   responses:
     Forbidden:
       description: The request was authenticated but the caller does not have permission to perform the requested operation.

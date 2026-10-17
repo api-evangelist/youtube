@@ -93,6 +93,60 @@ paths:
                   $ref: '#/components/examples/ForbiddenErrorExample'
 components:
   schemas:
+    AnalyticsReportResponse:
+      type: object
+      description: Response object containing YouTube Analytics report data
+      required:
+      - kind
+      - columnHeaders
+      - rows
+      properties:
+        kind:
+          type: string
+          description: Identifies the API resource type
+          example: youtubeAnalytics#resultTable
+        columnHeaders:
+          type: array
+          description: Column header definitions for the report data
+          items:
+            $ref: '#/components/schemas/ColumnHeader'
+        rows:
+          type: array
+          description: Data rows containing the requested metrics and dimensions
+          items:
+            type: array
+            items:
+              oneOf:
+              - type: string
+              - type: number
+              - type: integer
+    ColumnHeader:
+      type: object
+      description: Defines a column in the analytics report
+      required:
+      - name
+      - columnType
+      - dataType
+      properties:
+        name:
+          type: string
+          description: The name of the dimension or metric
+          example: views
+        columnType:
+          type: string
+          description: Whether the column is a dimension or metric
+          enum:
+          - DIMENSION
+          - METRIC
+          example: METRIC
+        dataType:
+          type: string
+          description: The data type of the column values
+          enum:
+          - STRING
+          - INTEGER
+          - FLOAT
+          example: INTEGER
     ErrorResponse:
       type: object
       description: Error response object
@@ -121,33 +175,6 @@ components:
           description: List of specific errors
           items:
             $ref: '#/components/schemas/ErrorItem'
-    AnalyticsReportResponse:
-      type: object
-      description: Response object containing YouTube Analytics report data
-      required:
-      - kind
-      - columnHeaders
-      - rows
-      properties:
-        kind:
-          type: string
-          description: Identifies the API resource type
-          example: youtubeAnalytics#resultTable
-        columnHeaders:
-          type: array
-          description: Column header definitions for the report data
-          items:
-            $ref: '#/components/schemas/ColumnHeader'
-        rows:
-          type: array
-          description: Data rows containing the requested metrics and dimensions
-          items:
-            type: array
-            items:
-              oneOf:
-              - type: string
-              - type: number
-              - type: integer
     ErrorItem:
       type: object
       description: Individual error detail
@@ -172,34 +199,20 @@ components:
           type: string
           description: Specific location of the error
           example: startDate
-    ColumnHeader:
-      type: object
-      description: Defines a column in the analytics report
-      required:
-      - name
-      - columnType
-      - dataType
-      properties:
-        name:
-          type: string
-          description: The name of the dimension or metric
-          example: views
-        columnType:
-          type: string
-          description: Whether the column is a dimension or metric
-          enum:
-          - DIMENSION
-          - METRIC
-          example: METRIC
-        dataType:
-          type: string
-          description: The data type of the column values
-          enum:
-          - STRING
-          - INTEGER
-          - FLOAT
-          example: INTEGER
   examples:
+    BadRequestErrorExample:
+      summary: Bad request error
+      description: Example error response for invalid parameters
+      value:
+        error:
+          code: 400
+          message: Invalid parameter value
+          errors:
+          - domain: youtube.analytics
+            reason: invalidParameter
+            message: The parameter 'startDate' has an invalid value
+            locationType: parameter
+            location: startDate
     SuccessfulAnalyticsReportExample:
       summary: Successful analytics report response
       description: Example response containing video views and engagement metrics
@@ -245,19 +258,6 @@ components:
             message: The access token is invalid or expired
             locationType: header
             location: Authorization
-    BadRequestErrorExample:
-      summary: Bad request error
-      description: Example error response for invalid parameters
-      value:
-        error:
-          code: 400
-          message: Invalid parameter value
-          errors:
-          - domain: youtube.analytics
-            reason: invalidParameter
-            message: The parameter 'startDate' has an invalid value
-            locationType: parameter
-            location: startDate
     ForbiddenErrorExample:
       summary: Forbidden error
       description: Example error response for insufficient permissions
@@ -272,15 +272,6 @@ components:
             locationType: header
             location: Authorization
   parameters:
-    StartDate:
-      name: startDate
-      in: query
-      required: true
-      description: The start date for the data retrieval in YYYY-MM-DD format
-      schema:
-        type: string
-        format: date
-        example: '2024-01-01'
     EndDate:
       name: endDate
       in: query
@@ -290,24 +281,6 @@ components:
         type: string
         format: date
         example: '2024-01-31'
-    MaxResults:
-      name: maxResults
-      in: query
-      required: false
-      description: Maximum number of rows to include in the response (1-500)
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 500
-        default: 100
-        example: 50
-    AccessToken:
-      name: access_token
-      in: query
-      required: false
-      description: OAuth 2.0 access token for authentication
-      schema:
-        type: string
     Metrics:
       name: metrics
       in: query
@@ -320,57 +293,6 @@ components:
       schema:
         type: string
         example: views,estimatedMinutesWatched,averageViewDuration,likes
-    PrettyPrint:
-      name: prettyPrint
-      in: query
-      required: false
-      description: Returns response with indentations and line breaks for readability
-      schema:
-        type: boolean
-        default: true
-    Sort:
-      name: sort
-      in: query
-      required: false
-      description: 'A comma-separated list of dimensions or metrics to sort by.
-
-        Prefix with - for descending order.
-
-        '
-      schema:
-        type: string
-        example: -views
-    StartIndex:
-      name: startIndex
-      in: query
-      required: false
-      description: Index of the first row to retrieve (1-based)
-      schema:
-        type: integer
-        minimum: 1
-        default: 1
-        example: 1
-    Dimensions:
-      name: dimensions
-      in: query
-      required: false
-      description: 'A comma-separated list of YouTube Analytics dimensions.
-
-        Common dimensions include video, channel, country, day, month.
-
-        '
-      schema:
-        type: string
-        example: video,day
-    Currency:
-      name: currency
-      in: query
-      required: false
-      description: Currency code for revenue metrics (ISO 4217)
-      schema:
-        type: string
-        pattern: ^[A-Z]{3}$
-        example: USD
     Ids:
       name: ids
       in: query
@@ -383,6 +305,60 @@ components:
       schema:
         type: string
         example: channel==UC_x5XG1OV2P6uZZ5FSM9Ttw
+    Currency:
+      name: currency
+      in: query
+      required: false
+      description: Currency code for revenue metrics (ISO 4217)
+      schema:
+        type: string
+        pattern: ^[A-Z]{3}$
+        example: USD
+    StartIndex:
+      name: startIndex
+      in: query
+      required: false
+      description: Index of the first row to retrieve (1-based)
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+        example: 1
+    MaxResults:
+      name: maxResults
+      in: query
+      required: false
+      description: Maximum number of rows to include in the response (1-500)
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+        default: 100
+        example: 50
+    Dimensions:
+      name: dimensions
+      in: query
+      required: false
+      description: 'A comma-separated list of YouTube Analytics dimensions.
+
+        Common dimensions include video, channel, country, day, month.
+
+        '
+      schema:
+        type: string
+        example: video,day
+    Sort:
+      name: sort
+      in: query
+      required: false
+      description: 'A comma-separated list of dimensions or metrics to sort by.
+
+        Prefix with - for descending order.
+
+        '
+      schema:
+        type: string
+        example: -views
     Filters:
       name: filters
       in: query
@@ -395,6 +371,30 @@ components:
       schema:
         type: string
         example: country==US;video==dQw4w9WgXcQ
+    StartDate:
+      name: startDate
+      in: query
+      required: true
+      description: The start date for the data retrieval in YYYY-MM-DD format
+      schema:
+        type: string
+        format: date
+        example: '2024-01-01'
+    PrettyPrint:
+      name: prettyPrint
+      in: query
+      required: false
+      description: Returns response with indentations and line breaks for readability
+      schema:
+        type: boolean
+        default: true
+    AccessToken:
+      name: access_token
+      in: query
+      required: false
+      description: OAuth 2.0 access token for authentication
+      schema:
+        type: string
   securitySchemes:
     OAuth2:
       type: oauth2
