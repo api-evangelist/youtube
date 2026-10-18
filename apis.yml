@@ -1653,6 +1653,8 @@ apis:
   humanURL: https://developers.google.com/youtube/v3/docs/channelSections
   baseURL: https://www.googleapis.com/youtube/v3
   tags:
+  - CommentThreads
+  tags_raw:
   - Comment Threads
   properties:
   - type: OpenAPI
